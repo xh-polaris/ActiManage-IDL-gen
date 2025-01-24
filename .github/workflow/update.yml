@@ -30,7 +30,7 @@ jobs:
         with:
           repository: ${{ github.event.client_payload.repository }}
           ref: ${{ github.event.client_payload.ref }}
-          path: service-idl
+          path: idl
           token: ${{ secrets.ACCESS_TOKEN }}
 
       - name: Setup Golang
@@ -47,7 +47,7 @@ jobs:
       - name: Update
         run: |
           rm -r kitex_gen
-          export IDL_DIR=./service-idl
+          export IDL_DIR=./idl
           chmod 755 /home/runner/go/bin/protoc
           sh build.sh
 

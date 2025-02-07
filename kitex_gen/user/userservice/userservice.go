@@ -71,24 +71,24 @@ var serviceMethods = map[string]kitex.MethodInfo{
 		false,
 		kitex.WithStreamingMode(kitex.StreamingUnary),
 	),
-	"CreateBooking": kitex.NewMethodInfo(
-		createBookingHandler,
-		newCreateBookingArgs,
-		newCreateBookingResult,
+	"CreateBookRecord": kitex.NewMethodInfo(
+		createBookRecordHandler,
+		newCreateBookRecordArgs,
+		newCreateBookRecordResult,
 		false,
 		kitex.WithStreamingMode(kitex.StreamingUnary),
 	),
-	"DeleteBooking": kitex.NewMethodInfo(
-		deleteBookingHandler,
-		newDeleteBookingArgs,
-		newDeleteBookingResult,
+	"CancelBookRecord": kitex.NewMethodInfo(
+		cancelBookRecordHandler,
+		newCancelBookRecordArgs,
+		newCancelBookRecordResult,
 		false,
 		kitex.WithStreamingMode(kitex.StreamingUnary),
 	),
-	"GetBookingDetail": kitex.NewMethodInfo(
-		getBookingDetailHandler,
-		newGetBookingDetailArgs,
-		newGetBookingDetailResult,
+	"GetBookRecordDetail": kitex.NewMethodInfo(
+		getBookRecordDetailHandler,
+		newGetBookRecordDetailArgs,
+		newGetBookRecordDetailResult,
 		false,
 		kitex.WithStreamingMode(kitex.StreamingUnary),
 	),
@@ -127,10 +127,10 @@ var serviceMethods = map[string]kitex.MethodInfo{
 		false,
 		kitex.WithStreamingMode(kitex.StreamingUnary),
 	),
-	"CreateFavorite": kitex.NewMethodInfo(
-		createFavoriteHandler,
-		newCreateFavoriteArgs,
-		newCreateFavoriteResult,
+	"DoFavorite": kitex.NewMethodInfo(
+		doFavoriteHandler,
+		newDoFavoriteArgs,
+		newDoFavoriteResult,
 		false,
 		kitex.WithStreamingMode(kitex.StreamingUnary),
 	),
@@ -1431,7 +1431,7 @@ func (p *ListReserversResult) GetResult() interface{} {
 	return p.Success
 }
 
-func createBookingHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
+func createBookRecordHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
 	switch s := arg.(type) {
 	case *streaming.Args:
 		st := s.Stream
@@ -1439,64 +1439,64 @@ func createBookingHandler(ctx context.Context, handler interface{}, arg, result 
 		if err := st.RecvMsg(req); err != nil {
 			return err
 		}
-		resp, err := handler.(user.UserService).CreateBooking(ctx, req)
+		resp, err := handler.(user.UserService).CreateBookRecord(ctx, req)
 		if err != nil {
 			return err
 		}
 		return st.SendMsg(resp)
-	case *CreateBookingArgs:
-		success, err := handler.(user.UserService).CreateBooking(ctx, s.Req)
+	case *CreateBookRecordArgs:
+		success, err := handler.(user.UserService).CreateBookRecord(ctx, s.Req)
 		if err != nil {
 			return err
 		}
-		realResult := result.(*CreateBookingResult)
+		realResult := result.(*CreateBookRecordResult)
 		realResult.Success = success
 		return nil
 	default:
 		return errInvalidMessageType
 	}
 }
-func newCreateBookingArgs() interface{} {
-	return &CreateBookingArgs{}
+func newCreateBookRecordArgs() interface{} {
+	return &CreateBookRecordArgs{}
 }
 
-func newCreateBookingResult() interface{} {
-	return &CreateBookingResult{}
+func newCreateBookRecordResult() interface{} {
+	return &CreateBookRecordResult{}
 }
 
-type CreateBookingArgs struct {
+type CreateBookRecordArgs struct {
 	Req *user.CreateBookRecordReq
 }
 
-func (p *CreateBookingArgs) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+func (p *CreateBookRecordArgs) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
 	if !p.IsSetReq() {
 		p.Req = new(user.CreateBookRecordReq)
 	}
 	return p.Req.FastRead(buf, _type, number)
 }
 
-func (p *CreateBookingArgs) FastWrite(buf []byte) (n int) {
+func (p *CreateBookRecordArgs) FastWrite(buf []byte) (n int) {
 	if !p.IsSetReq() {
 		return 0
 	}
 	return p.Req.FastWrite(buf)
 }
 
-func (p *CreateBookingArgs) Size() (n int) {
+func (p *CreateBookRecordArgs) Size() (n int) {
 	if !p.IsSetReq() {
 		return 0
 	}
 	return p.Req.Size()
 }
 
-func (p *CreateBookingArgs) Marshal(out []byte) ([]byte, error) {
+func (p *CreateBookRecordArgs) Marshal(out []byte) ([]byte, error) {
 	if !p.IsSetReq() {
 		return out, nil
 	}
 	return proto.Marshal(p.Req)
 }
 
-func (p *CreateBookingArgs) Unmarshal(in []byte) error {
+func (p *CreateBookRecordArgs) Unmarshal(in []byte) error {
 	msg := new(user.CreateBookRecordReq)
 	if err := proto.Unmarshal(in, msg); err != nil {
 		return err
@@ -1505,58 +1505,58 @@ func (p *CreateBookingArgs) Unmarshal(in []byte) error {
 	return nil
 }
 
-var CreateBookingArgs_Req_DEFAULT *user.CreateBookRecordReq
+var CreateBookRecordArgs_Req_DEFAULT *user.CreateBookRecordReq
 
-func (p *CreateBookingArgs) GetReq() *user.CreateBookRecordReq {
+func (p *CreateBookRecordArgs) GetReq() *user.CreateBookRecordReq {
 	if !p.IsSetReq() {
-		return CreateBookingArgs_Req_DEFAULT
+		return CreateBookRecordArgs_Req_DEFAULT
 	}
 	return p.Req
 }
 
-func (p *CreateBookingArgs) IsSetReq() bool {
+func (p *CreateBookRecordArgs) IsSetReq() bool {
 	return p.Req != nil
 }
 
-func (p *CreateBookingArgs) GetFirstArgument() interface{} {
+func (p *CreateBookRecordArgs) GetFirstArgument() interface{} {
 	return p.Req
 }
 
-type CreateBookingResult struct {
+type CreateBookRecordResult struct {
 	Success *user.Response
 }
 
-var CreateBookingResult_Success_DEFAULT *user.Response
+var CreateBookRecordResult_Success_DEFAULT *user.Response
 
-func (p *CreateBookingResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+func (p *CreateBookRecordResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
 	if !p.IsSetSuccess() {
 		p.Success = new(user.Response)
 	}
 	return p.Success.FastRead(buf, _type, number)
 }
 
-func (p *CreateBookingResult) FastWrite(buf []byte) (n int) {
+func (p *CreateBookRecordResult) FastWrite(buf []byte) (n int) {
 	if !p.IsSetSuccess() {
 		return 0
 	}
 	return p.Success.FastWrite(buf)
 }
 
-func (p *CreateBookingResult) Size() (n int) {
+func (p *CreateBookRecordResult) Size() (n int) {
 	if !p.IsSetSuccess() {
 		return 0
 	}
 	return p.Success.Size()
 }
 
-func (p *CreateBookingResult) Marshal(out []byte) ([]byte, error) {
+func (p *CreateBookRecordResult) Marshal(out []byte) ([]byte, error) {
 	if !p.IsSetSuccess() {
 		return out, nil
 	}
 	return proto.Marshal(p.Success)
 }
 
-func (p *CreateBookingResult) Unmarshal(in []byte) error {
+func (p *CreateBookRecordResult) Unmarshal(in []byte) error {
 	msg := new(user.Response)
 	if err := proto.Unmarshal(in, msg); err != nil {
 		return err
@@ -1565,92 +1565,92 @@ func (p *CreateBookingResult) Unmarshal(in []byte) error {
 	return nil
 }
 
-func (p *CreateBookingResult) GetSuccess() *user.Response {
+func (p *CreateBookRecordResult) GetSuccess() *user.Response {
 	if !p.IsSetSuccess() {
-		return CreateBookingResult_Success_DEFAULT
+		return CreateBookRecordResult_Success_DEFAULT
 	}
 	return p.Success
 }
 
-func (p *CreateBookingResult) SetSuccess(x interface{}) {
+func (p *CreateBookRecordResult) SetSuccess(x interface{}) {
 	p.Success = x.(*user.Response)
 }
 
-func (p *CreateBookingResult) IsSetSuccess() bool {
+func (p *CreateBookRecordResult) IsSetSuccess() bool {
 	return p.Success != nil
 }
 
-func (p *CreateBookingResult) GetResult() interface{} {
+func (p *CreateBookRecordResult) GetResult() interface{} {
 	return p.Success
 }
 
-func deleteBookingHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
+func cancelBookRecordHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
 	switch s := arg.(type) {
 	case *streaming.Args:
 		st := s.Stream
-		req := new(user.DeleteBookRecordReq)
+		req := new(user.CancelBookRecordReq)
 		if err := st.RecvMsg(req); err != nil {
 			return err
 		}
-		resp, err := handler.(user.UserService).DeleteBooking(ctx, req)
+		resp, err := handler.(user.UserService).CancelBookRecord(ctx, req)
 		if err != nil {
 			return err
 		}
 		return st.SendMsg(resp)
-	case *DeleteBookingArgs:
-		success, err := handler.(user.UserService).DeleteBooking(ctx, s.Req)
+	case *CancelBookRecordArgs:
+		success, err := handler.(user.UserService).CancelBookRecord(ctx, s.Req)
 		if err != nil {
 			return err
 		}
-		realResult := result.(*DeleteBookingResult)
+		realResult := result.(*CancelBookRecordResult)
 		realResult.Success = success
 		return nil
 	default:
 		return errInvalidMessageType
 	}
 }
-func newDeleteBookingArgs() interface{} {
-	return &DeleteBookingArgs{}
+func newCancelBookRecordArgs() interface{} {
+	return &CancelBookRecordArgs{}
 }
 
-func newDeleteBookingResult() interface{} {
-	return &DeleteBookingResult{}
+func newCancelBookRecordResult() interface{} {
+	return &CancelBookRecordResult{}
 }
 
-type DeleteBookingArgs struct {
-	Req *user.DeleteBookRecordReq
+type CancelBookRecordArgs struct {
+	Req *user.CancelBookRecordReq
 }
 
-func (p *DeleteBookingArgs) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+func (p *CancelBookRecordArgs) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
 	if !p.IsSetReq() {
-		p.Req = new(user.DeleteBookRecordReq)
+		p.Req = new(user.CancelBookRecordReq)
 	}
 	return p.Req.FastRead(buf, _type, number)
 }
 
-func (p *DeleteBookingArgs) FastWrite(buf []byte) (n int) {
+func (p *CancelBookRecordArgs) FastWrite(buf []byte) (n int) {
 	if !p.IsSetReq() {
 		return 0
 	}
 	return p.Req.FastWrite(buf)
 }
 
-func (p *DeleteBookingArgs) Size() (n int) {
+func (p *CancelBookRecordArgs) Size() (n int) {
 	if !p.IsSetReq() {
 		return 0
 	}
 	return p.Req.Size()
 }
 
-func (p *DeleteBookingArgs) Marshal(out []byte) ([]byte, error) {
+func (p *CancelBookRecordArgs) Marshal(out []byte) ([]byte, error) {
 	if !p.IsSetReq() {
 		return out, nil
 	}
 	return proto.Marshal(p.Req)
 }
 
-func (p *DeleteBookingArgs) Unmarshal(in []byte) error {
-	msg := new(user.DeleteBookRecordReq)
+func (p *CancelBookRecordArgs) Unmarshal(in []byte) error {
+	msg := new(user.CancelBookRecordReq)
 	if err := proto.Unmarshal(in, msg); err != nil {
 		return err
 	}
@@ -1658,58 +1658,58 @@ func (p *DeleteBookingArgs) Unmarshal(in []byte) error {
 	return nil
 }
 
-var DeleteBookingArgs_Req_DEFAULT *user.DeleteBookRecordReq
+var CancelBookRecordArgs_Req_DEFAULT *user.CancelBookRecordReq
 
-func (p *DeleteBookingArgs) GetReq() *user.DeleteBookRecordReq {
+func (p *CancelBookRecordArgs) GetReq() *user.CancelBookRecordReq {
 	if !p.IsSetReq() {
-		return DeleteBookingArgs_Req_DEFAULT
+		return CancelBookRecordArgs_Req_DEFAULT
 	}
 	return p.Req
 }
 
-func (p *DeleteBookingArgs) IsSetReq() bool {
+func (p *CancelBookRecordArgs) IsSetReq() bool {
 	return p.Req != nil
 }
 
-func (p *DeleteBookingArgs) GetFirstArgument() interface{} {
+func (p *CancelBookRecordArgs) GetFirstArgument() interface{} {
 	return p.Req
 }
 
-type DeleteBookingResult struct {
+type CancelBookRecordResult struct {
 	Success *user.Response
 }
 
-var DeleteBookingResult_Success_DEFAULT *user.Response
+var CancelBookRecordResult_Success_DEFAULT *user.Response
 
-func (p *DeleteBookingResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+func (p *CancelBookRecordResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
 	if !p.IsSetSuccess() {
 		p.Success = new(user.Response)
 	}
 	return p.Success.FastRead(buf, _type, number)
 }
 
-func (p *DeleteBookingResult) FastWrite(buf []byte) (n int) {
+func (p *CancelBookRecordResult) FastWrite(buf []byte) (n int) {
 	if !p.IsSetSuccess() {
 		return 0
 	}
 	return p.Success.FastWrite(buf)
 }
 
-func (p *DeleteBookingResult) Size() (n int) {
+func (p *CancelBookRecordResult) Size() (n int) {
 	if !p.IsSetSuccess() {
 		return 0
 	}
 	return p.Success.Size()
 }
 
-func (p *DeleteBookingResult) Marshal(out []byte) ([]byte, error) {
+func (p *CancelBookRecordResult) Marshal(out []byte) ([]byte, error) {
 	if !p.IsSetSuccess() {
 		return out, nil
 	}
 	return proto.Marshal(p.Success)
 }
 
-func (p *DeleteBookingResult) Unmarshal(in []byte) error {
+func (p *CancelBookRecordResult) Unmarshal(in []byte) error {
 	msg := new(user.Response)
 	if err := proto.Unmarshal(in, msg); err != nil {
 		return err
@@ -1718,26 +1718,26 @@ func (p *DeleteBookingResult) Unmarshal(in []byte) error {
 	return nil
 }
 
-func (p *DeleteBookingResult) GetSuccess() *user.Response {
+func (p *CancelBookRecordResult) GetSuccess() *user.Response {
 	if !p.IsSetSuccess() {
-		return DeleteBookingResult_Success_DEFAULT
+		return CancelBookRecordResult_Success_DEFAULT
 	}
 	return p.Success
 }
 
-func (p *DeleteBookingResult) SetSuccess(x interface{}) {
+func (p *CancelBookRecordResult) SetSuccess(x interface{}) {
 	p.Success = x.(*user.Response)
 }
 
-func (p *DeleteBookingResult) IsSetSuccess() bool {
+func (p *CancelBookRecordResult) IsSetSuccess() bool {
 	return p.Success != nil
 }
 
-func (p *DeleteBookingResult) GetResult() interface{} {
+func (p *CancelBookRecordResult) GetResult() interface{} {
 	return p.Success
 }
 
-func getBookingDetailHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
+func getBookRecordDetailHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
 	switch s := arg.(type) {
 	case *streaming.Args:
 		st := s.Stream
@@ -1745,64 +1745,64 @@ func getBookingDetailHandler(ctx context.Context, handler interface{}, arg, resu
 		if err := st.RecvMsg(req); err != nil {
 			return err
 		}
-		resp, err := handler.(user.UserService).GetBookingDetail(ctx, req)
+		resp, err := handler.(user.UserService).GetBookRecordDetail(ctx, req)
 		if err != nil {
 			return err
 		}
 		return st.SendMsg(resp)
-	case *GetBookingDetailArgs:
-		success, err := handler.(user.UserService).GetBookingDetail(ctx, s.Req)
+	case *GetBookRecordDetailArgs:
+		success, err := handler.(user.UserService).GetBookRecordDetail(ctx, s.Req)
 		if err != nil {
 			return err
 		}
-		realResult := result.(*GetBookingDetailResult)
+		realResult := result.(*GetBookRecordDetailResult)
 		realResult.Success = success
 		return nil
 	default:
 		return errInvalidMessageType
 	}
 }
-func newGetBookingDetailArgs() interface{} {
-	return &GetBookingDetailArgs{}
+func newGetBookRecordDetailArgs() interface{} {
+	return &GetBookRecordDetailArgs{}
 }
 
-func newGetBookingDetailResult() interface{} {
-	return &GetBookingDetailResult{}
+func newGetBookRecordDetailResult() interface{} {
+	return &GetBookRecordDetailResult{}
 }
 
-type GetBookingDetailArgs struct {
+type GetBookRecordDetailArgs struct {
 	Req *user.GetBookRecordReq
 }
 
-func (p *GetBookingDetailArgs) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+func (p *GetBookRecordDetailArgs) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
 	if !p.IsSetReq() {
 		p.Req = new(user.GetBookRecordReq)
 	}
 	return p.Req.FastRead(buf, _type, number)
 }
 
-func (p *GetBookingDetailArgs) FastWrite(buf []byte) (n int) {
+func (p *GetBookRecordDetailArgs) FastWrite(buf []byte) (n int) {
 	if !p.IsSetReq() {
 		return 0
 	}
 	return p.Req.FastWrite(buf)
 }
 
-func (p *GetBookingDetailArgs) Size() (n int) {
+func (p *GetBookRecordDetailArgs) Size() (n int) {
 	if !p.IsSetReq() {
 		return 0
 	}
 	return p.Req.Size()
 }
 
-func (p *GetBookingDetailArgs) Marshal(out []byte) ([]byte, error) {
+func (p *GetBookRecordDetailArgs) Marshal(out []byte) ([]byte, error) {
 	if !p.IsSetReq() {
 		return out, nil
 	}
 	return proto.Marshal(p.Req)
 }
 
-func (p *GetBookingDetailArgs) Unmarshal(in []byte) error {
+func (p *GetBookRecordDetailArgs) Unmarshal(in []byte) error {
 	msg := new(user.GetBookRecordReq)
 	if err := proto.Unmarshal(in, msg); err != nil {
 		return err
@@ -1811,58 +1811,58 @@ func (p *GetBookingDetailArgs) Unmarshal(in []byte) error {
 	return nil
 }
 
-var GetBookingDetailArgs_Req_DEFAULT *user.GetBookRecordReq
+var GetBookRecordDetailArgs_Req_DEFAULT *user.GetBookRecordReq
 
-func (p *GetBookingDetailArgs) GetReq() *user.GetBookRecordReq {
+func (p *GetBookRecordDetailArgs) GetReq() *user.GetBookRecordReq {
 	if !p.IsSetReq() {
-		return GetBookingDetailArgs_Req_DEFAULT
+		return GetBookRecordDetailArgs_Req_DEFAULT
 	}
 	return p.Req
 }
 
-func (p *GetBookingDetailArgs) IsSetReq() bool {
+func (p *GetBookRecordDetailArgs) IsSetReq() bool {
 	return p.Req != nil
 }
 
-func (p *GetBookingDetailArgs) GetFirstArgument() interface{} {
+func (p *GetBookRecordDetailArgs) GetFirstArgument() interface{} {
 	return p.Req
 }
 
-type GetBookingDetailResult struct {
+type GetBookRecordDetailResult struct {
 	Success *user.GetBookRecordResp
 }
 
-var GetBookingDetailResult_Success_DEFAULT *user.GetBookRecordResp
+var GetBookRecordDetailResult_Success_DEFAULT *user.GetBookRecordResp
 
-func (p *GetBookingDetailResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+func (p *GetBookRecordDetailResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
 	if !p.IsSetSuccess() {
 		p.Success = new(user.GetBookRecordResp)
 	}
 	return p.Success.FastRead(buf, _type, number)
 }
 
-func (p *GetBookingDetailResult) FastWrite(buf []byte) (n int) {
+func (p *GetBookRecordDetailResult) FastWrite(buf []byte) (n int) {
 	if !p.IsSetSuccess() {
 		return 0
 	}
 	return p.Success.FastWrite(buf)
 }
 
-func (p *GetBookingDetailResult) Size() (n int) {
+func (p *GetBookRecordDetailResult) Size() (n int) {
 	if !p.IsSetSuccess() {
 		return 0
 	}
 	return p.Success.Size()
 }
 
-func (p *GetBookingDetailResult) Marshal(out []byte) ([]byte, error) {
+func (p *GetBookRecordDetailResult) Marshal(out []byte) ([]byte, error) {
 	if !p.IsSetSuccess() {
 		return out, nil
 	}
 	return proto.Marshal(p.Success)
 }
 
-func (p *GetBookingDetailResult) Unmarshal(in []byte) error {
+func (p *GetBookRecordDetailResult) Unmarshal(in []byte) error {
 	msg := new(user.GetBookRecordResp)
 	if err := proto.Unmarshal(in, msg); err != nil {
 		return err
@@ -1871,22 +1871,22 @@ func (p *GetBookingDetailResult) Unmarshal(in []byte) error {
 	return nil
 }
 
-func (p *GetBookingDetailResult) GetSuccess() *user.GetBookRecordResp {
+func (p *GetBookRecordDetailResult) GetSuccess() *user.GetBookRecordResp {
 	if !p.IsSetSuccess() {
-		return GetBookingDetailResult_Success_DEFAULT
+		return GetBookRecordDetailResult_Success_DEFAULT
 	}
 	return p.Success
 }
 
-func (p *GetBookingDetailResult) SetSuccess(x interface{}) {
+func (p *GetBookRecordDetailResult) SetSuccess(x interface{}) {
 	p.Success = x.(*user.GetBookRecordResp)
 }
 
-func (p *GetBookingDetailResult) IsSetSuccess() bool {
+func (p *GetBookRecordDetailResult) IsSetSuccess() bool {
 	return p.Success != nil
 }
 
-func (p *GetBookingDetailResult) GetResult() interface{} {
+func (p *GetBookRecordDetailResult) GetResult() interface{} {
 	return p.Success
 }
 
@@ -2655,73 +2655,73 @@ func (p *MarkReceiptReadResult) GetResult() interface{} {
 	return p.Success
 }
 
-func createFavoriteHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
+func doFavoriteHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
 	switch s := arg.(type) {
 	case *streaming.Args:
 		st := s.Stream
-		req := new(user.CreateFavoriteReq)
+		req := new(user.DoFavoriteReq)
 		if err := st.RecvMsg(req); err != nil {
 			return err
 		}
-		resp, err := handler.(user.UserService).CreateFavorite(ctx, req)
+		resp, err := handler.(user.UserService).DoFavorite(ctx, req)
 		if err != nil {
 			return err
 		}
 		return st.SendMsg(resp)
-	case *CreateFavoriteArgs:
-		success, err := handler.(user.UserService).CreateFavorite(ctx, s.Req)
+	case *DoFavoriteArgs:
+		success, err := handler.(user.UserService).DoFavorite(ctx, s.Req)
 		if err != nil {
 			return err
 		}
-		realResult := result.(*CreateFavoriteResult)
+		realResult := result.(*DoFavoriteResult)
 		realResult.Success = success
 		return nil
 	default:
 		return errInvalidMessageType
 	}
 }
-func newCreateFavoriteArgs() interface{} {
-	return &CreateFavoriteArgs{}
+func newDoFavoriteArgs() interface{} {
+	return &DoFavoriteArgs{}
 }
 
-func newCreateFavoriteResult() interface{} {
-	return &CreateFavoriteResult{}
+func newDoFavoriteResult() interface{} {
+	return &DoFavoriteResult{}
 }
 
-type CreateFavoriteArgs struct {
-	Req *user.CreateFavoriteReq
+type DoFavoriteArgs struct {
+	Req *user.DoFavoriteReq
 }
 
-func (p *CreateFavoriteArgs) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+func (p *DoFavoriteArgs) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
 	if !p.IsSetReq() {
-		p.Req = new(user.CreateFavoriteReq)
+		p.Req = new(user.DoFavoriteReq)
 	}
 	return p.Req.FastRead(buf, _type, number)
 }
 
-func (p *CreateFavoriteArgs) FastWrite(buf []byte) (n int) {
+func (p *DoFavoriteArgs) FastWrite(buf []byte) (n int) {
 	if !p.IsSetReq() {
 		return 0
 	}
 	return p.Req.FastWrite(buf)
 }
 
-func (p *CreateFavoriteArgs) Size() (n int) {
+func (p *DoFavoriteArgs) Size() (n int) {
 	if !p.IsSetReq() {
 		return 0
 	}
 	return p.Req.Size()
 }
 
-func (p *CreateFavoriteArgs) Marshal(out []byte) ([]byte, error) {
+func (p *DoFavoriteArgs) Marshal(out []byte) ([]byte, error) {
 	if !p.IsSetReq() {
 		return out, nil
 	}
 	return proto.Marshal(p.Req)
 }
 
-func (p *CreateFavoriteArgs) Unmarshal(in []byte) error {
-	msg := new(user.CreateFavoriteReq)
+func (p *DoFavoriteArgs) Unmarshal(in []byte) error {
+	msg := new(user.DoFavoriteReq)
 	if err := proto.Unmarshal(in, msg); err != nil {
 		return err
 	}
@@ -2729,58 +2729,58 @@ func (p *CreateFavoriteArgs) Unmarshal(in []byte) error {
 	return nil
 }
 
-var CreateFavoriteArgs_Req_DEFAULT *user.CreateFavoriteReq
+var DoFavoriteArgs_Req_DEFAULT *user.DoFavoriteReq
 
-func (p *CreateFavoriteArgs) GetReq() *user.CreateFavoriteReq {
+func (p *DoFavoriteArgs) GetReq() *user.DoFavoriteReq {
 	if !p.IsSetReq() {
-		return CreateFavoriteArgs_Req_DEFAULT
+		return DoFavoriteArgs_Req_DEFAULT
 	}
 	return p.Req
 }
 
-func (p *CreateFavoriteArgs) IsSetReq() bool {
+func (p *DoFavoriteArgs) IsSetReq() bool {
 	return p.Req != nil
 }
 
-func (p *CreateFavoriteArgs) GetFirstArgument() interface{} {
+func (p *DoFavoriteArgs) GetFirstArgument() interface{} {
 	return p.Req
 }
 
-type CreateFavoriteResult struct {
+type DoFavoriteResult struct {
 	Success *user.Response
 }
 
-var CreateFavoriteResult_Success_DEFAULT *user.Response
+var DoFavoriteResult_Success_DEFAULT *user.Response
 
-func (p *CreateFavoriteResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+func (p *DoFavoriteResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
 	if !p.IsSetSuccess() {
 		p.Success = new(user.Response)
 	}
 	return p.Success.FastRead(buf, _type, number)
 }
 
-func (p *CreateFavoriteResult) FastWrite(buf []byte) (n int) {
+func (p *DoFavoriteResult) FastWrite(buf []byte) (n int) {
 	if !p.IsSetSuccess() {
 		return 0
 	}
 	return p.Success.FastWrite(buf)
 }
 
-func (p *CreateFavoriteResult) Size() (n int) {
+func (p *DoFavoriteResult) Size() (n int) {
 	if !p.IsSetSuccess() {
 		return 0
 	}
 	return p.Success.Size()
 }
 
-func (p *CreateFavoriteResult) Marshal(out []byte) ([]byte, error) {
+func (p *DoFavoriteResult) Marshal(out []byte) ([]byte, error) {
 	if !p.IsSetSuccess() {
 		return out, nil
 	}
 	return proto.Marshal(p.Success)
 }
 
-func (p *CreateFavoriteResult) Unmarshal(in []byte) error {
+func (p *DoFavoriteResult) Unmarshal(in []byte) error {
 	msg := new(user.Response)
 	if err := proto.Unmarshal(in, msg); err != nil {
 		return err
@@ -2789,22 +2789,22 @@ func (p *CreateFavoriteResult) Unmarshal(in []byte) error {
 	return nil
 }
 
-func (p *CreateFavoriteResult) GetSuccess() *user.Response {
+func (p *DoFavoriteResult) GetSuccess() *user.Response {
 	if !p.IsSetSuccess() {
-		return CreateFavoriteResult_Success_DEFAULT
+		return DoFavoriteResult_Success_DEFAULT
 	}
 	return p.Success
 }
 
-func (p *CreateFavoriteResult) SetSuccess(x interface{}) {
+func (p *DoFavoriteResult) SetSuccess(x interface{}) {
 	p.Success = x.(*user.Response)
 }
 
-func (p *CreateFavoriteResult) IsSetSuccess() bool {
+func (p *DoFavoriteResult) IsSetSuccess() bool {
 	return p.Success != nil
 }
 
-func (p *CreateFavoriteResult) GetResult() interface{} {
+func (p *DoFavoriteResult) GetResult() interface{} {
 	return p.Success
 }
 
@@ -3051,31 +3051,31 @@ func (p *kClient) ListReservers(ctx context.Context, Req *user.ListReserversReq)
 	return _result.GetSuccess(), nil
 }
 
-func (p *kClient) CreateBooking(ctx context.Context, Req *user.CreateBookRecordReq) (r *user.Response, err error) {
-	var _args CreateBookingArgs
+func (p *kClient) CreateBookRecord(ctx context.Context, Req *user.CreateBookRecordReq) (r *user.Response, err error) {
+	var _args CreateBookRecordArgs
 	_args.Req = Req
-	var _result CreateBookingResult
-	if err = p.c.Call(ctx, "CreateBooking", &_args, &_result); err != nil {
+	var _result CreateBookRecordResult
+	if err = p.c.Call(ctx, "CreateBookRecord", &_args, &_result); err != nil {
 		return
 	}
 	return _result.GetSuccess(), nil
 }
 
-func (p *kClient) DeleteBooking(ctx context.Context, Req *user.DeleteBookRecordReq) (r *user.Response, err error) {
-	var _args DeleteBookingArgs
+func (p *kClient) CancelBookRecord(ctx context.Context, Req *user.CancelBookRecordReq) (r *user.Response, err error) {
+	var _args CancelBookRecordArgs
 	_args.Req = Req
-	var _result DeleteBookingResult
-	if err = p.c.Call(ctx, "DeleteBooking", &_args, &_result); err != nil {
+	var _result CancelBookRecordResult
+	if err = p.c.Call(ctx, "CancelBookRecord", &_args, &_result); err != nil {
 		return
 	}
 	return _result.GetSuccess(), nil
 }
 
-func (p *kClient) GetBookingDetail(ctx context.Context, Req *user.GetBookRecordReq) (r *user.GetBookRecordResp, err error) {
-	var _args GetBookingDetailArgs
+func (p *kClient) GetBookRecordDetail(ctx context.Context, Req *user.GetBookRecordReq) (r *user.GetBookRecordResp, err error) {
+	var _args GetBookRecordDetailArgs
 	_args.Req = Req
-	var _result GetBookingDetailResult
-	if err = p.c.Call(ctx, "GetBookingDetail", &_args, &_result); err != nil {
+	var _result GetBookRecordDetailResult
+	if err = p.c.Call(ctx, "GetBookRecordDetail", &_args, &_result); err != nil {
 		return
 	}
 	return _result.GetSuccess(), nil
@@ -3131,11 +3131,11 @@ func (p *kClient) MarkReceiptRead(ctx context.Context, Req *user.MarkReceiptRead
 	return _result.GetSuccess(), nil
 }
 
-func (p *kClient) CreateFavorite(ctx context.Context, Req *user.CreateFavoriteReq) (r *user.Response, err error) {
-	var _args CreateFavoriteArgs
+func (p *kClient) DoFavorite(ctx context.Context, Req *user.DoFavoriteReq) (r *user.Response, err error) {
+	var _args DoFavoriteArgs
 	_args.Req = Req
-	var _result CreateFavoriteResult
-	if err = p.c.Call(ctx, "CreateFavorite", &_args, &_result); err != nil {
+	var _result DoFavoriteResult
+	if err = p.c.Call(ctx, "DoFavorite", &_args, &_result); err != nil {
 		return
 	}
 	return _result.GetSuccess(), nil

@@ -49,12 +49,12 @@ ReadFieldError:
 }
 
 func (x *Opening) fastReadField1(buf []byte, _type int8) (offset int, err error) {
-	x.StartDat, offset, err = fastpb.ReadInt32(buf, _type)
+	x.StartDay, offset, err = fastpb.ReadInt64(buf, _type)
 	return offset, err
 }
 
 func (x *Opening) fastReadField2(buf []byte, _type int8) (offset int, err error) {
-	x.EndDat, offset, err = fastpb.ReadInt32(buf, _type)
+	x.EndDay, offset, err = fastpb.ReadInt64(buf, _type)
 	return offset, err
 }
 
@@ -175,6 +175,11 @@ func (x *Merchant) FastRead(buf []byte, _type int8, number int32) (offset int, e
 		if err != nil {
 			goto ReadFieldError
 		}
+	case 13:
+		offset, err = x.fastReadField13(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
 		if err != nil {
@@ -199,6 +204,11 @@ func (x *Merchant) fastReadField2(buf []byte, _type int8) (offset int, err error
 }
 
 func (x *Merchant) fastReadField3(buf []byte, _type int8) (offset int, err error) {
+	x.Logo, offset, err = fastpb.ReadString(buf, _type)
+	return offset, err
+}
+
+func (x *Merchant) fastReadField4(buf []byte, _type int8) (offset int, err error) {
 	var v Opening
 	offset, err = fastpb.ReadMessage(buf, _type, &v)
 	if err != nil {
@@ -208,12 +218,12 @@ func (x *Merchant) fastReadField3(buf []byte, _type int8) (offset int, err error
 	return offset, nil
 }
 
-func (x *Merchant) fastReadField4(buf []byte, _type int8) (offset int, err error) {
-	x.Contact, offset, err = fastpb.ReadString(buf, _type)
+func (x *Merchant) fastReadField5(buf []byte, _type int8) (offset int, err error) {
+	x.Phone, offset, err = fastpb.ReadString(buf, _type)
 	return offset, err
 }
 
-func (x *Merchant) fastReadField5(buf []byte, _type int8) (offset int, err error) {
+func (x *Merchant) fastReadField6(buf []byte, _type int8) (offset int, err error) {
 	var v Location
 	offset, err = fastpb.ReadMessage(buf, _type, &v)
 	if err != nil {
@@ -223,12 +233,12 @@ func (x *Merchant) fastReadField5(buf []byte, _type int8) (offset int, err error
 	return offset, nil
 }
 
-func (x *Merchant) fastReadField6(buf []byte, _type int8) (offset int, err error) {
+func (x *Merchant) fastReadField7(buf []byte, _type int8) (offset int, err error) {
 	x.Description, offset, err = fastpb.ReadString(buf, _type)
 	return offset, err
 }
 
-func (x *Merchant) fastReadField7(buf []byte, _type int8) (offset int, err error) {
+func (x *Merchant) fastReadField8(buf []byte, _type int8) (offset int, err error) {
 	var v string
 	v, offset, err = fastpb.ReadString(buf, _type)
 	if err != nil {
@@ -238,28 +248,28 @@ func (x *Merchant) fastReadField7(buf []byte, _type int8) (offset int, err error
 	return offset, err
 }
 
-func (x *Merchant) fastReadField8(buf []byte, _type int8) (offset int, err error) {
+func (x *Merchant) fastReadField9(buf []byte, _type int8) (offset int, err error) {
 	x.Password, offset, err = fastpb.ReadString(buf, _type)
 	return offset, err
 }
 
-func (x *Merchant) fastReadField9(buf []byte, _type int8) (offset int, err error) {
+func (x *Merchant) fastReadField10(buf []byte, _type int8) (offset int, err error) {
 	x.CreateTime, offset, err = fastpb.ReadInt64(buf, _type)
 	return offset, err
 }
 
-func (x *Merchant) fastReadField10(buf []byte, _type int8) (offset int, err error) {
+func (x *Merchant) fastReadField11(buf []byte, _type int8) (offset int, err error) {
 	x.UpdateTime, offset, err = fastpb.ReadInt64(buf, _type)
 	return offset, err
 }
 
-func (x *Merchant) fastReadField11(buf []byte, _type int8) (offset int, err error) {
+func (x *Merchant) fastReadField12(buf []byte, _type int8) (offset int, err error) {
 	x.DeleteTime, offset, err = fastpb.ReadInt64(buf, _type)
 	return offset, err
 }
 
-func (x *Merchant) fastReadField12(buf []byte, _type int8) (offset int, err error) {
-	x.Status, offset, err = fastpb.ReadInt32(buf, _type)
+func (x *Merchant) fastReadField13(buf []byte, _type int8) (offset int, err error) {
+	x.Status, offset, err = fastpb.ReadInt64(buf, _type)
 	return offset, err
 }
 
@@ -294,12 +304,16 @@ func (x *Header) fastReadField1(buf []byte, _type int8) (offset int, err error) 
 }
 
 func (x *Header) fastReadField2(buf []byte, _type int8) (offset int, err error) {
-	var v string
-	v, offset, err = fastpb.ReadString(buf, _type)
-	if err != nil {
-		return offset, err
-	}
-	x.Rgb = append(x.Rgb, v)
+	offset, err = fastpb.ReadList(buf, _type,
+		func(buf []byte, _type int8) (n int, err error) {
+			var v int64
+			v, offset, err = fastpb.ReadInt64(buf, _type)
+			if err != nil {
+				return offset, err
+			}
+			x.Rgb = append(x.Rgb, v)
+			return offset, err
+		})
 	return offset, err
 }
 
@@ -329,7 +343,7 @@ ReadFieldError:
 }
 
 func (x *Covers) fastReadField1(buf []byte, _type int8) (offset int, err error) {
-	x.Type, offset, err = fastpb.ReadInt32(buf, _type)
+	x.Type, offset, err = fastpb.ReadInt64(buf, _type)
 	return offset, err
 }
 
@@ -489,7 +503,7 @@ func (x *Setting) fastReadField8(buf []byte, _type int8) (offset int, err error)
 }
 
 func (x *Setting) fastReadField9(buf []byte, _type int8) (offset int, err error) {
-	x.Status, offset, err = fastpb.ReadInt32(buf, _type)
+	x.Status, offset, err = fastpb.ReadInt64(buf, _type)
 	return offset, err
 }
 
@@ -524,7 +538,7 @@ ReadFieldError:
 }
 
 func (x *ActivitySetting) fastReadField1(buf []byte, _type int8) (offset int, err error) {
-	x.Max, offset, err = fastpb.ReadInt32(buf, _type)
+	x.Max, offset, err = fastpb.ReadInt64(buf, _type)
 	return offset, err
 }
 
@@ -664,7 +678,7 @@ func (x *Activity) fastReadField4(buf []byte, _type int8) (offset int, err error
 }
 
 func (x *Activity) fastReadField5(buf []byte, _type int8) (offset int, err error) {
-	x.Book, offset, err = fastpb.ReadInt32(buf, _type)
+	x.Book, offset, err = fastpb.ReadInt64(buf, _type)
 	return offset, err
 }
 
@@ -679,7 +693,7 @@ func (x *Activity) fastReadField7(buf []byte, _type int8) (offset int, err error
 }
 
 func (x *Activity) fastReadField8(buf []byte, _type int8) (offset int, err error) {
-	var v Setting
+	var v ActivitySetting
 	offset, err = fastpb.ReadMessage(buf, _type, &v)
 	if err != nil {
 		return offset, err
@@ -699,7 +713,7 @@ func (x *Activity) fastReadField9(buf []byte, _type int8) (offset int, err error
 }
 
 func (x *Activity) fastReadField10(buf []byte, _type int8) (offset int, err error) {
-	x.Top, offset, err = fastpb.ReadInt32(buf, _type)
+	x.Top, offset, err = fastpb.ReadInt64(buf, _type)
 	return offset, err
 }
 
@@ -734,7 +748,7 @@ func (x *Activity) fastReadField16(buf []byte, _type int8) (offset int, err erro
 }
 
 func (x *Activity) fastReadField17(buf []byte, _type int8) (offset int, err error) {
-	x.Status, offset, err = fastpb.ReadInt32(buf, _type)
+	x.Status, offset, err = fastpb.ReadInt64(buf, _type)
 	return offset, err
 }
 
@@ -819,7 +833,7 @@ func (x *Admin) fastReadField6(buf []byte, _type int8) (offset int, err error) {
 }
 
 func (x *Admin) fastReadField7(buf []byte, _type int8) (offset int, err error) {
-	x.Status, offset, err = fastpb.ReadInt32(buf, _type)
+	x.Status, offset, err = fastpb.ReadInt64(buf, _type)
 	return offset, err
 }
 
@@ -931,7 +945,7 @@ func (x *MerchantLoginResp) fastReadField2(buf []byte, _type int8) (offset int, 
 }
 
 func (x *MerchantLoginResp) fastReadField3(buf []byte, _type int8) (offset int, err error) {
-	x.UserId, offset, err = fastpb.ReadString(buf, _type)
+	x.Id, offset, err = fastpb.ReadString(buf, _type)
 	return offset, err
 }
 
@@ -1191,7 +1205,7 @@ func (x *CreateActivityReq) fastReadField2(buf []byte, _type int8) (offset int, 
 }
 
 func (x *CreateActivityReq) fastReadField3(buf []byte, _type int8) (offset int, err error) {
-	x.Book, offset, err = fastpb.ReadInt32(buf, _type)
+	x.Book, offset, err = fastpb.ReadInt64(buf, _type)
 	return offset, err
 }
 
@@ -1226,7 +1240,7 @@ func (x *CreateActivityReq) fastReadField7(buf []byte, _type int8) (offset int, 
 }
 
 func (x *CreateActivityReq) fastReadField8(buf []byte, _type int8) (offset int, err error) {
-	x.Top, offset, err = fastpb.ReadInt32(buf, _type)
+	x.Top, offset, err = fastpb.ReadInt64(buf, _type)
 	return offset, err
 }
 
@@ -1457,6 +1471,16 @@ func (x *GetActivityResp) FastRead(buf []byte, _type int8, number int32) (offset
 		if err != nil {
 			goto ReadFieldError
 		}
+	case 2:
+		offset, err = x.fastReadField2(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	case 3:
+		offset, err = x.fastReadField3(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
 		if err != nil {
@@ -1471,6 +1495,16 @@ ReadFieldError:
 }
 
 func (x *GetActivityResp) fastReadField1(buf []byte, _type int8) (offset int, err error) {
+	x.Code, offset, err = fastpb.ReadInt64(buf, _type)
+	return offset, err
+}
+
+func (x *GetActivityResp) fastReadField2(buf []byte, _type int8) (offset int, err error) {
+	x.Msg, offset, err = fastpb.ReadString(buf, _type)
+	return offset, err
+}
+
+func (x *GetActivityResp) fastReadField3(buf []byte, _type int8) (offset int, err error) {
 	var v Activity
 	offset, err = fastpb.ReadMessage(buf, _type, &v)
 	if err != nil {
@@ -1718,7 +1752,7 @@ func (x *CreateMerchantReq) fastReadField3(buf []byte, _type int8) (offset int, 
 }
 
 func (x *CreateMerchantReq) fastReadField4(buf []byte, _type int8) (offset int, err error) {
-	x.Contact, offset, err = fastpb.ReadString(buf, _type)
+	x.Phone, offset, err = fastpb.ReadString(buf, _type)
 	return offset, err
 }
 
@@ -1869,18 +1903,18 @@ func (x *Opening) FastWrite(buf []byte) (offset int) {
 }
 
 func (x *Opening) fastWriteField1(buf []byte) (offset int) {
-	if x.StartDat == 0 {
+	if x.StartDay == 0 {
 		return offset
 	}
-	offset += fastpb.WriteInt32(buf[offset:], 1, x.GetStartDat())
+	offset += fastpb.WriteInt64(buf[offset:], 1, x.GetStartDay())
 	return offset
 }
 
 func (x *Opening) fastWriteField2(buf []byte) (offset int) {
-	if x.EndDat == 0 {
+	if x.EndDay == 0 {
 		return offset
 	}
-	offset += fastpb.WriteInt32(buf[offset:], 2, x.GetEndDat())
+	offset += fastpb.WriteInt64(buf[offset:], 2, x.GetEndDay())
 	return offset
 }
 
@@ -1950,6 +1984,7 @@ func (x *Merchant) FastWrite(buf []byte) (offset int) {
 	offset += x.fastWriteField10(buf[offset:])
 	offset += x.fastWriteField11(buf[offset:])
 	offset += x.fastWriteField12(buf[offset:])
+	offset += x.fastWriteField13(buf[offset:])
 	return offset
 }
 
@@ -1970,86 +2005,94 @@ func (x *Merchant) fastWriteField2(buf []byte) (offset int) {
 }
 
 func (x *Merchant) fastWriteField3(buf []byte) (offset int) {
-	if x.Openings == nil {
+	if x.Logo == "" {
 		return offset
 	}
-	for i := range x.GetOpenings() {
-		offset += fastpb.WriteMessage(buf[offset:], 3, x.GetOpenings()[i])
-	}
+	offset += fastpb.WriteString(buf[offset:], 3, x.GetLogo())
 	return offset
 }
 
 func (x *Merchant) fastWriteField4(buf []byte) (offset int) {
-	if x.Contact == "" {
+	if x.Openings == nil {
 		return offset
 	}
-	offset += fastpb.WriteString(buf[offset:], 4, x.GetContact())
+	for i := range x.GetOpenings() {
+		offset += fastpb.WriteMessage(buf[offset:], 4, x.GetOpenings()[i])
+	}
 	return offset
 }
 
 func (x *Merchant) fastWriteField5(buf []byte) (offset int) {
-	if x.Location == nil {
+	if x.Phone == "" {
 		return offset
 	}
-	offset += fastpb.WriteMessage(buf[offset:], 5, x.GetLocation())
+	offset += fastpb.WriteString(buf[offset:], 5, x.GetPhone())
 	return offset
 }
 
 func (x *Merchant) fastWriteField6(buf []byte) (offset int) {
-	if x.Description == "" {
+	if x.Location == nil {
 		return offset
 	}
-	offset += fastpb.WriteString(buf[offset:], 6, x.GetDescription())
+	offset += fastpb.WriteMessage(buf[offset:], 6, x.GetLocation())
 	return offset
 }
 
 func (x *Merchant) fastWriteField7(buf []byte) (offset int) {
-	if len(x.Licences) == 0 {
+	if x.Description == "" {
 		return offset
 	}
-	for i := range x.GetLicences() {
-		offset += fastpb.WriteString(buf[offset:], 7, x.GetLicences()[i])
-	}
+	offset += fastpb.WriteString(buf[offset:], 7, x.GetDescription())
 	return offset
 }
 
 func (x *Merchant) fastWriteField8(buf []byte) (offset int) {
-	if x.Password == "" {
+	if len(x.Licences) == 0 {
 		return offset
 	}
-	offset += fastpb.WriteString(buf[offset:], 8, x.GetPassword())
+	for i := range x.GetLicences() {
+		offset += fastpb.WriteString(buf[offset:], 8, x.GetLicences()[i])
+	}
 	return offset
 }
 
 func (x *Merchant) fastWriteField9(buf []byte) (offset int) {
-	if x.CreateTime == 0 {
+	if x.Password == "" {
 		return offset
 	}
-	offset += fastpb.WriteInt64(buf[offset:], 9, x.GetCreateTime())
+	offset += fastpb.WriteString(buf[offset:], 9, x.GetPassword())
 	return offset
 }
 
 func (x *Merchant) fastWriteField10(buf []byte) (offset int) {
-	if x.UpdateTime == 0 {
+	if x.CreateTime == 0 {
 		return offset
 	}
-	offset += fastpb.WriteInt64(buf[offset:], 10, x.GetUpdateTime())
+	offset += fastpb.WriteInt64(buf[offset:], 10, x.GetCreateTime())
 	return offset
 }
 
 func (x *Merchant) fastWriteField11(buf []byte) (offset int) {
-	if x.DeleteTime == 0 {
+	if x.UpdateTime == 0 {
 		return offset
 	}
-	offset += fastpb.WriteInt64(buf[offset:], 11, x.GetDeleteTime())
+	offset += fastpb.WriteInt64(buf[offset:], 11, x.GetUpdateTime())
 	return offset
 }
 
 func (x *Merchant) fastWriteField12(buf []byte) (offset int) {
+	if x.DeleteTime == 0 {
+		return offset
+	}
+	offset += fastpb.WriteInt64(buf[offset:], 12, x.GetDeleteTime())
+	return offset
+}
+
+func (x *Merchant) fastWriteField13(buf []byte) (offset int) {
 	if x.Status == 0 {
 		return offset
 	}
-	offset += fastpb.WriteInt32(buf[offset:], 12, x.GetStatus())
+	offset += fastpb.WriteInt64(buf[offset:], 13, x.GetStatus())
 	return offset
 }
 
@@ -2074,9 +2117,12 @@ func (x *Header) fastWriteField2(buf []byte) (offset int) {
 	if len(x.Rgb) == 0 {
 		return offset
 	}
-	for i := range x.GetRgb() {
-		offset += fastpb.WriteString(buf[offset:], 2, x.GetRgb()[i])
-	}
+	offset += fastpb.WriteListPacked(buf[offset:], 2, len(x.GetRgb()),
+		func(buf []byte, numTagOrKey, numIdxOrVal int32) int {
+			offset := 0
+			offset += fastpb.WriteInt64(buf[offset:], numTagOrKey, x.GetRgb()[numIdxOrVal])
+			return offset
+		})
 	return offset
 }
 
@@ -2093,7 +2139,7 @@ func (x *Covers) fastWriteField1(buf []byte) (offset int) {
 	if x.Type == 0 {
 		return offset
 	}
-	offset += fastpb.WriteInt32(buf[offset:], 1, x.GetType())
+	offset += fastpb.WriteInt64(buf[offset:], 1, x.GetType())
 	return offset
 }
 
@@ -2209,7 +2255,7 @@ func (x *Setting) fastWriteField9(buf []byte) (offset int) {
 	if x.Status == 0 {
 		return offset
 	}
-	offset += fastpb.WriteInt32(buf[offset:], 9, x.GetStatus())
+	offset += fastpb.WriteInt64(buf[offset:], 9, x.GetStatus())
 	return offset
 }
 
@@ -2227,7 +2273,7 @@ func (x *ActivitySetting) fastWriteField1(buf []byte) (offset int) {
 	if x.Max == 0 {
 		return offset
 	}
-	offset += fastpb.WriteInt32(buf[offset:], 1, x.GetMax())
+	offset += fastpb.WriteInt64(buf[offset:], 1, x.GetMax())
 	return offset
 }
 
@@ -2309,7 +2355,7 @@ func (x *Activity) fastWriteField5(buf []byte) (offset int) {
 	if x.Book == 0 {
 		return offset
 	}
-	offset += fastpb.WriteInt32(buf[offset:], 5, x.GetBook())
+	offset += fastpb.WriteInt64(buf[offset:], 5, x.GetBook())
 	return offset
 }
 
@@ -2351,7 +2397,7 @@ func (x *Activity) fastWriteField10(buf []byte) (offset int) {
 	if x.Top == 0 {
 		return offset
 	}
-	offset += fastpb.WriteInt32(buf[offset:], 10, x.GetTop())
+	offset += fastpb.WriteInt64(buf[offset:], 10, x.GetTop())
 	return offset
 }
 
@@ -2407,7 +2453,7 @@ func (x *Activity) fastWriteField17(buf []byte) (offset int) {
 	if x.Status == 0 {
 		return offset
 	}
-	offset += fastpb.WriteInt32(buf[offset:], 17, x.GetStatus())
+	offset += fastpb.WriteInt64(buf[offset:], 17, x.GetStatus())
 	return offset
 }
 
@@ -2477,7 +2523,7 @@ func (x *Admin) fastWriteField7(buf []byte) (offset int) {
 	if x.Status == 0 {
 		return offset
 	}
-	offset += fastpb.WriteInt32(buf[offset:], 7, x.GetStatus())
+	offset += fastpb.WriteInt64(buf[offset:], 7, x.GetStatus())
 	return offset
 }
 
@@ -2553,10 +2599,10 @@ func (x *MerchantLoginResp) fastWriteField2(buf []byte) (offset int) {
 }
 
 func (x *MerchantLoginResp) fastWriteField3(buf []byte) (offset int) {
-	if x.UserId == "" {
+	if x.Id == "" {
 		return offset
 	}
-	offset += fastpb.WriteString(buf[offset:], 3, x.GetUserId())
+	offset += fastpb.WriteString(buf[offset:], 3, x.GetId())
 	return offset
 }
 
@@ -2723,7 +2769,7 @@ func (x *CreateActivityReq) fastWriteField3(buf []byte) (offset int) {
 	if x.Book == 0 {
 		return offset
 	}
-	offset += fastpb.WriteInt32(buf[offset:], 3, x.GetBook())
+	offset += fastpb.WriteInt64(buf[offset:], 3, x.GetBook())
 	return offset
 }
 
@@ -2765,7 +2811,7 @@ func (x *CreateActivityReq) fastWriteField8(buf []byte) (offset int) {
 	if x.Top == 0 {
 		return offset
 	}
-	offset += fastpb.WriteInt32(buf[offset:], 8, x.GetTop())
+	offset += fastpb.WriteInt64(buf[offset:], 8, x.GetTop())
 	return offset
 }
 
@@ -2932,14 +2978,32 @@ func (x *GetActivityResp) FastWrite(buf []byte) (offset int) {
 		return offset
 	}
 	offset += x.fastWriteField1(buf[offset:])
+	offset += x.fastWriteField2(buf[offset:])
+	offset += x.fastWriteField3(buf[offset:])
 	return offset
 }
 
 func (x *GetActivityResp) fastWriteField1(buf []byte) (offset int) {
+	if x.Code == 0 {
+		return offset
+	}
+	offset += fastpb.WriteInt64(buf[offset:], 1, x.GetCode())
+	return offset
+}
+
+func (x *GetActivityResp) fastWriteField2(buf []byte) (offset int) {
+	if x.Msg == "" {
+		return offset
+	}
+	offset += fastpb.WriteString(buf[offset:], 2, x.GetMsg())
+	return offset
+}
+
+func (x *GetActivityResp) fastWriteField3(buf []byte) (offset int) {
 	if x.Activity == nil {
 		return offset
 	}
-	offset += fastpb.WriteMessage(buf[offset:], 1, x.GetActivity())
+	offset += fastpb.WriteMessage(buf[offset:], 3, x.GetActivity())
 	return offset
 }
 
@@ -3113,10 +3177,10 @@ func (x *CreateMerchantReq) fastWriteField3(buf []byte) (offset int) {
 }
 
 func (x *CreateMerchantReq) fastWriteField4(buf []byte) (offset int) {
-	if x.Contact == "" {
+	if x.Phone == "" {
 		return offset
 	}
-	offset += fastpb.WriteString(buf[offset:], 4, x.GetContact())
+	offset += fastpb.WriteString(buf[offset:], 4, x.GetPhone())
 	return offset
 }
 
@@ -3233,18 +3297,18 @@ func (x *Opening) Size() (n int) {
 }
 
 func (x *Opening) sizeField1() (n int) {
-	if x.StartDat == 0 {
+	if x.StartDay == 0 {
 		return n
 	}
-	n += fastpb.SizeInt32(1, x.GetStartDat())
+	n += fastpb.SizeInt64(1, x.GetStartDay())
 	return n
 }
 
 func (x *Opening) sizeField2() (n int) {
-	if x.EndDat == 0 {
+	if x.EndDay == 0 {
 		return n
 	}
-	n += fastpb.SizeInt32(2, x.GetEndDat())
+	n += fastpb.SizeInt64(2, x.GetEndDay())
 	return n
 }
 
@@ -3314,6 +3378,7 @@ func (x *Merchant) Size() (n int) {
 	n += x.sizeField10()
 	n += x.sizeField11()
 	n += x.sizeField12()
+	n += x.sizeField13()
 	return n
 }
 
@@ -3334,86 +3399,94 @@ func (x *Merchant) sizeField2() (n int) {
 }
 
 func (x *Merchant) sizeField3() (n int) {
-	if x.Openings == nil {
+	if x.Logo == "" {
 		return n
 	}
-	for i := range x.GetOpenings() {
-		n += fastpb.SizeMessage(3, x.GetOpenings()[i])
-	}
+	n += fastpb.SizeString(3, x.GetLogo())
 	return n
 }
 
 func (x *Merchant) sizeField4() (n int) {
-	if x.Contact == "" {
+	if x.Openings == nil {
 		return n
 	}
-	n += fastpb.SizeString(4, x.GetContact())
+	for i := range x.GetOpenings() {
+		n += fastpb.SizeMessage(4, x.GetOpenings()[i])
+	}
 	return n
 }
 
 func (x *Merchant) sizeField5() (n int) {
-	if x.Location == nil {
+	if x.Phone == "" {
 		return n
 	}
-	n += fastpb.SizeMessage(5, x.GetLocation())
+	n += fastpb.SizeString(5, x.GetPhone())
 	return n
 }
 
 func (x *Merchant) sizeField6() (n int) {
-	if x.Description == "" {
+	if x.Location == nil {
 		return n
 	}
-	n += fastpb.SizeString(6, x.GetDescription())
+	n += fastpb.SizeMessage(6, x.GetLocation())
 	return n
 }
 
 func (x *Merchant) sizeField7() (n int) {
-	if len(x.Licences) == 0 {
+	if x.Description == "" {
 		return n
 	}
-	for i := range x.GetLicences() {
-		n += fastpb.SizeString(7, x.GetLicences()[i])
-	}
+	n += fastpb.SizeString(7, x.GetDescription())
 	return n
 }
 
 func (x *Merchant) sizeField8() (n int) {
-	if x.Password == "" {
+	if len(x.Licences) == 0 {
 		return n
 	}
-	n += fastpb.SizeString(8, x.GetPassword())
+	for i := range x.GetLicences() {
+		n += fastpb.SizeString(8, x.GetLicences()[i])
+	}
 	return n
 }
 
 func (x *Merchant) sizeField9() (n int) {
-	if x.CreateTime == 0 {
+	if x.Password == "" {
 		return n
 	}
-	n += fastpb.SizeInt64(9, x.GetCreateTime())
+	n += fastpb.SizeString(9, x.GetPassword())
 	return n
 }
 
 func (x *Merchant) sizeField10() (n int) {
-	if x.UpdateTime == 0 {
+	if x.CreateTime == 0 {
 		return n
 	}
-	n += fastpb.SizeInt64(10, x.GetUpdateTime())
+	n += fastpb.SizeInt64(10, x.GetCreateTime())
 	return n
 }
 
 func (x *Merchant) sizeField11() (n int) {
-	if x.DeleteTime == 0 {
+	if x.UpdateTime == 0 {
 		return n
 	}
-	n += fastpb.SizeInt64(11, x.GetDeleteTime())
+	n += fastpb.SizeInt64(11, x.GetUpdateTime())
 	return n
 }
 
 func (x *Merchant) sizeField12() (n int) {
+	if x.DeleteTime == 0 {
+		return n
+	}
+	n += fastpb.SizeInt64(12, x.GetDeleteTime())
+	return n
+}
+
+func (x *Merchant) sizeField13() (n int) {
 	if x.Status == 0 {
 		return n
 	}
-	n += fastpb.SizeInt32(12, x.GetStatus())
+	n += fastpb.SizeInt64(13, x.GetStatus())
 	return n
 }
 
@@ -3438,9 +3511,12 @@ func (x *Header) sizeField2() (n int) {
 	if len(x.Rgb) == 0 {
 		return n
 	}
-	for i := range x.GetRgb() {
-		n += fastpb.SizeString(2, x.GetRgb()[i])
-	}
+	n += fastpb.SizeListPacked(2, len(x.GetRgb()),
+		func(numTagOrKey, numIdxOrVal int32) int {
+			n := 0
+			n += fastpb.SizeInt64(numTagOrKey, x.GetRgb()[numIdxOrVal])
+			return n
+		})
 	return n
 }
 
@@ -3457,7 +3533,7 @@ func (x *Covers) sizeField1() (n int) {
 	if x.Type == 0 {
 		return n
 	}
-	n += fastpb.SizeInt32(1, x.GetType())
+	n += fastpb.SizeInt64(1, x.GetType())
 	return n
 }
 
@@ -3573,7 +3649,7 @@ func (x *Setting) sizeField9() (n int) {
 	if x.Status == 0 {
 		return n
 	}
-	n += fastpb.SizeInt32(9, x.GetStatus())
+	n += fastpb.SizeInt64(9, x.GetStatus())
 	return n
 }
 
@@ -3591,7 +3667,7 @@ func (x *ActivitySetting) sizeField1() (n int) {
 	if x.Max == 0 {
 		return n
 	}
-	n += fastpb.SizeInt32(1, x.GetMax())
+	n += fastpb.SizeInt64(1, x.GetMax())
 	return n
 }
 
@@ -3673,7 +3749,7 @@ func (x *Activity) sizeField5() (n int) {
 	if x.Book == 0 {
 		return n
 	}
-	n += fastpb.SizeInt32(5, x.GetBook())
+	n += fastpb.SizeInt64(5, x.GetBook())
 	return n
 }
 
@@ -3715,7 +3791,7 @@ func (x *Activity) sizeField10() (n int) {
 	if x.Top == 0 {
 		return n
 	}
-	n += fastpb.SizeInt32(10, x.GetTop())
+	n += fastpb.SizeInt64(10, x.GetTop())
 	return n
 }
 
@@ -3771,7 +3847,7 @@ func (x *Activity) sizeField17() (n int) {
 	if x.Status == 0 {
 		return n
 	}
-	n += fastpb.SizeInt32(17, x.GetStatus())
+	n += fastpb.SizeInt64(17, x.GetStatus())
 	return n
 }
 
@@ -3841,7 +3917,7 @@ func (x *Admin) sizeField7() (n int) {
 	if x.Status == 0 {
 		return n
 	}
-	n += fastpb.SizeInt32(7, x.GetStatus())
+	n += fastpb.SizeInt64(7, x.GetStatus())
 	return n
 }
 
@@ -3917,10 +3993,10 @@ func (x *MerchantLoginResp) sizeField2() (n int) {
 }
 
 func (x *MerchantLoginResp) sizeField3() (n int) {
-	if x.UserId == "" {
+	if x.Id == "" {
 		return n
 	}
-	n += fastpb.SizeString(3, x.GetUserId())
+	n += fastpb.SizeString(3, x.GetId())
 	return n
 }
 
@@ -4087,7 +4163,7 @@ func (x *CreateActivityReq) sizeField3() (n int) {
 	if x.Book == 0 {
 		return n
 	}
-	n += fastpb.SizeInt32(3, x.GetBook())
+	n += fastpb.SizeInt64(3, x.GetBook())
 	return n
 }
 
@@ -4129,7 +4205,7 @@ func (x *CreateActivityReq) sizeField8() (n int) {
 	if x.Top == 0 {
 		return n
 	}
-	n += fastpb.SizeInt32(8, x.GetTop())
+	n += fastpb.SizeInt64(8, x.GetTop())
 	return n
 }
 
@@ -4296,14 +4372,32 @@ func (x *GetActivityResp) Size() (n int) {
 		return n
 	}
 	n += x.sizeField1()
+	n += x.sizeField2()
+	n += x.sizeField3()
 	return n
 }
 
 func (x *GetActivityResp) sizeField1() (n int) {
+	if x.Code == 0 {
+		return n
+	}
+	n += fastpb.SizeInt64(1, x.GetCode())
+	return n
+}
+
+func (x *GetActivityResp) sizeField2() (n int) {
+	if x.Msg == "" {
+		return n
+	}
+	n += fastpb.SizeString(2, x.GetMsg())
+	return n
+}
+
+func (x *GetActivityResp) sizeField3() (n int) {
 	if x.Activity == nil {
 		return n
 	}
-	n += fastpb.SizeMessage(1, x.GetActivity())
+	n += fastpb.SizeMessage(3, x.GetActivity())
 	return n
 }
 
@@ -4477,10 +4571,10 @@ func (x *CreateMerchantReq) sizeField3() (n int) {
 }
 
 func (x *CreateMerchantReq) sizeField4() (n int) {
-	if x.Contact == "" {
+	if x.Phone == "" {
 		return n
 	}
-	n += fastpb.SizeString(4, x.GetContact())
+	n += fastpb.SizeString(4, x.GetPhone())
 	return n
 }
 
@@ -4586,8 +4680,8 @@ func (x *Response) sizeField2() (n int) {
 }
 
 var fieldIDToName_Opening = map[int32]string{
-	1: "StartDat",
-	2: "EndDat",
+	1: "StartDay",
+	2: "EndDay",
 	3: "StartTime",
 	4: "EndTime",
 }
@@ -4601,16 +4695,17 @@ var fieldIDToName_Location = map[int32]string{
 var fieldIDToName_Merchant = map[int32]string{
 	1:  "Id",
 	2:  "Name",
-	3:  "Openings",
-	4:  "Contact",
-	5:  "Location",
-	6:  "Description",
-	7:  "Licences",
-	8:  "Password",
-	9:  "CreateTime",
-	10: "UpdateTime",
-	11: "DeleteTime",
-	12: "Status",
+	3:  "Logo",
+	4:  "Openings",
+	5:  "Phone",
+	6:  "Location",
+	7:  "Description",
+	8:  "Licences",
+	9:  "Password",
+	10: "CreateTime",
+	11: "UpdateTime",
+	12: "DeleteTime",
+	13: "Status",
 }
 
 var fieldIDToName_Header = map[int32]string{
@@ -4685,7 +4780,7 @@ var fieldIDToName_MerchantLoginReq = map[int32]string{
 var fieldIDToName_MerchantLoginResp = map[int32]string{
 	1: "Code",
 	2: "Msg",
-	3: "UserId",
+	3: "Id",
 	4: "AccessToken",
 	5: "ExpireTime",
 }
@@ -4754,7 +4849,9 @@ var fieldIDToName_GetActivityReq = map[int32]string{
 }
 
 var fieldIDToName_GetActivityResp = map[int32]string{
-	1: "Activity",
+	1: "Code",
+	2: "Msg",
+	3: "Activity",
 }
 
 var fieldIDToName_AdminLoginReq = map[int32]string{
@@ -4782,7 +4879,7 @@ var fieldIDToName_CreateMerchantReq = map[int32]string{
 	1: "AdminId",
 	2: "Name",
 	3: "Openings",
-	4: "Contact",
+	4: "Phone",
 	5: "Location",
 	6: "Description",
 	7: "Licences",

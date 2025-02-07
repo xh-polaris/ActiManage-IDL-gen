@@ -3,11 +3,11 @@ package coreapiservice
 
 import (
 	server "github.com/cloudwego/kitex/server"
-	user "github.com/xh-polaris/ActiManage-IDL-gen/kitex_gen/user"
+	userr "github.com/xh-polaris/ActiManage-IDL-gen/kitex_gen/userr"
 )
 
 // NewServer creates a server.Server with the given handler and options.
-func NewServer(handler user.CoreApiService, opts ...server.Option) server.Server {
+func NewServer(handler userr.CoreApiService, opts ...server.Option) server.Server {
 	var options []server.Option
 
 	options = append(options, opts...)
@@ -19,6 +19,6 @@ func NewServer(handler user.CoreApiService, opts ...server.Option) server.Server
 	return svr
 }
 
-func RegisterService(svr server.Server, handler user.CoreApiService, opts ...server.RegisterOption) error {
+func RegisterService(svr server.Server, handler userr.CoreApiService, opts ...server.RegisterOption) error {
 	return svr.RegisterService(serviceInfo(), handler, opts...)
 }

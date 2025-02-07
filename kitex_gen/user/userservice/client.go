@@ -19,15 +19,15 @@ type Client interface {
 	DeleteReserver(ctx context.Context, Req *user.DeleteReserverReq, callOptions ...callopt.Option) (r *user.Response, err error)
 	UpdateReserver(ctx context.Context, Req *user.UpdateReserverReq, callOptions ...callopt.Option) (r *user.Response, err error)
 	ListReservers(ctx context.Context, Req *user.ListReserversReq, callOptions ...callopt.Option) (r *user.ListReserversResp, err error)
-	CreateBooking(ctx context.Context, Req *user.CreateBookRecordReq, callOptions ...callopt.Option) (r *user.Response, err error)
-	DeleteBooking(ctx context.Context, Req *user.DeleteBookRecordReq, callOptions ...callopt.Option) (r *user.Response, err error)
-	GetBookingDetail(ctx context.Context, Req *user.GetBookRecordReq, callOptions ...callopt.Option) (r *user.GetBookRecordResp, err error)
+	CreateBookRecord(ctx context.Context, Req *user.CreateBookRecordReq, callOptions ...callopt.Option) (r *user.Response, err error)
+	CancelBookRecord(ctx context.Context, Req *user.CancelBookRecordReq, callOptions ...callopt.Option) (r *user.Response, err error)
+	GetBookRecordDetail(ctx context.Context, Req *user.GetBookRecordReq, callOptions ...callopt.Option) (r *user.GetBookRecordResp, err error)
 	ListBookRecordsByUser(ctx context.Context, Req *user.ListBookRecordsByUserReq, callOptions ...callopt.Option) (r *user.ListBookRecordsByUserResp, err error)
 	CreateReceipt(ctx context.Context, Req *user.CreateReceiptReq, callOptions ...callopt.Option) (r *user.Response, err error)
 	DeleteReceipt(ctx context.Context, Req *user.DeleteReceiptReq, callOptions ...callopt.Option) (r *user.Response, err error)
 	ListReceipts(ctx context.Context, Req *user.ListReceiptsReq, callOptions ...callopt.Option) (r *user.ListReceiptsResp, err error)
 	MarkReceiptRead(ctx context.Context, Req *user.MarkReceiptReadReq, callOptions ...callopt.Option) (r *user.Response, err error)
-	CreateFavorite(ctx context.Context, Req *user.CreateFavoriteReq, callOptions ...callopt.Option) (r *user.Response, err error)
+	DoFavorite(ctx context.Context, Req *user.DoFavoriteReq, callOptions ...callopt.Option) (r *user.Response, err error)
 	CancelFavorite(ctx context.Context, Req *user.CancelFavoriteReq, callOptions ...callopt.Option) (r *user.Response, err error)
 }
 
@@ -100,19 +100,19 @@ func (p *kUserServiceClient) ListReservers(ctx context.Context, Req *user.ListRe
 	return p.kClient.ListReservers(ctx, Req)
 }
 
-func (p *kUserServiceClient) CreateBooking(ctx context.Context, Req *user.CreateBookRecordReq, callOptions ...callopt.Option) (r *user.Response, err error) {
+func (p *kUserServiceClient) CreateBookRecord(ctx context.Context, Req *user.CreateBookRecordReq, callOptions ...callopt.Option) (r *user.Response, err error) {
 	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
-	return p.kClient.CreateBooking(ctx, Req)
+	return p.kClient.CreateBookRecord(ctx, Req)
 }
 
-func (p *kUserServiceClient) DeleteBooking(ctx context.Context, Req *user.DeleteBookRecordReq, callOptions ...callopt.Option) (r *user.Response, err error) {
+func (p *kUserServiceClient) CancelBookRecord(ctx context.Context, Req *user.CancelBookRecordReq, callOptions ...callopt.Option) (r *user.Response, err error) {
 	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
-	return p.kClient.DeleteBooking(ctx, Req)
+	return p.kClient.CancelBookRecord(ctx, Req)
 }
 
-func (p *kUserServiceClient) GetBookingDetail(ctx context.Context, Req *user.GetBookRecordReq, callOptions ...callopt.Option) (r *user.GetBookRecordResp, err error) {
+func (p *kUserServiceClient) GetBookRecordDetail(ctx context.Context, Req *user.GetBookRecordReq, callOptions ...callopt.Option) (r *user.GetBookRecordResp, err error) {
 	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
-	return p.kClient.GetBookingDetail(ctx, Req)
+	return p.kClient.GetBookRecordDetail(ctx, Req)
 }
 
 func (p *kUserServiceClient) ListBookRecordsByUser(ctx context.Context, Req *user.ListBookRecordsByUserReq, callOptions ...callopt.Option) (r *user.ListBookRecordsByUserResp, err error) {
@@ -140,9 +140,9 @@ func (p *kUserServiceClient) MarkReceiptRead(ctx context.Context, Req *user.Mark
 	return p.kClient.MarkReceiptRead(ctx, Req)
 }
 
-func (p *kUserServiceClient) CreateFavorite(ctx context.Context, Req *user.CreateFavoriteReq, callOptions ...callopt.Option) (r *user.Response, err error) {
+func (p *kUserServiceClient) DoFavorite(ctx context.Context, Req *user.DoFavoriteReq, callOptions ...callopt.Option) (r *user.Response, err error) {
 	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
-	return p.kClient.CreateFavorite(ctx, Req)
+	return p.kClient.DoFavorite(ctx, Req)
 }
 
 func (p *kUserServiceClient) CancelFavorite(ctx context.Context, Req *user.CancelFavoriteReq, callOptions ...callopt.Option) (r *user.Response, err error) {

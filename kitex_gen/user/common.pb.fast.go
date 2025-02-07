@@ -75,6 +75,21 @@ func (x *User) FastRead(buf []byte, _type int8, number int32) (offset int, err e
 		if err != nil {
 			goto ReadFieldError
 		}
+	case 13:
+		offset, err = x.fastReadField13(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	case 14:
+		offset, err = x.fastReadField14(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	case 15:
+		offset, err = x.fastReadField15(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
 		if err != nil {
@@ -145,6 +160,21 @@ func (x *User) fastReadField11(buf []byte, _type int8) (offset int, err error) {
 
 func (x *User) fastReadField12(buf []byte, _type int8) (offset int, err error) {
 	x.Status, offset, err = fastpb.ReadInt64(buf, _type)
+	return offset, err
+}
+
+func (x *User) fastReadField13(buf []byte, _type int8) (offset int, err error) {
+	x.Notice, offset, err = fastpb.ReadInt64(buf, _type)
+	return offset, err
+}
+
+func (x *User) fastReadField14(buf []byte, _type int8) (offset int, err error) {
+	x.Description, offset, err = fastpb.ReadString(buf, _type)
+	return offset, err
+}
+
+func (x *User) fastReadField15(buf []byte, _type int8) (offset int, err error) {
+	x.Avatar, offset, err = fastpb.ReadString(buf, _type)
 	return offset, err
 }
 
@@ -755,7 +785,7 @@ func (x *UserSignUpResp) fastReadField2(buf []byte, _type int8) (offset int, err
 }
 
 func (x *UserSignUpResp) fastReadField3(buf []byte, _type int8) (offset int, err error) {
-	x.UserId, offset, err = fastpb.ReadString(buf, _type)
+	x.Id, offset, err = fastpb.ReadString(buf, _type)
 	return offset, err
 }
 
@@ -877,7 +907,7 @@ func (x *UserLoginResp) fastReadField2(buf []byte, _type int8) (offset int, err 
 }
 
 func (x *UserLoginResp) fastReadField3(buf []byte, _type int8) (offset int, err error) {
-	x.UserId, offset, err = fastpb.ReadString(buf, _type)
+	x.Id, offset, err = fastpb.ReadString(buf, _type)
 	return offset, err
 }
 
@@ -1028,6 +1058,11 @@ func (x *CreateReserverReq) FastRead(buf []byte, _type int8, number int32) (offs
 		if err != nil {
 			goto ReadFieldError
 		}
+	case 7:
+		offset, err = x.fastReadField7(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
 		if err != nil {
@@ -1042,33 +1077,38 @@ ReadFieldError:
 }
 
 func (x *CreateReserverReq) fastReadField1(buf []byte, _type int8) (offset int, err error) {
-	x.Name, offset, err = fastpb.ReadString(buf, _type)
+	x.UserId, offset, err = fastpb.ReadString(buf, _type)
 	return offset, err
 }
 
 func (x *CreateReserverReq) fastReadField2(buf []byte, _type int8) (offset int, err error) {
-	x.Gender, offset, err = fastpb.ReadInt64(buf, _type)
+	x.Name, offset, err = fastpb.ReadString(buf, _type)
 	return offset, err
 }
 
 func (x *CreateReserverReq) fastReadField3(buf []byte, _type int8) (offset int, err error) {
-	x.Relation, offset, err = fastpb.ReadString(buf, _type)
+	x.Gender, offset, err = fastpb.ReadInt64(buf, _type)
 	return offset, err
 }
 
 func (x *CreateReserverReq) fastReadField4(buf []byte, _type int8) (offset int, err error) {
-	tmp, offset, err := fastpb.ReadString(buf, _type)
-	x.Phone = &tmp
+	x.Relation, offset, err = fastpb.ReadString(buf, _type)
 	return offset, err
 }
 
 func (x *CreateReserverReq) fastReadField5(buf []byte, _type int8) (offset int, err error) {
 	tmp, offset, err := fastpb.ReadString(buf, _type)
-	x.Email = &tmp
+	x.Phone = &tmp
 	return offset, err
 }
 
 func (x *CreateReserverReq) fastReadField6(buf []byte, _type int8) (offset int, err error) {
+	tmp, offset, err := fastpb.ReadString(buf, _type)
+	x.Email = &tmp
+	return offset, err
+}
+
+func (x *CreateReserverReq) fastReadField7(buf []byte, _type int8) (offset int, err error) {
 	tmp, offset, err := fastpb.ReadInt64(buf, _type)
 	x.Birth = &tmp
 	return offset, err
@@ -1299,7 +1339,7 @@ func (x *CreateBookRecordReq) fastReadField5(buf []byte, _type int8) (offset int
 	return offset, err
 }
 
-func (x *DeleteBookRecordReq) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
+func (x *CancelBookRecordReq) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
 	switch number {
 	case 1:
 		offset, err = x.fastReadField1(buf, _type)
@@ -1321,15 +1361,15 @@ func (x *DeleteBookRecordReq) FastRead(buf []byte, _type int8, number int32) (of
 SkipFieldError:
 	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
 ReadFieldError:
-	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_DeleteBookRecordReq[number], err)
+	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_CancelBookRecordReq[number], err)
 }
 
-func (x *DeleteBookRecordReq) fastReadField1(buf []byte, _type int8) (offset int, err error) {
+func (x *CancelBookRecordReq) fastReadField1(buf []byte, _type int8) (offset int, err error) {
 	x.BookRecordId, offset, err = fastpb.ReadString(buf, _type)
 	return offset, err
 }
 
-func (x *DeleteBookRecordReq) fastReadField2(buf []byte, _type int8) (offset int, err error) {
+func (x *CancelBookRecordReq) fastReadField2(buf []byte, _type int8) (offset int, err error) {
 	x.ReserverId, offset, err = fastpb.ReadString(buf, _type)
 	return offset, err
 }
@@ -1704,7 +1744,7 @@ func (x *MarkReceiptReadReq) fastReadField1(buf []byte, _type int8) (offset int,
 	return offset, err
 }
 
-func (x *CreateFavoriteReq) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
+func (x *DoFavoriteReq) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
 	switch number {
 	case 1:
 		offset, err = x.fastReadField1(buf, _type)
@@ -1726,15 +1766,15 @@ func (x *CreateFavoriteReq) FastRead(buf []byte, _type int8, number int32) (offs
 SkipFieldError:
 	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
 ReadFieldError:
-	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_CreateFavoriteReq[number], err)
+	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_DoFavoriteReq[number], err)
 }
 
-func (x *CreateFavoriteReq) fastReadField1(buf []byte, _type int8) (offset int, err error) {
+func (x *DoFavoriteReq) fastReadField1(buf []byte, _type int8) (offset int, err error) {
 	x.UserId, offset, err = fastpb.ReadString(buf, _type)
 	return offset, err
 }
 
-func (x *CreateFavoriteReq) fastReadField2(buf []byte, _type int8) (offset int, err error) {
+func (x *DoFavoriteReq) fastReadField2(buf []byte, _type int8) (offset int, err error) {
 	x.ActivityId, offset, err = fastpb.ReadString(buf, _type)
 	return offset, err
 }
@@ -1815,6 +1855,9 @@ func (x *User) FastWrite(buf []byte) (offset int) {
 	offset += x.fastWriteField10(buf[offset:])
 	offset += x.fastWriteField11(buf[offset:])
 	offset += x.fastWriteField12(buf[offset:])
+	offset += x.fastWriteField13(buf[offset:])
+	offset += x.fastWriteField14(buf[offset:])
+	offset += x.fastWriteField15(buf[offset:])
 	return offset
 }
 
@@ -1911,6 +1954,30 @@ func (x *User) fastWriteField12(buf []byte) (offset int) {
 		return offset
 	}
 	offset += fastpb.WriteInt64(buf[offset:], 12, x.GetStatus())
+	return offset
+}
+
+func (x *User) fastWriteField13(buf []byte) (offset int) {
+	if x.Notice == 0 {
+		return offset
+	}
+	offset += fastpb.WriteInt64(buf[offset:], 13, x.GetNotice())
+	return offset
+}
+
+func (x *User) fastWriteField14(buf []byte) (offset int) {
+	if x.Description == "" {
+		return offset
+	}
+	offset += fastpb.WriteString(buf[offset:], 14, x.GetDescription())
+	return offset
+}
+
+func (x *User) fastWriteField15(buf []byte) (offset int) {
+	if x.Avatar == "" {
+		return offset
+	}
+	offset += fastpb.WriteString(buf[offset:], 15, x.GetAvatar())
 	return offset
 }
 
@@ -2401,10 +2468,10 @@ func (x *UserSignUpResp) fastWriteField2(buf []byte) (offset int) {
 }
 
 func (x *UserSignUpResp) fastWriteField3(buf []byte) (offset int) {
-	if x.UserId == "" {
+	if x.Id == "" {
 		return offset
 	}
-	offset += fastpb.WriteString(buf[offset:], 3, x.GetUserId())
+	offset += fastpb.WriteString(buf[offset:], 3, x.GetId())
 	return offset
 }
 
@@ -2496,10 +2563,10 @@ func (x *UserLoginResp) fastWriteField2(buf []byte) (offset int) {
 }
 
 func (x *UserLoginResp) fastWriteField3(buf []byte) (offset int) {
-	if x.UserId == "" {
+	if x.Id == "" {
 		return offset
 	}
-	offset += fastpb.WriteString(buf[offset:], 3, x.GetUserId())
+	offset += fastpb.WriteString(buf[offset:], 3, x.GetId())
 	return offset
 }
 
@@ -2595,54 +2662,63 @@ func (x *CreateReserverReq) FastWrite(buf []byte) (offset int) {
 	offset += x.fastWriteField4(buf[offset:])
 	offset += x.fastWriteField5(buf[offset:])
 	offset += x.fastWriteField6(buf[offset:])
+	offset += x.fastWriteField7(buf[offset:])
 	return offset
 }
 
 func (x *CreateReserverReq) fastWriteField1(buf []byte) (offset int) {
-	if x.Name == "" {
+	if x.UserId == "" {
 		return offset
 	}
-	offset += fastpb.WriteString(buf[offset:], 1, x.GetName())
+	offset += fastpb.WriteString(buf[offset:], 1, x.GetUserId())
 	return offset
 }
 
 func (x *CreateReserverReq) fastWriteField2(buf []byte) (offset int) {
-	if x.Gender == 0 {
+	if x.Name == "" {
 		return offset
 	}
-	offset += fastpb.WriteInt64(buf[offset:], 2, x.GetGender())
+	offset += fastpb.WriteString(buf[offset:], 2, x.GetName())
 	return offset
 }
 
 func (x *CreateReserverReq) fastWriteField3(buf []byte) (offset int) {
-	if x.Relation == "" {
+	if x.Gender == 0 {
 		return offset
 	}
-	offset += fastpb.WriteString(buf[offset:], 3, x.GetRelation())
+	offset += fastpb.WriteInt64(buf[offset:], 3, x.GetGender())
 	return offset
 }
 
 func (x *CreateReserverReq) fastWriteField4(buf []byte) (offset int) {
-	if x.Phone == nil {
+	if x.Relation == "" {
 		return offset
 	}
-	offset += fastpb.WriteString(buf[offset:], 4, x.GetPhone())
+	offset += fastpb.WriteString(buf[offset:], 4, x.GetRelation())
 	return offset
 }
 
 func (x *CreateReserverReq) fastWriteField5(buf []byte) (offset int) {
-	if x.Email == nil {
+	if x.Phone == nil {
 		return offset
 	}
-	offset += fastpb.WriteString(buf[offset:], 5, x.GetEmail())
+	offset += fastpb.WriteString(buf[offset:], 5, x.GetPhone())
 	return offset
 }
 
 func (x *CreateReserverReq) fastWriteField6(buf []byte) (offset int) {
+	if x.Email == nil {
+		return offset
+	}
+	offset += fastpb.WriteString(buf[offset:], 6, x.GetEmail())
+	return offset
+}
+
+func (x *CreateReserverReq) fastWriteField7(buf []byte) (offset int) {
 	if x.Birth == nil {
 		return offset
 	}
-	offset += fastpb.WriteInt64(buf[offset:], 6, x.GetBirth())
+	offset += fastpb.WriteInt64(buf[offset:], 7, x.GetBirth())
 	return offset
 }
 
@@ -2802,7 +2878,7 @@ func (x *CreateBookRecordReq) fastWriteField5(buf []byte) (offset int) {
 	return offset
 }
 
-func (x *DeleteBookRecordReq) FastWrite(buf []byte) (offset int) {
+func (x *CancelBookRecordReq) FastWrite(buf []byte) (offset int) {
 	if x == nil {
 		return offset
 	}
@@ -2811,7 +2887,7 @@ func (x *DeleteBookRecordReq) FastWrite(buf []byte) (offset int) {
 	return offset
 }
 
-func (x *DeleteBookRecordReq) fastWriteField1(buf []byte) (offset int) {
+func (x *CancelBookRecordReq) fastWriteField1(buf []byte) (offset int) {
 	if x.BookRecordId == "" {
 		return offset
 	}
@@ -2819,7 +2895,7 @@ func (x *DeleteBookRecordReq) fastWriteField1(buf []byte) (offset int) {
 	return offset
 }
 
-func (x *DeleteBookRecordReq) fastWriteField2(buf []byte) (offset int) {
+func (x *CancelBookRecordReq) fastWriteField2(buf []byte) (offset int) {
 	if x.ReserverId == "" {
 		return offset
 	}
@@ -3083,7 +3159,7 @@ func (x *MarkReceiptReadReq) fastWriteField1(buf []byte) (offset int) {
 	return offset
 }
 
-func (x *CreateFavoriteReq) FastWrite(buf []byte) (offset int) {
+func (x *DoFavoriteReq) FastWrite(buf []byte) (offset int) {
 	if x == nil {
 		return offset
 	}
@@ -3092,7 +3168,7 @@ func (x *CreateFavoriteReq) FastWrite(buf []byte) (offset int) {
 	return offset
 }
 
-func (x *CreateFavoriteReq) fastWriteField1(buf []byte) (offset int) {
+func (x *DoFavoriteReq) fastWriteField1(buf []byte) (offset int) {
 	if x.UserId == "" {
 		return offset
 	}
@@ -3100,7 +3176,7 @@ func (x *CreateFavoriteReq) fastWriteField1(buf []byte) (offset int) {
 	return offset
 }
 
-func (x *CreateFavoriteReq) fastWriteField2(buf []byte) (offset int) {
+func (x *DoFavoriteReq) fastWriteField2(buf []byte) (offset int) {
 	if x.ActivityId == "" {
 		return offset
 	}
@@ -3165,6 +3241,9 @@ func (x *User) Size() (n int) {
 	n += x.sizeField10()
 	n += x.sizeField11()
 	n += x.sizeField12()
+	n += x.sizeField13()
+	n += x.sizeField14()
+	n += x.sizeField15()
 	return n
 }
 
@@ -3261,6 +3340,30 @@ func (x *User) sizeField12() (n int) {
 		return n
 	}
 	n += fastpb.SizeInt64(12, x.GetStatus())
+	return n
+}
+
+func (x *User) sizeField13() (n int) {
+	if x.Notice == 0 {
+		return n
+	}
+	n += fastpb.SizeInt64(13, x.GetNotice())
+	return n
+}
+
+func (x *User) sizeField14() (n int) {
+	if x.Description == "" {
+		return n
+	}
+	n += fastpb.SizeString(14, x.GetDescription())
+	return n
+}
+
+func (x *User) sizeField15() (n int) {
+	if x.Avatar == "" {
+		return n
+	}
+	n += fastpb.SizeString(15, x.GetAvatar())
 	return n
 }
 
@@ -3751,10 +3854,10 @@ func (x *UserSignUpResp) sizeField2() (n int) {
 }
 
 func (x *UserSignUpResp) sizeField3() (n int) {
-	if x.UserId == "" {
+	if x.Id == "" {
 		return n
 	}
-	n += fastpb.SizeString(3, x.GetUserId())
+	n += fastpb.SizeString(3, x.GetId())
 	return n
 }
 
@@ -3846,10 +3949,10 @@ func (x *UserLoginResp) sizeField2() (n int) {
 }
 
 func (x *UserLoginResp) sizeField3() (n int) {
-	if x.UserId == "" {
+	if x.Id == "" {
 		return n
 	}
-	n += fastpb.SizeString(3, x.GetUserId())
+	n += fastpb.SizeString(3, x.GetId())
 	return n
 }
 
@@ -3945,54 +4048,63 @@ func (x *CreateReserverReq) Size() (n int) {
 	n += x.sizeField4()
 	n += x.sizeField5()
 	n += x.sizeField6()
+	n += x.sizeField7()
 	return n
 }
 
 func (x *CreateReserverReq) sizeField1() (n int) {
-	if x.Name == "" {
+	if x.UserId == "" {
 		return n
 	}
-	n += fastpb.SizeString(1, x.GetName())
+	n += fastpb.SizeString(1, x.GetUserId())
 	return n
 }
 
 func (x *CreateReserverReq) sizeField2() (n int) {
-	if x.Gender == 0 {
+	if x.Name == "" {
 		return n
 	}
-	n += fastpb.SizeInt64(2, x.GetGender())
+	n += fastpb.SizeString(2, x.GetName())
 	return n
 }
 
 func (x *CreateReserverReq) sizeField3() (n int) {
-	if x.Relation == "" {
+	if x.Gender == 0 {
 		return n
 	}
-	n += fastpb.SizeString(3, x.GetRelation())
+	n += fastpb.SizeInt64(3, x.GetGender())
 	return n
 }
 
 func (x *CreateReserverReq) sizeField4() (n int) {
-	if x.Phone == nil {
+	if x.Relation == "" {
 		return n
 	}
-	n += fastpb.SizeString(4, x.GetPhone())
+	n += fastpb.SizeString(4, x.GetRelation())
 	return n
 }
 
 func (x *CreateReserverReq) sizeField5() (n int) {
-	if x.Email == nil {
+	if x.Phone == nil {
 		return n
 	}
-	n += fastpb.SizeString(5, x.GetEmail())
+	n += fastpb.SizeString(5, x.GetPhone())
 	return n
 }
 
 func (x *CreateReserverReq) sizeField6() (n int) {
+	if x.Email == nil {
+		return n
+	}
+	n += fastpb.SizeString(6, x.GetEmail())
+	return n
+}
+
+func (x *CreateReserverReq) sizeField7() (n int) {
 	if x.Birth == nil {
 		return n
 	}
-	n += fastpb.SizeInt64(6, x.GetBirth())
+	n += fastpb.SizeInt64(7, x.GetBirth())
 	return n
 }
 
@@ -4152,7 +4264,7 @@ func (x *CreateBookRecordReq) sizeField5() (n int) {
 	return n
 }
 
-func (x *DeleteBookRecordReq) Size() (n int) {
+func (x *CancelBookRecordReq) Size() (n int) {
 	if x == nil {
 		return n
 	}
@@ -4161,7 +4273,7 @@ func (x *DeleteBookRecordReq) Size() (n int) {
 	return n
 }
 
-func (x *DeleteBookRecordReq) sizeField1() (n int) {
+func (x *CancelBookRecordReq) sizeField1() (n int) {
 	if x.BookRecordId == "" {
 		return n
 	}
@@ -4169,7 +4281,7 @@ func (x *DeleteBookRecordReq) sizeField1() (n int) {
 	return n
 }
 
-func (x *DeleteBookRecordReq) sizeField2() (n int) {
+func (x *CancelBookRecordReq) sizeField2() (n int) {
 	if x.ReserverId == "" {
 		return n
 	}
@@ -4433,7 +4545,7 @@ func (x *MarkReceiptReadReq) sizeField1() (n int) {
 	return n
 }
 
-func (x *CreateFavoriteReq) Size() (n int) {
+func (x *DoFavoriteReq) Size() (n int) {
 	if x == nil {
 		return n
 	}
@@ -4442,7 +4554,7 @@ func (x *CreateFavoriteReq) Size() (n int) {
 	return n
 }
 
-func (x *CreateFavoriteReq) sizeField1() (n int) {
+func (x *DoFavoriteReq) sizeField1() (n int) {
 	if x.UserId == "" {
 		return n
 	}
@@ -4450,7 +4562,7 @@ func (x *CreateFavoriteReq) sizeField1() (n int) {
 	return n
 }
 
-func (x *CreateFavoriteReq) sizeField2() (n int) {
+func (x *DoFavoriteReq) sizeField2() (n int) {
 	if x.ActivityId == "" {
 		return n
 	}
@@ -4512,6 +4624,9 @@ var fieldIDToName_User = map[int32]string{
 	10: "UpdateTime",
 	11: "DeleteTime",
 	12: "Status",
+	13: "Notice",
+	14: "Description",
+	15: "Avatar",
 }
 
 var fieldIDToName_Reserver = map[int32]string{
@@ -4581,7 +4696,7 @@ var fieldIDToName_UserSignUpReq = map[int32]string{
 var fieldIDToName_UserSignUpResp = map[int32]string{
 	1: "Code",
 	2: "Msg",
-	3: "UserId",
+	3: "Id",
 	4: "AccessToken",
 	5: "ExpireTime",
 }
@@ -4596,7 +4711,7 @@ var fieldIDToName_UserLoginReq = map[int32]string{
 var fieldIDToName_UserLoginResp = map[int32]string{
 	1: "Code",
 	2: "Msg",
-	3: "UserId",
+	3: "Id",
 	4: "AccessToken",
 	5: "ExpireTime",
 }
@@ -4616,12 +4731,13 @@ var fieldIDToName_UpdateUserInfoReq = map[int32]string{
 }
 
 var fieldIDToName_CreateReserverReq = map[int32]string{
-	1: "Name",
-	2: "Gender",
-	3: "Relation",
-	4: "Phone",
-	5: "Email",
-	6: "Birth",
+	1: "UserId",
+	2: "Name",
+	3: "Gender",
+	4: "Relation",
+	5: "Phone",
+	6: "Email",
+	7: "Birth",
 }
 
 var fieldIDToName_DeleteReserverReq = map[int32]string{
@@ -4652,7 +4768,7 @@ var fieldIDToName_CreateBookRecordReq = map[int32]string{
 	5: "Remark",
 }
 
-var fieldIDToName_DeleteBookRecordReq = map[int32]string{
+var fieldIDToName_CancelBookRecordReq = map[int32]string{
 	1: "BookRecordId",
 	2: "ReserverId",
 }
@@ -4705,7 +4821,7 @@ var fieldIDToName_MarkReceiptReadReq = map[int32]string{
 	1: "ReceiptId",
 }
 
-var fieldIDToName_CreateFavoriteReq = map[int32]string{
+var fieldIDToName_DoFavoriteReq = map[int32]string{
 	1: "UserId",
 	2: "ActivityId",
 }

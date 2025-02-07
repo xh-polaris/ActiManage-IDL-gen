@@ -1474,16 +1474,6 @@ func (x *AdminLoginReq) FastRead(buf []byte, _type int8, number int32) (offset i
 		if err != nil {
 			goto ReadFieldError
 		}
-	case 3:
-		offset, err = x.fastReadField3(buf, _type)
-		if err != nil {
-			goto ReadFieldError
-		}
-	case 4:
-		offset, err = x.fastReadField4(buf, _type)
-		if err != nil {
-			goto ReadFieldError
-		}
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
 		if err != nil {
@@ -1503,19 +1493,7 @@ func (x *AdminLoginReq) fastReadField1(buf []byte, _type int8) (offset int, err 
 }
 
 func (x *AdminLoginReq) fastReadField2(buf []byte, _type int8) (offset int, err error) {
-	x.AuthType, offset, err = fastpb.ReadString(buf, _type)
-	return offset, err
-}
-
-func (x *AdminLoginReq) fastReadField3(buf []byte, _type int8) (offset int, err error) {
-	tmp, offset, err := fastpb.ReadString(buf, _type)
-	x.VerifyCode = &tmp
-	return offset, err
-}
-
-func (x *AdminLoginReq) fastReadField4(buf []byte, _type int8) (offset int, err error) {
-	tmp, offset, err := fastpb.ReadString(buf, _type)
-	x.Password = &tmp
+	x.Password, offset, err = fastpb.ReadString(buf, _type)
 	return offset, err
 }
 
@@ -2896,8 +2874,6 @@ func (x *AdminLoginReq) FastWrite(buf []byte) (offset int) {
 	}
 	offset += x.fastWriteField1(buf[offset:])
 	offset += x.fastWriteField2(buf[offset:])
-	offset += x.fastWriteField3(buf[offset:])
-	offset += x.fastWriteField4(buf[offset:])
 	return offset
 }
 
@@ -2910,26 +2886,10 @@ func (x *AdminLoginReq) fastWriteField1(buf []byte) (offset int) {
 }
 
 func (x *AdminLoginReq) fastWriteField2(buf []byte) (offset int) {
-	if x.AuthType == "" {
+	if x.Password == "" {
 		return offset
 	}
-	offset += fastpb.WriteString(buf[offset:], 2, x.GetAuthType())
-	return offset
-}
-
-func (x *AdminLoginReq) fastWriteField3(buf []byte) (offset int) {
-	if x.VerifyCode == nil {
-		return offset
-	}
-	offset += fastpb.WriteString(buf[offset:], 3, x.GetVerifyCode())
-	return offset
-}
-
-func (x *AdminLoginReq) fastWriteField4(buf []byte) (offset int) {
-	if x.Password == nil {
-		return offset
-	}
-	offset += fastpb.WriteString(buf[offset:], 4, x.GetPassword())
+	offset += fastpb.WriteString(buf[offset:], 2, x.GetPassword())
 	return offset
 }
 
@@ -4227,8 +4187,6 @@ func (x *AdminLoginReq) Size() (n int) {
 	}
 	n += x.sizeField1()
 	n += x.sizeField2()
-	n += x.sizeField3()
-	n += x.sizeField4()
 	return n
 }
 
@@ -4241,26 +4199,10 @@ func (x *AdminLoginReq) sizeField1() (n int) {
 }
 
 func (x *AdminLoginReq) sizeField2() (n int) {
-	if x.AuthType == "" {
+	if x.Password == "" {
 		return n
 	}
-	n += fastpb.SizeString(2, x.GetAuthType())
-	return n
-}
-
-func (x *AdminLoginReq) sizeField3() (n int) {
-	if x.VerifyCode == nil {
-		return n
-	}
-	n += fastpb.SizeString(3, x.GetVerifyCode())
-	return n
-}
-
-func (x *AdminLoginReq) sizeField4() (n int) {
-	if x.Password == nil {
-		return n
-	}
-	n += fastpb.SizeString(4, x.GetPassword())
+	n += fastpb.SizeString(2, x.GetPassword())
 	return n
 }
 
@@ -4653,9 +4595,7 @@ var fieldIDToName_GetActivityResp = map[int32]string{
 
 var fieldIDToName_AdminLoginReq = map[int32]string{
 	1: "AuthId",
-	2: "AuthType",
-	3: "VerifyCode",
-	4: "Password",
+	2: "Password",
 }
 
 var fieldIDToName_AdminLoginResp = map[int32]string{

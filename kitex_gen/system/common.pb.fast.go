@@ -844,16 +844,6 @@ func (x *MerchantLoginReq) FastRead(buf []byte, _type int8, number int32) (offse
 		if err != nil {
 			goto ReadFieldError
 		}
-	case 2:
-		offset, err = x.fastReadField2(buf, _type)
-		if err != nil {
-			goto ReadFieldError
-		}
-	case 3:
-		offset, err = x.fastReadField3(buf, _type)
-		if err != nil {
-			goto ReadFieldError
-		}
 	case 4:
 		offset, err = x.fastReadField4(buf, _type)
 		if err != nil {
@@ -877,20 +867,8 @@ func (x *MerchantLoginReq) fastReadField1(buf []byte, _type int8) (offset int, e
 	return offset, err
 }
 
-func (x *MerchantLoginReq) fastReadField2(buf []byte, _type int8) (offset int, err error) {
-	x.AuthType, offset, err = fastpb.ReadString(buf, _type)
-	return offset, err
-}
-
-func (x *MerchantLoginReq) fastReadField3(buf []byte, _type int8) (offset int, err error) {
-	tmp, offset, err := fastpb.ReadString(buf, _type)
-	x.VerifyCode = &tmp
-	return offset, err
-}
-
 func (x *MerchantLoginReq) fastReadField4(buf []byte, _type int8) (offset int, err error) {
-	tmp, offset, err := fastpb.ReadString(buf, _type)
-	x.Password = &tmp
+	x.Password, offset, err = fastpb.ReadString(buf, _type)
 	return offset, err
 }
 
@@ -2532,8 +2510,6 @@ func (x *MerchantLoginReq) FastWrite(buf []byte) (offset int) {
 		return offset
 	}
 	offset += x.fastWriteField1(buf[offset:])
-	offset += x.fastWriteField2(buf[offset:])
-	offset += x.fastWriteField3(buf[offset:])
 	offset += x.fastWriteField4(buf[offset:])
 	return offset
 }
@@ -2546,24 +2522,8 @@ func (x *MerchantLoginReq) fastWriteField1(buf []byte) (offset int) {
 	return offset
 }
 
-func (x *MerchantLoginReq) fastWriteField2(buf []byte) (offset int) {
-	if x.AuthType == "" {
-		return offset
-	}
-	offset += fastpb.WriteString(buf[offset:], 2, x.GetAuthType())
-	return offset
-}
-
-func (x *MerchantLoginReq) fastWriteField3(buf []byte) (offset int) {
-	if x.VerifyCode == nil {
-		return offset
-	}
-	offset += fastpb.WriteString(buf[offset:], 3, x.GetVerifyCode())
-	return offset
-}
-
 func (x *MerchantLoginReq) fastWriteField4(buf []byte) (offset int) {
-	if x.Password == nil {
+	if x.Password == "" {
 		return offset
 	}
 	offset += fastpb.WriteString(buf[offset:], 4, x.GetPassword())
@@ -3926,8 +3886,6 @@ func (x *MerchantLoginReq) Size() (n int) {
 		return n
 	}
 	n += x.sizeField1()
-	n += x.sizeField2()
-	n += x.sizeField3()
 	n += x.sizeField4()
 	return n
 }
@@ -3940,24 +3898,8 @@ func (x *MerchantLoginReq) sizeField1() (n int) {
 	return n
 }
 
-func (x *MerchantLoginReq) sizeField2() (n int) {
-	if x.AuthType == "" {
-		return n
-	}
-	n += fastpb.SizeString(2, x.GetAuthType())
-	return n
-}
-
-func (x *MerchantLoginReq) sizeField3() (n int) {
-	if x.VerifyCode == nil {
-		return n
-	}
-	n += fastpb.SizeString(3, x.GetVerifyCode())
-	return n
-}
-
 func (x *MerchantLoginReq) sizeField4() (n int) {
-	if x.Password == nil {
+	if x.Password == "" {
 		return n
 	}
 	n += fastpb.SizeString(4, x.GetPassword())
@@ -4772,8 +4714,6 @@ var fieldIDToName_Admin = map[int32]string{
 
 var fieldIDToName_MerchantLoginReq = map[int32]string{
 	1: "AuthId",
-	2: "AuthType",
-	3: "VerifyCode",
 	4: "Password",
 }
 

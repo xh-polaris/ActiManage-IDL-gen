@@ -889,16 +889,6 @@ func (x *MerchantLoginResp) FastRead(buf []byte, _type int8, number int32) (offs
 		if err != nil {
 			goto ReadFieldError
 		}
-	case 4:
-		offset, err = x.fastReadField4(buf, _type)
-		if err != nil {
-			goto ReadFieldError
-		}
-	case 5:
-		offset, err = x.fastReadField5(buf, _type)
-		if err != nil {
-			goto ReadFieldError
-		}
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
 		if err != nil {
@@ -924,16 +914,6 @@ func (x *MerchantLoginResp) fastReadField2(buf []byte, _type int8) (offset int, 
 
 func (x *MerchantLoginResp) fastReadField3(buf []byte, _type int8) (offset int, err error) {
 	x.Id, offset, err = fastpb.ReadString(buf, _type)
-	return offset, err
-}
-
-func (x *MerchantLoginResp) fastReadField4(buf []byte, _type int8) (offset int, err error) {
-	x.AccessToken, offset, err = fastpb.ReadString(buf, _type)
-	return offset, err
-}
-
-func (x *MerchantLoginResp) fastReadField5(buf []byte, _type int8) (offset int, err error) {
-	x.ExpireTime, offset, err = fastpb.ReadInt64(buf, _type)
 	return offset, err
 }
 
@@ -1566,16 +1546,6 @@ func (x *AdminLoginResp) FastRead(buf []byte, _type int8, number int32) (offset 
 		if err != nil {
 			goto ReadFieldError
 		}
-	case 4:
-		offset, err = x.fastReadField4(buf, _type)
-		if err != nil {
-			goto ReadFieldError
-		}
-	case 5:
-		offset, err = x.fastReadField5(buf, _type)
-		if err != nil {
-			goto ReadFieldError
-		}
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
 		if err != nil {
@@ -1601,16 +1571,6 @@ func (x *AdminLoginResp) fastReadField2(buf []byte, _type int8) (offset int, err
 
 func (x *AdminLoginResp) fastReadField3(buf []byte, _type int8) (offset int, err error) {
 	x.UserId, offset, err = fastpb.ReadString(buf, _type)
-	return offset, err
-}
-
-func (x *AdminLoginResp) fastReadField4(buf []byte, _type int8) (offset int, err error) {
-	x.AccessToken, offset, err = fastpb.ReadString(buf, _type)
-	return offset, err
-}
-
-func (x *AdminLoginResp) fastReadField5(buf []byte, _type int8) (offset int, err error) {
-	x.ExpireTime, offset, err = fastpb.ReadInt64(buf, _type)
 	return offset, err
 }
 
@@ -2537,8 +2497,6 @@ func (x *MerchantLoginResp) FastWrite(buf []byte) (offset int) {
 	offset += x.fastWriteField1(buf[offset:])
 	offset += x.fastWriteField2(buf[offset:])
 	offset += x.fastWriteField3(buf[offset:])
-	offset += x.fastWriteField4(buf[offset:])
-	offset += x.fastWriteField5(buf[offset:])
 	return offset
 }
 
@@ -2563,22 +2521,6 @@ func (x *MerchantLoginResp) fastWriteField3(buf []byte) (offset int) {
 		return offset
 	}
 	offset += fastpb.WriteString(buf[offset:], 3, x.GetId())
-	return offset
-}
-
-func (x *MerchantLoginResp) fastWriteField4(buf []byte) (offset int) {
-	if x.AccessToken == "" {
-		return offset
-	}
-	offset += fastpb.WriteString(buf[offset:], 4, x.GetAccessToken())
-	return offset
-}
-
-func (x *MerchantLoginResp) fastWriteField5(buf []byte) (offset int) {
-	if x.ExpireTime == 0 {
-		return offset
-	}
-	offset += fastpb.WriteInt64(buf[offset:], 5, x.GetExpireTime())
 	return offset
 }
 
@@ -3017,8 +2959,6 @@ func (x *AdminLoginResp) FastWrite(buf []byte) (offset int) {
 	offset += x.fastWriteField1(buf[offset:])
 	offset += x.fastWriteField2(buf[offset:])
 	offset += x.fastWriteField3(buf[offset:])
-	offset += x.fastWriteField4(buf[offset:])
-	offset += x.fastWriteField5(buf[offset:])
 	return offset
 }
 
@@ -3043,22 +2983,6 @@ func (x *AdminLoginResp) fastWriteField3(buf []byte) (offset int) {
 		return offset
 	}
 	offset += fastpb.WriteString(buf[offset:], 3, x.GetUserId())
-	return offset
-}
-
-func (x *AdminLoginResp) fastWriteField4(buf []byte) (offset int) {
-	if x.AccessToken == "" {
-		return offset
-	}
-	offset += fastpb.WriteString(buf[offset:], 4, x.GetAccessToken())
-	return offset
-}
-
-func (x *AdminLoginResp) fastWriteField5(buf []byte) (offset int) {
-	if x.ExpireTime == 0 {
-		return offset
-	}
-	offset += fastpb.WriteInt64(buf[offset:], 5, x.GetExpireTime())
 	return offset
 }
 
@@ -3913,8 +3837,6 @@ func (x *MerchantLoginResp) Size() (n int) {
 	n += x.sizeField1()
 	n += x.sizeField2()
 	n += x.sizeField3()
-	n += x.sizeField4()
-	n += x.sizeField5()
 	return n
 }
 
@@ -3939,22 +3861,6 @@ func (x *MerchantLoginResp) sizeField3() (n int) {
 		return n
 	}
 	n += fastpb.SizeString(3, x.GetId())
-	return n
-}
-
-func (x *MerchantLoginResp) sizeField4() (n int) {
-	if x.AccessToken == "" {
-		return n
-	}
-	n += fastpb.SizeString(4, x.GetAccessToken())
-	return n
-}
-
-func (x *MerchantLoginResp) sizeField5() (n int) {
-	if x.ExpireTime == 0 {
-		return n
-	}
-	n += fastpb.SizeInt64(5, x.GetExpireTime())
 	return n
 }
 
@@ -4393,8 +4299,6 @@ func (x *AdminLoginResp) Size() (n int) {
 	n += x.sizeField1()
 	n += x.sizeField2()
 	n += x.sizeField3()
-	n += x.sizeField4()
-	n += x.sizeField5()
 	return n
 }
 
@@ -4419,22 +4323,6 @@ func (x *AdminLoginResp) sizeField3() (n int) {
 		return n
 	}
 	n += fastpb.SizeString(3, x.GetUserId())
-	return n
-}
-
-func (x *AdminLoginResp) sizeField4() (n int) {
-	if x.AccessToken == "" {
-		return n
-	}
-	n += fastpb.SizeString(4, x.GetAccessToken())
-	return n
-}
-
-func (x *AdminLoginResp) sizeField5() (n int) {
-	if x.ExpireTime == 0 {
-		return n
-	}
-	n += fastpb.SizeInt64(5, x.GetExpireTime())
 	return n
 }
 
@@ -4721,8 +4609,6 @@ var fieldIDToName_MerchantLoginResp = map[int32]string{
 	1: "Code",
 	2: "Msg",
 	3: "Id",
-	4: "AccessToken",
-	5: "ExpireTime",
 }
 
 var fieldIDToName_MerchantSetPasswordReq = map[int32]string{
@@ -4805,8 +4691,6 @@ var fieldIDToName_AdminLoginResp = map[int32]string{
 	1: "Code",
 	2: "Msg",
 	3: "UserId",
-	4: "AccessToken",
-	5: "ExpireTime",
 }
 
 var fieldIDToName_AdminSetPasswordReq = map[int32]string{

@@ -280,11 +280,6 @@ func (x *Header) FastRead(buf []byte, _type int8, number int32) (offset int, err
 		if err != nil {
 			goto ReadFieldError
 		}
-	case 2:
-		offset, err = x.fastReadField2(buf, _type)
-		if err != nil {
-			goto ReadFieldError
-		}
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
 		if err != nil {
@@ -299,11 +294,6 @@ ReadFieldError:
 }
 
 func (x *Header) fastReadField1(buf []byte, _type int8) (offset int, err error) {
-	x.Type, offset, err = fastpb.ReadInt64(buf, _type)
-	return offset, err
-}
-
-func (x *Header) fastReadField2(buf []byte, _type int8) (offset int, err error) {
 	offset, err = fastpb.ReadList(buf, _type,
 		func(buf []byte, _type int8) (n int, err error) {
 			var v int64
@@ -2039,23 +2029,14 @@ func (x *Header) FastWrite(buf []byte) (offset int) {
 		return offset
 	}
 	offset += x.fastWriteField1(buf[offset:])
-	offset += x.fastWriteField2(buf[offset:])
 	return offset
 }
 
 func (x *Header) fastWriteField1(buf []byte) (offset int) {
-	if x.Type == 0 {
-		return offset
-	}
-	offset += fastpb.WriteInt64(buf[offset:], 1, x.GetType())
-	return offset
-}
-
-func (x *Header) fastWriteField2(buf []byte) (offset int) {
 	if len(x.Rgb) == 0 {
 		return offset
 	}
-	offset += fastpb.WriteListPacked(buf[offset:], 2, len(x.GetRgb()),
+	offset += fastpb.WriteListPacked(buf[offset:], 1, len(x.GetRgb()),
 		func(buf []byte, numTagOrKey, numIdxOrVal int32) int {
 			offset := 0
 			offset += fastpb.WriteInt64(buf[offset:], numTagOrKey, x.GetRgb()[numIdxOrVal])
@@ -3379,23 +3360,14 @@ func (x *Header) Size() (n int) {
 		return n
 	}
 	n += x.sizeField1()
-	n += x.sizeField2()
 	return n
 }
 
 func (x *Header) sizeField1() (n int) {
-	if x.Type == 0 {
-		return n
-	}
-	n += fastpb.SizeInt64(1, x.GetType())
-	return n
-}
-
-func (x *Header) sizeField2() (n int) {
 	if len(x.Rgb) == 0 {
 		return n
 	}
-	n += fastpb.SizeListPacked(2, len(x.GetRgb()),
+	n += fastpb.SizeListPacked(1, len(x.GetRgb()),
 		func(numTagOrKey, numIdxOrVal int32) int {
 			n := 0
 			n += fastpb.SizeInt64(numTagOrKey, x.GetRgb()[numIdxOrVal])
@@ -4539,8 +4511,7 @@ var fieldIDToName_Merchant = map[int32]string{
 }
 
 var fieldIDToName_Header = map[int32]string{
-	1: "Type",
-	2: "Rgb",
+	1: "Rgb",
 }
 
 var fieldIDToName_Covers = map[int32]string{

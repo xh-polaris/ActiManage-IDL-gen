@@ -1,6 +1,6 @@
 module github.com/xh-polaris/ActiManage-IDL-gen
 
-go 1.18
+go 1.21
 
 require (
 	github.com/cloudwego/fastpb v0.0.5

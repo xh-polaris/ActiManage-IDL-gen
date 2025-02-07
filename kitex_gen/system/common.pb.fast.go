@@ -1624,6 +1624,11 @@ func (x *CreateMerchantReq) FastRead(buf []byte, _type int8, number int32) (offs
 		if err != nil {
 			goto ReadFieldError
 		}
+	case 8:
+		offset, err = x.fastReadField8(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
 		if err != nil {
@@ -1684,6 +1689,11 @@ func (x *CreateMerchantReq) fastReadField7(buf []byte, _type int8) (offset int, 
 		return offset, err
 	}
 	x.Licences = append(x.Licences, v)
+	return offset, err
+}
+
+func (x *CreateMerchantReq) fastReadField8(buf []byte, _type int8) (offset int, err error) {
+	x.Logo, offset, err = fastpb.ReadString(buf, _type)
 	return offset, err
 }
 
@@ -2972,6 +2982,7 @@ func (x *CreateMerchantReq) FastWrite(buf []byte) (offset int) {
 	offset += x.fastWriteField5(buf[offset:])
 	offset += x.fastWriteField6(buf[offset:])
 	offset += x.fastWriteField7(buf[offset:])
+	offset += x.fastWriteField8(buf[offset:])
 	return offset
 }
 
@@ -3032,6 +3043,14 @@ func (x *CreateMerchantReq) fastWriteField7(buf []byte) (offset int) {
 	for i := range x.GetLicences() {
 		offset += fastpb.WriteString(buf[offset:], 7, x.GetLicences()[i])
 	}
+	return offset
+}
+
+func (x *CreateMerchantReq) fastWriteField8(buf []byte) (offset int) {
+	if x.Logo == "" {
+		return offset
+	}
+	offset += fastpb.WriteString(buf[offset:], 8, x.GetLogo())
 	return offset
 }
 
@@ -4285,6 +4304,7 @@ func (x *CreateMerchantReq) Size() (n int) {
 	n += x.sizeField5()
 	n += x.sizeField6()
 	n += x.sizeField7()
+	n += x.sizeField8()
 	return n
 }
 
@@ -4345,6 +4365,14 @@ func (x *CreateMerchantReq) sizeField7() (n int) {
 	for i := range x.GetLicences() {
 		n += fastpb.SizeString(7, x.GetLicences()[i])
 	}
+	return n
+}
+
+func (x *CreateMerchantReq) sizeField8() (n int) {
+	if x.Logo == "" {
+		return n
+	}
+	n += fastpb.SizeString(8, x.GetLogo())
 	return n
 }
 
@@ -4618,6 +4646,7 @@ var fieldIDToName_CreateMerchantReq = map[int32]string{
 	5: "Location",
 	6: "Description",
 	7: "Licences",
+	8: "Logo",
 }
 
 var fieldIDToName_UpdateMerchantReq = map[int32]string{

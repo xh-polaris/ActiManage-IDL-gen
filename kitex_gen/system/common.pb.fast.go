@@ -1173,7 +1173,7 @@ func (x *CreateActivityReq) fastReadField5(buf []byte, _type int8) (offset int, 
 }
 
 func (x *CreateActivityReq) fastReadField6(buf []byte, _type int8) (offset int, err error) {
-	var v Setting
+	var v ActivitySetting
 	offset, err = fastpb.ReadMessage(buf, _type, &v)
 	if err != nil {
 		return offset, err

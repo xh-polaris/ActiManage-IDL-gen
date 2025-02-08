@@ -715,7 +715,7 @@ func (x *UserSignUpReq) fastReadField3(buf []byte, _type int8) (offset int, err 
 }
 
 func (x *UserSignUpReq) fastReadField4(buf []byte, _type int8) (offset int, err error) {
-	x.AuthType, offset, err = fastpb.ReadInt64(buf, _type)
+	x.AuthType, offset, err = fastpb.ReadString(buf, _type)
 	return offset, err
 }
 
@@ -820,7 +820,7 @@ func (x *UserLoginReq) fastReadField1(buf []byte, _type int8) (offset int, err e
 }
 
 func (x *UserLoginReq) fastReadField2(buf []byte, _type int8) (offset int, err error) {
-	x.AuthType, offset, err = fastpb.ReadInt64(buf, _type)
+	x.AuthType, offset, err = fastpb.ReadString(buf, _type)
 	return offset, err
 }
 
@@ -2368,10 +2368,10 @@ func (x *UserSignUpReq) fastWriteField3(buf []byte) (offset int) {
 }
 
 func (x *UserSignUpReq) fastWriteField4(buf []byte) (offset int) {
-	if x.AuthType == 0 {
+	if x.AuthType == "" {
 		return offset
 	}
-	offset += fastpb.WriteInt64(buf[offset:], 4, x.GetAuthType())
+	offset += fastpb.WriteString(buf[offset:], 4, x.GetAuthType())
 	return offset
 }
 
@@ -2453,10 +2453,10 @@ func (x *UserLoginReq) fastWriteField1(buf []byte) (offset int) {
 }
 
 func (x *UserLoginReq) fastWriteField2(buf []byte) (offset int) {
-	if x.AuthType == 0 {
+	if x.AuthType == "" {
 		return offset
 	}
-	offset += fastpb.WriteInt64(buf[offset:], 2, x.GetAuthType())
+	offset += fastpb.WriteString(buf[offset:], 2, x.GetAuthType())
 	return offset
 }
 
@@ -3718,10 +3718,10 @@ func (x *UserSignUpReq) sizeField3() (n int) {
 }
 
 func (x *UserSignUpReq) sizeField4() (n int) {
-	if x.AuthType == 0 {
+	if x.AuthType == "" {
 		return n
 	}
-	n += fastpb.SizeInt64(4, x.GetAuthType())
+	n += fastpb.SizeString(4, x.GetAuthType())
 	return n
 }
 
@@ -3803,10 +3803,10 @@ func (x *UserLoginReq) sizeField1() (n int) {
 }
 
 func (x *UserLoginReq) sizeField2() (n int) {
-	if x.AuthType == 0 {
+	if x.AuthType == "" {
 		return n
 	}
-	n += fastpb.SizeInt64(2, x.GetAuthType())
+	n += fastpb.SizeString(2, x.GetAuthType())
 	return n
 }
 

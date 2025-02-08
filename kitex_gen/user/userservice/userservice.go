@@ -50,6 +50,13 @@ var serviceMethods = map[string]kitex.MethodInfo{
 		false,
 		kitex.WithStreamingMode(kitex.StreamingUnary),
 	),
+	"SetNotice": kitex.NewMethodInfo(
+		setNoticeHandler,
+		newSetNoticeArgs,
+		newSetNoticeResult,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingUnary),
+	),
 	"CreateReserver": kitex.NewMethodInfo(
 		createReserverHandler,
 		newCreateReserverArgs,
@@ -1004,6 +1011,159 @@ func (p *SetPasswordResult) IsSetSuccess() bool {
 }
 
 func (p *SetPasswordResult) GetResult() interface{} {
+	return p.Success
+}
+
+func setNoticeHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
+	switch s := arg.(type) {
+	case *streaming.Args:
+		st := s.Stream
+		req := new(user.SetNoticeReq)
+		if err := st.RecvMsg(req); err != nil {
+			return err
+		}
+		resp, err := handler.(user.UserService).SetNotice(ctx, req)
+		if err != nil {
+			return err
+		}
+		return st.SendMsg(resp)
+	case *SetNoticeArgs:
+		success, err := handler.(user.UserService).SetNotice(ctx, s.Req)
+		if err != nil {
+			return err
+		}
+		realResult := result.(*SetNoticeResult)
+		realResult.Success = success
+		return nil
+	default:
+		return errInvalidMessageType
+	}
+}
+func newSetNoticeArgs() interface{} {
+	return &SetNoticeArgs{}
+}
+
+func newSetNoticeResult() interface{} {
+	return &SetNoticeResult{}
+}
+
+type SetNoticeArgs struct {
+	Req *user.SetNoticeReq
+}
+
+func (p *SetNoticeArgs) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetReq() {
+		p.Req = new(user.SetNoticeReq)
+	}
+	return p.Req.FastRead(buf, _type, number)
+}
+
+func (p *SetNoticeArgs) FastWrite(buf []byte) (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.FastWrite(buf)
+}
+
+func (p *SetNoticeArgs) Size() (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.Size()
+}
+
+func (p *SetNoticeArgs) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetReq() {
+		return out, nil
+	}
+	return proto.Marshal(p.Req)
+}
+
+func (p *SetNoticeArgs) Unmarshal(in []byte) error {
+	msg := new(user.SetNoticeReq)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Req = msg
+	return nil
+}
+
+var SetNoticeArgs_Req_DEFAULT *user.SetNoticeReq
+
+func (p *SetNoticeArgs) GetReq() *user.SetNoticeReq {
+	if !p.IsSetReq() {
+		return SetNoticeArgs_Req_DEFAULT
+	}
+	return p.Req
+}
+
+func (p *SetNoticeArgs) IsSetReq() bool {
+	return p.Req != nil
+}
+
+func (p *SetNoticeArgs) GetFirstArgument() interface{} {
+	return p.Req
+}
+
+type SetNoticeResult struct {
+	Success *user.Response
+}
+
+var SetNoticeResult_Success_DEFAULT *user.Response
+
+func (p *SetNoticeResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetSuccess() {
+		p.Success = new(user.Response)
+	}
+	return p.Success.FastRead(buf, _type, number)
+}
+
+func (p *SetNoticeResult) FastWrite(buf []byte) (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.FastWrite(buf)
+}
+
+func (p *SetNoticeResult) Size() (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.Size()
+}
+
+func (p *SetNoticeResult) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetSuccess() {
+		return out, nil
+	}
+	return proto.Marshal(p.Success)
+}
+
+func (p *SetNoticeResult) Unmarshal(in []byte) error {
+	msg := new(user.Response)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Success = msg
+	return nil
+}
+
+func (p *SetNoticeResult) GetSuccess() *user.Response {
+	if !p.IsSetSuccess() {
+		return SetNoticeResult_Success_DEFAULT
+	}
+	return p.Success
+}
+
+func (p *SetNoticeResult) SetSuccess(x interface{}) {
+	p.Success = x.(*user.Response)
+}
+
+func (p *SetNoticeResult) IsSetSuccess() bool {
+	return p.Success != nil
+}
+
+func (p *SetNoticeResult) GetResult() interface{} {
 	return p.Success
 }
 
@@ -3816,6 +3976,16 @@ func (p *kClient) SetPassword(ctx context.Context, Req *user.SetPasswordReq) (r 
 	_args.Req = Req
 	var _result SetPasswordResult
 	if err = p.c.Call(ctx, "SetPassword", &_args, &_result); err != nil {
+		return
+	}
+	return _result.GetSuccess(), nil
+}
+
+func (p *kClient) SetNotice(ctx context.Context, Req *user.SetNoticeReq) (r *user.Response, err error) {
+	var _args SetNoticeArgs
+	_args.Req = Req
+	var _result SetNoticeResult
+	if err = p.c.Call(ctx, "SetNotice", &_args, &_result); err != nil {
 		return
 	}
 	return _result.GetSuccess(), nil

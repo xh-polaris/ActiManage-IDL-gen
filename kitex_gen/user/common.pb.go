@@ -1355,6 +1355,54 @@ func (x *SetPasswordReq) GetNewPassword() string {
 	return ""
 }
 
+// 更改通知接收状态
+type SetNoticeReq struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+}
+
+func (x *SetNoticeReq) Reset() {
+	*x = SetNoticeReq{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_ActiManage_user_common_proto_msgTypes[14]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *SetNoticeReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetNoticeReq) ProtoMessage() {}
+
+func (x *SetNoticeReq) ProtoReflect() protoreflect.Message {
+	mi := &file_ActiManage_user_common_proto_msgTypes[14]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetNoticeReq.ProtoReflect.Descriptor instead.
+func (*SetNoticeReq) Descriptor() ([]byte, []int) {
+	return file_ActiManage_user_common_proto_rawDescGZIP(), []int{14}
+}
+
+func (x *SetNoticeReq) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
+}
+
 // 添加预约人
 type CreateReserverReq struct {
 	state         protoimpl.MessageState
@@ -1373,7 +1421,7 @@ type CreateReserverReq struct {
 func (x *CreateReserverReq) Reset() {
 	*x = CreateReserverReq{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_ActiManage_user_common_proto_msgTypes[14]
+		mi := &file_ActiManage_user_common_proto_msgTypes[15]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1386,7 +1434,7 @@ func (x *CreateReserverReq) String() string {
 func (*CreateReserverReq) ProtoMessage() {}
 
 func (x *CreateReserverReq) ProtoReflect() protoreflect.Message {
-	mi := &file_ActiManage_user_common_proto_msgTypes[14]
+	mi := &file_ActiManage_user_common_proto_msgTypes[15]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1399,7 +1447,7 @@ func (x *CreateReserverReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateReserverReq.ProtoReflect.Descriptor instead.
 func (*CreateReserverReq) Descriptor() ([]byte, []int) {
-	return file_ActiManage_user_common_proto_rawDescGZIP(), []int{14}
+	return file_ActiManage_user_common_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *CreateReserverReq) GetUserId() string {
@@ -1463,7 +1511,7 @@ type DeleteReserverReq struct {
 func (x *DeleteReserverReq) Reset() {
 	*x = DeleteReserverReq{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_ActiManage_user_common_proto_msgTypes[15]
+		mi := &file_ActiManage_user_common_proto_msgTypes[16]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1476,7 +1524,7 @@ func (x *DeleteReserverReq) String() string {
 func (*DeleteReserverReq) ProtoMessage() {}
 
 func (x *DeleteReserverReq) ProtoReflect() protoreflect.Message {
-	mi := &file_ActiManage_user_common_proto_msgTypes[15]
+	mi := &file_ActiManage_user_common_proto_msgTypes[16]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1489,7 +1537,7 @@ func (x *DeleteReserverReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteReserverReq.ProtoReflect.Descriptor instead.
 func (*DeleteReserverReq) Descriptor() ([]byte, []int) {
-	return file_ActiManage_user_common_proto_rawDescGZIP(), []int{15}
+	return file_ActiManage_user_common_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *DeleteReserverReq) GetReserverId() string {
@@ -1511,7 +1559,7 @@ type UpdateReserverReq struct {
 func (x *UpdateReserverReq) Reset() {
 	*x = UpdateReserverReq{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_ActiManage_user_common_proto_msgTypes[16]
+		mi := &file_ActiManage_user_common_proto_msgTypes[17]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1524,7 +1572,7 @@ func (x *UpdateReserverReq) String() string {
 func (*UpdateReserverReq) ProtoMessage() {}
 
 func (x *UpdateReserverReq) ProtoReflect() protoreflect.Message {
-	mi := &file_ActiManage_user_common_proto_msgTypes[16]
+	mi := &file_ActiManage_user_common_proto_msgTypes[17]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1537,7 +1585,7 @@ func (x *UpdateReserverReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateReserverReq.ProtoReflect.Descriptor instead.
 func (*UpdateReserverReq) Descriptor() ([]byte, []int) {
-	return file_ActiManage_user_common_proto_rawDescGZIP(), []int{16}
+	return file_ActiManage_user_common_proto_rawDescGZIP(), []int{17}
 }
 
 func (x *UpdateReserverReq) GetReserver() *Reserver {
@@ -1560,7 +1608,7 @@ type ListReserversReq struct {
 func (x *ListReserversReq) Reset() {
 	*x = ListReserversReq{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_ActiManage_user_common_proto_msgTypes[17]
+		mi := &file_ActiManage_user_common_proto_msgTypes[18]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1573,7 +1621,7 @@ func (x *ListReserversReq) String() string {
 func (*ListReserversReq) ProtoMessage() {}
 
 func (x *ListReserversReq) ProtoReflect() protoreflect.Message {
-	mi := &file_ActiManage_user_common_proto_msgTypes[17]
+	mi := &file_ActiManage_user_common_proto_msgTypes[18]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1586,7 +1634,7 @@ func (x *ListReserversReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListReserversReq.ProtoReflect.Descriptor instead.
 func (*ListReserversReq) Descriptor() ([]byte, []int) {
-	return file_ActiManage_user_common_proto_rawDescGZIP(), []int{17}
+	return file_ActiManage_user_common_proto_rawDescGZIP(), []int{18}
 }
 
 func (x *ListReserversReq) GetUserId() string {
@@ -1617,7 +1665,7 @@ type ListReserversResp struct {
 func (x *ListReserversResp) Reset() {
 	*x = ListReserversResp{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_ActiManage_user_common_proto_msgTypes[18]
+		mi := &file_ActiManage_user_common_proto_msgTypes[19]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1630,7 +1678,7 @@ func (x *ListReserversResp) String() string {
 func (*ListReserversResp) ProtoMessage() {}
 
 func (x *ListReserversResp) ProtoReflect() protoreflect.Message {
-	mi := &file_ActiManage_user_common_proto_msgTypes[18]
+	mi := &file_ActiManage_user_common_proto_msgTypes[19]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1643,7 +1691,7 @@ func (x *ListReserversResp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListReserversResp.ProtoReflect.Descriptor instead.
 func (*ListReserversResp) Descriptor() ([]byte, []int) {
-	return file_ActiManage_user_common_proto_rawDescGZIP(), []int{18}
+	return file_ActiManage_user_common_proto_rawDescGZIP(), []int{19}
 }
 
 func (x *ListReserversResp) GetCode() int64 {
@@ -1690,7 +1738,7 @@ type CreateBookRecordReq struct {
 func (x *CreateBookRecordReq) Reset() {
 	*x = CreateBookRecordReq{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_ActiManage_user_common_proto_msgTypes[19]
+		mi := &file_ActiManage_user_common_proto_msgTypes[20]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1703,7 +1751,7 @@ func (x *CreateBookRecordReq) String() string {
 func (*CreateBookRecordReq) ProtoMessage() {}
 
 func (x *CreateBookRecordReq) ProtoReflect() protoreflect.Message {
-	mi := &file_ActiManage_user_common_proto_msgTypes[19]
+	mi := &file_ActiManage_user_common_proto_msgTypes[20]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1716,7 +1764,7 @@ func (x *CreateBookRecordReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateBookRecordReq.ProtoReflect.Descriptor instead.
 func (*CreateBookRecordReq) Descriptor() ([]byte, []int) {
-	return file_ActiManage_user_common_proto_rawDescGZIP(), []int{19}
+	return file_ActiManage_user_common_proto_rawDescGZIP(), []int{20}
 }
 
 func (x *CreateBookRecordReq) GetUserId() string {
@@ -1767,7 +1815,7 @@ type CancelBookRecordReq struct {
 func (x *CancelBookRecordReq) Reset() {
 	*x = CancelBookRecordReq{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_ActiManage_user_common_proto_msgTypes[20]
+		mi := &file_ActiManage_user_common_proto_msgTypes[21]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1780,7 +1828,7 @@ func (x *CancelBookRecordReq) String() string {
 func (*CancelBookRecordReq) ProtoMessage() {}
 
 func (x *CancelBookRecordReq) ProtoReflect() protoreflect.Message {
-	mi := &file_ActiManage_user_common_proto_msgTypes[20]
+	mi := &file_ActiManage_user_common_proto_msgTypes[21]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1793,7 +1841,7 @@ func (x *CancelBookRecordReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CancelBookRecordReq.ProtoReflect.Descriptor instead.
 func (*CancelBookRecordReq) Descriptor() ([]byte, []int) {
-	return file_ActiManage_user_common_proto_rawDescGZIP(), []int{20}
+	return file_ActiManage_user_common_proto_rawDescGZIP(), []int{21}
 }
 
 func (x *CancelBookRecordReq) GetBookRecordId() string {
@@ -1822,7 +1870,7 @@ type GetBookRecordReq struct {
 func (x *GetBookRecordReq) Reset() {
 	*x = GetBookRecordReq{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_ActiManage_user_common_proto_msgTypes[21]
+		mi := &file_ActiManage_user_common_proto_msgTypes[22]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1835,7 +1883,7 @@ func (x *GetBookRecordReq) String() string {
 func (*GetBookRecordReq) ProtoMessage() {}
 
 func (x *GetBookRecordReq) ProtoReflect() protoreflect.Message {
-	mi := &file_ActiManage_user_common_proto_msgTypes[21]
+	mi := &file_ActiManage_user_common_proto_msgTypes[22]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1848,7 +1896,7 @@ func (x *GetBookRecordReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetBookRecordReq.ProtoReflect.Descriptor instead.
 func (*GetBookRecordReq) Descriptor() ([]byte, []int) {
-	return file_ActiManage_user_common_proto_rawDescGZIP(), []int{21}
+	return file_ActiManage_user_common_proto_rawDescGZIP(), []int{22}
 }
 
 func (x *GetBookRecordReq) GetBookRecordId() string {
@@ -1871,7 +1919,7 @@ type GetBookRecordResp struct {
 func (x *GetBookRecordResp) Reset() {
 	*x = GetBookRecordResp{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_ActiManage_user_common_proto_msgTypes[22]
+		mi := &file_ActiManage_user_common_proto_msgTypes[23]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1884,7 +1932,7 @@ func (x *GetBookRecordResp) String() string {
 func (*GetBookRecordResp) ProtoMessage() {}
 
 func (x *GetBookRecordResp) ProtoReflect() protoreflect.Message {
-	mi := &file_ActiManage_user_common_proto_msgTypes[22]
+	mi := &file_ActiManage_user_common_proto_msgTypes[23]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1897,7 +1945,7 @@ func (x *GetBookRecordResp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetBookRecordResp.ProtoReflect.Descriptor instead.
 func (*GetBookRecordResp) Descriptor() ([]byte, []int) {
-	return file_ActiManage_user_common_proto_rawDescGZIP(), []int{22}
+	return file_ActiManage_user_common_proto_rawDescGZIP(), []int{23}
 }
 
 func (x *GetBookRecordResp) GetCode() int64 {
@@ -1934,7 +1982,7 @@ type ListBookRecordsByUserReq struct {
 func (x *ListBookRecordsByUserReq) Reset() {
 	*x = ListBookRecordsByUserReq{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_ActiManage_user_common_proto_msgTypes[23]
+		mi := &file_ActiManage_user_common_proto_msgTypes[24]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1947,7 +1995,7 @@ func (x *ListBookRecordsByUserReq) String() string {
 func (*ListBookRecordsByUserReq) ProtoMessage() {}
 
 func (x *ListBookRecordsByUserReq) ProtoReflect() protoreflect.Message {
-	mi := &file_ActiManage_user_common_proto_msgTypes[23]
+	mi := &file_ActiManage_user_common_proto_msgTypes[24]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1960,7 +2008,7 @@ func (x *ListBookRecordsByUserReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListBookRecordsByUserReq.ProtoReflect.Descriptor instead.
 func (*ListBookRecordsByUserReq) Descriptor() ([]byte, []int) {
-	return file_ActiManage_user_common_proto_rawDescGZIP(), []int{23}
+	return file_ActiManage_user_common_proto_rawDescGZIP(), []int{24}
 }
 
 func (x *ListBookRecordsByUserReq) GetUserId() string {
@@ -1991,7 +2039,7 @@ type ListBookRecordsByUserResp struct {
 func (x *ListBookRecordsByUserResp) Reset() {
 	*x = ListBookRecordsByUserResp{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_ActiManage_user_common_proto_msgTypes[24]
+		mi := &file_ActiManage_user_common_proto_msgTypes[25]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2004,7 +2052,7 @@ func (x *ListBookRecordsByUserResp) String() string {
 func (*ListBookRecordsByUserResp) ProtoMessage() {}
 
 func (x *ListBookRecordsByUserResp) ProtoReflect() protoreflect.Message {
-	mi := &file_ActiManage_user_common_proto_msgTypes[24]
+	mi := &file_ActiManage_user_common_proto_msgTypes[25]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2017,7 +2065,7 @@ func (x *ListBookRecordsByUserResp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListBookRecordsByUserResp.ProtoReflect.Descriptor instead.
 func (*ListBookRecordsByUserResp) Descriptor() ([]byte, []int) {
-	return file_ActiManage_user_common_proto_rawDescGZIP(), []int{24}
+	return file_ActiManage_user_common_proto_rawDescGZIP(), []int{25}
 }
 
 func (x *ListBookRecordsByUserResp) GetCode() int64 {
@@ -2062,7 +2110,7 @@ type CreateReceiptReq struct {
 func (x *CreateReceiptReq) Reset() {
 	*x = CreateReceiptReq{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_ActiManage_user_common_proto_msgTypes[25]
+		mi := &file_ActiManage_user_common_proto_msgTypes[26]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2075,7 +2123,7 @@ func (x *CreateReceiptReq) String() string {
 func (*CreateReceiptReq) ProtoMessage() {}
 
 func (x *CreateReceiptReq) ProtoReflect() protoreflect.Message {
-	mi := &file_ActiManage_user_common_proto_msgTypes[25]
+	mi := &file_ActiManage_user_common_proto_msgTypes[26]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2088,7 +2136,7 @@ func (x *CreateReceiptReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateReceiptReq.ProtoReflect.Descriptor instead.
 func (*CreateReceiptReq) Descriptor() ([]byte, []int) {
-	return file_ActiManage_user_common_proto_rawDescGZIP(), []int{25}
+	return file_ActiManage_user_common_proto_rawDescGZIP(), []int{26}
 }
 
 func (x *CreateReceiptReq) GetUserId() string {
@@ -2124,7 +2172,7 @@ type DeleteReceiptReq struct {
 func (x *DeleteReceiptReq) Reset() {
 	*x = DeleteReceiptReq{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_ActiManage_user_common_proto_msgTypes[26]
+		mi := &file_ActiManage_user_common_proto_msgTypes[27]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2137,7 +2185,7 @@ func (x *DeleteReceiptReq) String() string {
 func (*DeleteReceiptReq) ProtoMessage() {}
 
 func (x *DeleteReceiptReq) ProtoReflect() protoreflect.Message {
-	mi := &file_ActiManage_user_common_proto_msgTypes[26]
+	mi := &file_ActiManage_user_common_proto_msgTypes[27]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2150,7 +2198,7 @@ func (x *DeleteReceiptReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteReceiptReq.ProtoReflect.Descriptor instead.
 func (*DeleteReceiptReq) Descriptor() ([]byte, []int) {
-	return file_ActiManage_user_common_proto_rawDescGZIP(), []int{26}
+	return file_ActiManage_user_common_proto_rawDescGZIP(), []int{27}
 }
 
 func (x *DeleteReceiptReq) GetReceiptId() string {
@@ -2173,7 +2221,7 @@ type ListReceiptsReq struct {
 func (x *ListReceiptsReq) Reset() {
 	*x = ListReceiptsReq{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_ActiManage_user_common_proto_msgTypes[27]
+		mi := &file_ActiManage_user_common_proto_msgTypes[28]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2186,7 +2234,7 @@ func (x *ListReceiptsReq) String() string {
 func (*ListReceiptsReq) ProtoMessage() {}
 
 func (x *ListReceiptsReq) ProtoReflect() protoreflect.Message {
-	mi := &file_ActiManage_user_common_proto_msgTypes[27]
+	mi := &file_ActiManage_user_common_proto_msgTypes[28]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2199,7 +2247,7 @@ func (x *ListReceiptsReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListReceiptsReq.ProtoReflect.Descriptor instead.
 func (*ListReceiptsReq) Descriptor() ([]byte, []int) {
-	return file_ActiManage_user_common_proto_rawDescGZIP(), []int{27}
+	return file_ActiManage_user_common_proto_rawDescGZIP(), []int{28}
 }
 
 func (x *ListReceiptsReq) GetUserId() string {
@@ -2230,7 +2278,7 @@ type ListReceiptsResp struct {
 func (x *ListReceiptsResp) Reset() {
 	*x = ListReceiptsResp{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_ActiManage_user_common_proto_msgTypes[28]
+		mi := &file_ActiManage_user_common_proto_msgTypes[29]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2243,7 +2291,7 @@ func (x *ListReceiptsResp) String() string {
 func (*ListReceiptsResp) ProtoMessage() {}
 
 func (x *ListReceiptsResp) ProtoReflect() protoreflect.Message {
-	mi := &file_ActiManage_user_common_proto_msgTypes[28]
+	mi := &file_ActiManage_user_common_proto_msgTypes[29]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2256,7 +2304,7 @@ func (x *ListReceiptsResp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListReceiptsResp.ProtoReflect.Descriptor instead.
 func (*ListReceiptsResp) Descriptor() ([]byte, []int) {
-	return file_ActiManage_user_common_proto_rawDescGZIP(), []int{28}
+	return file_ActiManage_user_common_proto_rawDescGZIP(), []int{29}
 }
 
 func (x *ListReceiptsResp) GetCode() int64 {
@@ -2299,7 +2347,7 @@ type MarkReceiptReadReq struct {
 func (x *MarkReceiptReadReq) Reset() {
 	*x = MarkReceiptReadReq{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_ActiManage_user_common_proto_msgTypes[29]
+		mi := &file_ActiManage_user_common_proto_msgTypes[30]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2312,7 +2360,7 @@ func (x *MarkReceiptReadReq) String() string {
 func (*MarkReceiptReadReq) ProtoMessage() {}
 
 func (x *MarkReceiptReadReq) ProtoReflect() protoreflect.Message {
-	mi := &file_ActiManage_user_common_proto_msgTypes[29]
+	mi := &file_ActiManage_user_common_proto_msgTypes[30]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2325,7 +2373,7 @@ func (x *MarkReceiptReadReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MarkReceiptReadReq.ProtoReflect.Descriptor instead.
 func (*MarkReceiptReadReq) Descriptor() ([]byte, []int) {
-	return file_ActiManage_user_common_proto_rawDescGZIP(), []int{29}
+	return file_ActiManage_user_common_proto_rawDescGZIP(), []int{30}
 }
 
 func (x *MarkReceiptReadReq) GetReceiptId() string {
@@ -2348,7 +2396,7 @@ type DoFavoriteReq struct {
 func (x *DoFavoriteReq) Reset() {
 	*x = DoFavoriteReq{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_ActiManage_user_common_proto_msgTypes[30]
+		mi := &file_ActiManage_user_common_proto_msgTypes[31]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2361,7 +2409,7 @@ func (x *DoFavoriteReq) String() string {
 func (*DoFavoriteReq) ProtoMessage() {}
 
 func (x *DoFavoriteReq) ProtoReflect() protoreflect.Message {
-	mi := &file_ActiManage_user_common_proto_msgTypes[30]
+	mi := &file_ActiManage_user_common_proto_msgTypes[31]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2374,7 +2422,7 @@ func (x *DoFavoriteReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DoFavoriteReq.ProtoReflect.Descriptor instead.
 func (*DoFavoriteReq) Descriptor() ([]byte, []int) {
-	return file_ActiManage_user_common_proto_rawDescGZIP(), []int{30}
+	return file_ActiManage_user_common_proto_rawDescGZIP(), []int{31}
 }
 
 func (x *DoFavoriteReq) GetUserId() string {
@@ -2403,7 +2451,7 @@ type CancelFavoriteReq struct {
 func (x *CancelFavoriteReq) Reset() {
 	*x = CancelFavoriteReq{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_ActiManage_user_common_proto_msgTypes[31]
+		mi := &file_ActiManage_user_common_proto_msgTypes[32]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2416,7 +2464,7 @@ func (x *CancelFavoriteReq) String() string {
 func (*CancelFavoriteReq) ProtoMessage() {}
 
 func (x *CancelFavoriteReq) ProtoReflect() protoreflect.Message {
-	mi := &file_ActiManage_user_common_proto_msgTypes[31]
+	mi := &file_ActiManage_user_common_proto_msgTypes[32]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2429,7 +2477,7 @@ func (x *CancelFavoriteReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CancelFavoriteReq.ProtoReflect.Descriptor instead.
 func (*CancelFavoriteReq) Descriptor() ([]byte, []int) {
-	return file_ActiManage_user_common_proto_rawDescGZIP(), []int{31}
+	return file_ActiManage_user_common_proto_rawDescGZIP(), []int{32}
 }
 
 func (x *CancelFavoriteReq) GetId() string {
@@ -2452,7 +2500,7 @@ type CreateViewReq struct {
 func (x *CreateViewReq) Reset() {
 	*x = CreateViewReq{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_ActiManage_user_common_proto_msgTypes[32]
+		mi := &file_ActiManage_user_common_proto_msgTypes[33]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2465,7 +2513,7 @@ func (x *CreateViewReq) String() string {
 func (*CreateViewReq) ProtoMessage() {}
 
 func (x *CreateViewReq) ProtoReflect() protoreflect.Message {
-	mi := &file_ActiManage_user_common_proto_msgTypes[32]
+	mi := &file_ActiManage_user_common_proto_msgTypes[33]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2478,7 +2526,7 @@ func (x *CreateViewReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateViewReq.ProtoReflect.Descriptor instead.
 func (*CreateViewReq) Descriptor() ([]byte, []int) {
-	return file_ActiManage_user_common_proto_rawDescGZIP(), []int{32}
+	return file_ActiManage_user_common_proto_rawDescGZIP(), []int{33}
 }
 
 func (x *CreateViewReq) GetTargetId() string {
@@ -2508,7 +2556,7 @@ type IncViewReq struct {
 func (x *IncViewReq) Reset() {
 	*x = IncViewReq{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_ActiManage_user_common_proto_msgTypes[33]
+		mi := &file_ActiManage_user_common_proto_msgTypes[34]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2521,7 +2569,7 @@ func (x *IncViewReq) String() string {
 func (*IncViewReq) ProtoMessage() {}
 
 func (x *IncViewReq) ProtoReflect() protoreflect.Message {
-	mi := &file_ActiManage_user_common_proto_msgTypes[33]
+	mi := &file_ActiManage_user_common_proto_msgTypes[34]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2534,7 +2582,7 @@ func (x *IncViewReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use IncViewReq.ProtoReflect.Descriptor instead.
 func (*IncViewReq) Descriptor() ([]byte, []int) {
-	return file_ActiManage_user_common_proto_rawDescGZIP(), []int{33}
+	return file_ActiManage_user_common_proto_rawDescGZIP(), []int{34}
 }
 
 func (x *IncViewReq) GetTargetId() string {
@@ -2560,7 +2608,7 @@ type IncViewResp struct {
 func (x *IncViewResp) Reset() {
 	*x = IncViewResp{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_ActiManage_user_common_proto_msgTypes[34]
+		mi := &file_ActiManage_user_common_proto_msgTypes[35]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2573,7 +2621,7 @@ func (x *IncViewResp) String() string {
 func (*IncViewResp) ProtoMessage() {}
 
 func (x *IncViewResp) ProtoReflect() protoreflect.Message {
-	mi := &file_ActiManage_user_common_proto_msgTypes[34]
+	mi := &file_ActiManage_user_common_proto_msgTypes[35]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2586,7 +2634,7 @@ func (x *IncViewResp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use IncViewResp.ProtoReflect.Descriptor instead.
 func (*IncViewResp) Descriptor() ([]byte, []int) {
-	return file_ActiManage_user_common_proto_rawDescGZIP(), []int{34}
+	return file_ActiManage_user_common_proto_rawDescGZIP(), []int{35}
 }
 
 // 获取活动访问与收藏统计
@@ -2601,7 +2649,7 @@ type GetFavoriteAndViewOfActivityReq struct {
 func (x *GetFavoriteAndViewOfActivityReq) Reset() {
 	*x = GetFavoriteAndViewOfActivityReq{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_ActiManage_user_common_proto_msgTypes[35]
+		mi := &file_ActiManage_user_common_proto_msgTypes[36]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2614,7 +2662,7 @@ func (x *GetFavoriteAndViewOfActivityReq) String() string {
 func (*GetFavoriteAndViewOfActivityReq) ProtoMessage() {}
 
 func (x *GetFavoriteAndViewOfActivityReq) ProtoReflect() protoreflect.Message {
-	mi := &file_ActiManage_user_common_proto_msgTypes[35]
+	mi := &file_ActiManage_user_common_proto_msgTypes[36]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2627,7 +2675,7 @@ func (x *GetFavoriteAndViewOfActivityReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetFavoriteAndViewOfActivityReq.ProtoReflect.Descriptor instead.
 func (*GetFavoriteAndViewOfActivityReq) Descriptor() ([]byte, []int) {
-	return file_ActiManage_user_common_proto_rawDescGZIP(), []int{35}
+	return file_ActiManage_user_common_proto_rawDescGZIP(), []int{36}
 }
 
 func (x *GetFavoriteAndViewOfActivityReq) GetActivityId() string {
@@ -2649,7 +2697,7 @@ type GetFavoriteAndViewOfActivityResp struct {
 func (x *GetFavoriteAndViewOfActivityResp) Reset() {
 	*x = GetFavoriteAndViewOfActivityResp{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_ActiManage_user_common_proto_msgTypes[36]
+		mi := &file_ActiManage_user_common_proto_msgTypes[37]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2662,7 +2710,7 @@ func (x *GetFavoriteAndViewOfActivityResp) String() string {
 func (*GetFavoriteAndViewOfActivityResp) ProtoMessage() {}
 
 func (x *GetFavoriteAndViewOfActivityResp) ProtoReflect() protoreflect.Message {
-	mi := &file_ActiManage_user_common_proto_msgTypes[36]
+	mi := &file_ActiManage_user_common_proto_msgTypes[37]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2675,7 +2723,7 @@ func (x *GetFavoriteAndViewOfActivityResp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetFavoriteAndViewOfActivityResp.ProtoReflect.Descriptor instead.
 func (*GetFavoriteAndViewOfActivityResp) Descriptor() ([]byte, []int) {
-	return file_ActiManage_user_common_proto_rawDescGZIP(), []int{36}
+	return file_ActiManage_user_common_proto_rawDescGZIP(), []int{37}
 }
 
 func (x *GetFavoriteAndViewOfActivityResp) GetFavorite() int64 {
@@ -2704,7 +2752,7 @@ type GetViewOfMerchantReq struct {
 func (x *GetViewOfMerchantReq) Reset() {
 	*x = GetViewOfMerchantReq{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_ActiManage_user_common_proto_msgTypes[37]
+		mi := &file_ActiManage_user_common_proto_msgTypes[38]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2717,7 +2765,7 @@ func (x *GetViewOfMerchantReq) String() string {
 func (*GetViewOfMerchantReq) ProtoMessage() {}
 
 func (x *GetViewOfMerchantReq) ProtoReflect() protoreflect.Message {
-	mi := &file_ActiManage_user_common_proto_msgTypes[37]
+	mi := &file_ActiManage_user_common_proto_msgTypes[38]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2730,7 +2778,7 @@ func (x *GetViewOfMerchantReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetViewOfMerchantReq.ProtoReflect.Descriptor instead.
 func (*GetViewOfMerchantReq) Descriptor() ([]byte, []int) {
-	return file_ActiManage_user_common_proto_rawDescGZIP(), []int{37}
+	return file_ActiManage_user_common_proto_rawDescGZIP(), []int{38}
 }
 
 func (x *GetViewOfMerchantReq) GetMerchantId() string {
@@ -2751,7 +2799,7 @@ type GetViewOfMerchantResp struct {
 func (x *GetViewOfMerchantResp) Reset() {
 	*x = GetViewOfMerchantResp{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_ActiManage_user_common_proto_msgTypes[38]
+		mi := &file_ActiManage_user_common_proto_msgTypes[39]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2764,7 +2812,7 @@ func (x *GetViewOfMerchantResp) String() string {
 func (*GetViewOfMerchantResp) ProtoMessage() {}
 
 func (x *GetViewOfMerchantResp) ProtoReflect() protoreflect.Message {
-	mi := &file_ActiManage_user_common_proto_msgTypes[38]
+	mi := &file_ActiManage_user_common_proto_msgTypes[39]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2777,7 +2825,7 @@ func (x *GetViewOfMerchantResp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetViewOfMerchantResp.ProtoReflect.Descriptor instead.
 func (*GetViewOfMerchantResp) Descriptor() ([]byte, []int) {
-	return file_ActiManage_user_common_proto_rawDescGZIP(), []int{38}
+	return file_ActiManage_user_common_proto_rawDescGZIP(), []int{39}
 }
 
 func (x *GetViewOfMerchantResp) GetView() int64 {
@@ -2800,7 +2848,7 @@ type Response struct {
 func (x *Response) Reset() {
 	*x = Response{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_ActiManage_user_common_proto_msgTypes[39]
+		mi := &file_ActiManage_user_common_proto_msgTypes[40]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2813,7 +2861,7 @@ func (x *Response) String() string {
 func (*Response) ProtoMessage() {}
 
 func (x *Response) ProtoReflect() protoreflect.Message {
-	mi := &file_ActiManage_user_common_proto_msgTypes[39]
+	mi := &file_ActiManage_user_common_proto_msgTypes[40]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2826,7 +2874,7 @@ func (x *Response) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Response.ProtoReflect.Descriptor instead.
 func (*Response) Descriptor() ([]byte, []int) {
-	return file_ActiManage_user_common_proto_rawDescGZIP(), []int{39}
+	return file_ActiManage_user_common_proto_rawDescGZIP(), []int{40}
 }
 
 func (x *Response) GetCode() int64 {
@@ -3023,6 +3071,8 @@ var file_ActiManage_user_common_proto_rawDesc = []byte{
 	0x52, 0x0b, 0x6f, 0x6c, 0x64, 0x50, 0x61, 0x73, 0x73, 0x77, 0x6f, 0x72, 0x64, 0x12, 0x20, 0x0a,
 	0x0b, 0x6e, 0x65, 0x77, 0x50, 0x61, 0x73, 0x73, 0x77, 0x6f, 0x72, 0x64, 0x18, 0x03, 0x20, 0x01,
 	0x28, 0x09, 0x52, 0x0b, 0x6e, 0x65, 0x77, 0x50, 0x61, 0x73, 0x73, 0x77, 0x6f, 0x72, 0x64, 0x22,
+	0x1e, 0x0a, 0x0c, 0x53, 0x65, 0x74, 0x4e, 0x6f, 0x74, 0x69, 0x63, 0x65, 0x52, 0x65, 0x71, 0x12,
+	0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x02, 0x69, 0x64, 0x22,
 	0xe2, 0x01, 0x0a, 0x11, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x52, 0x65, 0x73, 0x65, 0x72, 0x76,
 	0x65, 0x72, 0x52, 0x65, 0x71, 0x12, 0x16, 0x0a, 0x06, 0x75, 0x73, 0x65, 0x72, 0x49, 0x64, 0x18,
 	0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x06, 0x75, 0x73, 0x65, 0x72, 0x49, 0x64, 0x12, 0x12, 0x0a,
@@ -3176,7 +3226,7 @@ func file_ActiManage_user_common_proto_rawDescGZIP() []byte {
 	return file_ActiManage_user_common_proto_rawDescData
 }
 
-var file_ActiManage_user_common_proto_msgTypes = make([]protoimpl.MessageInfo, 40)
+var file_ActiManage_user_common_proto_msgTypes = make([]protoimpl.MessageInfo, 41)
 var file_ActiManage_user_common_proto_goTypes = []interface{}{
 	(*User)(nil),                             // 0: user.User
 	(*Reserver)(nil),                         // 1: user.Reserver
@@ -3192,43 +3242,44 @@ var file_ActiManage_user_common_proto_goTypes = []interface{}{
 	(*GetUserInfoResp)(nil),                  // 11: user.GetUserInfoResp
 	(*UpdateUserInfoReq)(nil),                // 12: user.UpdateUserInfoReq
 	(*SetPasswordReq)(nil),                   // 13: user.SetPasswordReq
-	(*CreateReserverReq)(nil),                // 14: user.CreateReserverReq
-	(*DeleteReserverReq)(nil),                // 15: user.DeleteReserverReq
-	(*UpdateReserverReq)(nil),                // 16: user.UpdateReserverReq
-	(*ListReserversReq)(nil),                 // 17: user.ListReserversReq
-	(*ListReserversResp)(nil),                // 18: user.ListReserversResp
-	(*CreateBookRecordReq)(nil),              // 19: user.CreateBookRecordReq
-	(*CancelBookRecordReq)(nil),              // 20: user.CancelBookRecordReq
-	(*GetBookRecordReq)(nil),                 // 21: user.GetBookRecordReq
-	(*GetBookRecordResp)(nil),                // 22: user.GetBookRecordResp
-	(*ListBookRecordsByUserReq)(nil),         // 23: user.ListBookRecordsByUserReq
-	(*ListBookRecordsByUserResp)(nil),        // 24: user.ListBookRecordsByUserResp
-	(*CreateReceiptReq)(nil),                 // 25: user.CreateReceiptReq
-	(*DeleteReceiptReq)(nil),                 // 26: user.DeleteReceiptReq
-	(*ListReceiptsReq)(nil),                  // 27: user.ListReceiptsReq
-	(*ListReceiptsResp)(nil),                 // 28: user.ListReceiptsResp
-	(*MarkReceiptReadReq)(nil),               // 29: user.MarkReceiptReadReq
-	(*DoFavoriteReq)(nil),                    // 30: user.DoFavoriteReq
-	(*CancelFavoriteReq)(nil),                // 31: user.CancelFavoriteReq
-	(*CreateViewReq)(nil),                    // 32: user.CreateViewReq
-	(*IncViewReq)(nil),                       // 33: user.IncViewReq
-	(*IncViewResp)(nil),                      // 34: user.IncViewResp
-	(*GetFavoriteAndViewOfActivityReq)(nil),  // 35: user.GetFavoriteAndViewOfActivityReq
-	(*GetFavoriteAndViewOfActivityResp)(nil), // 36: user.GetFavoriteAndViewOfActivityResp
-	(*GetViewOfMerchantReq)(nil),             // 37: user.GetViewOfMerchantReq
-	(*GetViewOfMerchantResp)(nil),            // 38: user.GetViewOfMerchantResp
-	(*Response)(nil),                         // 39: user.Response
-	(*basic.Paging)(nil),                     // 40: basic.Paging
+	(*SetNoticeReq)(nil),                     // 14: user.SetNoticeReq
+	(*CreateReserverReq)(nil),                // 15: user.CreateReserverReq
+	(*DeleteReserverReq)(nil),                // 16: user.DeleteReserverReq
+	(*UpdateReserverReq)(nil),                // 17: user.UpdateReserverReq
+	(*ListReserversReq)(nil),                 // 18: user.ListReserversReq
+	(*ListReserversResp)(nil),                // 19: user.ListReserversResp
+	(*CreateBookRecordReq)(nil),              // 20: user.CreateBookRecordReq
+	(*CancelBookRecordReq)(nil),              // 21: user.CancelBookRecordReq
+	(*GetBookRecordReq)(nil),                 // 22: user.GetBookRecordReq
+	(*GetBookRecordResp)(nil),                // 23: user.GetBookRecordResp
+	(*ListBookRecordsByUserReq)(nil),         // 24: user.ListBookRecordsByUserReq
+	(*ListBookRecordsByUserResp)(nil),        // 25: user.ListBookRecordsByUserResp
+	(*CreateReceiptReq)(nil),                 // 26: user.CreateReceiptReq
+	(*DeleteReceiptReq)(nil),                 // 27: user.DeleteReceiptReq
+	(*ListReceiptsReq)(nil),                  // 28: user.ListReceiptsReq
+	(*ListReceiptsResp)(nil),                 // 29: user.ListReceiptsResp
+	(*MarkReceiptReadReq)(nil),               // 30: user.MarkReceiptReadReq
+	(*DoFavoriteReq)(nil),                    // 31: user.DoFavoriteReq
+	(*CancelFavoriteReq)(nil),                // 32: user.CancelFavoriteReq
+	(*CreateViewReq)(nil),                    // 33: user.CreateViewReq
+	(*IncViewReq)(nil),                       // 34: user.IncViewReq
+	(*IncViewResp)(nil),                      // 35: user.IncViewResp
+	(*GetFavoriteAndViewOfActivityReq)(nil),  // 36: user.GetFavoriteAndViewOfActivityReq
+	(*GetFavoriteAndViewOfActivityResp)(nil), // 37: user.GetFavoriteAndViewOfActivityResp
+	(*GetViewOfMerchantReq)(nil),             // 38: user.GetViewOfMerchantReq
+	(*GetViewOfMerchantResp)(nil),            // 39: user.GetViewOfMerchantResp
+	(*Response)(nil),                         // 40: user.Response
+	(*basic.Paging)(nil),                     // 41: basic.Paging
 }
 var file_ActiManage_user_common_proto_depIdxs = []int32{
 	2,  // 0: user.BookRecord.reservers:type_name -> user.BookItem
 	1,  // 1: user.UpdateReserverReq.reserver:type_name -> user.Reserver
-	40, // 2: user.ListReserversReq.paging:type_name -> basic.Paging
+	41, // 2: user.ListReserversReq.paging:type_name -> basic.Paging
 	1,  // 3: user.ListReserversResp.reservers:type_name -> user.Reserver
 	3,  // 4: user.GetBookRecordResp.record:type_name -> user.BookRecord
-	40, // 5: user.ListBookRecordsByUserReq.paging:type_name -> basic.Paging
+	41, // 5: user.ListBookRecordsByUserReq.paging:type_name -> basic.Paging
 	3,  // 6: user.ListBookRecordsByUserResp.records:type_name -> user.BookRecord
-	40, // 7: user.ListReceiptsReq.paging:type_name -> basic.Paging
+	41, // 7: user.ListReceiptsReq.paging:type_name -> basic.Paging
 	4,  // 8: user.ListReceiptsResp.receipts:type_name -> user.Receipt
 	9,  // [9:9] is the sub-list for method output_type
 	9,  // [9:9] is the sub-list for method input_type
@@ -3412,7 +3463,7 @@ func file_ActiManage_user_common_proto_init() {
 			}
 		}
 		file_ActiManage_user_common_proto_msgTypes[14].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CreateReserverReq); i {
+			switch v := v.(*SetNoticeReq); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -3424,7 +3475,7 @@ func file_ActiManage_user_common_proto_init() {
 			}
 		}
 		file_ActiManage_user_common_proto_msgTypes[15].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*DeleteReserverReq); i {
+			switch v := v.(*CreateReserverReq); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -3436,7 +3487,7 @@ func file_ActiManage_user_common_proto_init() {
 			}
 		}
 		file_ActiManage_user_common_proto_msgTypes[16].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*UpdateReserverReq); i {
+			switch v := v.(*DeleteReserverReq); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -3448,7 +3499,7 @@ func file_ActiManage_user_common_proto_init() {
 			}
 		}
 		file_ActiManage_user_common_proto_msgTypes[17].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ListReserversReq); i {
+			switch v := v.(*UpdateReserverReq); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -3460,7 +3511,7 @@ func file_ActiManage_user_common_proto_init() {
 			}
 		}
 		file_ActiManage_user_common_proto_msgTypes[18].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ListReserversResp); i {
+			switch v := v.(*ListReserversReq); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -3472,7 +3523,7 @@ func file_ActiManage_user_common_proto_init() {
 			}
 		}
 		file_ActiManage_user_common_proto_msgTypes[19].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CreateBookRecordReq); i {
+			switch v := v.(*ListReserversResp); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -3484,7 +3535,7 @@ func file_ActiManage_user_common_proto_init() {
 			}
 		}
 		file_ActiManage_user_common_proto_msgTypes[20].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CancelBookRecordReq); i {
+			switch v := v.(*CreateBookRecordReq); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -3496,7 +3547,7 @@ func file_ActiManage_user_common_proto_init() {
 			}
 		}
 		file_ActiManage_user_common_proto_msgTypes[21].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*GetBookRecordReq); i {
+			switch v := v.(*CancelBookRecordReq); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -3508,7 +3559,7 @@ func file_ActiManage_user_common_proto_init() {
 			}
 		}
 		file_ActiManage_user_common_proto_msgTypes[22].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*GetBookRecordResp); i {
+			switch v := v.(*GetBookRecordReq); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -3520,7 +3571,7 @@ func file_ActiManage_user_common_proto_init() {
 			}
 		}
 		file_ActiManage_user_common_proto_msgTypes[23].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ListBookRecordsByUserReq); i {
+			switch v := v.(*GetBookRecordResp); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -3532,7 +3583,7 @@ func file_ActiManage_user_common_proto_init() {
 			}
 		}
 		file_ActiManage_user_common_proto_msgTypes[24].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ListBookRecordsByUserResp); i {
+			switch v := v.(*ListBookRecordsByUserReq); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -3544,7 +3595,7 @@ func file_ActiManage_user_common_proto_init() {
 			}
 		}
 		file_ActiManage_user_common_proto_msgTypes[25].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CreateReceiptReq); i {
+			switch v := v.(*ListBookRecordsByUserResp); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -3556,7 +3607,7 @@ func file_ActiManage_user_common_proto_init() {
 			}
 		}
 		file_ActiManage_user_common_proto_msgTypes[26].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*DeleteReceiptReq); i {
+			switch v := v.(*CreateReceiptReq); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -3568,7 +3619,7 @@ func file_ActiManage_user_common_proto_init() {
 			}
 		}
 		file_ActiManage_user_common_proto_msgTypes[27].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ListReceiptsReq); i {
+			switch v := v.(*DeleteReceiptReq); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -3580,7 +3631,7 @@ func file_ActiManage_user_common_proto_init() {
 			}
 		}
 		file_ActiManage_user_common_proto_msgTypes[28].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ListReceiptsResp); i {
+			switch v := v.(*ListReceiptsReq); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -3592,7 +3643,7 @@ func file_ActiManage_user_common_proto_init() {
 			}
 		}
 		file_ActiManage_user_common_proto_msgTypes[29].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*MarkReceiptReadReq); i {
+			switch v := v.(*ListReceiptsResp); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -3604,7 +3655,7 @@ func file_ActiManage_user_common_proto_init() {
 			}
 		}
 		file_ActiManage_user_common_proto_msgTypes[30].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*DoFavoriteReq); i {
+			switch v := v.(*MarkReceiptReadReq); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -3616,7 +3667,7 @@ func file_ActiManage_user_common_proto_init() {
 			}
 		}
 		file_ActiManage_user_common_proto_msgTypes[31].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CancelFavoriteReq); i {
+			switch v := v.(*DoFavoriteReq); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -3628,7 +3679,7 @@ func file_ActiManage_user_common_proto_init() {
 			}
 		}
 		file_ActiManage_user_common_proto_msgTypes[32].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CreateViewReq); i {
+			switch v := v.(*CancelFavoriteReq); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -3640,7 +3691,7 @@ func file_ActiManage_user_common_proto_init() {
 			}
 		}
 		file_ActiManage_user_common_proto_msgTypes[33].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*IncViewReq); i {
+			switch v := v.(*CreateViewReq); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -3652,7 +3703,7 @@ func file_ActiManage_user_common_proto_init() {
 			}
 		}
 		file_ActiManage_user_common_proto_msgTypes[34].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*IncViewResp); i {
+			switch v := v.(*IncViewReq); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -3664,7 +3715,7 @@ func file_ActiManage_user_common_proto_init() {
 			}
 		}
 		file_ActiManage_user_common_proto_msgTypes[35].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*GetFavoriteAndViewOfActivityReq); i {
+			switch v := v.(*IncViewResp); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -3676,7 +3727,7 @@ func file_ActiManage_user_common_proto_init() {
 			}
 		}
 		file_ActiManage_user_common_proto_msgTypes[36].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*GetFavoriteAndViewOfActivityResp); i {
+			switch v := v.(*GetFavoriteAndViewOfActivityReq); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -3688,7 +3739,7 @@ func file_ActiManage_user_common_proto_init() {
 			}
 		}
 		file_ActiManage_user_common_proto_msgTypes[37].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*GetViewOfMerchantReq); i {
+			switch v := v.(*GetFavoriteAndViewOfActivityResp); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -3700,7 +3751,7 @@ func file_ActiManage_user_common_proto_init() {
 			}
 		}
 		file_ActiManage_user_common_proto_msgTypes[38].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*GetViewOfMerchantResp); i {
+			switch v := v.(*GetViewOfMerchantReq); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -3712,6 +3763,18 @@ func file_ActiManage_user_common_proto_init() {
 			}
 		}
 		file_ActiManage_user_common_proto_msgTypes[39].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*GetViewOfMerchantResp); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_ActiManage_user_common_proto_msgTypes[40].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*Response); i {
 			case 0:
 				return &v.state
@@ -3727,14 +3790,14 @@ func file_ActiManage_user_common_proto_init() {
 	file_ActiManage_user_common_proto_msgTypes[6].OneofWrappers = []interface{}{}
 	file_ActiManage_user_common_proto_msgTypes[8].OneofWrappers = []interface{}{}
 	file_ActiManage_user_common_proto_msgTypes[12].OneofWrappers = []interface{}{}
-	file_ActiManage_user_common_proto_msgTypes[14].OneofWrappers = []interface{}{}
+	file_ActiManage_user_common_proto_msgTypes[15].OneofWrappers = []interface{}{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_ActiManage_user_common_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   40,
+			NumMessages:   41,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

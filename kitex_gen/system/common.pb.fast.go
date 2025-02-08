@@ -1319,6 +1319,11 @@ func (x *ListActivitiesReq) FastRead(buf []byte, _type int8, number int32) (offs
 		if err != nil {
 			goto ReadFieldError
 		}
+	case 2:
+		offset, err = x.fastReadField2(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
 		if err != nil {
@@ -1340,6 +1345,11 @@ func (x *ListActivitiesReq) fastReadField1(buf []byte, _type int8) (offset int, 
 	}
 	x.Paging = &v
 	return offset, nil
+}
+
+func (x *ListActivitiesReq) fastReadField2(buf []byte, _type int8) (offset int, err error) {
+	x.Type, offset, err = fastpb.ReadInt64(buf, _type)
+	return offset, err
 }
 
 func (x *ListActivitiesResp) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
@@ -2798,6 +2808,7 @@ func (x *ListActivitiesReq) FastWrite(buf []byte) (offset int) {
 		return offset
 	}
 	offset += x.fastWriteField1(buf[offset:])
+	offset += x.fastWriteField2(buf[offset:])
 	return offset
 }
 
@@ -2806,6 +2817,14 @@ func (x *ListActivitiesReq) fastWriteField1(buf []byte) (offset int) {
 		return offset
 	}
 	offset += fastpb.WriteMessage(buf[offset:], 1, x.GetPaging())
+	return offset
+}
+
+func (x *ListActivitiesReq) fastWriteField2(buf []byte) (offset int) {
+	if x.Type == 0 {
+		return offset
+	}
+	offset += fastpb.WriteInt64(buf[offset:], 2, x.GetType())
 	return offset
 }
 
@@ -4131,6 +4150,7 @@ func (x *ListActivitiesReq) Size() (n int) {
 		return n
 	}
 	n += x.sizeField1()
+	n += x.sizeField2()
 	return n
 }
 
@@ -4139,6 +4159,14 @@ func (x *ListActivitiesReq) sizeField1() (n int) {
 		return n
 	}
 	n += fastpb.SizeMessage(1, x.GetPaging())
+	return n
+}
+
+func (x *ListActivitiesReq) sizeField2() (n int) {
+	if x.Type == 0 {
+		return n
+	}
+	n += fastpb.SizeInt64(2, x.GetType())
 	return n
 }
 
@@ -4640,6 +4668,7 @@ var fieldIDToName_UpdateActivityReq = map[int32]string{
 
 var fieldIDToName_ListActivitiesReq = map[int32]string{
 	1: "Paging",
+	2: "Type",
 }
 
 var fieldIDToName_ListActivitiesResp = map[int32]string{

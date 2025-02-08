@@ -1774,6 +1774,199 @@ func (x *CancelFavoriteReq) fastReadField1(buf []byte, _type int8) (offset int, 
 	return offset, err
 }
 
+func (x *CreateViewReq) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
+	switch number {
+	case 1:
+		offset, err = x.fastReadField1(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	case 2:
+		offset, err = x.fastReadField2(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	default:
+		offset, err = fastpb.Skip(buf, _type, number)
+		if err != nil {
+			goto SkipFieldError
+		}
+	}
+	return offset, nil
+SkipFieldError:
+	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
+ReadFieldError:
+	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_CreateViewReq[number], err)
+}
+
+func (x *CreateViewReq) fastReadField1(buf []byte, _type int8) (offset int, err error) {
+	x.TargetId, offset, err = fastpb.ReadString(buf, _type)
+	return offset, err
+}
+
+func (x *CreateViewReq) fastReadField2(buf []byte, _type int8) (offset int, err error) {
+	x.Type, offset, err = fastpb.ReadInt64(buf, _type)
+	return offset, err
+}
+
+func (x *IncViewReq) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
+	switch number {
+	case 1:
+		offset, err = x.fastReadField1(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	case 2:
+		offset, err = x.fastReadField2(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	default:
+		offset, err = fastpb.Skip(buf, _type, number)
+		if err != nil {
+			goto SkipFieldError
+		}
+	}
+	return offset, nil
+SkipFieldError:
+	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
+ReadFieldError:
+	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_IncViewReq[number], err)
+}
+
+func (x *IncViewReq) fastReadField1(buf []byte, _type int8) (offset int, err error) {
+	x.TargetId, offset, err = fastpb.ReadString(buf, _type)
+	return offset, err
+}
+
+func (x *IncViewReq) fastReadField2(buf []byte, _type int8) (offset int, err error) {
+	x.Type, offset, err = fastpb.ReadInt64(buf, _type)
+	return offset, err
+}
+
+func (x *IncViewResp) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
+	switch number {
+	default:
+		offset, err = fastpb.Skip(buf, _type, number)
+		if err != nil {
+			goto SkipFieldError
+		}
+	}
+	return offset, nil
+SkipFieldError:
+	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
+}
+
+func (x *GetFavoriteAndViewOfActivityReq) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
+	switch number {
+	case 1:
+		offset, err = x.fastReadField1(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	default:
+		offset, err = fastpb.Skip(buf, _type, number)
+		if err != nil {
+			goto SkipFieldError
+		}
+	}
+	return offset, nil
+SkipFieldError:
+	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
+ReadFieldError:
+	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_GetFavoriteAndViewOfActivityReq[number], err)
+}
+
+func (x *GetFavoriteAndViewOfActivityReq) fastReadField1(buf []byte, _type int8) (offset int, err error) {
+	x.ActivityId, offset, err = fastpb.ReadString(buf, _type)
+	return offset, err
+}
+
+func (x *GetFavoriteAndViewOfActivityResp) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
+	switch number {
+	case 1:
+		offset, err = x.fastReadField1(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	case 2:
+		offset, err = x.fastReadField2(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	default:
+		offset, err = fastpb.Skip(buf, _type, number)
+		if err != nil {
+			goto SkipFieldError
+		}
+	}
+	return offset, nil
+SkipFieldError:
+	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
+ReadFieldError:
+	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_GetFavoriteAndViewOfActivityResp[number], err)
+}
+
+func (x *GetFavoriteAndViewOfActivityResp) fastReadField1(buf []byte, _type int8) (offset int, err error) {
+	x.Favorite, offset, err = fastpb.ReadInt64(buf, _type)
+	return offset, err
+}
+
+func (x *GetFavoriteAndViewOfActivityResp) fastReadField2(buf []byte, _type int8) (offset int, err error) {
+	x.View, offset, err = fastpb.ReadInt64(buf, _type)
+	return offset, err
+}
+
+func (x *GetViewOfMerchantReq) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
+	switch number {
+	case 1:
+		offset, err = x.fastReadField1(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	default:
+		offset, err = fastpb.Skip(buf, _type, number)
+		if err != nil {
+			goto SkipFieldError
+		}
+	}
+	return offset, nil
+SkipFieldError:
+	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
+ReadFieldError:
+	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_GetViewOfMerchantReq[number], err)
+}
+
+func (x *GetViewOfMerchantReq) fastReadField1(buf []byte, _type int8) (offset int, err error) {
+	x.MerchantId, offset, err = fastpb.ReadString(buf, _type)
+	return offset, err
+}
+
+func (x *GetViewOfMerchantResp) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
+	switch number {
+	case 1:
+		offset, err = x.fastReadField1(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	default:
+		offset, err = fastpb.Skip(buf, _type, number)
+		if err != nil {
+			goto SkipFieldError
+		}
+	}
+	return offset, nil
+SkipFieldError:
+	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
+ReadFieldError:
+	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_GetViewOfMerchantResp[number], err)
+}
+
+func (x *GetViewOfMerchantResp) fastReadField1(buf []byte, _type int8) (offset int, err error) {
+	x.View, offset, err = fastpb.ReadInt64(buf, _type)
+	return offset, err
+}
+
 func (x *Response) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
 	switch number {
 	case 1:
@@ -3143,6 +3336,136 @@ func (x *CancelFavoriteReq) fastWriteField1(buf []byte) (offset int) {
 	return offset
 }
 
+func (x *CreateViewReq) FastWrite(buf []byte) (offset int) {
+	if x == nil {
+		return offset
+	}
+	offset += x.fastWriteField1(buf[offset:])
+	offset += x.fastWriteField2(buf[offset:])
+	return offset
+}
+
+func (x *CreateViewReq) fastWriteField1(buf []byte) (offset int) {
+	if x.TargetId == "" {
+		return offset
+	}
+	offset += fastpb.WriteString(buf[offset:], 1, x.GetTargetId())
+	return offset
+}
+
+func (x *CreateViewReq) fastWriteField2(buf []byte) (offset int) {
+	if x.Type == 0 {
+		return offset
+	}
+	offset += fastpb.WriteInt64(buf[offset:], 2, x.GetType())
+	return offset
+}
+
+func (x *IncViewReq) FastWrite(buf []byte) (offset int) {
+	if x == nil {
+		return offset
+	}
+	offset += x.fastWriteField1(buf[offset:])
+	offset += x.fastWriteField2(buf[offset:])
+	return offset
+}
+
+func (x *IncViewReq) fastWriteField1(buf []byte) (offset int) {
+	if x.TargetId == "" {
+		return offset
+	}
+	offset += fastpb.WriteString(buf[offset:], 1, x.GetTargetId())
+	return offset
+}
+
+func (x *IncViewReq) fastWriteField2(buf []byte) (offset int) {
+	if x.Type == 0 {
+		return offset
+	}
+	offset += fastpb.WriteInt64(buf[offset:], 2, x.GetType())
+	return offset
+}
+
+func (x *IncViewResp) FastWrite(buf []byte) (offset int) {
+	if x == nil {
+		return offset
+	}
+	return offset
+}
+
+func (x *GetFavoriteAndViewOfActivityReq) FastWrite(buf []byte) (offset int) {
+	if x == nil {
+		return offset
+	}
+	offset += x.fastWriteField1(buf[offset:])
+	return offset
+}
+
+func (x *GetFavoriteAndViewOfActivityReq) fastWriteField1(buf []byte) (offset int) {
+	if x.ActivityId == "" {
+		return offset
+	}
+	offset += fastpb.WriteString(buf[offset:], 1, x.GetActivityId())
+	return offset
+}
+
+func (x *GetFavoriteAndViewOfActivityResp) FastWrite(buf []byte) (offset int) {
+	if x == nil {
+		return offset
+	}
+	offset += x.fastWriteField1(buf[offset:])
+	offset += x.fastWriteField2(buf[offset:])
+	return offset
+}
+
+func (x *GetFavoriteAndViewOfActivityResp) fastWriteField1(buf []byte) (offset int) {
+	if x.Favorite == 0 {
+		return offset
+	}
+	offset += fastpb.WriteInt64(buf[offset:], 1, x.GetFavorite())
+	return offset
+}
+
+func (x *GetFavoriteAndViewOfActivityResp) fastWriteField2(buf []byte) (offset int) {
+	if x.View == 0 {
+		return offset
+	}
+	offset += fastpb.WriteInt64(buf[offset:], 2, x.GetView())
+	return offset
+}
+
+func (x *GetViewOfMerchantReq) FastWrite(buf []byte) (offset int) {
+	if x == nil {
+		return offset
+	}
+	offset += x.fastWriteField1(buf[offset:])
+	return offset
+}
+
+func (x *GetViewOfMerchantReq) fastWriteField1(buf []byte) (offset int) {
+	if x.MerchantId == "" {
+		return offset
+	}
+	offset += fastpb.WriteString(buf[offset:], 1, x.GetMerchantId())
+	return offset
+}
+
+func (x *GetViewOfMerchantResp) FastWrite(buf []byte) (offset int) {
+	if x == nil {
+		return offset
+	}
+	offset += x.fastWriteField1(buf[offset:])
+	return offset
+}
+
+func (x *GetViewOfMerchantResp) fastWriteField1(buf []byte) (offset int) {
+	if x.View == 0 {
+		return offset
+	}
+	offset += fastpb.WriteInt64(buf[offset:], 1, x.GetView())
+	return offset
+}
+
 func (x *Response) FastWrite(buf []byte) (offset int) {
 	if x == nil {
 		return offset
@@ -4502,6 +4825,136 @@ func (x *CancelFavoriteReq) sizeField1() (n int) {
 	return n
 }
 
+func (x *CreateViewReq) Size() (n int) {
+	if x == nil {
+		return n
+	}
+	n += x.sizeField1()
+	n += x.sizeField2()
+	return n
+}
+
+func (x *CreateViewReq) sizeField1() (n int) {
+	if x.TargetId == "" {
+		return n
+	}
+	n += fastpb.SizeString(1, x.GetTargetId())
+	return n
+}
+
+func (x *CreateViewReq) sizeField2() (n int) {
+	if x.Type == 0 {
+		return n
+	}
+	n += fastpb.SizeInt64(2, x.GetType())
+	return n
+}
+
+func (x *IncViewReq) Size() (n int) {
+	if x == nil {
+		return n
+	}
+	n += x.sizeField1()
+	n += x.sizeField2()
+	return n
+}
+
+func (x *IncViewReq) sizeField1() (n int) {
+	if x.TargetId == "" {
+		return n
+	}
+	n += fastpb.SizeString(1, x.GetTargetId())
+	return n
+}
+
+func (x *IncViewReq) sizeField2() (n int) {
+	if x.Type == 0 {
+		return n
+	}
+	n += fastpb.SizeInt64(2, x.GetType())
+	return n
+}
+
+func (x *IncViewResp) Size() (n int) {
+	if x == nil {
+		return n
+	}
+	return n
+}
+
+func (x *GetFavoriteAndViewOfActivityReq) Size() (n int) {
+	if x == nil {
+		return n
+	}
+	n += x.sizeField1()
+	return n
+}
+
+func (x *GetFavoriteAndViewOfActivityReq) sizeField1() (n int) {
+	if x.ActivityId == "" {
+		return n
+	}
+	n += fastpb.SizeString(1, x.GetActivityId())
+	return n
+}
+
+func (x *GetFavoriteAndViewOfActivityResp) Size() (n int) {
+	if x == nil {
+		return n
+	}
+	n += x.sizeField1()
+	n += x.sizeField2()
+	return n
+}
+
+func (x *GetFavoriteAndViewOfActivityResp) sizeField1() (n int) {
+	if x.Favorite == 0 {
+		return n
+	}
+	n += fastpb.SizeInt64(1, x.GetFavorite())
+	return n
+}
+
+func (x *GetFavoriteAndViewOfActivityResp) sizeField2() (n int) {
+	if x.View == 0 {
+		return n
+	}
+	n += fastpb.SizeInt64(2, x.GetView())
+	return n
+}
+
+func (x *GetViewOfMerchantReq) Size() (n int) {
+	if x == nil {
+		return n
+	}
+	n += x.sizeField1()
+	return n
+}
+
+func (x *GetViewOfMerchantReq) sizeField1() (n int) {
+	if x.MerchantId == "" {
+		return n
+	}
+	n += fastpb.SizeString(1, x.GetMerchantId())
+	return n
+}
+
+func (x *GetViewOfMerchantResp) Size() (n int) {
+	if x == nil {
+		return n
+	}
+	n += x.sizeField1()
+	return n
+}
+
+func (x *GetViewOfMerchantResp) sizeField1() (n int) {
+	if x.View == 0 {
+		return n
+	}
+	n += fastpb.SizeInt64(1, x.GetView())
+	return n
+}
+
 func (x *Response) Size() (n int) {
 	if x == nil {
 		return n
@@ -4741,6 +5194,35 @@ var fieldIDToName_DoFavoriteReq = map[int32]string{
 
 var fieldIDToName_CancelFavoriteReq = map[int32]string{
 	1: "Id",
+}
+
+var fieldIDToName_CreateViewReq = map[int32]string{
+	1: "TargetId",
+	2: "Type",
+}
+
+var fieldIDToName_IncViewReq = map[int32]string{
+	1: "TargetId",
+	2: "Type",
+}
+
+var fieldIDToName_IncViewResp = map[int32]string{}
+
+var fieldIDToName_GetFavoriteAndViewOfActivityReq = map[int32]string{
+	1: "ActivityId",
+}
+
+var fieldIDToName_GetFavoriteAndViewOfActivityResp = map[int32]string{
+	1: "Favorite",
+	2: "View",
+}
+
+var fieldIDToName_GetViewOfMerchantReq = map[int32]string{
+	1: "MerchantId",
+}
+
+var fieldIDToName_GetViewOfMerchantResp = map[int32]string{
+	1: "View",
 }
 
 var fieldIDToName_Response = map[int32]string{

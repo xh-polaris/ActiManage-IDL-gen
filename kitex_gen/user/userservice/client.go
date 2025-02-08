@@ -29,6 +29,10 @@ type Client interface {
 	MarkReceiptRead(ctx context.Context, Req *user.MarkReceiptReadReq, callOptions ...callopt.Option) (r *user.Response, err error)
 	DoFavorite(ctx context.Context, Req *user.DoFavoriteReq, callOptions ...callopt.Option) (r *user.Response, err error)
 	CancelFavorite(ctx context.Context, Req *user.CancelFavoriteReq, callOptions ...callopt.Option) (r *user.Response, err error)
+	CreateView(ctx context.Context, Req *user.CreateViewReq, callOptions ...callopt.Option) (r *user.Response, err error)
+	IncView(ctx context.Context, Req *user.IncViewReq, callOptions ...callopt.Option) (r *user.IncViewReq, err error)
+	GetFavoriteAndViewOfActivity(ctx context.Context, Req *user.GetFavoriteAndViewOfActivityReq, callOptions ...callopt.Option) (r *user.GetFavoriteAndViewOfActivityResp, err error)
+	GetViewOfMerchant(ctx context.Context, Req *user.GetViewOfMerchantReq, callOptions ...callopt.Option) (r *user.GetViewOfMerchantResp, err error)
 }
 
 // NewClient creates a client for the service defined in IDL.
@@ -148,4 +152,24 @@ func (p *kUserServiceClient) DoFavorite(ctx context.Context, Req *user.DoFavorit
 func (p *kUserServiceClient) CancelFavorite(ctx context.Context, Req *user.CancelFavoriteReq, callOptions ...callopt.Option) (r *user.Response, err error) {
 	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
 	return p.kClient.CancelFavorite(ctx, Req)
+}
+
+func (p *kUserServiceClient) CreateView(ctx context.Context, Req *user.CreateViewReq, callOptions ...callopt.Option) (r *user.Response, err error) {
+	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
+	return p.kClient.CreateView(ctx, Req)
+}
+
+func (p *kUserServiceClient) IncView(ctx context.Context, Req *user.IncViewReq, callOptions ...callopt.Option) (r *user.IncViewReq, err error) {
+	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
+	return p.kClient.IncView(ctx, Req)
+}
+
+func (p *kUserServiceClient) GetFavoriteAndViewOfActivity(ctx context.Context, Req *user.GetFavoriteAndViewOfActivityReq, callOptions ...callopt.Option) (r *user.GetFavoriteAndViewOfActivityResp, err error) {
+	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
+	return p.kClient.GetFavoriteAndViewOfActivity(ctx, Req)
+}
+
+func (p *kUserServiceClient) GetViewOfMerchant(ctx context.Context, Req *user.GetViewOfMerchantReq, callOptions ...callopt.Option) (r *user.GetViewOfMerchantResp, err error) {
+	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
+	return p.kClient.GetViewOfMerchant(ctx, Req)
 }

@@ -27,7 +27,7 @@ var file_ActiManage_user_user_proto_rawDesc = []byte{
 	0x72, 0x2f, 0x75, 0x73, 0x65, 0x72, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x12, 0x04, 0x75, 0x73,
 	0x65, 0x72, 0x1a, 0x1c, 0x41, 0x63, 0x74, 0x69, 0x4d, 0x61, 0x6e, 0x61, 0x67, 0x65, 0x2f, 0x75,
 	0x73, 0x65, 0x72, 0x2f, 0x63, 0x6f, 0x6d, 0x6d, 0x6f, 0x6e, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f,
-	0x32, 0xe2, 0x08, 0x0a, 0x0b, 0x55, 0x73, 0x65, 0x72, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65,
+	0x32, 0x81, 0x0b, 0x0a, 0x0b, 0x55, 0x73, 0x65, 0x72, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65,
 	0x12, 0x37, 0x0a, 0x0a, 0x55, 0x73, 0x65, 0x72, 0x53, 0x69, 0x67, 0x6e, 0x55, 0x70, 0x12, 0x13,
 	0x2e, 0x75, 0x73, 0x65, 0x72, 0x2e, 0x55, 0x73, 0x65, 0x72, 0x53, 0x69, 0x67, 0x6e, 0x55, 0x70,
 	0x52, 0x65, 0x71, 0x1a, 0x14, 0x2e, 0x75, 0x73, 0x65, 0x72, 0x2e, 0x55, 0x73, 0x65, 0x72, 0x53,
@@ -97,40 +97,64 @@ var file_ActiManage_user_user_proto_rawDesc = []byte{
 	0x6e, 0x63, 0x65, 0x6c, 0x46, 0x61, 0x76, 0x6f, 0x72, 0x69, 0x74, 0x65, 0x12, 0x17, 0x2e, 0x75,
 	0x73, 0x65, 0x72, 0x2e, 0x43, 0x61, 0x6e, 0x63, 0x65, 0x6c, 0x46, 0x61, 0x76, 0x6f, 0x72, 0x69,
 	0x74, 0x65, 0x52, 0x65, 0x71, 0x1a, 0x0e, 0x2e, 0x75, 0x73, 0x65, 0x72, 0x2e, 0x52, 0x65, 0x73,
-	0x70, 0x6f, 0x6e, 0x73, 0x65, 0x42, 0x39, 0x5a, 0x37, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e,
-	0x63, 0x6f, 0x6d, 0x2f, 0x78, 0x68, 0x2d, 0x70, 0x6f, 0x6c, 0x61, 0x72, 0x69, 0x73, 0x2f, 0x41,
-	0x63, 0x74, 0x69, 0x4d, 0x61, 0x6e, 0x61, 0x67, 0x65, 0x2d, 0x49, 0x44, 0x4c, 0x2d, 0x67, 0x65,
-	0x6e, 0x2f, 0x6b, 0x69, 0x74, 0x65, 0x78, 0x5f, 0x67, 0x65, 0x6e, 0x2f, 0x75, 0x73, 0x65, 0x72,
-	0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x31, 0x0a, 0x0a, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x56,
+	0x69, 0x65, 0x77, 0x12, 0x13, 0x2e, 0x75, 0x73, 0x65, 0x72, 0x2e, 0x43, 0x72, 0x65, 0x61, 0x74,
+	0x65, 0x56, 0x69, 0x65, 0x77, 0x52, 0x65, 0x71, 0x1a, 0x0e, 0x2e, 0x75, 0x73, 0x65, 0x72, 0x2e,
+	0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x2d, 0x0a, 0x07, 0x49, 0x6e, 0x63, 0x56,
+	0x69, 0x65, 0x77, 0x12, 0x10, 0x2e, 0x75, 0x73, 0x65, 0x72, 0x2e, 0x49, 0x6e, 0x63, 0x56, 0x69,
+	0x65, 0x77, 0x52, 0x65, 0x71, 0x1a, 0x10, 0x2e, 0x75, 0x73, 0x65, 0x72, 0x2e, 0x49, 0x6e, 0x63,
+	0x56, 0x69, 0x65, 0x77, 0x52, 0x65, 0x71, 0x12, 0x6d, 0x0a, 0x1c, 0x47, 0x65, 0x74, 0x46, 0x61,
+	0x76, 0x6f, 0x72, 0x69, 0x74, 0x65, 0x41, 0x6e, 0x64, 0x56, 0x69, 0x65, 0x77, 0x4f, 0x66, 0x41,
+	0x63, 0x74, 0x69, 0x76, 0x69, 0x74, 0x79, 0x12, 0x25, 0x2e, 0x75, 0x73, 0x65, 0x72, 0x2e, 0x47,
+	0x65, 0x74, 0x46, 0x61, 0x76, 0x6f, 0x72, 0x69, 0x74, 0x65, 0x41, 0x6e, 0x64, 0x56, 0x69, 0x65,
+	0x77, 0x4f, 0x66, 0x41, 0x63, 0x74, 0x69, 0x76, 0x69, 0x74, 0x79, 0x52, 0x65, 0x71, 0x1a, 0x26,
+	0x2e, 0x75, 0x73, 0x65, 0x72, 0x2e, 0x47, 0x65, 0x74, 0x46, 0x61, 0x76, 0x6f, 0x72, 0x69, 0x74,
+	0x65, 0x41, 0x6e, 0x64, 0x56, 0x69, 0x65, 0x77, 0x4f, 0x66, 0x41, 0x63, 0x74, 0x69, 0x76, 0x69,
+	0x74, 0x79, 0x52, 0x65, 0x73, 0x70, 0x12, 0x4c, 0x0a, 0x11, 0x47, 0x65, 0x74, 0x56, 0x69, 0x65,
+	0x77, 0x4f, 0x66, 0x4d, 0x65, 0x72, 0x63, 0x68, 0x61, 0x6e, 0x74, 0x12, 0x1a, 0x2e, 0x75, 0x73,
+	0x65, 0x72, 0x2e, 0x47, 0x65, 0x74, 0x56, 0x69, 0x65, 0x77, 0x4f, 0x66, 0x4d, 0x65, 0x72, 0x63,
+	0x68, 0x61, 0x6e, 0x74, 0x52, 0x65, 0x71, 0x1a, 0x1b, 0x2e, 0x75, 0x73, 0x65, 0x72, 0x2e, 0x47,
+	0x65, 0x74, 0x56, 0x69, 0x65, 0x77, 0x4f, 0x66, 0x4d, 0x65, 0x72, 0x63, 0x68, 0x61, 0x6e, 0x74,
+	0x52, 0x65, 0x73, 0x70, 0x42, 0x39, 0x5a, 0x37, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63,
+	0x6f, 0x6d, 0x2f, 0x78, 0x68, 0x2d, 0x70, 0x6f, 0x6c, 0x61, 0x72, 0x69, 0x73, 0x2f, 0x41, 0x63,
+	0x74, 0x69, 0x4d, 0x61, 0x6e, 0x61, 0x67, 0x65, 0x2d, 0x49, 0x44, 0x4c, 0x2d, 0x67, 0x65, 0x6e,
+	0x2f, 0x6b, 0x69, 0x74, 0x65, 0x78, 0x5f, 0x67, 0x65, 0x6e, 0x2f, 0x75, 0x73, 0x65, 0x72, 0x62,
+	0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var file_ActiManage_user_user_proto_goTypes = []interface{}{
-	(*UserSignUpReq)(nil),             // 0: user.UserSignUpReq
-	(*UserLoginReq)(nil),              // 1: user.UserLoginReq
-	(*GetUserInfoReq)(nil),            // 2: user.GetUserInfoReq
-	(*UpdateUserInfoReq)(nil),         // 3: user.UpdateUserInfoReq
-	(*CreateReserverReq)(nil),         // 4: user.CreateReserverReq
-	(*DeleteReserverReq)(nil),         // 5: user.DeleteReserverReq
-	(*UpdateReserverReq)(nil),         // 6: user.UpdateReserverReq
-	(*ListReserversReq)(nil),          // 7: user.ListReserversReq
-	(*CreateBookRecordReq)(nil),       // 8: user.CreateBookRecordReq
-	(*CancelBookRecordReq)(nil),       // 9: user.CancelBookRecordReq
-	(*GetBookRecordReq)(nil),          // 10: user.GetBookRecordReq
-	(*ListBookRecordsByUserReq)(nil),  // 11: user.ListBookRecordsByUserReq
-	(*CreateReceiptReq)(nil),          // 12: user.CreateReceiptReq
-	(*DeleteReceiptReq)(nil),          // 13: user.DeleteReceiptReq
-	(*ListReceiptsReq)(nil),           // 14: user.ListReceiptsReq
-	(*MarkReceiptReadReq)(nil),        // 15: user.MarkReceiptReadReq
-	(*DoFavoriteReq)(nil),             // 16: user.DoFavoriteReq
-	(*CancelFavoriteReq)(nil),         // 17: user.CancelFavoriteReq
-	(*UserSignUpResp)(nil),            // 18: user.UserSignUpResp
-	(*UserLoginResp)(nil),             // 19: user.UserLoginResp
-	(*GetUserInfoResp)(nil),           // 20: user.GetUserInfoResp
-	(*Response)(nil),                  // 21: user.Response
-	(*ListReserversResp)(nil),         // 22: user.ListReserversResp
-	(*GetBookRecordResp)(nil),         // 23: user.GetBookRecordResp
-	(*ListBookRecordsByUserResp)(nil), // 24: user.ListBookRecordsByUserResp
-	(*ListReceiptsResp)(nil),          // 25: user.ListReceiptsResp
+	(*UserSignUpReq)(nil),                    // 0: user.UserSignUpReq
+	(*UserLoginReq)(nil),                     // 1: user.UserLoginReq
+	(*GetUserInfoReq)(nil),                   // 2: user.GetUserInfoReq
+	(*UpdateUserInfoReq)(nil),                // 3: user.UpdateUserInfoReq
+	(*CreateReserverReq)(nil),                // 4: user.CreateReserverReq
+	(*DeleteReserverReq)(nil),                // 5: user.DeleteReserverReq
+	(*UpdateReserverReq)(nil),                // 6: user.UpdateReserverReq
+	(*ListReserversReq)(nil),                 // 7: user.ListReserversReq
+	(*CreateBookRecordReq)(nil),              // 8: user.CreateBookRecordReq
+	(*CancelBookRecordReq)(nil),              // 9: user.CancelBookRecordReq
+	(*GetBookRecordReq)(nil),                 // 10: user.GetBookRecordReq
+	(*ListBookRecordsByUserReq)(nil),         // 11: user.ListBookRecordsByUserReq
+	(*CreateReceiptReq)(nil),                 // 12: user.CreateReceiptReq
+	(*DeleteReceiptReq)(nil),                 // 13: user.DeleteReceiptReq
+	(*ListReceiptsReq)(nil),                  // 14: user.ListReceiptsReq
+	(*MarkReceiptReadReq)(nil),               // 15: user.MarkReceiptReadReq
+	(*DoFavoriteReq)(nil),                    // 16: user.DoFavoriteReq
+	(*CancelFavoriteReq)(nil),                // 17: user.CancelFavoriteReq
+	(*CreateViewReq)(nil),                    // 18: user.CreateViewReq
+	(*IncViewReq)(nil),                       // 19: user.IncViewReq
+	(*GetFavoriteAndViewOfActivityReq)(nil),  // 20: user.GetFavoriteAndViewOfActivityReq
+	(*GetViewOfMerchantReq)(nil),             // 21: user.GetViewOfMerchantReq
+	(*UserSignUpResp)(nil),                   // 22: user.UserSignUpResp
+	(*UserLoginResp)(nil),                    // 23: user.UserLoginResp
+	(*GetUserInfoResp)(nil),                  // 24: user.GetUserInfoResp
+	(*Response)(nil),                         // 25: user.Response
+	(*ListReserversResp)(nil),                // 26: user.ListReserversResp
+	(*GetBookRecordResp)(nil),                // 27: user.GetBookRecordResp
+	(*ListBookRecordsByUserResp)(nil),        // 28: user.ListBookRecordsByUserResp
+	(*ListReceiptsResp)(nil),                 // 29: user.ListReceiptsResp
+	(*GetFavoriteAndViewOfActivityResp)(nil), // 30: user.GetFavoriteAndViewOfActivityResp
+	(*GetViewOfMerchantResp)(nil),            // 31: user.GetViewOfMerchantResp
 }
 var file_ActiManage_user_user_proto_depIdxs = []int32{
 	0,  // 0: user.UserService.UserSignUp:input_type -> user.UserSignUpReq
@@ -151,26 +175,34 @@ var file_ActiManage_user_user_proto_depIdxs = []int32{
 	15, // 15: user.UserService.MarkReceiptRead:input_type -> user.MarkReceiptReadReq
 	16, // 16: user.UserService.DoFavorite:input_type -> user.DoFavoriteReq
 	17, // 17: user.UserService.CancelFavorite:input_type -> user.CancelFavoriteReq
-	18, // 18: user.UserService.UserSignUp:output_type -> user.UserSignUpResp
-	19, // 19: user.UserService.UserLogin:output_type -> user.UserLoginResp
-	20, // 20: user.UserService.GetUserInfo:output_type -> user.GetUserInfoResp
-	21, // 21: user.UserService.UpdateUserInfo:output_type -> user.Response
-	21, // 22: user.UserService.CreateReserver:output_type -> user.Response
-	21, // 23: user.UserService.DeleteReserver:output_type -> user.Response
-	21, // 24: user.UserService.UpdateReserver:output_type -> user.Response
-	22, // 25: user.UserService.ListReservers:output_type -> user.ListReserversResp
-	21, // 26: user.UserService.CreateBookRecord:output_type -> user.Response
-	21, // 27: user.UserService.CancelBookRecord:output_type -> user.Response
-	23, // 28: user.UserService.GetBookRecordDetail:output_type -> user.GetBookRecordResp
-	24, // 29: user.UserService.ListBookRecordsByUser:output_type -> user.ListBookRecordsByUserResp
-	21, // 30: user.UserService.CreateReceipt:output_type -> user.Response
-	21, // 31: user.UserService.DeleteReceipt:output_type -> user.Response
-	25, // 32: user.UserService.ListReceipts:output_type -> user.ListReceiptsResp
-	21, // 33: user.UserService.MarkReceiptRead:output_type -> user.Response
-	21, // 34: user.UserService.DoFavorite:output_type -> user.Response
-	21, // 35: user.UserService.CancelFavorite:output_type -> user.Response
-	18, // [18:36] is the sub-list for method output_type
-	0,  // [0:18] is the sub-list for method input_type
+	18, // 18: user.UserService.CreateView:input_type -> user.CreateViewReq
+	19, // 19: user.UserService.IncView:input_type -> user.IncViewReq
+	20, // 20: user.UserService.GetFavoriteAndViewOfActivity:input_type -> user.GetFavoriteAndViewOfActivityReq
+	21, // 21: user.UserService.GetViewOfMerchant:input_type -> user.GetViewOfMerchantReq
+	22, // 22: user.UserService.UserSignUp:output_type -> user.UserSignUpResp
+	23, // 23: user.UserService.UserLogin:output_type -> user.UserLoginResp
+	24, // 24: user.UserService.GetUserInfo:output_type -> user.GetUserInfoResp
+	25, // 25: user.UserService.UpdateUserInfo:output_type -> user.Response
+	25, // 26: user.UserService.CreateReserver:output_type -> user.Response
+	25, // 27: user.UserService.DeleteReserver:output_type -> user.Response
+	25, // 28: user.UserService.UpdateReserver:output_type -> user.Response
+	26, // 29: user.UserService.ListReservers:output_type -> user.ListReserversResp
+	25, // 30: user.UserService.CreateBookRecord:output_type -> user.Response
+	25, // 31: user.UserService.CancelBookRecord:output_type -> user.Response
+	27, // 32: user.UserService.GetBookRecordDetail:output_type -> user.GetBookRecordResp
+	28, // 33: user.UserService.ListBookRecordsByUser:output_type -> user.ListBookRecordsByUserResp
+	25, // 34: user.UserService.CreateReceipt:output_type -> user.Response
+	25, // 35: user.UserService.DeleteReceipt:output_type -> user.Response
+	29, // 36: user.UserService.ListReceipts:output_type -> user.ListReceiptsResp
+	25, // 37: user.UserService.MarkReceiptRead:output_type -> user.Response
+	25, // 38: user.UserService.DoFavorite:output_type -> user.Response
+	25, // 39: user.UserService.CancelFavorite:output_type -> user.Response
+	25, // 40: user.UserService.CreateView:output_type -> user.Response
+	19, // 41: user.UserService.IncView:output_type -> user.IncViewReq
+	30, // 42: user.UserService.GetFavoriteAndViewOfActivity:output_type -> user.GetFavoriteAndViewOfActivityResp
+	31, // 43: user.UserService.GetViewOfMerchant:output_type -> user.GetViewOfMerchantResp
+	22, // [22:44] is the sub-list for method output_type
+	0,  // [0:22] is the sub-list for method input_type
 	0,  // [0:0] is the sub-list for extension type_name
 	0,  // [0:0] is the sub-list for extension extendee
 	0,  // [0:0] is the sub-list for field type_name
@@ -224,4 +256,8 @@ type UserService interface {
 	MarkReceiptRead(ctx context.Context, req *MarkReceiptReadReq) (res *Response, err error)
 	DoFavorite(ctx context.Context, req *DoFavoriteReq) (res *Response, err error)
 	CancelFavorite(ctx context.Context, req *CancelFavoriteReq) (res *Response, err error)
+	CreateView(ctx context.Context, req *CreateViewReq) (res *Response, err error)
+	IncView(ctx context.Context, req *IncViewReq) (res *IncViewReq, err error)
+	GetFavoriteAndViewOfActivity(ctx context.Context, req *GetFavoriteAndViewOfActivityReq) (res *GetFavoriteAndViewOfActivityResp, err error)
+	GetViewOfMerchant(ctx context.Context, req *GetViewOfMerchantReq) (res *GetViewOfMerchantResp, err error)
 }

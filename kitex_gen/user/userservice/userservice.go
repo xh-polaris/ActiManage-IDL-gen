@@ -141,6 +141,34 @@ var serviceMethods = map[string]kitex.MethodInfo{
 		false,
 		kitex.WithStreamingMode(kitex.StreamingUnary),
 	),
+	"CreateView": kitex.NewMethodInfo(
+		createViewHandler,
+		newCreateViewArgs,
+		newCreateViewResult,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingUnary),
+	),
+	"IncView": kitex.NewMethodInfo(
+		incViewHandler,
+		newIncViewArgs,
+		newIncViewResult,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingUnary),
+	),
+	"GetFavoriteAndViewOfActivity": kitex.NewMethodInfo(
+		getFavoriteAndViewOfActivityHandler,
+		newGetFavoriteAndViewOfActivityArgs,
+		newGetFavoriteAndViewOfActivityResult,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingUnary),
+	),
+	"GetViewOfMerchant": kitex.NewMethodInfo(
+		getViewOfMerchantHandler,
+		newGetViewOfMerchantArgs,
+		newGetViewOfMerchantResult,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingUnary),
+	),
 }
 
 var (
@@ -2961,6 +2989,618 @@ func (p *CancelFavoriteResult) GetResult() interface{} {
 	return p.Success
 }
 
+func createViewHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
+	switch s := arg.(type) {
+	case *streaming.Args:
+		st := s.Stream
+		req := new(user.CreateViewReq)
+		if err := st.RecvMsg(req); err != nil {
+			return err
+		}
+		resp, err := handler.(user.UserService).CreateView(ctx, req)
+		if err != nil {
+			return err
+		}
+		return st.SendMsg(resp)
+	case *CreateViewArgs:
+		success, err := handler.(user.UserService).CreateView(ctx, s.Req)
+		if err != nil {
+			return err
+		}
+		realResult := result.(*CreateViewResult)
+		realResult.Success = success
+		return nil
+	default:
+		return errInvalidMessageType
+	}
+}
+func newCreateViewArgs() interface{} {
+	return &CreateViewArgs{}
+}
+
+func newCreateViewResult() interface{} {
+	return &CreateViewResult{}
+}
+
+type CreateViewArgs struct {
+	Req *user.CreateViewReq
+}
+
+func (p *CreateViewArgs) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetReq() {
+		p.Req = new(user.CreateViewReq)
+	}
+	return p.Req.FastRead(buf, _type, number)
+}
+
+func (p *CreateViewArgs) FastWrite(buf []byte) (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.FastWrite(buf)
+}
+
+func (p *CreateViewArgs) Size() (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.Size()
+}
+
+func (p *CreateViewArgs) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetReq() {
+		return out, nil
+	}
+	return proto.Marshal(p.Req)
+}
+
+func (p *CreateViewArgs) Unmarshal(in []byte) error {
+	msg := new(user.CreateViewReq)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Req = msg
+	return nil
+}
+
+var CreateViewArgs_Req_DEFAULT *user.CreateViewReq
+
+func (p *CreateViewArgs) GetReq() *user.CreateViewReq {
+	if !p.IsSetReq() {
+		return CreateViewArgs_Req_DEFAULT
+	}
+	return p.Req
+}
+
+func (p *CreateViewArgs) IsSetReq() bool {
+	return p.Req != nil
+}
+
+func (p *CreateViewArgs) GetFirstArgument() interface{} {
+	return p.Req
+}
+
+type CreateViewResult struct {
+	Success *user.Response
+}
+
+var CreateViewResult_Success_DEFAULT *user.Response
+
+func (p *CreateViewResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetSuccess() {
+		p.Success = new(user.Response)
+	}
+	return p.Success.FastRead(buf, _type, number)
+}
+
+func (p *CreateViewResult) FastWrite(buf []byte) (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.FastWrite(buf)
+}
+
+func (p *CreateViewResult) Size() (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.Size()
+}
+
+func (p *CreateViewResult) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetSuccess() {
+		return out, nil
+	}
+	return proto.Marshal(p.Success)
+}
+
+func (p *CreateViewResult) Unmarshal(in []byte) error {
+	msg := new(user.Response)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Success = msg
+	return nil
+}
+
+func (p *CreateViewResult) GetSuccess() *user.Response {
+	if !p.IsSetSuccess() {
+		return CreateViewResult_Success_DEFAULT
+	}
+	return p.Success
+}
+
+func (p *CreateViewResult) SetSuccess(x interface{}) {
+	p.Success = x.(*user.Response)
+}
+
+func (p *CreateViewResult) IsSetSuccess() bool {
+	return p.Success != nil
+}
+
+func (p *CreateViewResult) GetResult() interface{} {
+	return p.Success
+}
+
+func incViewHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
+	switch s := arg.(type) {
+	case *streaming.Args:
+		st := s.Stream
+		req := new(user.IncViewReq)
+		if err := st.RecvMsg(req); err != nil {
+			return err
+		}
+		resp, err := handler.(user.UserService).IncView(ctx, req)
+		if err != nil {
+			return err
+		}
+		return st.SendMsg(resp)
+	case *IncViewArgs:
+		success, err := handler.(user.UserService).IncView(ctx, s.Req)
+		if err != nil {
+			return err
+		}
+		realResult := result.(*IncViewResult)
+		realResult.Success = success
+		return nil
+	default:
+		return errInvalidMessageType
+	}
+}
+func newIncViewArgs() interface{} {
+	return &IncViewArgs{}
+}
+
+func newIncViewResult() interface{} {
+	return &IncViewResult{}
+}
+
+type IncViewArgs struct {
+	Req *user.IncViewReq
+}
+
+func (p *IncViewArgs) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetReq() {
+		p.Req = new(user.IncViewReq)
+	}
+	return p.Req.FastRead(buf, _type, number)
+}
+
+func (p *IncViewArgs) FastWrite(buf []byte) (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.FastWrite(buf)
+}
+
+func (p *IncViewArgs) Size() (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.Size()
+}
+
+func (p *IncViewArgs) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetReq() {
+		return out, nil
+	}
+	return proto.Marshal(p.Req)
+}
+
+func (p *IncViewArgs) Unmarshal(in []byte) error {
+	msg := new(user.IncViewReq)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Req = msg
+	return nil
+}
+
+var IncViewArgs_Req_DEFAULT *user.IncViewReq
+
+func (p *IncViewArgs) GetReq() *user.IncViewReq {
+	if !p.IsSetReq() {
+		return IncViewArgs_Req_DEFAULT
+	}
+	return p.Req
+}
+
+func (p *IncViewArgs) IsSetReq() bool {
+	return p.Req != nil
+}
+
+func (p *IncViewArgs) GetFirstArgument() interface{} {
+	return p.Req
+}
+
+type IncViewResult struct {
+	Success *user.IncViewReq
+}
+
+var IncViewResult_Success_DEFAULT *user.IncViewReq
+
+func (p *IncViewResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetSuccess() {
+		p.Success = new(user.IncViewReq)
+	}
+	return p.Success.FastRead(buf, _type, number)
+}
+
+func (p *IncViewResult) FastWrite(buf []byte) (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.FastWrite(buf)
+}
+
+func (p *IncViewResult) Size() (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.Size()
+}
+
+func (p *IncViewResult) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetSuccess() {
+		return out, nil
+	}
+	return proto.Marshal(p.Success)
+}
+
+func (p *IncViewResult) Unmarshal(in []byte) error {
+	msg := new(user.IncViewReq)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Success = msg
+	return nil
+}
+
+func (p *IncViewResult) GetSuccess() *user.IncViewReq {
+	if !p.IsSetSuccess() {
+		return IncViewResult_Success_DEFAULT
+	}
+	return p.Success
+}
+
+func (p *IncViewResult) SetSuccess(x interface{}) {
+	p.Success = x.(*user.IncViewReq)
+}
+
+func (p *IncViewResult) IsSetSuccess() bool {
+	return p.Success != nil
+}
+
+func (p *IncViewResult) GetResult() interface{} {
+	return p.Success
+}
+
+func getFavoriteAndViewOfActivityHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
+	switch s := arg.(type) {
+	case *streaming.Args:
+		st := s.Stream
+		req := new(user.GetFavoriteAndViewOfActivityReq)
+		if err := st.RecvMsg(req); err != nil {
+			return err
+		}
+		resp, err := handler.(user.UserService).GetFavoriteAndViewOfActivity(ctx, req)
+		if err != nil {
+			return err
+		}
+		return st.SendMsg(resp)
+	case *GetFavoriteAndViewOfActivityArgs:
+		success, err := handler.(user.UserService).GetFavoriteAndViewOfActivity(ctx, s.Req)
+		if err != nil {
+			return err
+		}
+		realResult := result.(*GetFavoriteAndViewOfActivityResult)
+		realResult.Success = success
+		return nil
+	default:
+		return errInvalidMessageType
+	}
+}
+func newGetFavoriteAndViewOfActivityArgs() interface{} {
+	return &GetFavoriteAndViewOfActivityArgs{}
+}
+
+func newGetFavoriteAndViewOfActivityResult() interface{} {
+	return &GetFavoriteAndViewOfActivityResult{}
+}
+
+type GetFavoriteAndViewOfActivityArgs struct {
+	Req *user.GetFavoriteAndViewOfActivityReq
+}
+
+func (p *GetFavoriteAndViewOfActivityArgs) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetReq() {
+		p.Req = new(user.GetFavoriteAndViewOfActivityReq)
+	}
+	return p.Req.FastRead(buf, _type, number)
+}
+
+func (p *GetFavoriteAndViewOfActivityArgs) FastWrite(buf []byte) (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.FastWrite(buf)
+}
+
+func (p *GetFavoriteAndViewOfActivityArgs) Size() (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.Size()
+}
+
+func (p *GetFavoriteAndViewOfActivityArgs) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetReq() {
+		return out, nil
+	}
+	return proto.Marshal(p.Req)
+}
+
+func (p *GetFavoriteAndViewOfActivityArgs) Unmarshal(in []byte) error {
+	msg := new(user.GetFavoriteAndViewOfActivityReq)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Req = msg
+	return nil
+}
+
+var GetFavoriteAndViewOfActivityArgs_Req_DEFAULT *user.GetFavoriteAndViewOfActivityReq
+
+func (p *GetFavoriteAndViewOfActivityArgs) GetReq() *user.GetFavoriteAndViewOfActivityReq {
+	if !p.IsSetReq() {
+		return GetFavoriteAndViewOfActivityArgs_Req_DEFAULT
+	}
+	return p.Req
+}
+
+func (p *GetFavoriteAndViewOfActivityArgs) IsSetReq() bool {
+	return p.Req != nil
+}
+
+func (p *GetFavoriteAndViewOfActivityArgs) GetFirstArgument() interface{} {
+	return p.Req
+}
+
+type GetFavoriteAndViewOfActivityResult struct {
+	Success *user.GetFavoriteAndViewOfActivityResp
+}
+
+var GetFavoriteAndViewOfActivityResult_Success_DEFAULT *user.GetFavoriteAndViewOfActivityResp
+
+func (p *GetFavoriteAndViewOfActivityResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetSuccess() {
+		p.Success = new(user.GetFavoriteAndViewOfActivityResp)
+	}
+	return p.Success.FastRead(buf, _type, number)
+}
+
+func (p *GetFavoriteAndViewOfActivityResult) FastWrite(buf []byte) (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.FastWrite(buf)
+}
+
+func (p *GetFavoriteAndViewOfActivityResult) Size() (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.Size()
+}
+
+func (p *GetFavoriteAndViewOfActivityResult) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetSuccess() {
+		return out, nil
+	}
+	return proto.Marshal(p.Success)
+}
+
+func (p *GetFavoriteAndViewOfActivityResult) Unmarshal(in []byte) error {
+	msg := new(user.GetFavoriteAndViewOfActivityResp)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Success = msg
+	return nil
+}
+
+func (p *GetFavoriteAndViewOfActivityResult) GetSuccess() *user.GetFavoriteAndViewOfActivityResp {
+	if !p.IsSetSuccess() {
+		return GetFavoriteAndViewOfActivityResult_Success_DEFAULT
+	}
+	return p.Success
+}
+
+func (p *GetFavoriteAndViewOfActivityResult) SetSuccess(x interface{}) {
+	p.Success = x.(*user.GetFavoriteAndViewOfActivityResp)
+}
+
+func (p *GetFavoriteAndViewOfActivityResult) IsSetSuccess() bool {
+	return p.Success != nil
+}
+
+func (p *GetFavoriteAndViewOfActivityResult) GetResult() interface{} {
+	return p.Success
+}
+
+func getViewOfMerchantHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
+	switch s := arg.(type) {
+	case *streaming.Args:
+		st := s.Stream
+		req := new(user.GetViewOfMerchantReq)
+		if err := st.RecvMsg(req); err != nil {
+			return err
+		}
+		resp, err := handler.(user.UserService).GetViewOfMerchant(ctx, req)
+		if err != nil {
+			return err
+		}
+		return st.SendMsg(resp)
+	case *GetViewOfMerchantArgs:
+		success, err := handler.(user.UserService).GetViewOfMerchant(ctx, s.Req)
+		if err != nil {
+			return err
+		}
+		realResult := result.(*GetViewOfMerchantResult)
+		realResult.Success = success
+		return nil
+	default:
+		return errInvalidMessageType
+	}
+}
+func newGetViewOfMerchantArgs() interface{} {
+	return &GetViewOfMerchantArgs{}
+}
+
+func newGetViewOfMerchantResult() interface{} {
+	return &GetViewOfMerchantResult{}
+}
+
+type GetViewOfMerchantArgs struct {
+	Req *user.GetViewOfMerchantReq
+}
+
+func (p *GetViewOfMerchantArgs) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetReq() {
+		p.Req = new(user.GetViewOfMerchantReq)
+	}
+	return p.Req.FastRead(buf, _type, number)
+}
+
+func (p *GetViewOfMerchantArgs) FastWrite(buf []byte) (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.FastWrite(buf)
+}
+
+func (p *GetViewOfMerchantArgs) Size() (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.Size()
+}
+
+func (p *GetViewOfMerchantArgs) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetReq() {
+		return out, nil
+	}
+	return proto.Marshal(p.Req)
+}
+
+func (p *GetViewOfMerchantArgs) Unmarshal(in []byte) error {
+	msg := new(user.GetViewOfMerchantReq)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Req = msg
+	return nil
+}
+
+var GetViewOfMerchantArgs_Req_DEFAULT *user.GetViewOfMerchantReq
+
+func (p *GetViewOfMerchantArgs) GetReq() *user.GetViewOfMerchantReq {
+	if !p.IsSetReq() {
+		return GetViewOfMerchantArgs_Req_DEFAULT
+	}
+	return p.Req
+}
+
+func (p *GetViewOfMerchantArgs) IsSetReq() bool {
+	return p.Req != nil
+}
+
+func (p *GetViewOfMerchantArgs) GetFirstArgument() interface{} {
+	return p.Req
+}
+
+type GetViewOfMerchantResult struct {
+	Success *user.GetViewOfMerchantResp
+}
+
+var GetViewOfMerchantResult_Success_DEFAULT *user.GetViewOfMerchantResp
+
+func (p *GetViewOfMerchantResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetSuccess() {
+		p.Success = new(user.GetViewOfMerchantResp)
+	}
+	return p.Success.FastRead(buf, _type, number)
+}
+
+func (p *GetViewOfMerchantResult) FastWrite(buf []byte) (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.FastWrite(buf)
+}
+
+func (p *GetViewOfMerchantResult) Size() (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.Size()
+}
+
+func (p *GetViewOfMerchantResult) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetSuccess() {
+		return out, nil
+	}
+	return proto.Marshal(p.Success)
+}
+
+func (p *GetViewOfMerchantResult) Unmarshal(in []byte) error {
+	msg := new(user.GetViewOfMerchantResp)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Success = msg
+	return nil
+}
+
+func (p *GetViewOfMerchantResult) GetSuccess() *user.GetViewOfMerchantResp {
+	if !p.IsSetSuccess() {
+		return GetViewOfMerchantResult_Success_DEFAULT
+	}
+	return p.Success
+}
+
+func (p *GetViewOfMerchantResult) SetSuccess(x interface{}) {
+	p.Success = x.(*user.GetViewOfMerchantResp)
+}
+
+func (p *GetViewOfMerchantResult) IsSetSuccess() bool {
+	return p.Success != nil
+}
+
+func (p *GetViewOfMerchantResult) GetResult() interface{} {
+	return p.Success
+}
+
 type kClient struct {
 	c client.Client
 }
@@ -3146,6 +3786,46 @@ func (p *kClient) CancelFavorite(ctx context.Context, Req *user.CancelFavoriteRe
 	_args.Req = Req
 	var _result CancelFavoriteResult
 	if err = p.c.Call(ctx, "CancelFavorite", &_args, &_result); err != nil {
+		return
+	}
+	return _result.GetSuccess(), nil
+}
+
+func (p *kClient) CreateView(ctx context.Context, Req *user.CreateViewReq) (r *user.Response, err error) {
+	var _args CreateViewArgs
+	_args.Req = Req
+	var _result CreateViewResult
+	if err = p.c.Call(ctx, "CreateView", &_args, &_result); err != nil {
+		return
+	}
+	return _result.GetSuccess(), nil
+}
+
+func (p *kClient) IncView(ctx context.Context, Req *user.IncViewReq) (r *user.IncViewReq, err error) {
+	var _args IncViewArgs
+	_args.Req = Req
+	var _result IncViewResult
+	if err = p.c.Call(ctx, "IncView", &_args, &_result); err != nil {
+		return
+	}
+	return _result.GetSuccess(), nil
+}
+
+func (p *kClient) GetFavoriteAndViewOfActivity(ctx context.Context, Req *user.GetFavoriteAndViewOfActivityReq) (r *user.GetFavoriteAndViewOfActivityResp, err error) {
+	var _args GetFavoriteAndViewOfActivityArgs
+	_args.Req = Req
+	var _result GetFavoriteAndViewOfActivityResult
+	if err = p.c.Call(ctx, "GetFavoriteAndViewOfActivity", &_args, &_result); err != nil {
+		return
+	}
+	return _result.GetSuccess(), nil
+}
+
+func (p *kClient) GetViewOfMerchant(ctx context.Context, Req *user.GetViewOfMerchantReq) (r *user.GetViewOfMerchantResp, err error) {
+	var _args GetViewOfMerchantArgs
+	_args.Req = Req
+	var _result GetViewOfMerchantResult
+	if err = p.c.Call(ctx, "GetViewOfMerchant", &_args, &_result); err != nil {
 		return
 	}
 	return _result.GetSuccess(), nil

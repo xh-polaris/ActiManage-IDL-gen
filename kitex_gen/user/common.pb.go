@@ -2239,6 +2239,354 @@ func (x *CancelFavoriteReq) GetId() string {
 	return ""
 }
 
+// 增加访问
+type CreateViewReq struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	TargetId string `protobuf:"bytes,1,opt,name=targetId,proto3" json:"targetId,omitempty"`
+	Type     int64  `protobuf:"varint,2,opt,name=type,proto3" json:"type,omitempty"`
+}
+
+func (x *CreateViewReq) Reset() {
+	*x = CreateViewReq{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_ActiManage_user_common_proto_msgTypes[31]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *CreateViewReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateViewReq) ProtoMessage() {}
+
+func (x *CreateViewReq) ProtoReflect() protoreflect.Message {
+	mi := &file_ActiManage_user_common_proto_msgTypes[31]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateViewReq.ProtoReflect.Descriptor instead.
+func (*CreateViewReq) Descriptor() ([]byte, []int) {
+	return file_ActiManage_user_common_proto_rawDescGZIP(), []int{31}
+}
+
+func (x *CreateViewReq) GetTargetId() string {
+	if x != nil {
+		return x.TargetId
+	}
+	return ""
+}
+
+func (x *CreateViewReq) GetType() int64 {
+	if x != nil {
+		return x.Type
+	}
+	return 0
+}
+
+// 增加访问
+type IncViewReq struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	TargetId string `protobuf:"bytes,1,opt,name=targetId,proto3" json:"targetId,omitempty"`
+	Type     int64  `protobuf:"varint,2,opt,name=type,proto3" json:"type,omitempty"`
+}
+
+func (x *IncViewReq) Reset() {
+	*x = IncViewReq{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_ActiManage_user_common_proto_msgTypes[32]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *IncViewReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*IncViewReq) ProtoMessage() {}
+
+func (x *IncViewReq) ProtoReflect() protoreflect.Message {
+	mi := &file_ActiManage_user_common_proto_msgTypes[32]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use IncViewReq.ProtoReflect.Descriptor instead.
+func (*IncViewReq) Descriptor() ([]byte, []int) {
+	return file_ActiManage_user_common_proto_rawDescGZIP(), []int{32}
+}
+
+func (x *IncViewReq) GetTargetId() string {
+	if x != nil {
+		return x.TargetId
+	}
+	return ""
+}
+
+func (x *IncViewReq) GetType() int64 {
+	if x != nil {
+		return x.Type
+	}
+	return 0
+}
+
+type IncViewResp struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+}
+
+func (x *IncViewResp) Reset() {
+	*x = IncViewResp{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_ActiManage_user_common_proto_msgTypes[33]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *IncViewResp) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*IncViewResp) ProtoMessage() {}
+
+func (x *IncViewResp) ProtoReflect() protoreflect.Message {
+	mi := &file_ActiManage_user_common_proto_msgTypes[33]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use IncViewResp.ProtoReflect.Descriptor instead.
+func (*IncViewResp) Descriptor() ([]byte, []int) {
+	return file_ActiManage_user_common_proto_rawDescGZIP(), []int{33}
+}
+
+// 获取活动访问与收藏统计
+type GetFavoriteAndViewOfActivityReq struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	ActivityId string `protobuf:"bytes,1,opt,name=activityId,proto3" json:"activityId,omitempty"`
+}
+
+func (x *GetFavoriteAndViewOfActivityReq) Reset() {
+	*x = GetFavoriteAndViewOfActivityReq{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_ActiManage_user_common_proto_msgTypes[34]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *GetFavoriteAndViewOfActivityReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetFavoriteAndViewOfActivityReq) ProtoMessage() {}
+
+func (x *GetFavoriteAndViewOfActivityReq) ProtoReflect() protoreflect.Message {
+	mi := &file_ActiManage_user_common_proto_msgTypes[34]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetFavoriteAndViewOfActivityReq.ProtoReflect.Descriptor instead.
+func (*GetFavoriteAndViewOfActivityReq) Descriptor() ([]byte, []int) {
+	return file_ActiManage_user_common_proto_rawDescGZIP(), []int{34}
+}
+
+func (x *GetFavoriteAndViewOfActivityReq) GetActivityId() string {
+	if x != nil {
+		return x.ActivityId
+	}
+	return ""
+}
+
+type GetFavoriteAndViewOfActivityResp struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Favorite int64 `protobuf:"varint,1,opt,name=favorite,proto3" json:"favorite,omitempty"`
+	View     int64 `protobuf:"varint,2,opt,name=view,proto3" json:"view,omitempty"`
+}
+
+func (x *GetFavoriteAndViewOfActivityResp) Reset() {
+	*x = GetFavoriteAndViewOfActivityResp{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_ActiManage_user_common_proto_msgTypes[35]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *GetFavoriteAndViewOfActivityResp) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetFavoriteAndViewOfActivityResp) ProtoMessage() {}
+
+func (x *GetFavoriteAndViewOfActivityResp) ProtoReflect() protoreflect.Message {
+	mi := &file_ActiManage_user_common_proto_msgTypes[35]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetFavoriteAndViewOfActivityResp.ProtoReflect.Descriptor instead.
+func (*GetFavoriteAndViewOfActivityResp) Descriptor() ([]byte, []int) {
+	return file_ActiManage_user_common_proto_rawDescGZIP(), []int{35}
+}
+
+func (x *GetFavoriteAndViewOfActivityResp) GetFavorite() int64 {
+	if x != nil {
+		return x.Favorite
+	}
+	return 0
+}
+
+func (x *GetFavoriteAndViewOfActivityResp) GetView() int64 {
+	if x != nil {
+		return x.View
+	}
+	return 0
+}
+
+// 获取商家访问
+type GetViewOfMerchantReq struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	MerchantId string `protobuf:"bytes,1,opt,name=merchantId,proto3" json:"merchantId,omitempty"`
+}
+
+func (x *GetViewOfMerchantReq) Reset() {
+	*x = GetViewOfMerchantReq{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_ActiManage_user_common_proto_msgTypes[36]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *GetViewOfMerchantReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetViewOfMerchantReq) ProtoMessage() {}
+
+func (x *GetViewOfMerchantReq) ProtoReflect() protoreflect.Message {
+	mi := &file_ActiManage_user_common_proto_msgTypes[36]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetViewOfMerchantReq.ProtoReflect.Descriptor instead.
+func (*GetViewOfMerchantReq) Descriptor() ([]byte, []int) {
+	return file_ActiManage_user_common_proto_rawDescGZIP(), []int{36}
+}
+
+func (x *GetViewOfMerchantReq) GetMerchantId() string {
+	if x != nil {
+		return x.MerchantId
+	}
+	return ""
+}
+
+type GetViewOfMerchantResp struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	View int64 `protobuf:"varint,1,opt,name=view,proto3" json:"view,omitempty"`
+}
+
+func (x *GetViewOfMerchantResp) Reset() {
+	*x = GetViewOfMerchantResp{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_ActiManage_user_common_proto_msgTypes[37]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *GetViewOfMerchantResp) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetViewOfMerchantResp) ProtoMessage() {}
+
+func (x *GetViewOfMerchantResp) ProtoReflect() protoreflect.Message {
+	mi := &file_ActiManage_user_common_proto_msgTypes[37]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetViewOfMerchantResp.ProtoReflect.Descriptor instead.
+func (*GetViewOfMerchantResp) Descriptor() ([]byte, []int) {
+	return file_ActiManage_user_common_proto_rawDescGZIP(), []int{37}
+}
+
+func (x *GetViewOfMerchantResp) GetView() int64 {
+	if x != nil {
+		return x.View
+	}
+	return 0
+}
+
 // 统一响应
 type Response struct {
 	state         protoimpl.MessageState
@@ -2252,7 +2600,7 @@ type Response struct {
 func (x *Response) Reset() {
 	*x = Response{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_ActiManage_user_common_proto_msgTypes[31]
+		mi := &file_ActiManage_user_common_proto_msgTypes[38]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2265,7 +2613,7 @@ func (x *Response) String() string {
 func (*Response) ProtoMessage() {}
 
 func (x *Response) ProtoReflect() protoreflect.Message {
-	mi := &file_ActiManage_user_common_proto_msgTypes[31]
+	mi := &file_ActiManage_user_common_proto_msgTypes[38]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2278,7 +2626,7 @@ func (x *Response) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Response.ProtoReflect.Descriptor instead.
 func (*Response) Descriptor() ([]byte, []int) {
-	return file_ActiManage_user_common_proto_rawDescGZIP(), []int{31}
+	return file_ActiManage_user_common_proto_rawDescGZIP(), []int{38}
 }
 
 func (x *Response) GetCode() int64 {
@@ -2548,15 +2896,39 @@ var file_ActiManage_user_common_proto_rawDesc = []byte{
 	0x76, 0x69, 0x74, 0x79, 0x49, 0x64, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0a, 0x61, 0x63,
 	0x74, 0x69, 0x76, 0x69, 0x74, 0x79, 0x49, 0x64, 0x22, 0x23, 0x0a, 0x11, 0x43, 0x61, 0x6e, 0x63,
 	0x65, 0x6c, 0x46, 0x61, 0x76, 0x6f, 0x72, 0x69, 0x74, 0x65, 0x52, 0x65, 0x71, 0x12, 0x0e, 0x0a,
-	0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x02, 0x69, 0x64, 0x22, 0x30, 0x0a,
-	0x08, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x12, 0x0a, 0x04, 0x63, 0x6f, 0x64,
-	0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x03, 0x52, 0x04, 0x63, 0x6f, 0x64, 0x65, 0x12, 0x10, 0x0a,
-	0x03, 0x6d, 0x73, 0x67, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x03, 0x6d, 0x73, 0x67, 0x42,
-	0x39, 0x5a, 0x37, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x78, 0x68,
-	0x2d, 0x70, 0x6f, 0x6c, 0x61, 0x72, 0x69, 0x73, 0x2f, 0x41, 0x63, 0x74, 0x69, 0x4d, 0x61, 0x6e,
-	0x61, 0x67, 0x65, 0x2d, 0x49, 0x44, 0x4c, 0x2d, 0x67, 0x65, 0x6e, 0x2f, 0x6b, 0x69, 0x74, 0x65,
-	0x78, 0x5f, 0x67, 0x65, 0x6e, 0x2f, 0x75, 0x73, 0x65, 0x72, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74,
-	0x6f, 0x33,
+	0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x02, 0x69, 0x64, 0x22, 0x3f, 0x0a,
+	0x0d, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x56, 0x69, 0x65, 0x77, 0x52, 0x65, 0x71, 0x12, 0x1a,
+	0x0a, 0x08, 0x74, 0x61, 0x72, 0x67, 0x65, 0x74, 0x49, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09,
+	0x52, 0x08, 0x74, 0x61, 0x72, 0x67, 0x65, 0x74, 0x49, 0x64, 0x12, 0x12, 0x0a, 0x04, 0x74, 0x79,
+	0x70, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x03, 0x52, 0x04, 0x74, 0x79, 0x70, 0x65, 0x22, 0x3c,
+	0x0a, 0x0a, 0x49, 0x6e, 0x63, 0x56, 0x69, 0x65, 0x77, 0x52, 0x65, 0x71, 0x12, 0x1a, 0x0a, 0x08,
+	0x74, 0x61, 0x72, 0x67, 0x65, 0x74, 0x49, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x08,
+	0x74, 0x61, 0x72, 0x67, 0x65, 0x74, 0x49, 0x64, 0x12, 0x12, 0x0a, 0x04, 0x74, 0x79, 0x70, 0x65,
+	0x18, 0x02, 0x20, 0x01, 0x28, 0x03, 0x52, 0x04, 0x74, 0x79, 0x70, 0x65, 0x22, 0x0d, 0x0a, 0x0b,
+	0x49, 0x6e, 0x63, 0x56, 0x69, 0x65, 0x77, 0x52, 0x65, 0x73, 0x70, 0x22, 0x41, 0x0a, 0x1f, 0x47,
+	0x65, 0x74, 0x46, 0x61, 0x76, 0x6f, 0x72, 0x69, 0x74, 0x65, 0x41, 0x6e, 0x64, 0x56, 0x69, 0x65,
+	0x77, 0x4f, 0x66, 0x41, 0x63, 0x74, 0x69, 0x76, 0x69, 0x74, 0x79, 0x52, 0x65, 0x71, 0x12, 0x1e,
+	0x0a, 0x0a, 0x61, 0x63, 0x74, 0x69, 0x76, 0x69, 0x74, 0x79, 0x49, 0x64, 0x18, 0x01, 0x20, 0x01,
+	0x28, 0x09, 0x52, 0x0a, 0x61, 0x63, 0x74, 0x69, 0x76, 0x69, 0x74, 0x79, 0x49, 0x64, 0x22, 0x52,
+	0x0a, 0x20, 0x47, 0x65, 0x74, 0x46, 0x61, 0x76, 0x6f, 0x72, 0x69, 0x74, 0x65, 0x41, 0x6e, 0x64,
+	0x56, 0x69, 0x65, 0x77, 0x4f, 0x66, 0x41, 0x63, 0x74, 0x69, 0x76, 0x69, 0x74, 0x79, 0x52, 0x65,
+	0x73, 0x70, 0x12, 0x1a, 0x0a, 0x08, 0x66, 0x61, 0x76, 0x6f, 0x72, 0x69, 0x74, 0x65, 0x18, 0x01,
+	0x20, 0x01, 0x28, 0x03, 0x52, 0x08, 0x66, 0x61, 0x76, 0x6f, 0x72, 0x69, 0x74, 0x65, 0x12, 0x12,
+	0x0a, 0x04, 0x76, 0x69, 0x65, 0x77, 0x18, 0x02, 0x20, 0x01, 0x28, 0x03, 0x52, 0x04, 0x76, 0x69,
+	0x65, 0x77, 0x22, 0x36, 0x0a, 0x14, 0x47, 0x65, 0x74, 0x56, 0x69, 0x65, 0x77, 0x4f, 0x66, 0x4d,
+	0x65, 0x72, 0x63, 0x68, 0x61, 0x6e, 0x74, 0x52, 0x65, 0x71, 0x12, 0x1e, 0x0a, 0x0a, 0x6d, 0x65,
+	0x72, 0x63, 0x68, 0x61, 0x6e, 0x74, 0x49, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0a,
+	0x6d, 0x65, 0x72, 0x63, 0x68, 0x61, 0x6e, 0x74, 0x49, 0x64, 0x22, 0x2b, 0x0a, 0x15, 0x47, 0x65,
+	0x74, 0x56, 0x69, 0x65, 0x77, 0x4f, 0x66, 0x4d, 0x65, 0x72, 0x63, 0x68, 0x61, 0x6e, 0x74, 0x52,
+	0x65, 0x73, 0x70, 0x12, 0x12, 0x0a, 0x04, 0x76, 0x69, 0x65, 0x77, 0x18, 0x01, 0x20, 0x01, 0x28,
+	0x03, 0x52, 0x04, 0x76, 0x69, 0x65, 0x77, 0x22, 0x30, 0x0a, 0x08, 0x52, 0x65, 0x73, 0x70, 0x6f,
+	0x6e, 0x73, 0x65, 0x12, 0x12, 0x0a, 0x04, 0x63, 0x6f, 0x64, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28,
+	0x03, 0x52, 0x04, 0x63, 0x6f, 0x64, 0x65, 0x12, 0x10, 0x0a, 0x03, 0x6d, 0x73, 0x67, 0x18, 0x02,
+	0x20, 0x01, 0x28, 0x09, 0x52, 0x03, 0x6d, 0x73, 0x67, 0x42, 0x39, 0x5a, 0x37, 0x67, 0x69, 0x74,
+	0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x78, 0x68, 0x2d, 0x70, 0x6f, 0x6c, 0x61, 0x72,
+	0x69, 0x73, 0x2f, 0x41, 0x63, 0x74, 0x69, 0x4d, 0x61, 0x6e, 0x61, 0x67, 0x65, 0x2d, 0x49, 0x44,
+	0x4c, 0x2d, 0x67, 0x65, 0x6e, 0x2f, 0x6b, 0x69, 0x74, 0x65, 0x78, 0x5f, 0x67, 0x65, 0x6e, 0x2f,
+	0x75, 0x73, 0x65, 0x72, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -2571,53 +2943,60 @@ func file_ActiManage_user_common_proto_rawDescGZIP() []byte {
 	return file_ActiManage_user_common_proto_rawDescData
 }
 
-var file_ActiManage_user_common_proto_msgTypes = make([]protoimpl.MessageInfo, 32)
+var file_ActiManage_user_common_proto_msgTypes = make([]protoimpl.MessageInfo, 39)
 var file_ActiManage_user_common_proto_goTypes = []interface{}{
-	(*User)(nil),                      // 0: user.User
-	(*Reserver)(nil),                  // 1: user.Reserver
-	(*BookItem)(nil),                  // 2: user.BookItem
-	(*BookRecord)(nil),                // 3: user.BookRecord
-	(*Receipt)(nil),                   // 4: user.Receipt
-	(*Favorite)(nil),                  // 5: user.Favorite
-	(*UserSignUpReq)(nil),             // 6: user.UserSignUpReq
-	(*UserSignUpResp)(nil),            // 7: user.UserSignUpResp
-	(*UserLoginReq)(nil),              // 8: user.UserLoginReq
-	(*UserLoginResp)(nil),             // 9: user.UserLoginResp
-	(*GetUserInfoReq)(nil),            // 10: user.GetUserInfoReq
-	(*GetUserInfoResp)(nil),           // 11: user.GetUserInfoResp
-	(*UpdateUserInfoReq)(nil),         // 12: user.UpdateUserInfoReq
-	(*CreateReserverReq)(nil),         // 13: user.CreateReserverReq
-	(*DeleteReserverReq)(nil),         // 14: user.DeleteReserverReq
-	(*UpdateReserverReq)(nil),         // 15: user.UpdateReserverReq
-	(*ListReserversReq)(nil),          // 16: user.ListReserversReq
-	(*ListReserversResp)(nil),         // 17: user.ListReserversResp
-	(*CreateBookRecordReq)(nil),       // 18: user.CreateBookRecordReq
-	(*CancelBookRecordReq)(nil),       // 19: user.CancelBookRecordReq
-	(*GetBookRecordReq)(nil),          // 20: user.GetBookRecordReq
-	(*GetBookRecordResp)(nil),         // 21: user.GetBookRecordResp
-	(*ListBookRecordsByUserReq)(nil),  // 22: user.ListBookRecordsByUserReq
-	(*ListBookRecordsByUserResp)(nil), // 23: user.ListBookRecordsByUserResp
-	(*CreateReceiptReq)(nil),          // 24: user.CreateReceiptReq
-	(*DeleteReceiptReq)(nil),          // 25: user.DeleteReceiptReq
-	(*ListReceiptsReq)(nil),           // 26: user.ListReceiptsReq
-	(*ListReceiptsResp)(nil),          // 27: user.ListReceiptsResp
-	(*MarkReceiptReadReq)(nil),        // 28: user.MarkReceiptReadReq
-	(*DoFavoriteReq)(nil),             // 29: user.DoFavoriteReq
-	(*CancelFavoriteReq)(nil),         // 30: user.CancelFavoriteReq
-	(*Response)(nil),                  // 31: user.Response
-	(*basic.Paging)(nil),              // 32: basic.Paging
+	(*User)(nil),                             // 0: user.User
+	(*Reserver)(nil),                         // 1: user.Reserver
+	(*BookItem)(nil),                         // 2: user.BookItem
+	(*BookRecord)(nil),                       // 3: user.BookRecord
+	(*Receipt)(nil),                          // 4: user.Receipt
+	(*Favorite)(nil),                         // 5: user.Favorite
+	(*UserSignUpReq)(nil),                    // 6: user.UserSignUpReq
+	(*UserSignUpResp)(nil),                   // 7: user.UserSignUpResp
+	(*UserLoginReq)(nil),                     // 8: user.UserLoginReq
+	(*UserLoginResp)(nil),                    // 9: user.UserLoginResp
+	(*GetUserInfoReq)(nil),                   // 10: user.GetUserInfoReq
+	(*GetUserInfoResp)(nil),                  // 11: user.GetUserInfoResp
+	(*UpdateUserInfoReq)(nil),                // 12: user.UpdateUserInfoReq
+	(*CreateReserverReq)(nil),                // 13: user.CreateReserverReq
+	(*DeleteReserverReq)(nil),                // 14: user.DeleteReserverReq
+	(*UpdateReserverReq)(nil),                // 15: user.UpdateReserverReq
+	(*ListReserversReq)(nil),                 // 16: user.ListReserversReq
+	(*ListReserversResp)(nil),                // 17: user.ListReserversResp
+	(*CreateBookRecordReq)(nil),              // 18: user.CreateBookRecordReq
+	(*CancelBookRecordReq)(nil),              // 19: user.CancelBookRecordReq
+	(*GetBookRecordReq)(nil),                 // 20: user.GetBookRecordReq
+	(*GetBookRecordResp)(nil),                // 21: user.GetBookRecordResp
+	(*ListBookRecordsByUserReq)(nil),         // 22: user.ListBookRecordsByUserReq
+	(*ListBookRecordsByUserResp)(nil),        // 23: user.ListBookRecordsByUserResp
+	(*CreateReceiptReq)(nil),                 // 24: user.CreateReceiptReq
+	(*DeleteReceiptReq)(nil),                 // 25: user.DeleteReceiptReq
+	(*ListReceiptsReq)(nil),                  // 26: user.ListReceiptsReq
+	(*ListReceiptsResp)(nil),                 // 27: user.ListReceiptsResp
+	(*MarkReceiptReadReq)(nil),               // 28: user.MarkReceiptReadReq
+	(*DoFavoriteReq)(nil),                    // 29: user.DoFavoriteReq
+	(*CancelFavoriteReq)(nil),                // 30: user.CancelFavoriteReq
+	(*CreateViewReq)(nil),                    // 31: user.CreateViewReq
+	(*IncViewReq)(nil),                       // 32: user.IncViewReq
+	(*IncViewResp)(nil),                      // 33: user.IncViewResp
+	(*GetFavoriteAndViewOfActivityReq)(nil),  // 34: user.GetFavoriteAndViewOfActivityReq
+	(*GetFavoriteAndViewOfActivityResp)(nil), // 35: user.GetFavoriteAndViewOfActivityResp
+	(*GetViewOfMerchantReq)(nil),             // 36: user.GetViewOfMerchantReq
+	(*GetViewOfMerchantResp)(nil),            // 37: user.GetViewOfMerchantResp
+	(*Response)(nil),                         // 38: user.Response
+	(*basic.Paging)(nil),                     // 39: basic.Paging
 }
 var file_ActiManage_user_common_proto_depIdxs = []int32{
 	2,  // 0: user.BookRecord.reservers:type_name -> user.BookItem
 	0,  // 1: user.GetUserInfoResp.user:type_name -> user.User
 	0,  // 2: user.UpdateUserInfoReq.user:type_name -> user.User
 	1,  // 3: user.UpdateReserverReq.reserver:type_name -> user.Reserver
-	32, // 4: user.ListReserversReq.paging:type_name -> basic.Paging
+	39, // 4: user.ListReserversReq.paging:type_name -> basic.Paging
 	1,  // 5: user.ListReserversResp.reservers:type_name -> user.Reserver
 	3,  // 6: user.GetBookRecordResp.record:type_name -> user.BookRecord
-	32, // 7: user.ListBookRecordsByUserReq.paging:type_name -> basic.Paging
+	39, // 7: user.ListBookRecordsByUserReq.paging:type_name -> basic.Paging
 	3,  // 8: user.ListBookRecordsByUserResp.records:type_name -> user.BookRecord
-	32, // 9: user.ListReceiptsReq.paging:type_name -> basic.Paging
+	39, // 9: user.ListReceiptsReq.paging:type_name -> basic.Paging
 	4,  // 10: user.ListReceiptsResp.receipts:type_name -> user.Receipt
 	11, // [11:11] is the sub-list for method output_type
 	11, // [11:11] is the sub-list for method input_type
@@ -3005,6 +3384,90 @@ func file_ActiManage_user_common_proto_init() {
 			}
 		}
 		file_ActiManage_user_common_proto_msgTypes[31].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*CreateViewReq); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_ActiManage_user_common_proto_msgTypes[32].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*IncViewReq); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_ActiManage_user_common_proto_msgTypes[33].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*IncViewResp); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_ActiManage_user_common_proto_msgTypes[34].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*GetFavoriteAndViewOfActivityReq); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_ActiManage_user_common_proto_msgTypes[35].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*GetFavoriteAndViewOfActivityResp); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_ActiManage_user_common_proto_msgTypes[36].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*GetViewOfMerchantReq); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_ActiManage_user_common_proto_msgTypes[37].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*GetViewOfMerchantResp); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_ActiManage_user_common_proto_msgTypes[38].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*Response); i {
 			case 0:
 				return &v.state
@@ -3026,7 +3489,7 @@ func file_ActiManage_user_common_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_ActiManage_user_common_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   32,
+			NumMessages:   39,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

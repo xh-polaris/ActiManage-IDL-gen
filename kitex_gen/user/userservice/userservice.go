@@ -3554,14 +3554,14 @@ func (p *IncViewArgs) GetFirstArgument() interface{} {
 }
 
 type IncViewResult struct {
-	Success *user.IncViewReq
+	Success *user.IncViewResp
 }
 
-var IncViewResult_Success_DEFAULT *user.IncViewReq
+var IncViewResult_Success_DEFAULT *user.IncViewResp
 
 func (p *IncViewResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
 	if !p.IsSetSuccess() {
-		p.Success = new(user.IncViewReq)
+		p.Success = new(user.IncViewResp)
 	}
 	return p.Success.FastRead(buf, _type, number)
 }
@@ -3588,7 +3588,7 @@ func (p *IncViewResult) Marshal(out []byte) ([]byte, error) {
 }
 
 func (p *IncViewResult) Unmarshal(in []byte) error {
-	msg := new(user.IncViewReq)
+	msg := new(user.IncViewResp)
 	if err := proto.Unmarshal(in, msg); err != nil {
 		return err
 	}
@@ -3596,7 +3596,7 @@ func (p *IncViewResult) Unmarshal(in []byte) error {
 	return nil
 }
 
-func (p *IncViewResult) GetSuccess() *user.IncViewReq {
+func (p *IncViewResult) GetSuccess() *user.IncViewResp {
 	if !p.IsSetSuccess() {
 		return IncViewResult_Success_DEFAULT
 	}
@@ -3604,7 +3604,7 @@ func (p *IncViewResult) GetSuccess() *user.IncViewReq {
 }
 
 func (p *IncViewResult) SetSuccess(x interface{}) {
-	p.Success = x.(*user.IncViewReq)
+	p.Success = x.(*user.IncViewResp)
 }
 
 func (p *IncViewResult) IsSetSuccess() bool {
@@ -4141,7 +4141,7 @@ func (p *kClient) CreateView(ctx context.Context, Req *user.CreateViewReq) (r *u
 	return _result.GetSuccess(), nil
 }
 
-func (p *kClient) IncView(ctx context.Context, Req *user.IncViewReq) (r *user.IncViewReq, err error) {
+func (p *kClient) IncView(ctx context.Context, Req *user.IncViewReq) (r *user.IncViewResp, err error) {
 	var _args IncViewArgs
 	_args.Req = Req
 	var _result IncViewResult

@@ -32,7 +32,7 @@ type Client interface {
 	DoFavorite(ctx context.Context, Req *user.DoFavoriteReq, callOptions ...callopt.Option) (r *user.Response, err error)
 	CancelFavorite(ctx context.Context, Req *user.CancelFavoriteReq, callOptions ...callopt.Option) (r *user.Response, err error)
 	CreateView(ctx context.Context, Req *user.CreateViewReq, callOptions ...callopt.Option) (r *user.Response, err error)
-	IncView(ctx context.Context, Req *user.IncViewReq, callOptions ...callopt.Option) (r *user.IncViewReq, err error)
+	IncView(ctx context.Context, Req *user.IncViewReq, callOptions ...callopt.Option) (r *user.IncViewResp, err error)
 	GetFavoriteAndViewOfActivity(ctx context.Context, Req *user.GetFavoriteAndViewOfActivityReq, callOptions ...callopt.Option) (r *user.GetFavoriteAndViewOfActivityResp, err error)
 	GetViewOfMerchant(ctx context.Context, Req *user.GetViewOfMerchantReq, callOptions ...callopt.Option) (r *user.GetViewOfMerchantResp, err error)
 }
@@ -171,7 +171,7 @@ func (p *kUserServiceClient) CreateView(ctx context.Context, Req *user.CreateVie
 	return p.kClient.CreateView(ctx, Req)
 }
 
-func (p *kUserServiceClient) IncView(ctx context.Context, Req *user.IncViewReq, callOptions ...callopt.Option) (r *user.IncViewReq, err error) {
+func (p *kUserServiceClient) IncView(ctx context.Context, Req *user.IncViewReq, callOptions ...callopt.Option) (r *user.IncViewResp, err error) {
 	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
 	return p.kClient.IncView(ctx, Req)
 }

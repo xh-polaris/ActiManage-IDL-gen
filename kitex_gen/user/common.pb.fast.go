@@ -801,6 +801,11 @@ func (x *UserLoginReq) FastRead(buf []byte, _type int8, number int32) (offset in
 		if err != nil {
 			goto ReadFieldError
 		}
+	case 5:
+		offset, err = x.fastReadField5(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
 		if err != nil {
@@ -833,6 +838,11 @@ func (x *UserLoginReq) fastReadField3(buf []byte, _type int8) (offset int, err e
 func (x *UserLoginReq) fastReadField4(buf []byte, _type int8) (offset int, err error) {
 	tmp, offset, err := fastpb.ReadString(buf, _type)
 	x.Password = &tmp
+	return offset, err
+}
+
+func (x *UserLoginReq) fastReadField5(buf []byte, _type int8) (offset int, err error) {
+	x.MerchantId, offset, err = fastpb.ReadString(buf, _type)
 	return offset, err
 }
 
@@ -2441,6 +2451,7 @@ func (x *UserLoginReq) FastWrite(buf []byte) (offset int) {
 	offset += x.fastWriteField2(buf[offset:])
 	offset += x.fastWriteField3(buf[offset:])
 	offset += x.fastWriteField4(buf[offset:])
+	offset += x.fastWriteField5(buf[offset:])
 	return offset
 }
 
@@ -2473,6 +2484,14 @@ func (x *UserLoginReq) fastWriteField4(buf []byte) (offset int) {
 		return offset
 	}
 	offset += fastpb.WriteString(buf[offset:], 4, x.GetPassword())
+	return offset
+}
+
+func (x *UserLoginReq) fastWriteField5(buf []byte) (offset int) {
+	if x.MerchantId == "" {
+		return offset
+	}
+	offset += fastpb.WriteString(buf[offset:], 5, x.GetMerchantId())
 	return offset
 }
 
@@ -3791,6 +3810,7 @@ func (x *UserLoginReq) Size() (n int) {
 	n += x.sizeField2()
 	n += x.sizeField3()
 	n += x.sizeField4()
+	n += x.sizeField5()
 	return n
 }
 
@@ -3823,6 +3843,14 @@ func (x *UserLoginReq) sizeField4() (n int) {
 		return n
 	}
 	n += fastpb.SizeString(4, x.GetPassword())
+	return n
+}
+
+func (x *UserLoginReq) sizeField5() (n int) {
+	if x.MerchantId == "" {
+		return n
+	}
+	n += fastpb.SizeString(5, x.GetMerchantId())
 	return n
 }
 
@@ -4592,6 +4620,7 @@ var fieldIDToName_UserLoginReq = map[int32]string{
 	2: "AuthType",
 	3: "VerifyCode",
 	4: "Password",
+	5: "MerchantId",
 }
 
 var fieldIDToName_UserLoginResp = map[int32]string{

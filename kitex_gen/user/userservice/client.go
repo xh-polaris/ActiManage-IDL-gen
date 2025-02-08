@@ -15,6 +15,7 @@ type Client interface {
 	UserLogin(ctx context.Context, Req *user.UserLoginReq, callOptions ...callopt.Option) (r *user.UserLoginResp, err error)
 	GetUserInfo(ctx context.Context, Req *user.GetUserInfoReq, callOptions ...callopt.Option) (r *user.GetUserInfoResp, err error)
 	UpdateUserInfo(ctx context.Context, Req *user.UpdateUserInfoReq, callOptions ...callopt.Option) (r *user.Response, err error)
+	SetPassword(ctx context.Context, Req *user.SetPasswordReq, callOptions ...callopt.Option) (r *user.Response, err error)
 	CreateReserver(ctx context.Context, Req *user.CreateReserverReq, callOptions ...callopt.Option) (r *user.Response, err error)
 	DeleteReserver(ctx context.Context, Req *user.DeleteReserverReq, callOptions ...callopt.Option) (r *user.Response, err error)
 	UpdateReserver(ctx context.Context, Req *user.UpdateReserverReq, callOptions ...callopt.Option) (r *user.Response, err error)
@@ -82,6 +83,11 @@ func (p *kUserServiceClient) GetUserInfo(ctx context.Context, Req *user.GetUserI
 func (p *kUserServiceClient) UpdateUserInfo(ctx context.Context, Req *user.UpdateUserInfoReq, callOptions ...callopt.Option) (r *user.Response, err error) {
 	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
 	return p.kClient.UpdateUserInfo(ctx, Req)
+}
+
+func (p *kUserServiceClient) SetPassword(ctx context.Context, Req *user.SetPasswordReq, callOptions ...callopt.Option) (r *user.Response, err error) {
+	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
+	return p.kClient.SetPassword(ctx, Req)
 }
 
 func (p *kUserServiceClient) CreateReserver(ctx context.Context, Req *user.CreateReserverReq, callOptions ...callopt.Option) (r *user.Response, err error) {

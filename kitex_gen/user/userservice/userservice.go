@@ -43,6 +43,13 @@ var serviceMethods = map[string]kitex.MethodInfo{
 		false,
 		kitex.WithStreamingMode(kitex.StreamingUnary),
 	),
+	"SetPassword": kitex.NewMethodInfo(
+		setPasswordHandler,
+		newSetPasswordArgs,
+		newSetPasswordResult,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingUnary),
+	),
 	"CreateReserver": kitex.NewMethodInfo(
 		createReserverHandler,
 		newCreateReserverArgs,
@@ -844,6 +851,159 @@ func (p *UpdateUserInfoResult) IsSetSuccess() bool {
 }
 
 func (p *UpdateUserInfoResult) GetResult() interface{} {
+	return p.Success
+}
+
+func setPasswordHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
+	switch s := arg.(type) {
+	case *streaming.Args:
+		st := s.Stream
+		req := new(user.SetPasswordReq)
+		if err := st.RecvMsg(req); err != nil {
+			return err
+		}
+		resp, err := handler.(user.UserService).SetPassword(ctx, req)
+		if err != nil {
+			return err
+		}
+		return st.SendMsg(resp)
+	case *SetPasswordArgs:
+		success, err := handler.(user.UserService).SetPassword(ctx, s.Req)
+		if err != nil {
+			return err
+		}
+		realResult := result.(*SetPasswordResult)
+		realResult.Success = success
+		return nil
+	default:
+		return errInvalidMessageType
+	}
+}
+func newSetPasswordArgs() interface{} {
+	return &SetPasswordArgs{}
+}
+
+func newSetPasswordResult() interface{} {
+	return &SetPasswordResult{}
+}
+
+type SetPasswordArgs struct {
+	Req *user.SetPasswordReq
+}
+
+func (p *SetPasswordArgs) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetReq() {
+		p.Req = new(user.SetPasswordReq)
+	}
+	return p.Req.FastRead(buf, _type, number)
+}
+
+func (p *SetPasswordArgs) FastWrite(buf []byte) (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.FastWrite(buf)
+}
+
+func (p *SetPasswordArgs) Size() (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.Size()
+}
+
+func (p *SetPasswordArgs) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetReq() {
+		return out, nil
+	}
+	return proto.Marshal(p.Req)
+}
+
+func (p *SetPasswordArgs) Unmarshal(in []byte) error {
+	msg := new(user.SetPasswordReq)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Req = msg
+	return nil
+}
+
+var SetPasswordArgs_Req_DEFAULT *user.SetPasswordReq
+
+func (p *SetPasswordArgs) GetReq() *user.SetPasswordReq {
+	if !p.IsSetReq() {
+		return SetPasswordArgs_Req_DEFAULT
+	}
+	return p.Req
+}
+
+func (p *SetPasswordArgs) IsSetReq() bool {
+	return p.Req != nil
+}
+
+func (p *SetPasswordArgs) GetFirstArgument() interface{} {
+	return p.Req
+}
+
+type SetPasswordResult struct {
+	Success *user.Response
+}
+
+var SetPasswordResult_Success_DEFAULT *user.Response
+
+func (p *SetPasswordResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetSuccess() {
+		p.Success = new(user.Response)
+	}
+	return p.Success.FastRead(buf, _type, number)
+}
+
+func (p *SetPasswordResult) FastWrite(buf []byte) (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.FastWrite(buf)
+}
+
+func (p *SetPasswordResult) Size() (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.Size()
+}
+
+func (p *SetPasswordResult) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetSuccess() {
+		return out, nil
+	}
+	return proto.Marshal(p.Success)
+}
+
+func (p *SetPasswordResult) Unmarshal(in []byte) error {
+	msg := new(user.Response)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Success = msg
+	return nil
+}
+
+func (p *SetPasswordResult) GetSuccess() *user.Response {
+	if !p.IsSetSuccess() {
+		return SetPasswordResult_Success_DEFAULT
+	}
+	return p.Success
+}
+
+func (p *SetPasswordResult) SetSuccess(x interface{}) {
+	p.Success = x.(*user.Response)
+}
+
+func (p *SetPasswordResult) IsSetSuccess() bool {
+	return p.Success != nil
+}
+
+func (p *SetPasswordResult) GetResult() interface{} {
 	return p.Success
 }
 
@@ -3646,6 +3806,16 @@ func (p *kClient) UpdateUserInfo(ctx context.Context, Req *user.UpdateUserInfoRe
 	_args.Req = Req
 	var _result UpdateUserInfoResult
 	if err = p.c.Call(ctx, "UpdateUserInfo", &_args, &_result); err != nil {
+		return
+	}
+	return _result.GetSuccess(), nil
+}
+
+func (p *kClient) SetPassword(ctx context.Context, Req *user.SetPasswordReq) (r *user.Response, err error) {
+	var _args SetPasswordArgs
+	_args.Req = Req
+	var _result SetPasswordResult
+	if err = p.c.Call(ctx, "SetPassword", &_args, &_result); err != nil {
 		return
 	}
 	return _result.GetSuccess(), nil

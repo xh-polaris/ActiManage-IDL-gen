@@ -1129,6 +1129,11 @@ func (x *CreateActivityReq) FastRead(buf []byte, _type int8, number int32) (offs
 		if err != nil {
 			goto ReadFieldError
 		}
+	case 12:
+		offset, err = x.fastReadField12(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
 		if err != nil {
@@ -1204,6 +1209,16 @@ func (x *CreateActivityReq) fastReadField10(buf []byte, _type int8) (offset int,
 
 func (x *CreateActivityReq) fastReadField11(buf []byte, _type int8) (offset int, err error) {
 	x.Notice, offset, err = fastpb.ReadString(buf, _type)
+	return offset, err
+}
+
+func (x *CreateActivityReq) fastReadField12(buf []byte, _type int8) (offset int, err error) {
+	var v string
+	v, offset, err = fastpb.ReadString(buf, _type)
+	if err != nil {
+		return offset, err
+	}
+	x.Cover = append(x.Cover, v)
 	return offset, err
 }
 
@@ -2617,6 +2632,7 @@ func (x *CreateActivityReq) FastWrite(buf []byte) (offset int) {
 	offset += x.fastWriteField9(buf[offset:])
 	offset += x.fastWriteField10(buf[offset:])
 	offset += x.fastWriteField11(buf[offset:])
+	offset += x.fastWriteField12(buf[offset:])
 	return offset
 }
 
@@ -2707,6 +2723,16 @@ func (x *CreateActivityReq) fastWriteField11(buf []byte) (offset int) {
 		return offset
 	}
 	offset += fastpb.WriteString(buf[offset:], 11, x.GetNotice())
+	return offset
+}
+
+func (x *CreateActivityReq) fastWriteField12(buf []byte) (offset int) {
+	if len(x.Cover) == 0 {
+		return offset
+	}
+	for i := range x.GetCover() {
+		offset += fastpb.WriteString(buf[offset:], 12, x.GetCover()[i])
+	}
 	return offset
 }
 
@@ -3939,6 +3965,7 @@ func (x *CreateActivityReq) Size() (n int) {
 	n += x.sizeField9()
 	n += x.sizeField10()
 	n += x.sizeField11()
+	n += x.sizeField12()
 	return n
 }
 
@@ -4029,6 +4056,16 @@ func (x *CreateActivityReq) sizeField11() (n int) {
 		return n
 	}
 	n += fastpb.SizeString(11, x.GetNotice())
+	return n
+}
+
+func (x *CreateActivityReq) sizeField12() (n int) {
+	if len(x.Cover) == 0 {
+		return n
+	}
+	for i := range x.GetCover() {
+		n += fastpb.SizeString(12, x.GetCover()[i])
+	}
 	return n
 }
 
@@ -4585,6 +4622,7 @@ var fieldIDToName_CreateActivityReq = map[int32]string{
 	9:  "Phone",
 	10: "Description",
 	11: "Notice",
+	12: "Cover",
 }
 
 var fieldIDToName_TopActivityReq = map[int32]string{

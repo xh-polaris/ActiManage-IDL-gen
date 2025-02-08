@@ -636,23 +636,23 @@ type Activity struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id          string             `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`                    // mongo中的十六进制uid
-	MerchantId  string             `protobuf:"bytes,2,opt,name=merchantId,proto3" json:"merchantId,omitempty"`    // 商户的id
-	Name        string             `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`                // 活动名称
-	Cover       []string           `protobuf:"bytes,4,rep,name=cover,proto3" json:"cover,omitempty"`              // 封面
-	Book        int64              `protobuf:"varint,5,opt,name=book,proto3" json:"book,omitempty"`               // 是否可预约, 0不可预约, 1可预约
-	BookStart   int64              `protobuf:"varint,6,opt,name=bookStart,proto3" json:"bookStart,omitempty"`     // 可预约的开始时间
-	BookEnd     int64              `protobuf:"varint,7,opt,name=bookEnd,proto3" json:"bookEnd,omitempty"`         // 可预约的结束时间
-	Setting     []*ActivitySetting `protobuf:"bytes,8,rep,name=setting,proto3" json:"setting,omitempty"`          // 活动设置
-	Location    *Location          `protobuf:"bytes,9,opt,name=location,proto3" json:"location,omitempty"`        // 地点
-	Top         int64              `protobuf:"varint,10,opt,name=top,proto3" json:"top,omitempty"`                // 是否置顶, 0否, 1置顶
-	Phone       string             `protobuf:"bytes,11,opt,name=phone,proto3" json:"phone,omitempty"`             // 电话
-	Description string             `protobuf:"bytes,12,opt,name=description,proto3" json:"description,omitempty"` // 活动详情
-	Notice      string             `protobuf:"bytes,13,opt,name=notice,proto3" json:"notice,omitempty"`           // 预约须知
-	CreateTime  int64              `protobuf:"varint,14,opt,name=createTime,proto3" json:"createTime,omitempty"`  // 创建时间
-	UpdateTime  int64              `protobuf:"varint,15,opt,name=updateTime,proto3" json:"updateTime,omitempty"`  // 更新时间
-	DeleteTime  int64              `protobuf:"varint,16,opt,name=deleteTime,proto3" json:"deleteTime,omitempty"`  // 删除时间
-	Status      int64              `protobuf:"varint,17,opt,name=status,proto3" json:"status,omitempty"`          // 状态, 0正常, -1删除
+	Id          string           `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`                    // mongo中的十六进制uid
+	MerchantId  string           `protobuf:"bytes,2,opt,name=merchantId,proto3" json:"merchantId,omitempty"`    // 商户的id
+	Name        string           `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`                // 活动名称
+	Cover       []string         `protobuf:"bytes,4,rep,name=cover,proto3" json:"cover,omitempty"`              // 封面
+	Book        int64            `protobuf:"varint,5,opt,name=book,proto3" json:"book,omitempty"`               // 是否可预约, 0不可预约, 1可预约
+	BookStart   int64            `protobuf:"varint,6,opt,name=bookStart,proto3" json:"bookStart,omitempty"`     // 可预约的开始时间
+	BookEnd     int64            `protobuf:"varint,7,opt,name=bookEnd,proto3" json:"bookEnd,omitempty"`         // 可预约的结束时间
+	Setting     *ActivitySetting `protobuf:"bytes,8,opt,name=setting,proto3" json:"setting,omitempty"`          // 活动设置
+	Location    *Location        `protobuf:"bytes,9,opt,name=location,proto3" json:"location,omitempty"`        // 地点
+	Top         int64            `protobuf:"varint,10,opt,name=top,proto3" json:"top,omitempty"`                // 是否置顶, 0否, 1置顶
+	Phone       string           `protobuf:"bytes,11,opt,name=phone,proto3" json:"phone,omitempty"`             // 电话
+	Description string           `protobuf:"bytes,12,opt,name=description,proto3" json:"description,omitempty"` // 活动详情
+	Notice      string           `protobuf:"bytes,13,opt,name=notice,proto3" json:"notice,omitempty"`           // 预约须知
+	CreateTime  int64            `protobuf:"varint,14,opt,name=createTime,proto3" json:"createTime,omitempty"`  // 创建时间
+	UpdateTime  int64            `protobuf:"varint,15,opt,name=updateTime,proto3" json:"updateTime,omitempty"`  // 更新时间
+	DeleteTime  int64            `protobuf:"varint,16,opt,name=deleteTime,proto3" json:"deleteTime,omitempty"`  // 删除时间
+	Status      int64            `protobuf:"varint,17,opt,name=status,proto3" json:"status,omitempty"`          // 状态, 0正常, -1删除
 }
 
 func (x *Activity) Reset() {
@@ -736,7 +736,7 @@ func (x *Activity) GetBookEnd() int64 {
 	return 0
 }
 
-func (x *Activity) GetSetting() []*ActivitySetting {
+func (x *Activity) GetSetting() *ActivitySetting {
 	if x != nil {
 		return x.Setting
 	}
@@ -2321,7 +2321,7 @@ var file_ActiManage_system_common_proto_rawDesc = []byte{
 	0x72, 0x74, 0x18, 0x06, 0x20, 0x01, 0x28, 0x03, 0x52, 0x09, 0x62, 0x6f, 0x6f, 0x6b, 0x53, 0x74,
 	0x61, 0x72, 0x74, 0x12, 0x18, 0x0a, 0x07, 0x62, 0x6f, 0x6f, 0x6b, 0x45, 0x6e, 0x64, 0x18, 0x07,
 	0x20, 0x01, 0x28, 0x03, 0x52, 0x07, 0x62, 0x6f, 0x6f, 0x6b, 0x45, 0x6e, 0x64, 0x12, 0x31, 0x0a,
-	0x07, 0x73, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x18, 0x08, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x17,
+	0x07, 0x73, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x18, 0x08, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x17,
 	0x2e, 0x73, 0x79, 0x73, 0x74, 0x65, 0x6d, 0x2e, 0x41, 0x63, 0x74, 0x69, 0x76, 0x69, 0x74, 0x79,
 	0x53, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x52, 0x07, 0x73, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67,
 	0x12, 0x2c, 0x0a, 0x08, 0x6c, 0x6f, 0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x18, 0x09, 0x20, 0x01,

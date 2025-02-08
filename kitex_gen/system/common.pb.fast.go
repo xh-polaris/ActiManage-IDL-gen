@@ -688,7 +688,7 @@ func (x *Activity) fastReadField8(buf []byte, _type int8) (offset int, err error
 	if err != nil {
 		return offset, err
 	}
-	x.Setting = append(x.Setting, &v)
+	x.Setting = &v
 	return offset, nil
 }
 
@@ -2311,9 +2311,7 @@ func (x *Activity) fastWriteField8(buf []byte) (offset int) {
 	if x.Setting == nil {
 		return offset
 	}
-	for i := range x.GetSetting() {
-		offset += fastpb.WriteMessage(buf[offset:], 8, x.GetSetting()[i])
-	}
+	offset += fastpb.WriteMessage(buf[offset:], 8, x.GetSetting())
 	return offset
 }
 
@@ -3653,9 +3651,7 @@ func (x *Activity) sizeField8() (n int) {
 	if x.Setting == nil {
 		return n
 	}
-	for i := range x.GetSetting() {
-		n += fastpb.SizeMessage(8, x.GetSetting()[i])
-	}
+	n += fastpb.SizeMessage(8, x.GetSetting())
 	return n
 }
 

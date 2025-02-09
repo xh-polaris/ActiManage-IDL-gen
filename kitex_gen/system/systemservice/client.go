@@ -13,9 +13,9 @@ import (
 type Client interface {
 	MerchantLogin(ctx context.Context, Req *system.MerchantLoginReq, callOptions ...callopt.Option) (r *system.MerchantLoginResp, err error)
 	MerchantSetPassword(ctx context.Context, Req *system.MerchantSetPasswordReq, callOptions ...callopt.Option) (r *system.Response, err error)
-	UpdateHeader(ctx context.Context, Req *system.UpdateHeaderReq, callOptions ...callopt.Option) (r *system.Response, err error)
-	UpdateCover(ctx context.Context, Req *system.UpdateCoverReq, callOptions ...callopt.Option) (r *system.Response, err error)
-	UpdateFooter(ctx context.Context, Req *system.UpdateFooterReq, callOptions ...callopt.Option) (r *system.Response, err error)
+	UpdateMerchantSetting(ctx context.Context, Req *system.UpdateSettingReq, callOptions ...callopt.Option) (r *system.Response, err error)
+	GetMerchantSetting(ctx context.Context, Req *system.GetMerchantSettingReq, callOptions ...callopt.Option) (r *system.GetMerchantSettingResp, err error)
+	UpdateMerchantInfo(ctx context.Context, Req *system.UpdateMerchantInfoReq, callOptions ...callopt.Option) (r *system.Response, err error)
 	CreateActivity(ctx context.Context, Req *system.CreateActivityReq, callOptions ...callopt.Option) (r *system.Response, err error)
 	TopActivity(ctx context.Context, Req *system.TopActivityReq, callOptions ...callopt.Option) (r *system.Response, err error)
 	DeleteActivity(ctx context.Context, Req *system.DeleteActivityReq, callOptions ...callopt.Option) (r *system.Response, err error)
@@ -27,6 +27,9 @@ type Client interface {
 	CreateMerchant(ctx context.Context, Req *system.CreateMerchantReq, callOptions ...callopt.Option) (r *system.Response, err error)
 	UpdateMerchant(ctx context.Context, Req *system.UpdateMerchantReq, callOptions ...callopt.Option) (r *system.Response, err error)
 	DeleteMerchant(ctx context.Context, Req *system.DeleteMerchantReq, callOptions ...callopt.Option) (r *system.Response, err error)
+	GetMerchantInfo(ctx context.Context, Req *system.GetMerchantInfoReq, callOptions ...callopt.Option) (r *system.GetMerchantInfoResp, err error)
+	ListMerchants(ctx context.Context, Req *system.ListMerchantsReq, callOptions ...callopt.Option) (r *system.ListMerchantsResp, err error)
+	StsSendVerifyCode(ctx context.Context, Req *system.StsSendVerifyCodeReq, callOptions ...callopt.Option) (r *system.Response, err error)
 }
 
 // NewClient creates a client for the service defined in IDL.
@@ -68,19 +71,19 @@ func (p *kSystemServiceClient) MerchantSetPassword(ctx context.Context, Req *sys
 	return p.kClient.MerchantSetPassword(ctx, Req)
 }
 
-func (p *kSystemServiceClient) UpdateHeader(ctx context.Context, Req *system.UpdateHeaderReq, callOptions ...callopt.Option) (r *system.Response, err error) {
+func (p *kSystemServiceClient) UpdateMerchantSetting(ctx context.Context, Req *system.UpdateSettingReq, callOptions ...callopt.Option) (r *system.Response, err error) {
 	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
-	return p.kClient.UpdateHeader(ctx, Req)
+	return p.kClient.UpdateMerchantSetting(ctx, Req)
 }
 
-func (p *kSystemServiceClient) UpdateCover(ctx context.Context, Req *system.UpdateCoverReq, callOptions ...callopt.Option) (r *system.Response, err error) {
+func (p *kSystemServiceClient) GetMerchantSetting(ctx context.Context, Req *system.GetMerchantSettingReq, callOptions ...callopt.Option) (r *system.GetMerchantSettingResp, err error) {
 	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
-	return p.kClient.UpdateCover(ctx, Req)
+	return p.kClient.GetMerchantSetting(ctx, Req)
 }
 
-func (p *kSystemServiceClient) UpdateFooter(ctx context.Context, Req *system.UpdateFooterReq, callOptions ...callopt.Option) (r *system.Response, err error) {
+func (p *kSystemServiceClient) UpdateMerchantInfo(ctx context.Context, Req *system.UpdateMerchantInfoReq, callOptions ...callopt.Option) (r *system.Response, err error) {
 	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
-	return p.kClient.UpdateFooter(ctx, Req)
+	return p.kClient.UpdateMerchantInfo(ctx, Req)
 }
 
 func (p *kSystemServiceClient) CreateActivity(ctx context.Context, Req *system.CreateActivityReq, callOptions ...callopt.Option) (r *system.Response, err error) {
@@ -136,4 +139,19 @@ func (p *kSystemServiceClient) UpdateMerchant(ctx context.Context, Req *system.U
 func (p *kSystemServiceClient) DeleteMerchant(ctx context.Context, Req *system.DeleteMerchantReq, callOptions ...callopt.Option) (r *system.Response, err error) {
 	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
 	return p.kClient.DeleteMerchant(ctx, Req)
+}
+
+func (p *kSystemServiceClient) GetMerchantInfo(ctx context.Context, Req *system.GetMerchantInfoReq, callOptions ...callopt.Option) (r *system.GetMerchantInfoResp, err error) {
+	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
+	return p.kClient.GetMerchantInfo(ctx, Req)
+}
+
+func (p *kSystemServiceClient) ListMerchants(ctx context.Context, Req *system.ListMerchantsReq, callOptions ...callopt.Option) (r *system.ListMerchantsResp, err error) {
+	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
+	return p.kClient.ListMerchants(ctx, Req)
+}
+
+func (p *kSystemServiceClient) StsSendVerifyCode(ctx context.Context, Req *system.StsSendVerifyCodeReq, callOptions ...callopt.Option) (r *system.Response, err error) {
+	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
+	return p.kClient.StsSendVerifyCode(ctx, Req)
 }

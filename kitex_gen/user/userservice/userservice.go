@@ -113,6 +113,13 @@ var serviceMethods = map[string]kitex.MethodInfo{
 		false,
 		kitex.WithStreamingMode(kitex.StreamingUnary),
 	),
+	"ListBookRecordsByActivity": kitex.NewMethodInfo(
+		listBookRecordsByActivityHandler,
+		newListBookRecordsByActivityArgs,
+		newListBookRecordsByActivityResult,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingUnary),
+	),
 	"CreateReceipt": kitex.NewMethodInfo(
 		createReceiptHandler,
 		newCreateReceiptArgs,
@@ -2391,6 +2398,159 @@ func (p *ListBookRecordsByUserResult) GetResult() interface{} {
 	return p.Success
 }
 
+func listBookRecordsByActivityHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
+	switch s := arg.(type) {
+	case *streaming.Args:
+		st := s.Stream
+		req := new(user.ListBookRecordsByActivityReq)
+		if err := st.RecvMsg(req); err != nil {
+			return err
+		}
+		resp, err := handler.(user.UserService).ListBookRecordsByActivity(ctx, req)
+		if err != nil {
+			return err
+		}
+		return st.SendMsg(resp)
+	case *ListBookRecordsByActivityArgs:
+		success, err := handler.(user.UserService).ListBookRecordsByActivity(ctx, s.Req)
+		if err != nil {
+			return err
+		}
+		realResult := result.(*ListBookRecordsByActivityResult)
+		realResult.Success = success
+		return nil
+	default:
+		return errInvalidMessageType
+	}
+}
+func newListBookRecordsByActivityArgs() interface{} {
+	return &ListBookRecordsByActivityArgs{}
+}
+
+func newListBookRecordsByActivityResult() interface{} {
+	return &ListBookRecordsByActivityResult{}
+}
+
+type ListBookRecordsByActivityArgs struct {
+	Req *user.ListBookRecordsByActivityReq
+}
+
+func (p *ListBookRecordsByActivityArgs) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetReq() {
+		p.Req = new(user.ListBookRecordsByActivityReq)
+	}
+	return p.Req.FastRead(buf, _type, number)
+}
+
+func (p *ListBookRecordsByActivityArgs) FastWrite(buf []byte) (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.FastWrite(buf)
+}
+
+func (p *ListBookRecordsByActivityArgs) Size() (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.Size()
+}
+
+func (p *ListBookRecordsByActivityArgs) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetReq() {
+		return out, nil
+	}
+	return proto.Marshal(p.Req)
+}
+
+func (p *ListBookRecordsByActivityArgs) Unmarshal(in []byte) error {
+	msg := new(user.ListBookRecordsByActivityReq)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Req = msg
+	return nil
+}
+
+var ListBookRecordsByActivityArgs_Req_DEFAULT *user.ListBookRecordsByActivityReq
+
+func (p *ListBookRecordsByActivityArgs) GetReq() *user.ListBookRecordsByActivityReq {
+	if !p.IsSetReq() {
+		return ListBookRecordsByActivityArgs_Req_DEFAULT
+	}
+	return p.Req
+}
+
+func (p *ListBookRecordsByActivityArgs) IsSetReq() bool {
+	return p.Req != nil
+}
+
+func (p *ListBookRecordsByActivityArgs) GetFirstArgument() interface{} {
+	return p.Req
+}
+
+type ListBookRecordsByActivityResult struct {
+	Success *user.ListBookRecordsByActivityResp
+}
+
+var ListBookRecordsByActivityResult_Success_DEFAULT *user.ListBookRecordsByActivityResp
+
+func (p *ListBookRecordsByActivityResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetSuccess() {
+		p.Success = new(user.ListBookRecordsByActivityResp)
+	}
+	return p.Success.FastRead(buf, _type, number)
+}
+
+func (p *ListBookRecordsByActivityResult) FastWrite(buf []byte) (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.FastWrite(buf)
+}
+
+func (p *ListBookRecordsByActivityResult) Size() (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.Size()
+}
+
+func (p *ListBookRecordsByActivityResult) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetSuccess() {
+		return out, nil
+	}
+	return proto.Marshal(p.Success)
+}
+
+func (p *ListBookRecordsByActivityResult) Unmarshal(in []byte) error {
+	msg := new(user.ListBookRecordsByActivityResp)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Success = msg
+	return nil
+}
+
+func (p *ListBookRecordsByActivityResult) GetSuccess() *user.ListBookRecordsByActivityResp {
+	if !p.IsSetSuccess() {
+		return ListBookRecordsByActivityResult_Success_DEFAULT
+	}
+	return p.Success
+}
+
+func (p *ListBookRecordsByActivityResult) SetSuccess(x interface{}) {
+	p.Success = x.(*user.ListBookRecordsByActivityResp)
+}
+
+func (p *ListBookRecordsByActivityResult) IsSetSuccess() bool {
+	return p.Success != nil
+}
+
+func (p *ListBookRecordsByActivityResult) GetResult() interface{} {
+	return p.Success
+}
+
 func createReceiptHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
 	switch s := arg.(type) {
 	case *streaming.Args:
@@ -4066,6 +4226,16 @@ func (p *kClient) ListBookRecordsByUser(ctx context.Context, Req *user.ListBookR
 	_args.Req = Req
 	var _result ListBookRecordsByUserResult
 	if err = p.c.Call(ctx, "ListBookRecordsByUser", &_args, &_result); err != nil {
+		return
+	}
+	return _result.GetSuccess(), nil
+}
+
+func (p *kClient) ListBookRecordsByActivity(ctx context.Context, Req *user.ListBookRecordsByActivityReq) (r *user.ListBookRecordsByActivityResp, err error) {
+	var _args ListBookRecordsByActivityArgs
+	_args.Req = Req
+	var _result ListBookRecordsByActivityResult
+	if err = p.c.Call(ctx, "ListBookRecordsByActivity", &_args, &_result); err != nil {
 		return
 	}
 	return _result.GetSuccess(), nil

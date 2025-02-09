@@ -1662,6 +1662,11 @@ func (x *ListBookRecordsByUserReq) FastRead(buf []byte, _type int8, number int32
 		if err != nil {
 			goto ReadFieldError
 		}
+	case 3:
+		offset, err = x.fastReadField3(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
 		if err != nil {
@@ -1688,6 +1693,11 @@ func (x *ListBookRecordsByUserReq) fastReadField2(buf []byte, _type int8) (offse
 	}
 	x.Paging = &v
 	return offset, nil
+}
+
+func (x *ListBookRecordsByUserReq) fastReadField3(buf []byte, _type int8) (offset int, err error) {
+	x.Type, offset, err = fastpb.ReadInt64(buf, _type)
+	return offset, err
 }
 
 func (x *ListBookRecordsByUserResp) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
@@ -1746,6 +1756,106 @@ func (x *ListBookRecordsByUserResp) fastReadField3(buf []byte, _type int8) (offs
 }
 
 func (x *ListBookRecordsByUserResp) fastReadField4(buf []byte, _type int8) (offset int, err error) {
+	x.Total, offset, err = fastpb.ReadInt64(buf, _type)
+	return offset, err
+}
+
+func (x *ListBookRecordsByActivityReq) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
+	switch number {
+	case 1:
+		offset, err = x.fastReadField1(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	case 2:
+		offset, err = x.fastReadField2(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	default:
+		offset, err = fastpb.Skip(buf, _type, number)
+		if err != nil {
+			goto SkipFieldError
+		}
+	}
+	return offset, nil
+SkipFieldError:
+	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
+ReadFieldError:
+	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_ListBookRecordsByActivityReq[number], err)
+}
+
+func (x *ListBookRecordsByActivityReq) fastReadField1(buf []byte, _type int8) (offset int, err error) {
+	x.ActivityId, offset, err = fastpb.ReadString(buf, _type)
+	return offset, err
+}
+
+func (x *ListBookRecordsByActivityReq) fastReadField2(buf []byte, _type int8) (offset int, err error) {
+	var v basic.Paging
+	offset, err = fastpb.ReadMessage(buf, _type, &v)
+	if err != nil {
+		return offset, err
+	}
+	x.Paging = &v
+	return offset, nil
+}
+
+func (x *ListBookRecordsByActivityResp) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
+	switch number {
+	case 1:
+		offset, err = x.fastReadField1(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	case 2:
+		offset, err = x.fastReadField2(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	case 3:
+		offset, err = x.fastReadField3(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	case 4:
+		offset, err = x.fastReadField4(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	default:
+		offset, err = fastpb.Skip(buf, _type, number)
+		if err != nil {
+			goto SkipFieldError
+		}
+	}
+	return offset, nil
+SkipFieldError:
+	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
+ReadFieldError:
+	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_ListBookRecordsByActivityResp[number], err)
+}
+
+func (x *ListBookRecordsByActivityResp) fastReadField1(buf []byte, _type int8) (offset int, err error) {
+	x.Code, offset, err = fastpb.ReadInt64(buf, _type)
+	return offset, err
+}
+
+func (x *ListBookRecordsByActivityResp) fastReadField2(buf []byte, _type int8) (offset int, err error) {
+	x.Msg, offset, err = fastpb.ReadString(buf, _type)
+	return offset, err
+}
+
+func (x *ListBookRecordsByActivityResp) fastReadField3(buf []byte, _type int8) (offset int, err error) {
+	var v BookRecord
+	offset, err = fastpb.ReadMessage(buf, _type, &v)
+	if err != nil {
+		return offset, err
+	}
+	x.Records = append(x.Records, &v)
+	return offset, nil
+}
+
+func (x *ListBookRecordsByActivityResp) fastReadField4(buf []byte, _type int8) (offset int, err error) {
 	x.Total, offset, err = fastpb.ReadInt64(buf, _type)
 	return offset, err
 }
@@ -1987,6 +2097,11 @@ func (x *CancelFavoriteReq) FastRead(buf []byte, _type int8, number int32) (offs
 		if err != nil {
 			goto ReadFieldError
 		}
+	case 2:
+		offset, err = x.fastReadField2(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
 		if err != nil {
@@ -2001,7 +2116,12 @@ ReadFieldError:
 }
 
 func (x *CancelFavoriteReq) fastReadField1(buf []byte, _type int8) (offset int, err error) {
-	x.Id, offset, err = fastpb.ReadString(buf, _type)
+	x.UserId, offset, err = fastpb.ReadString(buf, _type)
+	return offset, err
+}
+
+func (x *CancelFavoriteReq) fastReadField2(buf []byte, _type int8) (offset int, err error) {
+	x.ActivityId, offset, err = fastpb.ReadString(buf, _type)
 	return offset, err
 }
 
@@ -3529,6 +3649,7 @@ func (x *ListBookRecordsByUserReq) FastWrite(buf []byte) (offset int) {
 	}
 	offset += x.fastWriteField1(buf[offset:])
 	offset += x.fastWriteField2(buf[offset:])
+	offset += x.fastWriteField3(buf[offset:])
 	return offset
 }
 
@@ -3545,6 +3666,14 @@ func (x *ListBookRecordsByUserReq) fastWriteField2(buf []byte) (offset int) {
 		return offset
 	}
 	offset += fastpb.WriteMessage(buf[offset:], 2, x.GetPaging())
+	return offset
+}
+
+func (x *ListBookRecordsByUserReq) fastWriteField3(buf []byte) (offset int) {
+	if x.Type == 0 {
+		return offset
+	}
+	offset += fastpb.WriteInt64(buf[offset:], 3, x.GetType())
 	return offset
 }
 
@@ -3586,6 +3715,76 @@ func (x *ListBookRecordsByUserResp) fastWriteField3(buf []byte) (offset int) {
 }
 
 func (x *ListBookRecordsByUserResp) fastWriteField4(buf []byte) (offset int) {
+	if x.Total == 0 {
+		return offset
+	}
+	offset += fastpb.WriteInt64(buf[offset:], 4, x.GetTotal())
+	return offset
+}
+
+func (x *ListBookRecordsByActivityReq) FastWrite(buf []byte) (offset int) {
+	if x == nil {
+		return offset
+	}
+	offset += x.fastWriteField1(buf[offset:])
+	offset += x.fastWriteField2(buf[offset:])
+	return offset
+}
+
+func (x *ListBookRecordsByActivityReq) fastWriteField1(buf []byte) (offset int) {
+	if x.ActivityId == "" {
+		return offset
+	}
+	offset += fastpb.WriteString(buf[offset:], 1, x.GetActivityId())
+	return offset
+}
+
+func (x *ListBookRecordsByActivityReq) fastWriteField2(buf []byte) (offset int) {
+	if x.Paging == nil {
+		return offset
+	}
+	offset += fastpb.WriteMessage(buf[offset:], 2, x.GetPaging())
+	return offset
+}
+
+func (x *ListBookRecordsByActivityResp) FastWrite(buf []byte) (offset int) {
+	if x == nil {
+		return offset
+	}
+	offset += x.fastWriteField1(buf[offset:])
+	offset += x.fastWriteField2(buf[offset:])
+	offset += x.fastWriteField3(buf[offset:])
+	offset += x.fastWriteField4(buf[offset:])
+	return offset
+}
+
+func (x *ListBookRecordsByActivityResp) fastWriteField1(buf []byte) (offset int) {
+	if x.Code == 0 {
+		return offset
+	}
+	offset += fastpb.WriteInt64(buf[offset:], 1, x.GetCode())
+	return offset
+}
+
+func (x *ListBookRecordsByActivityResp) fastWriteField2(buf []byte) (offset int) {
+	if x.Msg == "" {
+		return offset
+	}
+	offset += fastpb.WriteString(buf[offset:], 2, x.GetMsg())
+	return offset
+}
+
+func (x *ListBookRecordsByActivityResp) fastWriteField3(buf []byte) (offset int) {
+	if x.Records == nil {
+		return offset
+	}
+	for i := range x.GetRecords() {
+		offset += fastpb.WriteMessage(buf[offset:], 3, x.GetRecords()[i])
+	}
+	return offset
+}
+
+func (x *ListBookRecordsByActivityResp) fastWriteField4(buf []byte) (offset int) {
 	if x.Total == 0 {
 		return offset
 	}
@@ -3759,14 +3958,23 @@ func (x *CancelFavoriteReq) FastWrite(buf []byte) (offset int) {
 		return offset
 	}
 	offset += x.fastWriteField1(buf[offset:])
+	offset += x.fastWriteField2(buf[offset:])
 	return offset
 }
 
 func (x *CancelFavoriteReq) fastWriteField1(buf []byte) (offset int) {
-	if x.Id == "" {
+	if x.UserId == "" {
 		return offset
 	}
-	offset += fastpb.WriteString(buf[offset:], 1, x.GetId())
+	offset += fastpb.WriteString(buf[offset:], 1, x.GetUserId())
+	return offset
+}
+
+func (x *CancelFavoriteReq) fastWriteField2(buf []byte) (offset int) {
+	if x.ActivityId == "" {
+		return offset
+	}
+	offset += fastpb.WriteString(buf[offset:], 2, x.GetActivityId())
 	return offset
 }
 
@@ -5221,6 +5429,7 @@ func (x *ListBookRecordsByUserReq) Size() (n int) {
 	}
 	n += x.sizeField1()
 	n += x.sizeField2()
+	n += x.sizeField3()
 	return n
 }
 
@@ -5237,6 +5446,14 @@ func (x *ListBookRecordsByUserReq) sizeField2() (n int) {
 		return n
 	}
 	n += fastpb.SizeMessage(2, x.GetPaging())
+	return n
+}
+
+func (x *ListBookRecordsByUserReq) sizeField3() (n int) {
+	if x.Type == 0 {
+		return n
+	}
+	n += fastpb.SizeInt64(3, x.GetType())
 	return n
 }
 
@@ -5278,6 +5495,76 @@ func (x *ListBookRecordsByUserResp) sizeField3() (n int) {
 }
 
 func (x *ListBookRecordsByUserResp) sizeField4() (n int) {
+	if x.Total == 0 {
+		return n
+	}
+	n += fastpb.SizeInt64(4, x.GetTotal())
+	return n
+}
+
+func (x *ListBookRecordsByActivityReq) Size() (n int) {
+	if x == nil {
+		return n
+	}
+	n += x.sizeField1()
+	n += x.sizeField2()
+	return n
+}
+
+func (x *ListBookRecordsByActivityReq) sizeField1() (n int) {
+	if x.ActivityId == "" {
+		return n
+	}
+	n += fastpb.SizeString(1, x.GetActivityId())
+	return n
+}
+
+func (x *ListBookRecordsByActivityReq) sizeField2() (n int) {
+	if x.Paging == nil {
+		return n
+	}
+	n += fastpb.SizeMessage(2, x.GetPaging())
+	return n
+}
+
+func (x *ListBookRecordsByActivityResp) Size() (n int) {
+	if x == nil {
+		return n
+	}
+	n += x.sizeField1()
+	n += x.sizeField2()
+	n += x.sizeField3()
+	n += x.sizeField4()
+	return n
+}
+
+func (x *ListBookRecordsByActivityResp) sizeField1() (n int) {
+	if x.Code == 0 {
+		return n
+	}
+	n += fastpb.SizeInt64(1, x.GetCode())
+	return n
+}
+
+func (x *ListBookRecordsByActivityResp) sizeField2() (n int) {
+	if x.Msg == "" {
+		return n
+	}
+	n += fastpb.SizeString(2, x.GetMsg())
+	return n
+}
+
+func (x *ListBookRecordsByActivityResp) sizeField3() (n int) {
+	if x.Records == nil {
+		return n
+	}
+	for i := range x.GetRecords() {
+		n += fastpb.SizeMessage(3, x.GetRecords()[i])
+	}
+	return n
+}
+
+func (x *ListBookRecordsByActivityResp) sizeField4() (n int) {
 	if x.Total == 0 {
 		return n
 	}
@@ -5451,14 +5738,23 @@ func (x *CancelFavoriteReq) Size() (n int) {
 		return n
 	}
 	n += x.sizeField1()
+	n += x.sizeField2()
 	return n
 }
 
 func (x *CancelFavoriteReq) sizeField1() (n int) {
-	if x.Id == "" {
+	if x.UserId == "" {
 		return n
 	}
-	n += fastpb.SizeString(1, x.GetId())
+	n += fastpb.SizeString(1, x.GetUserId())
+	return n
+}
+
+func (x *CancelFavoriteReq) sizeField2() (n int) {
+	if x.ActivityId == "" {
+		return n
+	}
+	n += fastpb.SizeString(2, x.GetActivityId())
 	return n
 }
 
@@ -5816,9 +6112,22 @@ var fieldIDToName_GetBookRecordResp = map[int32]string{
 var fieldIDToName_ListBookRecordsByUserReq = map[int32]string{
 	1: "UserId",
 	2: "Paging",
+	3: "Type",
 }
 
 var fieldIDToName_ListBookRecordsByUserResp = map[int32]string{
+	1: "Code",
+	2: "Msg",
+	3: "Records",
+	4: "Total",
+}
+
+var fieldIDToName_ListBookRecordsByActivityReq = map[int32]string{
+	1: "ActivityId",
+	2: "Paging",
+}
+
+var fieldIDToName_ListBookRecordsByActivityResp = map[int32]string{
 	1: "Code",
 	2: "Msg",
 	3: "Records",
@@ -5857,7 +6166,8 @@ var fieldIDToName_DoFavoriteReq = map[int32]string{
 }
 
 var fieldIDToName_CancelFavoriteReq = map[int32]string{
-	1: "Id",
+	1: "UserId",
+	2: "ActivityId",
 }
 
 var fieldIDToName_CreateViewReq = map[int32]string{

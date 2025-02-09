@@ -25,6 +25,7 @@ type Client interface {
 	CancelBookRecord(ctx context.Context, Req *user.CancelBookRecordReq, callOptions ...callopt.Option) (r *user.Response, err error)
 	GetBookRecordDetail(ctx context.Context, Req *user.GetBookRecordReq, callOptions ...callopt.Option) (r *user.GetBookRecordResp, err error)
 	ListBookRecordsByUser(ctx context.Context, Req *user.ListBookRecordsByUserReq, callOptions ...callopt.Option) (r *user.ListBookRecordsByUserResp, err error)
+	ListBookRecordsByActivity(ctx context.Context, Req *user.ListBookRecordsByActivityReq, callOptions ...callopt.Option) (r *user.ListBookRecordsByActivityResp, err error)
 	CreateReceipt(ctx context.Context, Req *user.CreateReceiptReq, callOptions ...callopt.Option) (r *user.Response, err error)
 	DeleteReceipt(ctx context.Context, Req *user.DeleteReceiptReq, callOptions ...callopt.Option) (r *user.Response, err error)
 	ListReceipts(ctx context.Context, Req *user.ListReceiptsReq, callOptions ...callopt.Option) (r *user.ListReceiptsResp, err error)
@@ -134,6 +135,11 @@ func (p *kUserServiceClient) GetBookRecordDetail(ctx context.Context, Req *user.
 func (p *kUserServiceClient) ListBookRecordsByUser(ctx context.Context, Req *user.ListBookRecordsByUserReq, callOptions ...callopt.Option) (r *user.ListBookRecordsByUserResp, err error) {
 	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
 	return p.kClient.ListBookRecordsByUser(ctx, Req)
+}
+
+func (p *kUserServiceClient) ListBookRecordsByActivity(ctx context.Context, Req *user.ListBookRecordsByActivityReq, callOptions ...callopt.Option) (r *user.ListBookRecordsByActivityResp, err error) {
+	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
+	return p.kClient.ListBookRecordsByActivity(ctx, Req)
 }
 
 func (p *kUserServiceClient) CreateReceipt(ctx context.Context, Req *user.CreateReceiptReq, callOptions ...callopt.Option) (r *user.Response, err error) {

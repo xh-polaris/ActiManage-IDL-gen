@@ -64,10 +64,10 @@ var serviceMethods = map[string]kitex.MethodInfo{
 		false,
 		kitex.WithStreamingMode(kitex.StreamingUnary),
 	),
-	"MerchantGetBookRecords": kitex.NewMethodInfo(
-		merchantGetBookRecordsHandler,
-		newMerchantGetBookRecordsArgs,
-		newMerchantGetBookRecordsResult,
+	"MerchantListBookRecords": kitex.NewMethodInfo(
+		merchantListBookRecordsHandler,
+		newMerchantListBookRecordsArgs,
+		newMerchantListBookRecordsResult,
 		false,
 		kitex.WithStreamingMode(kitex.StreamingUnary),
 	),
@@ -1229,7 +1229,7 @@ func (p *MerchantUpdateSettingResult) GetResult() interface{} {
 	return p.Success
 }
 
-func merchantGetBookRecordsHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
+func merchantListBookRecordsHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
 	switch s := arg.(type) {
 	case *streaming.Args:
 		st := s.Stream
@@ -1237,64 +1237,64 @@ func merchantGetBookRecordsHandler(ctx context.Context, handler interface{}, arg
 		if err := st.RecvMsg(req); err != nil {
 			return err
 		}
-		resp, err := handler.(core_api.Merchant).MerchantGetBookRecords(ctx, req)
+		resp, err := handler.(core_api.Merchant).MerchantListBookRecords(ctx, req)
 		if err != nil {
 			return err
 		}
 		return st.SendMsg(resp)
-	case *MerchantGetBookRecordsArgs:
-		success, err := handler.(core_api.Merchant).MerchantGetBookRecords(ctx, s.Req)
+	case *MerchantListBookRecordsArgs:
+		success, err := handler.(core_api.Merchant).MerchantListBookRecords(ctx, s.Req)
 		if err != nil {
 			return err
 		}
-		realResult := result.(*MerchantGetBookRecordsResult)
+		realResult := result.(*MerchantListBookRecordsResult)
 		realResult.Success = success
 		return nil
 	default:
 		return errInvalidMessageType
 	}
 }
-func newMerchantGetBookRecordsArgs() interface{} {
-	return &MerchantGetBookRecordsArgs{}
+func newMerchantListBookRecordsArgs() interface{} {
+	return &MerchantListBookRecordsArgs{}
 }
 
-func newMerchantGetBookRecordsResult() interface{} {
-	return &MerchantGetBookRecordsResult{}
+func newMerchantListBookRecordsResult() interface{} {
+	return &MerchantListBookRecordsResult{}
 }
 
-type MerchantGetBookRecordsArgs struct {
+type MerchantListBookRecordsArgs struct {
 	Req *core_api.MerchantListBookRecordsReq
 }
 
-func (p *MerchantGetBookRecordsArgs) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+func (p *MerchantListBookRecordsArgs) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
 	if !p.IsSetReq() {
 		p.Req = new(core_api.MerchantListBookRecordsReq)
 	}
 	return p.Req.FastRead(buf, _type, number)
 }
 
-func (p *MerchantGetBookRecordsArgs) FastWrite(buf []byte) (n int) {
+func (p *MerchantListBookRecordsArgs) FastWrite(buf []byte) (n int) {
 	if !p.IsSetReq() {
 		return 0
 	}
 	return p.Req.FastWrite(buf)
 }
 
-func (p *MerchantGetBookRecordsArgs) Size() (n int) {
+func (p *MerchantListBookRecordsArgs) Size() (n int) {
 	if !p.IsSetReq() {
 		return 0
 	}
 	return p.Req.Size()
 }
 
-func (p *MerchantGetBookRecordsArgs) Marshal(out []byte) ([]byte, error) {
+func (p *MerchantListBookRecordsArgs) Marshal(out []byte) ([]byte, error) {
 	if !p.IsSetReq() {
 		return out, nil
 	}
 	return proto.Marshal(p.Req)
 }
 
-func (p *MerchantGetBookRecordsArgs) Unmarshal(in []byte) error {
+func (p *MerchantListBookRecordsArgs) Unmarshal(in []byte) error {
 	msg := new(core_api.MerchantListBookRecordsReq)
 	if err := proto.Unmarshal(in, msg); err != nil {
 		return err
@@ -1303,58 +1303,58 @@ func (p *MerchantGetBookRecordsArgs) Unmarshal(in []byte) error {
 	return nil
 }
 
-var MerchantGetBookRecordsArgs_Req_DEFAULT *core_api.MerchantListBookRecordsReq
+var MerchantListBookRecordsArgs_Req_DEFAULT *core_api.MerchantListBookRecordsReq
 
-func (p *MerchantGetBookRecordsArgs) GetReq() *core_api.MerchantListBookRecordsReq {
+func (p *MerchantListBookRecordsArgs) GetReq() *core_api.MerchantListBookRecordsReq {
 	if !p.IsSetReq() {
-		return MerchantGetBookRecordsArgs_Req_DEFAULT
+		return MerchantListBookRecordsArgs_Req_DEFAULT
 	}
 	return p.Req
 }
 
-func (p *MerchantGetBookRecordsArgs) IsSetReq() bool {
+func (p *MerchantListBookRecordsArgs) IsSetReq() bool {
 	return p.Req != nil
 }
 
-func (p *MerchantGetBookRecordsArgs) GetFirstArgument() interface{} {
+func (p *MerchantListBookRecordsArgs) GetFirstArgument() interface{} {
 	return p.Req
 }
 
-type MerchantGetBookRecordsResult struct {
+type MerchantListBookRecordsResult struct {
 	Success *core_api.MerchantListBookRecordsResp
 }
 
-var MerchantGetBookRecordsResult_Success_DEFAULT *core_api.MerchantListBookRecordsResp
+var MerchantListBookRecordsResult_Success_DEFAULT *core_api.MerchantListBookRecordsResp
 
-func (p *MerchantGetBookRecordsResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+func (p *MerchantListBookRecordsResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
 	if !p.IsSetSuccess() {
 		p.Success = new(core_api.MerchantListBookRecordsResp)
 	}
 	return p.Success.FastRead(buf, _type, number)
 }
 
-func (p *MerchantGetBookRecordsResult) FastWrite(buf []byte) (n int) {
+func (p *MerchantListBookRecordsResult) FastWrite(buf []byte) (n int) {
 	if !p.IsSetSuccess() {
 		return 0
 	}
 	return p.Success.FastWrite(buf)
 }
 
-func (p *MerchantGetBookRecordsResult) Size() (n int) {
+func (p *MerchantListBookRecordsResult) Size() (n int) {
 	if !p.IsSetSuccess() {
 		return 0
 	}
 	return p.Success.Size()
 }
 
-func (p *MerchantGetBookRecordsResult) Marshal(out []byte) ([]byte, error) {
+func (p *MerchantListBookRecordsResult) Marshal(out []byte) ([]byte, error) {
 	if !p.IsSetSuccess() {
 		return out, nil
 	}
 	return proto.Marshal(p.Success)
 }
 
-func (p *MerchantGetBookRecordsResult) Unmarshal(in []byte) error {
+func (p *MerchantListBookRecordsResult) Unmarshal(in []byte) error {
 	msg := new(core_api.MerchantListBookRecordsResp)
 	if err := proto.Unmarshal(in, msg); err != nil {
 		return err
@@ -1363,22 +1363,22 @@ func (p *MerchantGetBookRecordsResult) Unmarshal(in []byte) error {
 	return nil
 }
 
-func (p *MerchantGetBookRecordsResult) GetSuccess() *core_api.MerchantListBookRecordsResp {
+func (p *MerchantListBookRecordsResult) GetSuccess() *core_api.MerchantListBookRecordsResp {
 	if !p.IsSetSuccess() {
-		return MerchantGetBookRecordsResult_Success_DEFAULT
+		return MerchantListBookRecordsResult_Success_DEFAULT
 	}
 	return p.Success
 }
 
-func (p *MerchantGetBookRecordsResult) SetSuccess(x interface{}) {
+func (p *MerchantListBookRecordsResult) SetSuccess(x interface{}) {
 	p.Success = x.(*core_api.MerchantListBookRecordsResp)
 }
 
-func (p *MerchantGetBookRecordsResult) IsSetSuccess() bool {
+func (p *MerchantListBookRecordsResult) IsSetSuccess() bool {
 	return p.Success != nil
 }
 
-func (p *MerchantGetBookRecordsResult) GetResult() interface{} {
+func (p *MerchantListBookRecordsResult) GetResult() interface{} {
 	return p.Success
 }
 
@@ -1921,11 +1921,11 @@ func (p *kClient) MerchantUpdateSetting(ctx context.Context, Req *core_api.Merch
 	return _result.GetSuccess(), nil
 }
 
-func (p *kClient) MerchantGetBookRecords(ctx context.Context, Req *core_api.MerchantListBookRecordsReq) (r *core_api.MerchantListBookRecordsResp, err error) {
-	var _args MerchantGetBookRecordsArgs
+func (p *kClient) MerchantListBookRecords(ctx context.Context, Req *core_api.MerchantListBookRecordsReq) (r *core_api.MerchantListBookRecordsResp, err error) {
+	var _args MerchantListBookRecordsArgs
 	_args.Req = Req
-	var _result MerchantGetBookRecordsResult
-	if err = p.c.Call(ctx, "MerchantGetBookRecords", &_args, &_result); err != nil {
+	var _result MerchantListBookRecordsResult
+	if err = p.c.Call(ctx, "MerchantListBookRecords", &_args, &_result); err != nil {
 		return
 	}
 	return _result.GetSuccess(), nil

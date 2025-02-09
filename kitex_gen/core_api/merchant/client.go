@@ -18,7 +18,7 @@ type Client interface {
 	MerchantLogin(ctx context.Context, Req *core_api.MerchantLoginReq, callOptions ...callopt.Option) (r *core_api.MerchantLoginResp, err error)
 	MerchantGetSetting(ctx context.Context, Req *core_api.MerchantGetSettingReq, callOptions ...callopt.Option) (r *core_api.MerchantGetSettingResp, err error)
 	MerchantUpdateSetting(ctx context.Context, Req *core_api.MerchantUpdateSettingReq, callOptions ...callopt.Option) (r *core_api.MerchantGetSettingResp, err error)
-	MerchantGetBookRecords(ctx context.Context, Req *core_api.MerchantListBookRecordsReq, callOptions ...callopt.Option) (r *core_api.MerchantListBookRecordsResp, err error)
+	MerchantListBookRecords(ctx context.Context, Req *core_api.MerchantListBookRecordsReq, callOptions ...callopt.Option) (r *core_api.MerchantListBookRecordsResp, err error)
 	MerchantUpdateInfo(ctx context.Context, Req *core_api.MerchantUpdateInfoReq, callOptions ...callopt.Option) (r *core_api.Response, err error)
 	MerchantGetInfo(ctx context.Context, Req *core_api.MerchantGetInfoReq, callOptions ...callopt.Option) (r *core_api.MerchantGetInfoResp, err error)
 	MerchantSetPassword(ctx context.Context, Req *core_api.MerchantSetPasswordReq, callOptions ...callopt.Option) (r *core_api.Response, err error)
@@ -88,9 +88,9 @@ func (p *kMerchantClient) MerchantUpdateSetting(ctx context.Context, Req *core_a
 	return p.kClient.MerchantUpdateSetting(ctx, Req)
 }
 
-func (p *kMerchantClient) MerchantGetBookRecords(ctx context.Context, Req *core_api.MerchantListBookRecordsReq, callOptions ...callopt.Option) (r *core_api.MerchantListBookRecordsResp, err error) {
+func (p *kMerchantClient) MerchantListBookRecords(ctx context.Context, Req *core_api.MerchantListBookRecordsReq, callOptions ...callopt.Option) (r *core_api.MerchantListBookRecordsResp, err error) {
 	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
-	return p.kClient.MerchantGetBookRecords(ctx, Req)
+	return p.kClient.MerchantListBookRecords(ctx, Req)
 }
 
 func (p *kMerchantClient) MerchantUpdateInfo(ctx context.Context, Req *core_api.MerchantUpdateInfoReq, callOptions ...callopt.Option) (r *core_api.Response, err error) {

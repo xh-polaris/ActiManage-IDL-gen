@@ -307,7 +307,7 @@ func (x *Header) fastReadField1(buf []byte, _type int8) (offset int, err error) 
 	return offset, err
 }
 
-func (x *Covers) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
+func (x *Cover) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
 	switch number {
 	case 1:
 		offset, err = x.fastReadField1(buf, _type)
@@ -329,15 +329,15 @@ func (x *Covers) FastRead(buf []byte, _type int8, number int32) (offset int, err
 SkipFieldError:
 	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
 ReadFieldError:
-	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_Covers[number], err)
+	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_Cover[number], err)
 }
 
-func (x *Covers) fastReadField1(buf []byte, _type int8) (offset int, err error) {
+func (x *Cover) fastReadField1(buf []byte, _type int8) (offset int, err error) {
 	x.Type, offset, err = fastpb.ReadInt64(buf, _type)
 	return offset, err
 }
 
-func (x *Covers) fastReadField2(buf []byte, _type int8) (offset int, err error) {
+func (x *Cover) fastReadField2(buf []byte, _type int8) (offset int, err error) {
 	var v string
 	v, offset, err = fastpb.ReadString(buf, _type)
 	if err != nil {
@@ -458,7 +458,7 @@ func (x *Setting) fastReadField3(buf []byte, _type int8) (offset int, err error)
 }
 
 func (x *Setting) fastReadField4(buf []byte, _type int8) (offset int, err error) {
-	var v Covers
+	var v Cover
 	offset, err = fastpb.ReadMessage(buf, _type, &v)
 	if err != nil {
 		return offset, err
@@ -1093,7 +1093,7 @@ func (x *UpdateSettingReq) fastReadField2(buf []byte, _type int8) (offset int, e
 }
 
 func (x *UpdateSettingReq) fastReadField3(buf []byte, _type int8) (offset int, err error) {
-	var v Covers
+	var v Cover
 	offset, err = fastpb.ReadMessage(buf, _type, &v)
 	if err != nil {
 		return offset, err
@@ -2548,7 +2548,7 @@ func (x *Header) fastWriteField1(buf []byte) (offset int) {
 	return offset
 }
 
-func (x *Covers) FastWrite(buf []byte) (offset int) {
+func (x *Cover) FastWrite(buf []byte) (offset int) {
 	if x == nil {
 		return offset
 	}
@@ -2557,7 +2557,7 @@ func (x *Covers) FastWrite(buf []byte) (offset int) {
 	return offset
 }
 
-func (x *Covers) fastWriteField1(buf []byte) (offset int) {
+func (x *Cover) fastWriteField1(buf []byte) (offset int) {
 	if x.Type == 0 {
 		return offset
 	}
@@ -2565,7 +2565,7 @@ func (x *Covers) fastWriteField1(buf []byte) (offset int) {
 	return offset
 }
 
-func (x *Covers) fastWriteField2(buf []byte) (offset int) {
+func (x *Cover) fastWriteField2(buf []byte) (offset int) {
 	if len(x.Imgs) == 0 {
 		return offset
 	}
@@ -4253,7 +4253,7 @@ func (x *Header) sizeField1() (n int) {
 	return n
 }
 
-func (x *Covers) Size() (n int) {
+func (x *Cover) Size() (n int) {
 	if x == nil {
 		return n
 	}
@@ -4262,7 +4262,7 @@ func (x *Covers) Size() (n int) {
 	return n
 }
 
-func (x *Covers) sizeField1() (n int) {
+func (x *Cover) sizeField1() (n int) {
 	if x.Type == 0 {
 		return n
 	}
@@ -4270,7 +4270,7 @@ func (x *Covers) sizeField1() (n int) {
 	return n
 }
 
-func (x *Covers) sizeField2() (n int) {
+func (x *Cover) sizeField2() (n int) {
 	if len(x.Imgs) == 0 {
 		return n
 	}
@@ -5765,7 +5765,7 @@ var fieldIDToName_Header = map[int32]string{
 	1: "Rgb",
 }
 
-var fieldIDToName_Covers = map[int32]string{
+var fieldIDToName_Cover = map[int32]string{
 	1: "Type",
 	2: "Imgs",
 }

@@ -463,7 +463,7 @@ func (x *Setting) fastReadField4(buf []byte, _type int8) (offset int, err error)
 	if err != nil {
 		return offset, err
 	}
-	x.Covers = &v
+	x.Cover = &v
 	return offset, nil
 }
 
@@ -1108,7 +1108,7 @@ func (x *UpdateSettingReq) fastReadField3(buf []byte, _type int8) (offset int, e
 	if err != nil {
 		return offset, err
 	}
-	x.Covers = &v
+	x.Cover = &v
 	return offset, nil
 }
 
@@ -2644,10 +2644,10 @@ func (x *Setting) fastWriteField3(buf []byte) (offset int) {
 }
 
 func (x *Setting) fastWriteField4(buf []byte) (offset int) {
-	if x.Covers == nil {
+	if x.Cover == nil {
 		return offset
 	}
-	offset += fastpb.WriteMessage(buf[offset:], 4, x.GetCovers())
+	offset += fastpb.WriteMessage(buf[offset:], 4, x.GetCover())
 	return offset
 }
 
@@ -3152,10 +3152,10 @@ func (x *UpdateSettingReq) fastWriteField2(buf []byte) (offset int) {
 }
 
 func (x *UpdateSettingReq) fastWriteField3(buf []byte) (offset int) {
-	if x.Covers == nil {
+	if x.Cover == nil {
 		return offset
 	}
-	offset += fastpb.WriteMessage(buf[offset:], 3, x.GetCovers())
+	offset += fastpb.WriteMessage(buf[offset:], 3, x.GetCover())
 	return offset
 }
 
@@ -4358,10 +4358,10 @@ func (x *Setting) sizeField3() (n int) {
 }
 
 func (x *Setting) sizeField4() (n int) {
-	if x.Covers == nil {
+	if x.Cover == nil {
 		return n
 	}
-	n += fastpb.SizeMessage(4, x.GetCovers())
+	n += fastpb.SizeMessage(4, x.GetCover())
 	return n
 }
 
@@ -4866,10 +4866,10 @@ func (x *UpdateSettingReq) sizeField2() (n int) {
 }
 
 func (x *UpdateSettingReq) sizeField3() (n int) {
-	if x.Covers == nil {
+	if x.Cover == nil {
 		return n
 	}
-	n += fastpb.SizeMessage(3, x.GetCovers())
+	n += fastpb.SizeMessage(3, x.GetCover())
 	return n
 }
 
@@ -5806,7 +5806,7 @@ var fieldIDToName_Setting = map[int32]string{
 	1: "Id",
 	2: "MerchantId",
 	3: "Header",
-	4: "Covers",
+	4: "Cover",
 	5: "Footer",
 	6: "CreateTime",
 	7: "UpdateTime",
@@ -5880,7 +5880,7 @@ var fieldIDToName_UpdateMerchantInfoReq = map[int32]string{
 var fieldIDToName_UpdateSettingReq = map[int32]string{
 	1: "Id",
 	2: "Header",
-	3: "Covers",
+	3: "Cover",
 	4: "Footer",
 }
 

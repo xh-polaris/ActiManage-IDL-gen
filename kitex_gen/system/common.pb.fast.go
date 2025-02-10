@@ -2349,6 +2349,11 @@ func (x *ListMerchantsByActivityNumberReq) fastReadField1(buf []byte, _type int8
 
 func (x *ListMerchantsByActivityNumberResp) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
 	switch number {
+	case 1:
+		offset, err = x.fastReadField1(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
 		if err != nil {
@@ -2358,6 +2363,18 @@ func (x *ListMerchantsByActivityNumberResp) FastRead(buf []byte, _type int8, num
 	return offset, nil
 SkipFieldError:
 	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
+ReadFieldError:
+	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_ListMerchantsByActivityNumberResp[number], err)
+}
+
+func (x *ListMerchantsByActivityNumberResp) fastReadField1(buf []byte, _type int8) (offset int, err error) {
+	var v ListMerchantsByActivityNumberResp_Item
+	offset, err = fastpb.ReadMessage(buf, _type, &v)
+	if err != nil {
+		return offset, err
+	}
+	x.Items = append(x.Items, &v)
+	return offset, nil
 }
 
 func (x *ListActivitiesByActivityIdReq) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
@@ -4426,6 +4443,17 @@ func (x *ListMerchantsByActivityNumberResp) FastWrite(buf []byte) (offset int) {
 	if x == nil {
 		return offset
 	}
+	offset += x.fastWriteField1(buf[offset:])
+	return offset
+}
+
+func (x *ListMerchantsByActivityNumberResp) fastWriteField1(buf []byte) (offset int) {
+	if x.Items == nil {
+		return offset
+	}
+	for i := range x.GetItems() {
+		offset += fastpb.WriteMessage(buf[offset:], 1, x.GetItems()[i])
+	}
 	return offset
 }
 
@@ -6396,6 +6424,17 @@ func (x *ListMerchantsByActivityNumberResp) Size() (n int) {
 	if x == nil {
 		return n
 	}
+	n += x.sizeField1()
+	return n
+}
+
+func (x *ListMerchantsByActivityNumberResp) sizeField1() (n int) {
+	if x.Items == nil {
+		return n
+	}
+	for i := range x.GetItems() {
+		n += fastpb.SizeMessage(1, x.GetItems()[i])
+	}
 	return n
 }
 
@@ -6929,7 +6968,9 @@ var fieldIDToName_ListMerchantsByActivityNumberReq = map[int32]string{
 	1: "Number",
 }
 
-var fieldIDToName_ListMerchantsByActivityNumberResp = map[int32]string{}
+var fieldIDToName_ListMerchantsByActivityNumberResp = map[int32]string{
+	1: "Items",
+}
 
 var fieldIDToName_ListActivitiesByActivityIdReq = map[int32]string{
 	1: "Ids",

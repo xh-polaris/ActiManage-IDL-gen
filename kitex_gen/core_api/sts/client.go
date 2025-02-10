@@ -14,6 +14,7 @@ type Client interface {
 	StsApplySignedUrl(ctx context.Context, Req *core_api.StsApplySignedUrlReq, callOptions ...callopt.Option) (r *core_api.StsApplySignedUrlResp, err error)
 	StsAIModify(ctx context.Context, Req *core_api.StsAIModifyReq, callOptions ...callopt.Option) (r *core_api.StsAIModifyResp, err error)
 	StsSendVerifyCode(ctx context.Context, Req *core_api.StsSendVerifyCodeReq, callOptions ...callopt.Option) (r *core_api.Response, err error)
+	StsView(ctx context.Context, Req *core_api.StsViewReq, callOptions ...callopt.Option) (r *core_api.Response, err error)
 }
 
 // NewClient creates a client for the service defined in IDL.
@@ -58,4 +59,9 @@ func (p *kStsClient) StsAIModify(ctx context.Context, Req *core_api.StsAIModifyR
 func (p *kStsClient) StsSendVerifyCode(ctx context.Context, Req *core_api.StsSendVerifyCodeReq, callOptions ...callopt.Option) (r *core_api.Response, err error) {
 	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
 	return p.kClient.StsSendVerifyCode(ctx, Req)
+}
+
+func (p *kStsClient) StsView(ctx context.Context, Req *core_api.StsViewReq, callOptions ...callopt.Option) (r *core_api.Response, err error) {
+	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
+	return p.kClient.StsView(ctx, Req)
 }

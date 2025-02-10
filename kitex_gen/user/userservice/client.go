@@ -33,9 +33,12 @@ type Client interface {
 	DoFavorite(ctx context.Context, Req *user.DoFavoriteReq, callOptions ...callopt.Option) (r *user.Response, err error)
 	CancelFavorite(ctx context.Context, Req *user.CancelFavoriteReq, callOptions ...callopt.Option) (r *user.Response, err error)
 	CreateView(ctx context.Context, Req *user.CreateViewReq, callOptions ...callopt.Option) (r *user.Response, err error)
-	IncView(ctx context.Context, Req *user.IncViewReq, callOptions ...callopt.Option) (r *user.IncViewResp, err error)
 	GetFavoriteAndViewOfActivity(ctx context.Context, Req *user.GetFavoriteAndViewOfActivityReq, callOptions ...callopt.Option) (r *user.GetFavoriteAndViewOfActivityResp, err error)
 	GetViewOfMerchant(ctx context.Context, Req *user.GetViewOfMerchantReq, callOptions ...callopt.Option) (r *user.GetViewOfMerchantResp, err error)
+	ListMerchantIdByViewRank(ctx context.Context, Req *user.ListMerchantIdsByViewRankReq, callOptions ...callopt.Option) (r *user.ListMerchantIdsByViewRankResp, err error)
+	ListMerchantIdRankRankByBookRecordRank(ctx context.Context, Req *user.ListMerchantIdsByBookRecordRankReq, callOptions ...callopt.Option) (r *user.ListMerchantIdsByBookRecordRankResp, err error)
+	ListActivityIdRankRankByBookRecordRank(ctx context.Context, Req *user.ListActivityIdsByBookRecordRankReq, callOptions ...callopt.Option) (r *user.ListActivityIdsByBookRecordRankResp, err error)
+	GetViewDataByMerchant(ctx context.Context, Req *user.GetViewDataByMerchantReq, callOptions ...callopt.Option) (r *user.GetViewDataByMerchantResp, err error)
 }
 
 // NewClient creates a client for the service defined in IDL.
@@ -177,11 +180,6 @@ func (p *kUserServiceClient) CreateView(ctx context.Context, Req *user.CreateVie
 	return p.kClient.CreateView(ctx, Req)
 }
 
-func (p *kUserServiceClient) IncView(ctx context.Context, Req *user.IncViewReq, callOptions ...callopt.Option) (r *user.IncViewResp, err error) {
-	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
-	return p.kClient.IncView(ctx, Req)
-}
-
 func (p *kUserServiceClient) GetFavoriteAndViewOfActivity(ctx context.Context, Req *user.GetFavoriteAndViewOfActivityReq, callOptions ...callopt.Option) (r *user.GetFavoriteAndViewOfActivityResp, err error) {
 	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
 	return p.kClient.GetFavoriteAndViewOfActivity(ctx, Req)
@@ -190,4 +188,24 @@ func (p *kUserServiceClient) GetFavoriteAndViewOfActivity(ctx context.Context, R
 func (p *kUserServiceClient) GetViewOfMerchant(ctx context.Context, Req *user.GetViewOfMerchantReq, callOptions ...callopt.Option) (r *user.GetViewOfMerchantResp, err error) {
 	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
 	return p.kClient.GetViewOfMerchant(ctx, Req)
+}
+
+func (p *kUserServiceClient) ListMerchantIdByViewRank(ctx context.Context, Req *user.ListMerchantIdsByViewRankReq, callOptions ...callopt.Option) (r *user.ListMerchantIdsByViewRankResp, err error) {
+	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
+	return p.kClient.ListMerchantIdByViewRank(ctx, Req)
+}
+
+func (p *kUserServiceClient) ListMerchantIdRankRankByBookRecordRank(ctx context.Context, Req *user.ListMerchantIdsByBookRecordRankReq, callOptions ...callopt.Option) (r *user.ListMerchantIdsByBookRecordRankResp, err error) {
+	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
+	return p.kClient.ListMerchantIdRankRankByBookRecordRank(ctx, Req)
+}
+
+func (p *kUserServiceClient) ListActivityIdRankRankByBookRecordRank(ctx context.Context, Req *user.ListActivityIdsByBookRecordRankReq, callOptions ...callopt.Option) (r *user.ListActivityIdsByBookRecordRankResp, err error) {
+	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
+	return p.kClient.ListActivityIdRankRankByBookRecordRank(ctx, Req)
+}
+
+func (p *kUserServiceClient) GetViewDataByMerchant(ctx context.Context, Req *user.GetViewDataByMerchantReq, callOptions ...callopt.Option) (r *user.GetViewDataByMerchantResp, err error) {
+	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
+	return p.kClient.GetViewDataByMerchant(ctx, Req)
 }

@@ -36,6 +36,13 @@ var serviceMethods = map[string]kitex.MethodInfo{
 		false,
 		kitex.WithStreamingMode(kitex.StreamingUnary),
 	),
+	"StsView": kitex.NewMethodInfo(
+		stsViewHandler,
+		newStsViewArgs,
+		newStsViewResult,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingUnary),
+	),
 }
 
 var (
@@ -561,6 +568,159 @@ func (p *StsSendVerifyCodeResult) GetResult() interface{} {
 	return p.Success
 }
 
+func stsViewHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
+	switch s := arg.(type) {
+	case *streaming.Args:
+		st := s.Stream
+		req := new(core_api.StsViewReq)
+		if err := st.RecvMsg(req); err != nil {
+			return err
+		}
+		resp, err := handler.(core_api.Sts).StsView(ctx, req)
+		if err != nil {
+			return err
+		}
+		return st.SendMsg(resp)
+	case *StsViewArgs:
+		success, err := handler.(core_api.Sts).StsView(ctx, s.Req)
+		if err != nil {
+			return err
+		}
+		realResult := result.(*StsViewResult)
+		realResult.Success = success
+		return nil
+	default:
+		return errInvalidMessageType
+	}
+}
+func newStsViewArgs() interface{} {
+	return &StsViewArgs{}
+}
+
+func newStsViewResult() interface{} {
+	return &StsViewResult{}
+}
+
+type StsViewArgs struct {
+	Req *core_api.StsViewReq
+}
+
+func (p *StsViewArgs) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetReq() {
+		p.Req = new(core_api.StsViewReq)
+	}
+	return p.Req.FastRead(buf, _type, number)
+}
+
+func (p *StsViewArgs) FastWrite(buf []byte) (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.FastWrite(buf)
+}
+
+func (p *StsViewArgs) Size() (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.Size()
+}
+
+func (p *StsViewArgs) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetReq() {
+		return out, nil
+	}
+	return proto.Marshal(p.Req)
+}
+
+func (p *StsViewArgs) Unmarshal(in []byte) error {
+	msg := new(core_api.StsViewReq)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Req = msg
+	return nil
+}
+
+var StsViewArgs_Req_DEFAULT *core_api.StsViewReq
+
+func (p *StsViewArgs) GetReq() *core_api.StsViewReq {
+	if !p.IsSetReq() {
+		return StsViewArgs_Req_DEFAULT
+	}
+	return p.Req
+}
+
+func (p *StsViewArgs) IsSetReq() bool {
+	return p.Req != nil
+}
+
+func (p *StsViewArgs) GetFirstArgument() interface{} {
+	return p.Req
+}
+
+type StsViewResult struct {
+	Success *core_api.Response
+}
+
+var StsViewResult_Success_DEFAULT *core_api.Response
+
+func (p *StsViewResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetSuccess() {
+		p.Success = new(core_api.Response)
+	}
+	return p.Success.FastRead(buf, _type, number)
+}
+
+func (p *StsViewResult) FastWrite(buf []byte) (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.FastWrite(buf)
+}
+
+func (p *StsViewResult) Size() (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.Size()
+}
+
+func (p *StsViewResult) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetSuccess() {
+		return out, nil
+	}
+	return proto.Marshal(p.Success)
+}
+
+func (p *StsViewResult) Unmarshal(in []byte) error {
+	msg := new(core_api.Response)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Success = msg
+	return nil
+}
+
+func (p *StsViewResult) GetSuccess() *core_api.Response {
+	if !p.IsSetSuccess() {
+		return StsViewResult_Success_DEFAULT
+	}
+	return p.Success
+}
+
+func (p *StsViewResult) SetSuccess(x interface{}) {
+	p.Success = x.(*core_api.Response)
+}
+
+func (p *StsViewResult) IsSetSuccess() bool {
+	return p.Success != nil
+}
+
+func (p *StsViewResult) GetResult() interface{} {
+	return p.Success
+}
+
 type kClient struct {
 	c client.Client
 }
@@ -596,6 +756,16 @@ func (p *kClient) StsSendVerifyCode(ctx context.Context, Req *core_api.StsSendVe
 	_args.Req = Req
 	var _result StsSendVerifyCodeResult
 	if err = p.c.Call(ctx, "StsSendVerifyCode", &_args, &_result); err != nil {
+		return
+	}
+	return _result.GetSuccess(), nil
+}
+
+func (p *kClient) StsView(ctx context.Context, Req *core_api.StsViewReq) (r *core_api.Response, err error) {
+	var _args StsViewArgs
+	_args.Req = Req
+	var _result StsViewResult
+	if err = p.c.Call(ctx, "StsView", &_args, &_result); err != nil {
 		return
 	}
 	return _result.GetSuccess(), nil

@@ -169,13 +169,6 @@ var serviceMethods = map[string]kitex.MethodInfo{
 		false,
 		kitex.WithStreamingMode(kitex.StreamingUnary),
 	),
-	"IncView": kitex.NewMethodInfo(
-		incViewHandler,
-		newIncViewArgs,
-		newIncViewResult,
-		false,
-		kitex.WithStreamingMode(kitex.StreamingUnary),
-	),
 	"GetFavoriteAndViewOfActivity": kitex.NewMethodInfo(
 		getFavoriteAndViewOfActivityHandler,
 		newGetFavoriteAndViewOfActivityArgs,
@@ -187,6 +180,34 @@ var serviceMethods = map[string]kitex.MethodInfo{
 		getViewOfMerchantHandler,
 		newGetViewOfMerchantArgs,
 		newGetViewOfMerchantResult,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingUnary),
+	),
+	"ListMerchantIdByViewRank": kitex.NewMethodInfo(
+		listMerchantIdByViewRankHandler,
+		newListMerchantIdByViewRankArgs,
+		newListMerchantIdByViewRankResult,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingUnary),
+	),
+	"ListMerchantIdRankRankByBookRecordRank": kitex.NewMethodInfo(
+		listMerchantIdRankRankByBookRecordRankHandler,
+		newListMerchantIdRankRankByBookRecordRankArgs,
+		newListMerchantIdRankRankByBookRecordRankResult,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingUnary),
+	),
+	"ListActivityIdRankRankByBookRecordRank": kitex.NewMethodInfo(
+		listActivityIdRankRankByBookRecordRankHandler,
+		newListActivityIdRankRankByBookRecordRankArgs,
+		newListActivityIdRankRankByBookRecordRankResult,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingUnary),
+	),
+	"GetViewDataByMerchant": kitex.NewMethodInfo(
+		getViewDataByMerchantHandler,
+		newGetViewDataByMerchantArgs,
+		newGetViewDataByMerchantResult,
 		false,
 		kitex.WithStreamingMode(kitex.StreamingUnary),
 	),
@@ -3622,159 +3643,6 @@ func (p *CreateViewResult) GetResult() interface{} {
 	return p.Success
 }
 
-func incViewHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
-	switch s := arg.(type) {
-	case *streaming.Args:
-		st := s.Stream
-		req := new(user.IncViewReq)
-		if err := st.RecvMsg(req); err != nil {
-			return err
-		}
-		resp, err := handler.(user.UserService).IncView(ctx, req)
-		if err != nil {
-			return err
-		}
-		return st.SendMsg(resp)
-	case *IncViewArgs:
-		success, err := handler.(user.UserService).IncView(ctx, s.Req)
-		if err != nil {
-			return err
-		}
-		realResult := result.(*IncViewResult)
-		realResult.Success = success
-		return nil
-	default:
-		return errInvalidMessageType
-	}
-}
-func newIncViewArgs() interface{} {
-	return &IncViewArgs{}
-}
-
-func newIncViewResult() interface{} {
-	return &IncViewResult{}
-}
-
-type IncViewArgs struct {
-	Req *user.IncViewReq
-}
-
-func (p *IncViewArgs) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
-	if !p.IsSetReq() {
-		p.Req = new(user.IncViewReq)
-	}
-	return p.Req.FastRead(buf, _type, number)
-}
-
-func (p *IncViewArgs) FastWrite(buf []byte) (n int) {
-	if !p.IsSetReq() {
-		return 0
-	}
-	return p.Req.FastWrite(buf)
-}
-
-func (p *IncViewArgs) Size() (n int) {
-	if !p.IsSetReq() {
-		return 0
-	}
-	return p.Req.Size()
-}
-
-func (p *IncViewArgs) Marshal(out []byte) ([]byte, error) {
-	if !p.IsSetReq() {
-		return out, nil
-	}
-	return proto.Marshal(p.Req)
-}
-
-func (p *IncViewArgs) Unmarshal(in []byte) error {
-	msg := new(user.IncViewReq)
-	if err := proto.Unmarshal(in, msg); err != nil {
-		return err
-	}
-	p.Req = msg
-	return nil
-}
-
-var IncViewArgs_Req_DEFAULT *user.IncViewReq
-
-func (p *IncViewArgs) GetReq() *user.IncViewReq {
-	if !p.IsSetReq() {
-		return IncViewArgs_Req_DEFAULT
-	}
-	return p.Req
-}
-
-func (p *IncViewArgs) IsSetReq() bool {
-	return p.Req != nil
-}
-
-func (p *IncViewArgs) GetFirstArgument() interface{} {
-	return p.Req
-}
-
-type IncViewResult struct {
-	Success *user.IncViewResp
-}
-
-var IncViewResult_Success_DEFAULT *user.IncViewResp
-
-func (p *IncViewResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
-	if !p.IsSetSuccess() {
-		p.Success = new(user.IncViewResp)
-	}
-	return p.Success.FastRead(buf, _type, number)
-}
-
-func (p *IncViewResult) FastWrite(buf []byte) (n int) {
-	if !p.IsSetSuccess() {
-		return 0
-	}
-	return p.Success.FastWrite(buf)
-}
-
-func (p *IncViewResult) Size() (n int) {
-	if !p.IsSetSuccess() {
-		return 0
-	}
-	return p.Success.Size()
-}
-
-func (p *IncViewResult) Marshal(out []byte) ([]byte, error) {
-	if !p.IsSetSuccess() {
-		return out, nil
-	}
-	return proto.Marshal(p.Success)
-}
-
-func (p *IncViewResult) Unmarshal(in []byte) error {
-	msg := new(user.IncViewResp)
-	if err := proto.Unmarshal(in, msg); err != nil {
-		return err
-	}
-	p.Success = msg
-	return nil
-}
-
-func (p *IncViewResult) GetSuccess() *user.IncViewResp {
-	if !p.IsSetSuccess() {
-		return IncViewResult_Success_DEFAULT
-	}
-	return p.Success
-}
-
-func (p *IncViewResult) SetSuccess(x interface{}) {
-	p.Success = x.(*user.IncViewResp)
-}
-
-func (p *IncViewResult) IsSetSuccess() bool {
-	return p.Success != nil
-}
-
-func (p *IncViewResult) GetResult() interface{} {
-	return p.Success
-}
-
 func getFavoriteAndViewOfActivityHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
 	switch s := arg.(type) {
 	case *streaming.Args:
@@ -4081,6 +3949,618 @@ func (p *GetViewOfMerchantResult) GetResult() interface{} {
 	return p.Success
 }
 
+func listMerchantIdByViewRankHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
+	switch s := arg.(type) {
+	case *streaming.Args:
+		st := s.Stream
+		req := new(user.ListMerchantIdsByViewRankReq)
+		if err := st.RecvMsg(req); err != nil {
+			return err
+		}
+		resp, err := handler.(user.UserService).ListMerchantIdByViewRank(ctx, req)
+		if err != nil {
+			return err
+		}
+		return st.SendMsg(resp)
+	case *ListMerchantIdByViewRankArgs:
+		success, err := handler.(user.UserService).ListMerchantIdByViewRank(ctx, s.Req)
+		if err != nil {
+			return err
+		}
+		realResult := result.(*ListMerchantIdByViewRankResult)
+		realResult.Success = success
+		return nil
+	default:
+		return errInvalidMessageType
+	}
+}
+func newListMerchantIdByViewRankArgs() interface{} {
+	return &ListMerchantIdByViewRankArgs{}
+}
+
+func newListMerchantIdByViewRankResult() interface{} {
+	return &ListMerchantIdByViewRankResult{}
+}
+
+type ListMerchantIdByViewRankArgs struct {
+	Req *user.ListMerchantIdsByViewRankReq
+}
+
+func (p *ListMerchantIdByViewRankArgs) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetReq() {
+		p.Req = new(user.ListMerchantIdsByViewRankReq)
+	}
+	return p.Req.FastRead(buf, _type, number)
+}
+
+func (p *ListMerchantIdByViewRankArgs) FastWrite(buf []byte) (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.FastWrite(buf)
+}
+
+func (p *ListMerchantIdByViewRankArgs) Size() (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.Size()
+}
+
+func (p *ListMerchantIdByViewRankArgs) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetReq() {
+		return out, nil
+	}
+	return proto.Marshal(p.Req)
+}
+
+func (p *ListMerchantIdByViewRankArgs) Unmarshal(in []byte) error {
+	msg := new(user.ListMerchantIdsByViewRankReq)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Req = msg
+	return nil
+}
+
+var ListMerchantIdByViewRankArgs_Req_DEFAULT *user.ListMerchantIdsByViewRankReq
+
+func (p *ListMerchantIdByViewRankArgs) GetReq() *user.ListMerchantIdsByViewRankReq {
+	if !p.IsSetReq() {
+		return ListMerchantIdByViewRankArgs_Req_DEFAULT
+	}
+	return p.Req
+}
+
+func (p *ListMerchantIdByViewRankArgs) IsSetReq() bool {
+	return p.Req != nil
+}
+
+func (p *ListMerchantIdByViewRankArgs) GetFirstArgument() interface{} {
+	return p.Req
+}
+
+type ListMerchantIdByViewRankResult struct {
+	Success *user.ListMerchantIdsByViewRankResp
+}
+
+var ListMerchantIdByViewRankResult_Success_DEFAULT *user.ListMerchantIdsByViewRankResp
+
+func (p *ListMerchantIdByViewRankResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetSuccess() {
+		p.Success = new(user.ListMerchantIdsByViewRankResp)
+	}
+	return p.Success.FastRead(buf, _type, number)
+}
+
+func (p *ListMerchantIdByViewRankResult) FastWrite(buf []byte) (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.FastWrite(buf)
+}
+
+func (p *ListMerchantIdByViewRankResult) Size() (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.Size()
+}
+
+func (p *ListMerchantIdByViewRankResult) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetSuccess() {
+		return out, nil
+	}
+	return proto.Marshal(p.Success)
+}
+
+func (p *ListMerchantIdByViewRankResult) Unmarshal(in []byte) error {
+	msg := new(user.ListMerchantIdsByViewRankResp)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Success = msg
+	return nil
+}
+
+func (p *ListMerchantIdByViewRankResult) GetSuccess() *user.ListMerchantIdsByViewRankResp {
+	if !p.IsSetSuccess() {
+		return ListMerchantIdByViewRankResult_Success_DEFAULT
+	}
+	return p.Success
+}
+
+func (p *ListMerchantIdByViewRankResult) SetSuccess(x interface{}) {
+	p.Success = x.(*user.ListMerchantIdsByViewRankResp)
+}
+
+func (p *ListMerchantIdByViewRankResult) IsSetSuccess() bool {
+	return p.Success != nil
+}
+
+func (p *ListMerchantIdByViewRankResult) GetResult() interface{} {
+	return p.Success
+}
+
+func listMerchantIdRankRankByBookRecordRankHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
+	switch s := arg.(type) {
+	case *streaming.Args:
+		st := s.Stream
+		req := new(user.ListMerchantIdsByBookRecordRankReq)
+		if err := st.RecvMsg(req); err != nil {
+			return err
+		}
+		resp, err := handler.(user.UserService).ListMerchantIdRankRankByBookRecordRank(ctx, req)
+		if err != nil {
+			return err
+		}
+		return st.SendMsg(resp)
+	case *ListMerchantIdRankRankByBookRecordRankArgs:
+		success, err := handler.(user.UserService).ListMerchantIdRankRankByBookRecordRank(ctx, s.Req)
+		if err != nil {
+			return err
+		}
+		realResult := result.(*ListMerchantIdRankRankByBookRecordRankResult)
+		realResult.Success = success
+		return nil
+	default:
+		return errInvalidMessageType
+	}
+}
+func newListMerchantIdRankRankByBookRecordRankArgs() interface{} {
+	return &ListMerchantIdRankRankByBookRecordRankArgs{}
+}
+
+func newListMerchantIdRankRankByBookRecordRankResult() interface{} {
+	return &ListMerchantIdRankRankByBookRecordRankResult{}
+}
+
+type ListMerchantIdRankRankByBookRecordRankArgs struct {
+	Req *user.ListMerchantIdsByBookRecordRankReq
+}
+
+func (p *ListMerchantIdRankRankByBookRecordRankArgs) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetReq() {
+		p.Req = new(user.ListMerchantIdsByBookRecordRankReq)
+	}
+	return p.Req.FastRead(buf, _type, number)
+}
+
+func (p *ListMerchantIdRankRankByBookRecordRankArgs) FastWrite(buf []byte) (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.FastWrite(buf)
+}
+
+func (p *ListMerchantIdRankRankByBookRecordRankArgs) Size() (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.Size()
+}
+
+func (p *ListMerchantIdRankRankByBookRecordRankArgs) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetReq() {
+		return out, nil
+	}
+	return proto.Marshal(p.Req)
+}
+
+func (p *ListMerchantIdRankRankByBookRecordRankArgs) Unmarshal(in []byte) error {
+	msg := new(user.ListMerchantIdsByBookRecordRankReq)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Req = msg
+	return nil
+}
+
+var ListMerchantIdRankRankByBookRecordRankArgs_Req_DEFAULT *user.ListMerchantIdsByBookRecordRankReq
+
+func (p *ListMerchantIdRankRankByBookRecordRankArgs) GetReq() *user.ListMerchantIdsByBookRecordRankReq {
+	if !p.IsSetReq() {
+		return ListMerchantIdRankRankByBookRecordRankArgs_Req_DEFAULT
+	}
+	return p.Req
+}
+
+func (p *ListMerchantIdRankRankByBookRecordRankArgs) IsSetReq() bool {
+	return p.Req != nil
+}
+
+func (p *ListMerchantIdRankRankByBookRecordRankArgs) GetFirstArgument() interface{} {
+	return p.Req
+}
+
+type ListMerchantIdRankRankByBookRecordRankResult struct {
+	Success *user.ListMerchantIdsByBookRecordRankResp
+}
+
+var ListMerchantIdRankRankByBookRecordRankResult_Success_DEFAULT *user.ListMerchantIdsByBookRecordRankResp
+
+func (p *ListMerchantIdRankRankByBookRecordRankResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetSuccess() {
+		p.Success = new(user.ListMerchantIdsByBookRecordRankResp)
+	}
+	return p.Success.FastRead(buf, _type, number)
+}
+
+func (p *ListMerchantIdRankRankByBookRecordRankResult) FastWrite(buf []byte) (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.FastWrite(buf)
+}
+
+func (p *ListMerchantIdRankRankByBookRecordRankResult) Size() (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.Size()
+}
+
+func (p *ListMerchantIdRankRankByBookRecordRankResult) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetSuccess() {
+		return out, nil
+	}
+	return proto.Marshal(p.Success)
+}
+
+func (p *ListMerchantIdRankRankByBookRecordRankResult) Unmarshal(in []byte) error {
+	msg := new(user.ListMerchantIdsByBookRecordRankResp)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Success = msg
+	return nil
+}
+
+func (p *ListMerchantIdRankRankByBookRecordRankResult) GetSuccess() *user.ListMerchantIdsByBookRecordRankResp {
+	if !p.IsSetSuccess() {
+		return ListMerchantIdRankRankByBookRecordRankResult_Success_DEFAULT
+	}
+	return p.Success
+}
+
+func (p *ListMerchantIdRankRankByBookRecordRankResult) SetSuccess(x interface{}) {
+	p.Success = x.(*user.ListMerchantIdsByBookRecordRankResp)
+}
+
+func (p *ListMerchantIdRankRankByBookRecordRankResult) IsSetSuccess() bool {
+	return p.Success != nil
+}
+
+func (p *ListMerchantIdRankRankByBookRecordRankResult) GetResult() interface{} {
+	return p.Success
+}
+
+func listActivityIdRankRankByBookRecordRankHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
+	switch s := arg.(type) {
+	case *streaming.Args:
+		st := s.Stream
+		req := new(user.ListActivityIdsByBookRecordRankReq)
+		if err := st.RecvMsg(req); err != nil {
+			return err
+		}
+		resp, err := handler.(user.UserService).ListActivityIdRankRankByBookRecordRank(ctx, req)
+		if err != nil {
+			return err
+		}
+		return st.SendMsg(resp)
+	case *ListActivityIdRankRankByBookRecordRankArgs:
+		success, err := handler.(user.UserService).ListActivityIdRankRankByBookRecordRank(ctx, s.Req)
+		if err != nil {
+			return err
+		}
+		realResult := result.(*ListActivityIdRankRankByBookRecordRankResult)
+		realResult.Success = success
+		return nil
+	default:
+		return errInvalidMessageType
+	}
+}
+func newListActivityIdRankRankByBookRecordRankArgs() interface{} {
+	return &ListActivityIdRankRankByBookRecordRankArgs{}
+}
+
+func newListActivityIdRankRankByBookRecordRankResult() interface{} {
+	return &ListActivityIdRankRankByBookRecordRankResult{}
+}
+
+type ListActivityIdRankRankByBookRecordRankArgs struct {
+	Req *user.ListActivityIdsByBookRecordRankReq
+}
+
+func (p *ListActivityIdRankRankByBookRecordRankArgs) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetReq() {
+		p.Req = new(user.ListActivityIdsByBookRecordRankReq)
+	}
+	return p.Req.FastRead(buf, _type, number)
+}
+
+func (p *ListActivityIdRankRankByBookRecordRankArgs) FastWrite(buf []byte) (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.FastWrite(buf)
+}
+
+func (p *ListActivityIdRankRankByBookRecordRankArgs) Size() (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.Size()
+}
+
+func (p *ListActivityIdRankRankByBookRecordRankArgs) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetReq() {
+		return out, nil
+	}
+	return proto.Marshal(p.Req)
+}
+
+func (p *ListActivityIdRankRankByBookRecordRankArgs) Unmarshal(in []byte) error {
+	msg := new(user.ListActivityIdsByBookRecordRankReq)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Req = msg
+	return nil
+}
+
+var ListActivityIdRankRankByBookRecordRankArgs_Req_DEFAULT *user.ListActivityIdsByBookRecordRankReq
+
+func (p *ListActivityIdRankRankByBookRecordRankArgs) GetReq() *user.ListActivityIdsByBookRecordRankReq {
+	if !p.IsSetReq() {
+		return ListActivityIdRankRankByBookRecordRankArgs_Req_DEFAULT
+	}
+	return p.Req
+}
+
+func (p *ListActivityIdRankRankByBookRecordRankArgs) IsSetReq() bool {
+	return p.Req != nil
+}
+
+func (p *ListActivityIdRankRankByBookRecordRankArgs) GetFirstArgument() interface{} {
+	return p.Req
+}
+
+type ListActivityIdRankRankByBookRecordRankResult struct {
+	Success *user.ListActivityIdsByBookRecordRankResp
+}
+
+var ListActivityIdRankRankByBookRecordRankResult_Success_DEFAULT *user.ListActivityIdsByBookRecordRankResp
+
+func (p *ListActivityIdRankRankByBookRecordRankResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetSuccess() {
+		p.Success = new(user.ListActivityIdsByBookRecordRankResp)
+	}
+	return p.Success.FastRead(buf, _type, number)
+}
+
+func (p *ListActivityIdRankRankByBookRecordRankResult) FastWrite(buf []byte) (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.FastWrite(buf)
+}
+
+func (p *ListActivityIdRankRankByBookRecordRankResult) Size() (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.Size()
+}
+
+func (p *ListActivityIdRankRankByBookRecordRankResult) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetSuccess() {
+		return out, nil
+	}
+	return proto.Marshal(p.Success)
+}
+
+func (p *ListActivityIdRankRankByBookRecordRankResult) Unmarshal(in []byte) error {
+	msg := new(user.ListActivityIdsByBookRecordRankResp)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Success = msg
+	return nil
+}
+
+func (p *ListActivityIdRankRankByBookRecordRankResult) GetSuccess() *user.ListActivityIdsByBookRecordRankResp {
+	if !p.IsSetSuccess() {
+		return ListActivityIdRankRankByBookRecordRankResult_Success_DEFAULT
+	}
+	return p.Success
+}
+
+func (p *ListActivityIdRankRankByBookRecordRankResult) SetSuccess(x interface{}) {
+	p.Success = x.(*user.ListActivityIdsByBookRecordRankResp)
+}
+
+func (p *ListActivityIdRankRankByBookRecordRankResult) IsSetSuccess() bool {
+	return p.Success != nil
+}
+
+func (p *ListActivityIdRankRankByBookRecordRankResult) GetResult() interface{} {
+	return p.Success
+}
+
+func getViewDataByMerchantHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
+	switch s := arg.(type) {
+	case *streaming.Args:
+		st := s.Stream
+		req := new(user.GetViewDataByMerchantReq)
+		if err := st.RecvMsg(req); err != nil {
+			return err
+		}
+		resp, err := handler.(user.UserService).GetViewDataByMerchant(ctx, req)
+		if err != nil {
+			return err
+		}
+		return st.SendMsg(resp)
+	case *GetViewDataByMerchantArgs:
+		success, err := handler.(user.UserService).GetViewDataByMerchant(ctx, s.Req)
+		if err != nil {
+			return err
+		}
+		realResult := result.(*GetViewDataByMerchantResult)
+		realResult.Success = success
+		return nil
+	default:
+		return errInvalidMessageType
+	}
+}
+func newGetViewDataByMerchantArgs() interface{} {
+	return &GetViewDataByMerchantArgs{}
+}
+
+func newGetViewDataByMerchantResult() interface{} {
+	return &GetViewDataByMerchantResult{}
+}
+
+type GetViewDataByMerchantArgs struct {
+	Req *user.GetViewDataByMerchantReq
+}
+
+func (p *GetViewDataByMerchantArgs) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetReq() {
+		p.Req = new(user.GetViewDataByMerchantReq)
+	}
+	return p.Req.FastRead(buf, _type, number)
+}
+
+func (p *GetViewDataByMerchantArgs) FastWrite(buf []byte) (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.FastWrite(buf)
+}
+
+func (p *GetViewDataByMerchantArgs) Size() (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.Size()
+}
+
+func (p *GetViewDataByMerchantArgs) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetReq() {
+		return out, nil
+	}
+	return proto.Marshal(p.Req)
+}
+
+func (p *GetViewDataByMerchantArgs) Unmarshal(in []byte) error {
+	msg := new(user.GetViewDataByMerchantReq)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Req = msg
+	return nil
+}
+
+var GetViewDataByMerchantArgs_Req_DEFAULT *user.GetViewDataByMerchantReq
+
+func (p *GetViewDataByMerchantArgs) GetReq() *user.GetViewDataByMerchantReq {
+	if !p.IsSetReq() {
+		return GetViewDataByMerchantArgs_Req_DEFAULT
+	}
+	return p.Req
+}
+
+func (p *GetViewDataByMerchantArgs) IsSetReq() bool {
+	return p.Req != nil
+}
+
+func (p *GetViewDataByMerchantArgs) GetFirstArgument() interface{} {
+	return p.Req
+}
+
+type GetViewDataByMerchantResult struct {
+	Success *user.GetViewDataByMerchantResp
+}
+
+var GetViewDataByMerchantResult_Success_DEFAULT *user.GetViewDataByMerchantResp
+
+func (p *GetViewDataByMerchantResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetSuccess() {
+		p.Success = new(user.GetViewDataByMerchantResp)
+	}
+	return p.Success.FastRead(buf, _type, number)
+}
+
+func (p *GetViewDataByMerchantResult) FastWrite(buf []byte) (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.FastWrite(buf)
+}
+
+func (p *GetViewDataByMerchantResult) Size() (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.Size()
+}
+
+func (p *GetViewDataByMerchantResult) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetSuccess() {
+		return out, nil
+	}
+	return proto.Marshal(p.Success)
+}
+
+func (p *GetViewDataByMerchantResult) Unmarshal(in []byte) error {
+	msg := new(user.GetViewDataByMerchantResp)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Success = msg
+	return nil
+}
+
+func (p *GetViewDataByMerchantResult) GetSuccess() *user.GetViewDataByMerchantResp {
+	if !p.IsSetSuccess() {
+		return GetViewDataByMerchantResult_Success_DEFAULT
+	}
+	return p.Success
+}
+
+func (p *GetViewDataByMerchantResult) SetSuccess(x interface{}) {
+	p.Success = x.(*user.GetViewDataByMerchantResp)
+}
+
+func (p *GetViewDataByMerchantResult) IsSetSuccess() bool {
+	return p.Success != nil
+}
+
+func (p *GetViewDataByMerchantResult) GetResult() interface{} {
+	return p.Success
+}
+
 type kClient struct {
 	c client.Client
 }
@@ -4311,16 +4791,6 @@ func (p *kClient) CreateView(ctx context.Context, Req *user.CreateViewReq) (r *u
 	return _result.GetSuccess(), nil
 }
 
-func (p *kClient) IncView(ctx context.Context, Req *user.IncViewReq) (r *user.IncViewResp, err error) {
-	var _args IncViewArgs
-	_args.Req = Req
-	var _result IncViewResult
-	if err = p.c.Call(ctx, "IncView", &_args, &_result); err != nil {
-		return
-	}
-	return _result.GetSuccess(), nil
-}
-
 func (p *kClient) GetFavoriteAndViewOfActivity(ctx context.Context, Req *user.GetFavoriteAndViewOfActivityReq) (r *user.GetFavoriteAndViewOfActivityResp, err error) {
 	var _args GetFavoriteAndViewOfActivityArgs
 	_args.Req = Req
@@ -4336,6 +4806,46 @@ func (p *kClient) GetViewOfMerchant(ctx context.Context, Req *user.GetViewOfMerc
 	_args.Req = Req
 	var _result GetViewOfMerchantResult
 	if err = p.c.Call(ctx, "GetViewOfMerchant", &_args, &_result); err != nil {
+		return
+	}
+	return _result.GetSuccess(), nil
+}
+
+func (p *kClient) ListMerchantIdByViewRank(ctx context.Context, Req *user.ListMerchantIdsByViewRankReq) (r *user.ListMerchantIdsByViewRankResp, err error) {
+	var _args ListMerchantIdByViewRankArgs
+	_args.Req = Req
+	var _result ListMerchantIdByViewRankResult
+	if err = p.c.Call(ctx, "ListMerchantIdByViewRank", &_args, &_result); err != nil {
+		return
+	}
+	return _result.GetSuccess(), nil
+}
+
+func (p *kClient) ListMerchantIdRankRankByBookRecordRank(ctx context.Context, Req *user.ListMerchantIdsByBookRecordRankReq) (r *user.ListMerchantIdsByBookRecordRankResp, err error) {
+	var _args ListMerchantIdRankRankByBookRecordRankArgs
+	_args.Req = Req
+	var _result ListMerchantIdRankRankByBookRecordRankResult
+	if err = p.c.Call(ctx, "ListMerchantIdRankRankByBookRecordRank", &_args, &_result); err != nil {
+		return
+	}
+	return _result.GetSuccess(), nil
+}
+
+func (p *kClient) ListActivityIdRankRankByBookRecordRank(ctx context.Context, Req *user.ListActivityIdsByBookRecordRankReq) (r *user.ListActivityIdsByBookRecordRankResp, err error) {
+	var _args ListActivityIdRankRankByBookRecordRankArgs
+	_args.Req = Req
+	var _result ListActivityIdRankRankByBookRecordRankResult
+	if err = p.c.Call(ctx, "ListActivityIdRankRankByBookRecordRank", &_args, &_result); err != nil {
+		return
+	}
+	return _result.GetSuccess(), nil
+}
+
+func (p *kClient) GetViewDataByMerchant(ctx context.Context, Req *user.GetViewDataByMerchantReq) (r *user.GetViewDataByMerchantResp, err error) {
+	var _args GetViewDataByMerchantArgs
+	_args.Req = Req
+	var _result GetViewDataByMerchantResult
+	if err = p.c.Call(ctx, "GetViewDataByMerchant", &_args, &_result); err != nil {
 		return
 	}
 	return _result.GetSuccess(), nil

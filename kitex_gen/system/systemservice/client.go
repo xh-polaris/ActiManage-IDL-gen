@@ -29,6 +29,10 @@ type Client interface {
 	DeleteMerchant(ctx context.Context, Req *system.DeleteMerchantReq, callOptions ...callopt.Option) (r *system.Response, err error)
 	GetMerchantInfo(ctx context.Context, Req *system.GetMerchantInfoReq, callOptions ...callopt.Option) (r *system.GetMerchantInfoResp, err error)
 	ListMerchants(ctx context.Context, Req *system.ListMerchantsReq, callOptions ...callopt.Option) (r *system.ListMerchantsResp, err error)
+	GetMerchantTotalData(ctx context.Context, Req *system.GetMerchantTotalDataReq, callOptions ...callopt.Option) (r *system.GetMerchantTotalDataResp, err error)
+	ListMerchantByMerchantId(ctx context.Context, Req *system.ListMerchantsByMerchantIdReq, callOptions ...callopt.Option) (r *system.ListMerchantsByMerchantIdResp, err error)
+	ListMerchantByActivityNumber(ctx context.Context, Req *system.ListMerchantsByActivityNumberReq, callOptions ...callopt.Option) (r *system.ListMerchantsByActivityNumberResp, err error)
+	ListActivityByActivityId(ctx context.Context, Req *system.ListActivitiesByActivityIdReq, callOptions ...callopt.Option) (r *system.ListActivitiesByActivityIdResp, err error)
 	StsSendVerifyCode(ctx context.Context, Req *system.StsSendVerifyCodeReq, callOptions ...callopt.Option) (r *system.Response, err error)
 }
 
@@ -149,6 +153,26 @@ func (p *kSystemServiceClient) GetMerchantInfo(ctx context.Context, Req *system.
 func (p *kSystemServiceClient) ListMerchants(ctx context.Context, Req *system.ListMerchantsReq, callOptions ...callopt.Option) (r *system.ListMerchantsResp, err error) {
 	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
 	return p.kClient.ListMerchants(ctx, Req)
+}
+
+func (p *kSystemServiceClient) GetMerchantTotalData(ctx context.Context, Req *system.GetMerchantTotalDataReq, callOptions ...callopt.Option) (r *system.GetMerchantTotalDataResp, err error) {
+	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
+	return p.kClient.GetMerchantTotalData(ctx, Req)
+}
+
+func (p *kSystemServiceClient) ListMerchantByMerchantId(ctx context.Context, Req *system.ListMerchantsByMerchantIdReq, callOptions ...callopt.Option) (r *system.ListMerchantsByMerchantIdResp, err error) {
+	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
+	return p.kClient.ListMerchantByMerchantId(ctx, Req)
+}
+
+func (p *kSystemServiceClient) ListMerchantByActivityNumber(ctx context.Context, Req *system.ListMerchantsByActivityNumberReq, callOptions ...callopt.Option) (r *system.ListMerchantsByActivityNumberResp, err error) {
+	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
+	return p.kClient.ListMerchantByActivityNumber(ctx, Req)
+}
+
+func (p *kSystemServiceClient) ListActivityByActivityId(ctx context.Context, Req *system.ListActivitiesByActivityIdReq, callOptions ...callopt.Option) (r *system.ListActivitiesByActivityIdResp, err error) {
+	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
+	return p.kClient.ListActivityByActivityId(ctx, Req)
 }
 
 func (p *kSystemServiceClient) StsSendVerifyCode(ctx context.Context, Req *system.StsSendVerifyCodeReq, callOptions ...callopt.Option) (r *system.Response, err error) {

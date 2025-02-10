@@ -2978,6 +2978,386 @@ func (x *GetViewOfMerchantResp) GetView() int64 {
 	return 0
 }
 
+// 根据访问排名获取商家列表
+type ListMerchantIdsByViewRankReq struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Number int64 `protobuf:"varint,1,opt,name=number,proto3" json:"number,omitempty"`
+}
+
+func (x *ListMerchantIdsByViewRankReq) Reset() {
+	*x = ListMerchantIdsByViewRankReq{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_ActiManage_user_common_proto_msgTypes[42]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *ListMerchantIdsByViewRankReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListMerchantIdsByViewRankReq) ProtoMessage() {}
+
+func (x *ListMerchantIdsByViewRankReq) ProtoReflect() protoreflect.Message {
+	mi := &file_ActiManage_user_common_proto_msgTypes[42]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListMerchantIdsByViewRankReq.ProtoReflect.Descriptor instead.
+func (*ListMerchantIdsByViewRankReq) Descriptor() ([]byte, []int) {
+	return file_ActiManage_user_common_proto_rawDescGZIP(), []int{42}
+}
+
+func (x *ListMerchantIdsByViewRankReq) GetNumber() int64 {
+	if x != nil {
+		return x.Number
+	}
+	return 0
+}
+
+type ListMerchantIdsByViewRankResp struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Ids []string `protobuf:"bytes,1,rep,name=ids,proto3" json:"ids,omitempty"`
+}
+
+func (x *ListMerchantIdsByViewRankResp) Reset() {
+	*x = ListMerchantIdsByViewRankResp{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_ActiManage_user_common_proto_msgTypes[43]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *ListMerchantIdsByViewRankResp) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListMerchantIdsByViewRankResp) ProtoMessage() {}
+
+func (x *ListMerchantIdsByViewRankResp) ProtoReflect() protoreflect.Message {
+	mi := &file_ActiManage_user_common_proto_msgTypes[43]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListMerchantIdsByViewRankResp.ProtoReflect.Descriptor instead.
+func (*ListMerchantIdsByViewRankResp) Descriptor() ([]byte, []int) {
+	return file_ActiManage_user_common_proto_rawDescGZIP(), []int{43}
+}
+
+func (x *ListMerchantIdsByViewRankResp) GetIds() []string {
+	if x != nil {
+		return x.Ids
+	}
+	return nil
+}
+
+// 根据预约排名获取商家列表
+type ListMerchantIdsByBookRecordRankReq struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Number int64 `protobuf:"varint,1,opt,name=number,proto3" json:"number,omitempty"`
+}
+
+func (x *ListMerchantIdsByBookRecordRankReq) Reset() {
+	*x = ListMerchantIdsByBookRecordRankReq{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_ActiManage_user_common_proto_msgTypes[44]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *ListMerchantIdsByBookRecordRankReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListMerchantIdsByBookRecordRankReq) ProtoMessage() {}
+
+func (x *ListMerchantIdsByBookRecordRankReq) ProtoReflect() protoreflect.Message {
+	mi := &file_ActiManage_user_common_proto_msgTypes[44]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListMerchantIdsByBookRecordRankReq.ProtoReflect.Descriptor instead.
+func (*ListMerchantIdsByBookRecordRankReq) Descriptor() ([]byte, []int) {
+	return file_ActiManage_user_common_proto_rawDescGZIP(), []int{44}
+}
+
+func (x *ListMerchantIdsByBookRecordRankReq) GetNumber() int64 {
+	if x != nil {
+		return x.Number
+	}
+	return 0
+}
+
+type ListMerchantIdsByBookRecordRankResp struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Ids []string `protobuf:"bytes,1,rep,name=ids,proto3" json:"ids,omitempty"`
+}
+
+func (x *ListMerchantIdsByBookRecordRankResp) Reset() {
+	*x = ListMerchantIdsByBookRecordRankResp{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_ActiManage_user_common_proto_msgTypes[45]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *ListMerchantIdsByBookRecordRankResp) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListMerchantIdsByBookRecordRankResp) ProtoMessage() {}
+
+func (x *ListMerchantIdsByBookRecordRankResp) ProtoReflect() protoreflect.Message {
+	mi := &file_ActiManage_user_common_proto_msgTypes[45]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListMerchantIdsByBookRecordRankResp.ProtoReflect.Descriptor instead.
+func (*ListMerchantIdsByBookRecordRankResp) Descriptor() ([]byte, []int) {
+	return file_ActiManage_user_common_proto_rawDescGZIP(), []int{45}
+}
+
+func (x *ListMerchantIdsByBookRecordRankResp) GetIds() []string {
+	if x != nil {
+		return x.Ids
+	}
+	return nil
+}
+
+// 根据预约排名获取活动列表
+type ListActivityIdsByBookRecordRankReq struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Number int64 `protobuf:"varint,1,opt,name=number,proto3" json:"number,omitempty"`
+}
+
+func (x *ListActivityIdsByBookRecordRankReq) Reset() {
+	*x = ListActivityIdsByBookRecordRankReq{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_ActiManage_user_common_proto_msgTypes[46]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *ListActivityIdsByBookRecordRankReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListActivityIdsByBookRecordRankReq) ProtoMessage() {}
+
+func (x *ListActivityIdsByBookRecordRankReq) ProtoReflect() protoreflect.Message {
+	mi := &file_ActiManage_user_common_proto_msgTypes[46]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListActivityIdsByBookRecordRankReq.ProtoReflect.Descriptor instead.
+func (*ListActivityIdsByBookRecordRankReq) Descriptor() ([]byte, []int) {
+	return file_ActiManage_user_common_proto_rawDescGZIP(), []int{46}
+}
+
+func (x *ListActivityIdsByBookRecordRankReq) GetNumber() int64 {
+	if x != nil {
+		return x.Number
+	}
+	return 0
+}
+
+type ListActivityIdsByBookRecordRankResp struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Ids []string `protobuf:"bytes,1,rep,name=ids,proto3" json:"ids,omitempty"`
+}
+
+func (x *ListActivityIdsByBookRecordRankResp) Reset() {
+	*x = ListActivityIdsByBookRecordRankResp{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_ActiManage_user_common_proto_msgTypes[47]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *ListActivityIdsByBookRecordRankResp) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListActivityIdsByBookRecordRankResp) ProtoMessage() {}
+
+func (x *ListActivityIdsByBookRecordRankResp) ProtoReflect() protoreflect.Message {
+	mi := &file_ActiManage_user_common_proto_msgTypes[47]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListActivityIdsByBookRecordRankResp.ProtoReflect.Descriptor instead.
+func (*ListActivityIdsByBookRecordRankResp) Descriptor() ([]byte, []int) {
+	return file_ActiManage_user_common_proto_rawDescGZIP(), []int{47}
+}
+
+func (x *ListActivityIdsByBookRecordRankResp) GetIds() []string {
+	if x != nil {
+		return x.Ids
+	}
+	return nil
+}
+
+// 获取单个商家的访问量折线图
+type GetViewDataByMerchantReq struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Number int64 `protobuf:"varint,1,opt,name=number,proto3" json:"number,omitempty"`
+}
+
+func (x *GetViewDataByMerchantReq) Reset() {
+	*x = GetViewDataByMerchantReq{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_ActiManage_user_common_proto_msgTypes[48]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *GetViewDataByMerchantReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetViewDataByMerchantReq) ProtoMessage() {}
+
+func (x *GetViewDataByMerchantReq) ProtoReflect() protoreflect.Message {
+	mi := &file_ActiManage_user_common_proto_msgTypes[48]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetViewDataByMerchantReq.ProtoReflect.Descriptor instead.
+func (*GetViewDataByMerchantReq) Descriptor() ([]byte, []int) {
+	return file_ActiManage_user_common_proto_rawDescGZIP(), []int{48}
+}
+
+func (x *GetViewDataByMerchantReq) GetNumber() int64 {
+	if x != nil {
+		return x.Number
+	}
+	return 0
+}
+
+type GetViewDataByMerchantResp struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Items []*GetViewDataByMerchantResp_Item `protobuf:"bytes,1,rep,name=items,proto3" json:"items,omitempty"`
+}
+
+func (x *GetViewDataByMerchantResp) Reset() {
+	*x = GetViewDataByMerchantResp{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_ActiManage_user_common_proto_msgTypes[49]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *GetViewDataByMerchantResp) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetViewDataByMerchantResp) ProtoMessage() {}
+
+func (x *GetViewDataByMerchantResp) ProtoReflect() protoreflect.Message {
+	mi := &file_ActiManage_user_common_proto_msgTypes[49]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetViewDataByMerchantResp.ProtoReflect.Descriptor instead.
+func (*GetViewDataByMerchantResp) Descriptor() ([]byte, []int) {
+	return file_ActiManage_user_common_proto_rawDescGZIP(), []int{49}
+}
+
+func (x *GetViewDataByMerchantResp) GetItems() []*GetViewDataByMerchantResp_Item {
+	if x != nil {
+		return x.Items
+	}
+	return nil
+}
+
 // 统一响应
 type Response struct {
 	state         protoimpl.MessageState
@@ -2991,7 +3371,7 @@ type Response struct {
 func (x *Response) Reset() {
 	*x = Response{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_ActiManage_user_common_proto_msgTypes[42]
+		mi := &file_ActiManage_user_common_proto_msgTypes[50]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -3004,7 +3384,7 @@ func (x *Response) String() string {
 func (*Response) ProtoMessage() {}
 
 func (x *Response) ProtoReflect() protoreflect.Message {
-	mi := &file_ActiManage_user_common_proto_msgTypes[42]
+	mi := &file_ActiManage_user_common_proto_msgTypes[50]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3017,7 +3397,7 @@ func (x *Response) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Response.ProtoReflect.Descriptor instead.
 func (*Response) Descriptor() ([]byte, []int) {
-	return file_ActiManage_user_common_proto_rawDescGZIP(), []int{42}
+	return file_ActiManage_user_common_proto_rawDescGZIP(), []int{50}
 }
 
 func (x *Response) GetCode() int64 {
@@ -3032,6 +3412,61 @@ func (x *Response) GetMsg() string {
 		return x.Msg
 	}
 	return ""
+}
+
+type GetViewDataByMerchantResp_Item struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Number int64 `protobuf:"varint,1,opt,name=number,proto3" json:"number,omitempty"`
+	Time   int64 `protobuf:"varint,2,opt,name=time,proto3" json:"time,omitempty"`
+}
+
+func (x *GetViewDataByMerchantResp_Item) Reset() {
+	*x = GetViewDataByMerchantResp_Item{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_ActiManage_user_common_proto_msgTypes[51]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *GetViewDataByMerchantResp_Item) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetViewDataByMerchantResp_Item) ProtoMessage() {}
+
+func (x *GetViewDataByMerchantResp_Item) ProtoReflect() protoreflect.Message {
+	mi := &file_ActiManage_user_common_proto_msgTypes[51]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetViewDataByMerchantResp_Item.ProtoReflect.Descriptor instead.
+func (*GetViewDataByMerchantResp_Item) Descriptor() ([]byte, []int) {
+	return file_ActiManage_user_common_proto_rawDescGZIP(), []int{49, 0}
+}
+
+func (x *GetViewDataByMerchantResp_Item) GetNumber() int64 {
+	if x != nil {
+		return x.Number
+	}
+	return 0
+}
+
+func (x *GetViewDataByMerchantResp_Item) GetTime() int64 {
+	if x != nil {
+		return x.Time
+	}
+	return 0
 }
 
 var File_ActiManage_user_common_proto protoreflect.FileDescriptor
@@ -3366,14 +3801,47 @@ var file_ActiManage_user_common_proto_rawDesc = []byte{
 	0x49, 0x64, 0x22, 0x2b, 0x0a, 0x15, 0x47, 0x65, 0x74, 0x56, 0x69, 0x65, 0x77, 0x4f, 0x66, 0x4d,
 	0x65, 0x72, 0x63, 0x68, 0x61, 0x6e, 0x74, 0x52, 0x65, 0x73, 0x70, 0x12, 0x12, 0x0a, 0x04, 0x76,
 	0x69, 0x65, 0x77, 0x18, 0x01, 0x20, 0x01, 0x28, 0x03, 0x52, 0x04, 0x76, 0x69, 0x65, 0x77, 0x22,
-	0x30, 0x0a, 0x08, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x12, 0x0a, 0x04, 0x63,
-	0x6f, 0x64, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x03, 0x52, 0x04, 0x63, 0x6f, 0x64, 0x65, 0x12,
-	0x10, 0x0a, 0x03, 0x6d, 0x73, 0x67, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x03, 0x6d, 0x73,
-	0x67, 0x42, 0x39, 0x5a, 0x37, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f,
-	0x78, 0x68, 0x2d, 0x70, 0x6f, 0x6c, 0x61, 0x72, 0x69, 0x73, 0x2f, 0x41, 0x63, 0x74, 0x69, 0x4d,
-	0x61, 0x6e, 0x61, 0x67, 0x65, 0x2d, 0x49, 0x44, 0x4c, 0x2d, 0x67, 0x65, 0x6e, 0x2f, 0x6b, 0x69,
-	0x74, 0x65, 0x78, 0x5f, 0x67, 0x65, 0x6e, 0x2f, 0x75, 0x73, 0x65, 0x72, 0x62, 0x06, 0x70, 0x72,
-	0x6f, 0x74, 0x6f, 0x33,
+	0x36, 0x0a, 0x1c, 0x4c, 0x69, 0x73, 0x74, 0x4d, 0x65, 0x72, 0x63, 0x68, 0x61, 0x6e, 0x74, 0x49,
+	0x64, 0x73, 0x42, 0x79, 0x56, 0x69, 0x65, 0x77, 0x52, 0x61, 0x6e, 0x6b, 0x52, 0x65, 0x71, 0x12,
+	0x16, 0x0a, 0x06, 0x6e, 0x75, 0x6d, 0x62, 0x65, 0x72, 0x18, 0x01, 0x20, 0x01, 0x28, 0x03, 0x52,
+	0x06, 0x6e, 0x75, 0x6d, 0x62, 0x65, 0x72, 0x22, 0x31, 0x0a, 0x1d, 0x4c, 0x69, 0x73, 0x74, 0x4d,
+	0x65, 0x72, 0x63, 0x68, 0x61, 0x6e, 0x74, 0x49, 0x64, 0x73, 0x42, 0x79, 0x56, 0x69, 0x65, 0x77,
+	0x52, 0x61, 0x6e, 0x6b, 0x52, 0x65, 0x73, 0x70, 0x12, 0x10, 0x0a, 0x03, 0x69, 0x64, 0x73, 0x18,
+	0x01, 0x20, 0x03, 0x28, 0x09, 0x52, 0x03, 0x69, 0x64, 0x73, 0x22, 0x3c, 0x0a, 0x22, 0x4c, 0x69,
+	0x73, 0x74, 0x4d, 0x65, 0x72, 0x63, 0x68, 0x61, 0x6e, 0x74, 0x49, 0x64, 0x73, 0x42, 0x79, 0x42,
+	0x6f, 0x6f, 0x6b, 0x52, 0x65, 0x63, 0x6f, 0x72, 0x64, 0x52, 0x61, 0x6e, 0x6b, 0x52, 0x65, 0x71,
+	0x12, 0x16, 0x0a, 0x06, 0x6e, 0x75, 0x6d, 0x62, 0x65, 0x72, 0x18, 0x01, 0x20, 0x01, 0x28, 0x03,
+	0x52, 0x06, 0x6e, 0x75, 0x6d, 0x62, 0x65, 0x72, 0x22, 0x37, 0x0a, 0x23, 0x4c, 0x69, 0x73, 0x74,
+	0x4d, 0x65, 0x72, 0x63, 0x68, 0x61, 0x6e, 0x74, 0x49, 0x64, 0x73, 0x42, 0x79, 0x42, 0x6f, 0x6f,
+	0x6b, 0x52, 0x65, 0x63, 0x6f, 0x72, 0x64, 0x52, 0x61, 0x6e, 0x6b, 0x52, 0x65, 0x73, 0x70, 0x12,
+	0x10, 0x0a, 0x03, 0x69, 0x64, 0x73, 0x18, 0x01, 0x20, 0x03, 0x28, 0x09, 0x52, 0x03, 0x69, 0x64,
+	0x73, 0x22, 0x3c, 0x0a, 0x22, 0x4c, 0x69, 0x73, 0x74, 0x41, 0x63, 0x74, 0x69, 0x76, 0x69, 0x74,
+	0x79, 0x49, 0x64, 0x73, 0x42, 0x79, 0x42, 0x6f, 0x6f, 0x6b, 0x52, 0x65, 0x63, 0x6f, 0x72, 0x64,
+	0x52, 0x61, 0x6e, 0x6b, 0x52, 0x65, 0x71, 0x12, 0x16, 0x0a, 0x06, 0x6e, 0x75, 0x6d, 0x62, 0x65,
+	0x72, 0x18, 0x01, 0x20, 0x01, 0x28, 0x03, 0x52, 0x06, 0x6e, 0x75, 0x6d, 0x62, 0x65, 0x72, 0x22,
+	0x37, 0x0a, 0x23, 0x4c, 0x69, 0x73, 0x74, 0x41, 0x63, 0x74, 0x69, 0x76, 0x69, 0x74, 0x79, 0x49,
+	0x64, 0x73, 0x42, 0x79, 0x42, 0x6f, 0x6f, 0x6b, 0x52, 0x65, 0x63, 0x6f, 0x72, 0x64, 0x52, 0x61,
+	0x6e, 0x6b, 0x52, 0x65, 0x73, 0x70, 0x12, 0x10, 0x0a, 0x03, 0x69, 0x64, 0x73, 0x18, 0x01, 0x20,
+	0x03, 0x28, 0x09, 0x52, 0x03, 0x69, 0x64, 0x73, 0x22, 0x32, 0x0a, 0x18, 0x47, 0x65, 0x74, 0x56,
+	0x69, 0x65, 0x77, 0x44, 0x61, 0x74, 0x61, 0x42, 0x79, 0x4d, 0x65, 0x72, 0x63, 0x68, 0x61, 0x6e,
+	0x74, 0x52, 0x65, 0x71, 0x12, 0x16, 0x0a, 0x06, 0x6e, 0x75, 0x6d, 0x62, 0x65, 0x72, 0x18, 0x01,
+	0x20, 0x01, 0x28, 0x03, 0x52, 0x06, 0x6e, 0x75, 0x6d, 0x62, 0x65, 0x72, 0x22, 0x8b, 0x01, 0x0a,
+	0x19, 0x47, 0x65, 0x74, 0x56, 0x69, 0x65, 0x77, 0x44, 0x61, 0x74, 0x61, 0x42, 0x79, 0x4d, 0x65,
+	0x72, 0x63, 0x68, 0x61, 0x6e, 0x74, 0x52, 0x65, 0x73, 0x70, 0x12, 0x3a, 0x0a, 0x05, 0x69, 0x74,
+	0x65, 0x6d, 0x73, 0x18, 0x01, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x24, 0x2e, 0x75, 0x73, 0x65, 0x72,
+	0x2e, 0x47, 0x65, 0x74, 0x56, 0x69, 0x65, 0x77, 0x44, 0x61, 0x74, 0x61, 0x42, 0x79, 0x4d, 0x65,
+	0x72, 0x63, 0x68, 0x61, 0x6e, 0x74, 0x52, 0x65, 0x73, 0x70, 0x2e, 0x49, 0x74, 0x65, 0x6d, 0x52,
+	0x05, 0x69, 0x74, 0x65, 0x6d, 0x73, 0x1a, 0x32, 0x0a, 0x04, 0x49, 0x74, 0x65, 0x6d, 0x12, 0x16,
+	0x0a, 0x06, 0x6e, 0x75, 0x6d, 0x62, 0x65, 0x72, 0x18, 0x01, 0x20, 0x01, 0x28, 0x03, 0x52, 0x06,
+	0x6e, 0x75, 0x6d, 0x62, 0x65, 0x72, 0x12, 0x12, 0x0a, 0x04, 0x74, 0x69, 0x6d, 0x65, 0x18, 0x02,
+	0x20, 0x01, 0x28, 0x03, 0x52, 0x04, 0x74, 0x69, 0x6d, 0x65, 0x22, 0x30, 0x0a, 0x08, 0x52, 0x65,
+	0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x12, 0x0a, 0x04, 0x63, 0x6f, 0x64, 0x65, 0x18, 0x01,
+	0x20, 0x01, 0x28, 0x03, 0x52, 0x04, 0x63, 0x6f, 0x64, 0x65, 0x12, 0x10, 0x0a, 0x03, 0x6d, 0x73,
+	0x67, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x03, 0x6d, 0x73, 0x67, 0x42, 0x39, 0x5a, 0x37,
+	0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x78, 0x68, 0x2d, 0x70, 0x6f,
+	0x6c, 0x61, 0x72, 0x69, 0x73, 0x2f, 0x41, 0x63, 0x74, 0x69, 0x4d, 0x61, 0x6e, 0x61, 0x67, 0x65,
+	0x2d, 0x49, 0x44, 0x4c, 0x2d, 0x67, 0x65, 0x6e, 0x2f, 0x6b, 0x69, 0x74, 0x65, 0x78, 0x5f, 0x67,
+	0x65, 0x6e, 0x2f, 0x75, 0x73, 0x65, 0x72, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -3388,70 +3856,80 @@ func file_ActiManage_user_common_proto_rawDescGZIP() []byte {
 	return file_ActiManage_user_common_proto_rawDescData
 }
 
-var file_ActiManage_user_common_proto_msgTypes = make([]protoimpl.MessageInfo, 43)
+var file_ActiManage_user_common_proto_msgTypes = make([]protoimpl.MessageInfo, 52)
 var file_ActiManage_user_common_proto_goTypes = []interface{}{
-	(*User)(nil),                             // 0: user.User
-	(*Reserver)(nil),                         // 1: user.Reserver
-	(*BookItem)(nil),                         // 2: user.BookItem
-	(*BookRecord)(nil),                       // 3: user.BookRecord
-	(*Receipt)(nil),                          // 4: user.Receipt
-	(*Favorite)(nil),                         // 5: user.Favorite
-	(*UserSignUpReq)(nil),                    // 6: user.UserSignUpReq
-	(*UserSignUpResp)(nil),                   // 7: user.UserSignUpResp
-	(*UserLoginReq)(nil),                     // 8: user.UserLoginReq
-	(*UserLoginResp)(nil),                    // 9: user.UserLoginResp
-	(*GetUserInfoReq)(nil),                   // 10: user.GetUserInfoReq
-	(*GetUserInfoResp)(nil),                  // 11: user.GetUserInfoResp
-	(*UpdateUserInfoReq)(nil),                // 12: user.UpdateUserInfoReq
-	(*SetPasswordReq)(nil),                   // 13: user.SetPasswordReq
-	(*SetNoticeReq)(nil),                     // 14: user.SetNoticeReq
-	(*CreateReserverReq)(nil),                // 15: user.CreateReserverReq
-	(*DeleteReserverReq)(nil),                // 16: user.DeleteReserverReq
-	(*UpdateReserverReq)(nil),                // 17: user.UpdateReserverReq
-	(*ListReserversReq)(nil),                 // 18: user.ListReserversReq
-	(*ListReserversResp)(nil),                // 19: user.ListReserversResp
-	(*CreateBookRecordReq)(nil),              // 20: user.CreateBookRecordReq
-	(*CancelBookRecordReq)(nil),              // 21: user.CancelBookRecordReq
-	(*GetBookRecordReq)(nil),                 // 22: user.GetBookRecordReq
-	(*GetBookRecordResp)(nil),                // 23: user.GetBookRecordResp
-	(*ListBookRecordsByUserReq)(nil),         // 24: user.ListBookRecordsByUserReq
-	(*ListBookRecordsByUserResp)(nil),        // 25: user.ListBookRecordsByUserResp
-	(*ListBookRecordsByActivityReq)(nil),     // 26: user.ListBookRecordsByActivityReq
-	(*ListBookRecordsByActivityResp)(nil),    // 27: user.ListBookRecordsByActivityResp
-	(*CreateReceiptReq)(nil),                 // 28: user.CreateReceiptReq
-	(*DeleteReceiptReq)(nil),                 // 29: user.DeleteReceiptReq
-	(*ListReceiptsReq)(nil),                  // 30: user.ListReceiptsReq
-	(*ListReceiptsResp)(nil),                 // 31: user.ListReceiptsResp
-	(*MarkReceiptReadReq)(nil),               // 32: user.MarkReceiptReadReq
-	(*DoFavoriteReq)(nil),                    // 33: user.DoFavoriteReq
-	(*CancelFavoriteReq)(nil),                // 34: user.CancelFavoriteReq
-	(*CreateViewReq)(nil),                    // 35: user.CreateViewReq
-	(*IncViewReq)(nil),                       // 36: user.IncViewReq
-	(*IncViewResp)(nil),                      // 37: user.IncViewResp
-	(*GetFavoriteAndViewOfActivityReq)(nil),  // 38: user.GetFavoriteAndViewOfActivityReq
-	(*GetFavoriteAndViewOfActivityResp)(nil), // 39: user.GetFavoriteAndViewOfActivityResp
-	(*GetViewOfMerchantReq)(nil),             // 40: user.GetViewOfMerchantReq
-	(*GetViewOfMerchantResp)(nil),            // 41: user.GetViewOfMerchantResp
-	(*Response)(nil),                         // 42: user.Response
-	(*basic.Paging)(nil),                     // 43: basic.Paging
+	(*User)(nil),                                // 0: user.User
+	(*Reserver)(nil),                            // 1: user.Reserver
+	(*BookItem)(nil),                            // 2: user.BookItem
+	(*BookRecord)(nil),                          // 3: user.BookRecord
+	(*Receipt)(nil),                             // 4: user.Receipt
+	(*Favorite)(nil),                            // 5: user.Favorite
+	(*UserSignUpReq)(nil),                       // 6: user.UserSignUpReq
+	(*UserSignUpResp)(nil),                      // 7: user.UserSignUpResp
+	(*UserLoginReq)(nil),                        // 8: user.UserLoginReq
+	(*UserLoginResp)(nil),                       // 9: user.UserLoginResp
+	(*GetUserInfoReq)(nil),                      // 10: user.GetUserInfoReq
+	(*GetUserInfoResp)(nil),                     // 11: user.GetUserInfoResp
+	(*UpdateUserInfoReq)(nil),                   // 12: user.UpdateUserInfoReq
+	(*SetPasswordReq)(nil),                      // 13: user.SetPasswordReq
+	(*SetNoticeReq)(nil),                        // 14: user.SetNoticeReq
+	(*CreateReserverReq)(nil),                   // 15: user.CreateReserverReq
+	(*DeleteReserverReq)(nil),                   // 16: user.DeleteReserverReq
+	(*UpdateReserverReq)(nil),                   // 17: user.UpdateReserverReq
+	(*ListReserversReq)(nil),                    // 18: user.ListReserversReq
+	(*ListReserversResp)(nil),                   // 19: user.ListReserversResp
+	(*CreateBookRecordReq)(nil),                 // 20: user.CreateBookRecordReq
+	(*CancelBookRecordReq)(nil),                 // 21: user.CancelBookRecordReq
+	(*GetBookRecordReq)(nil),                    // 22: user.GetBookRecordReq
+	(*GetBookRecordResp)(nil),                   // 23: user.GetBookRecordResp
+	(*ListBookRecordsByUserReq)(nil),            // 24: user.ListBookRecordsByUserReq
+	(*ListBookRecordsByUserResp)(nil),           // 25: user.ListBookRecordsByUserResp
+	(*ListBookRecordsByActivityReq)(nil),        // 26: user.ListBookRecordsByActivityReq
+	(*ListBookRecordsByActivityResp)(nil),       // 27: user.ListBookRecordsByActivityResp
+	(*CreateReceiptReq)(nil),                    // 28: user.CreateReceiptReq
+	(*DeleteReceiptReq)(nil),                    // 29: user.DeleteReceiptReq
+	(*ListReceiptsReq)(nil),                     // 30: user.ListReceiptsReq
+	(*ListReceiptsResp)(nil),                    // 31: user.ListReceiptsResp
+	(*MarkReceiptReadReq)(nil),                  // 32: user.MarkReceiptReadReq
+	(*DoFavoriteReq)(nil),                       // 33: user.DoFavoriteReq
+	(*CancelFavoriteReq)(nil),                   // 34: user.CancelFavoriteReq
+	(*CreateViewReq)(nil),                       // 35: user.CreateViewReq
+	(*IncViewReq)(nil),                          // 36: user.IncViewReq
+	(*IncViewResp)(nil),                         // 37: user.IncViewResp
+	(*GetFavoriteAndViewOfActivityReq)(nil),     // 38: user.GetFavoriteAndViewOfActivityReq
+	(*GetFavoriteAndViewOfActivityResp)(nil),    // 39: user.GetFavoriteAndViewOfActivityResp
+	(*GetViewOfMerchantReq)(nil),                // 40: user.GetViewOfMerchantReq
+	(*GetViewOfMerchantResp)(nil),               // 41: user.GetViewOfMerchantResp
+	(*ListMerchantIdsByViewRankReq)(nil),        // 42: user.ListMerchantIdsByViewRankReq
+	(*ListMerchantIdsByViewRankResp)(nil),       // 43: user.ListMerchantIdsByViewRankResp
+	(*ListMerchantIdsByBookRecordRankReq)(nil),  // 44: user.ListMerchantIdsByBookRecordRankReq
+	(*ListMerchantIdsByBookRecordRankResp)(nil), // 45: user.ListMerchantIdsByBookRecordRankResp
+	(*ListActivityIdsByBookRecordRankReq)(nil),  // 46: user.ListActivityIdsByBookRecordRankReq
+	(*ListActivityIdsByBookRecordRankResp)(nil), // 47: user.ListActivityIdsByBookRecordRankResp
+	(*GetViewDataByMerchantReq)(nil),            // 48: user.GetViewDataByMerchantReq
+	(*GetViewDataByMerchantResp)(nil),           // 49: user.GetViewDataByMerchantResp
+	(*Response)(nil),                            // 50: user.Response
+	(*GetViewDataByMerchantResp_Item)(nil),      // 51: user.GetViewDataByMerchantResp.Item
+	(*basic.Paging)(nil),                        // 52: basic.Paging
 }
 var file_ActiManage_user_common_proto_depIdxs = []int32{
 	2,  // 0: user.BookRecord.reservers:type_name -> user.BookItem
 	1,  // 1: user.UpdateReserverReq.reserver:type_name -> user.Reserver
-	43, // 2: user.ListReserversReq.paging:type_name -> basic.Paging
+	52, // 2: user.ListReserversReq.paging:type_name -> basic.Paging
 	1,  // 3: user.ListReserversResp.reservers:type_name -> user.Reserver
 	3,  // 4: user.GetBookRecordResp.record:type_name -> user.BookRecord
-	43, // 5: user.ListBookRecordsByUserReq.paging:type_name -> basic.Paging
+	52, // 5: user.ListBookRecordsByUserReq.paging:type_name -> basic.Paging
 	3,  // 6: user.ListBookRecordsByUserResp.records:type_name -> user.BookRecord
-	43, // 7: user.ListBookRecordsByActivityReq.paging:type_name -> basic.Paging
+	52, // 7: user.ListBookRecordsByActivityReq.paging:type_name -> basic.Paging
 	3,  // 8: user.ListBookRecordsByActivityResp.records:type_name -> user.BookRecord
-	43, // 9: user.ListReceiptsReq.paging:type_name -> basic.Paging
+	52, // 9: user.ListReceiptsReq.paging:type_name -> basic.Paging
 	4,  // 10: user.ListReceiptsResp.receipts:type_name -> user.Receipt
-	11, // [11:11] is the sub-list for method output_type
-	11, // [11:11] is the sub-list for method input_type
-	11, // [11:11] is the sub-list for extension type_name
-	11, // [11:11] is the sub-list for extension extendee
-	0,  // [0:11] is the sub-list for field type_name
+	51, // 11: user.GetViewDataByMerchantResp.items:type_name -> user.GetViewDataByMerchantResp.Item
+	12, // [12:12] is the sub-list for method output_type
+	12, // [12:12] is the sub-list for method input_type
+	12, // [12:12] is the sub-list for extension type_name
+	12, // [12:12] is the sub-list for extension extendee
+	0,  // [0:12] is the sub-list for field type_name
 }
 
 func init() { file_ActiManage_user_common_proto_init() }
@@ -3965,7 +4443,115 @@ func file_ActiManage_user_common_proto_init() {
 			}
 		}
 		file_ActiManage_user_common_proto_msgTypes[42].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*ListMerchantIdsByViewRankReq); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_ActiManage_user_common_proto_msgTypes[43].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*ListMerchantIdsByViewRankResp); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_ActiManage_user_common_proto_msgTypes[44].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*ListMerchantIdsByBookRecordRankReq); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_ActiManage_user_common_proto_msgTypes[45].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*ListMerchantIdsByBookRecordRankResp); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_ActiManage_user_common_proto_msgTypes[46].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*ListActivityIdsByBookRecordRankReq); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_ActiManage_user_common_proto_msgTypes[47].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*ListActivityIdsByBookRecordRankResp); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_ActiManage_user_common_proto_msgTypes[48].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*GetViewDataByMerchantReq); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_ActiManage_user_common_proto_msgTypes[49].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*GetViewDataByMerchantResp); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_ActiManage_user_common_proto_msgTypes[50].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*Response); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_ActiManage_user_common_proto_msgTypes[51].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*GetViewDataByMerchantResp_Item); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -3987,7 +4573,7 @@ func file_ActiManage_user_common_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_ActiManage_user_common_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   43,
+			NumMessages:   52,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

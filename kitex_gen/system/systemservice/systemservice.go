@@ -141,6 +141,34 @@ var serviceMethods = map[string]kitex.MethodInfo{
 		false,
 		kitex.WithStreamingMode(kitex.StreamingUnary),
 	),
+	"GetMerchantTotalData": kitex.NewMethodInfo(
+		getMerchantTotalDataHandler,
+		newGetMerchantTotalDataArgs,
+		newGetMerchantTotalDataResult,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingUnary),
+	),
+	"ListMerchantByMerchantId": kitex.NewMethodInfo(
+		listMerchantByMerchantIdHandler,
+		newListMerchantByMerchantIdArgs,
+		newListMerchantByMerchantIdResult,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingUnary),
+	),
+	"ListMerchantByActivityNumber": kitex.NewMethodInfo(
+		listMerchantByActivityNumberHandler,
+		newListMerchantByActivityNumberArgs,
+		newListMerchantByActivityNumberResult,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingUnary),
+	),
+	"ListActivityByActivityId": kitex.NewMethodInfo(
+		listActivityByActivityIdHandler,
+		newListActivityByActivityIdArgs,
+		newListActivityByActivityIdResult,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingUnary),
+	),
 	"StsSendVerifyCode": kitex.NewMethodInfo(
 		stsSendVerifyCodeHandler,
 		newStsSendVerifyCodeArgs,
@@ -2968,6 +2996,618 @@ func (p *ListMerchantsResult) GetResult() interface{} {
 	return p.Success
 }
 
+func getMerchantTotalDataHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
+	switch s := arg.(type) {
+	case *streaming.Args:
+		st := s.Stream
+		req := new(system.GetMerchantTotalDataReq)
+		if err := st.RecvMsg(req); err != nil {
+			return err
+		}
+		resp, err := handler.(system.SystemService).GetMerchantTotalData(ctx, req)
+		if err != nil {
+			return err
+		}
+		return st.SendMsg(resp)
+	case *GetMerchantTotalDataArgs:
+		success, err := handler.(system.SystemService).GetMerchantTotalData(ctx, s.Req)
+		if err != nil {
+			return err
+		}
+		realResult := result.(*GetMerchantTotalDataResult)
+		realResult.Success = success
+		return nil
+	default:
+		return errInvalidMessageType
+	}
+}
+func newGetMerchantTotalDataArgs() interface{} {
+	return &GetMerchantTotalDataArgs{}
+}
+
+func newGetMerchantTotalDataResult() interface{} {
+	return &GetMerchantTotalDataResult{}
+}
+
+type GetMerchantTotalDataArgs struct {
+	Req *system.GetMerchantTotalDataReq
+}
+
+func (p *GetMerchantTotalDataArgs) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetReq() {
+		p.Req = new(system.GetMerchantTotalDataReq)
+	}
+	return p.Req.FastRead(buf, _type, number)
+}
+
+func (p *GetMerchantTotalDataArgs) FastWrite(buf []byte) (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.FastWrite(buf)
+}
+
+func (p *GetMerchantTotalDataArgs) Size() (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.Size()
+}
+
+func (p *GetMerchantTotalDataArgs) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetReq() {
+		return out, nil
+	}
+	return proto.Marshal(p.Req)
+}
+
+func (p *GetMerchantTotalDataArgs) Unmarshal(in []byte) error {
+	msg := new(system.GetMerchantTotalDataReq)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Req = msg
+	return nil
+}
+
+var GetMerchantTotalDataArgs_Req_DEFAULT *system.GetMerchantTotalDataReq
+
+func (p *GetMerchantTotalDataArgs) GetReq() *system.GetMerchantTotalDataReq {
+	if !p.IsSetReq() {
+		return GetMerchantTotalDataArgs_Req_DEFAULT
+	}
+	return p.Req
+}
+
+func (p *GetMerchantTotalDataArgs) IsSetReq() bool {
+	return p.Req != nil
+}
+
+func (p *GetMerchantTotalDataArgs) GetFirstArgument() interface{} {
+	return p.Req
+}
+
+type GetMerchantTotalDataResult struct {
+	Success *system.GetMerchantTotalDataResp
+}
+
+var GetMerchantTotalDataResult_Success_DEFAULT *system.GetMerchantTotalDataResp
+
+func (p *GetMerchantTotalDataResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetSuccess() {
+		p.Success = new(system.GetMerchantTotalDataResp)
+	}
+	return p.Success.FastRead(buf, _type, number)
+}
+
+func (p *GetMerchantTotalDataResult) FastWrite(buf []byte) (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.FastWrite(buf)
+}
+
+func (p *GetMerchantTotalDataResult) Size() (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.Size()
+}
+
+func (p *GetMerchantTotalDataResult) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetSuccess() {
+		return out, nil
+	}
+	return proto.Marshal(p.Success)
+}
+
+func (p *GetMerchantTotalDataResult) Unmarshal(in []byte) error {
+	msg := new(system.GetMerchantTotalDataResp)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Success = msg
+	return nil
+}
+
+func (p *GetMerchantTotalDataResult) GetSuccess() *system.GetMerchantTotalDataResp {
+	if !p.IsSetSuccess() {
+		return GetMerchantTotalDataResult_Success_DEFAULT
+	}
+	return p.Success
+}
+
+func (p *GetMerchantTotalDataResult) SetSuccess(x interface{}) {
+	p.Success = x.(*system.GetMerchantTotalDataResp)
+}
+
+func (p *GetMerchantTotalDataResult) IsSetSuccess() bool {
+	return p.Success != nil
+}
+
+func (p *GetMerchantTotalDataResult) GetResult() interface{} {
+	return p.Success
+}
+
+func listMerchantByMerchantIdHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
+	switch s := arg.(type) {
+	case *streaming.Args:
+		st := s.Stream
+		req := new(system.ListMerchantsByMerchantIdReq)
+		if err := st.RecvMsg(req); err != nil {
+			return err
+		}
+		resp, err := handler.(system.SystemService).ListMerchantByMerchantId(ctx, req)
+		if err != nil {
+			return err
+		}
+		return st.SendMsg(resp)
+	case *ListMerchantByMerchantIdArgs:
+		success, err := handler.(system.SystemService).ListMerchantByMerchantId(ctx, s.Req)
+		if err != nil {
+			return err
+		}
+		realResult := result.(*ListMerchantByMerchantIdResult)
+		realResult.Success = success
+		return nil
+	default:
+		return errInvalidMessageType
+	}
+}
+func newListMerchantByMerchantIdArgs() interface{} {
+	return &ListMerchantByMerchantIdArgs{}
+}
+
+func newListMerchantByMerchantIdResult() interface{} {
+	return &ListMerchantByMerchantIdResult{}
+}
+
+type ListMerchantByMerchantIdArgs struct {
+	Req *system.ListMerchantsByMerchantIdReq
+}
+
+func (p *ListMerchantByMerchantIdArgs) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetReq() {
+		p.Req = new(system.ListMerchantsByMerchantIdReq)
+	}
+	return p.Req.FastRead(buf, _type, number)
+}
+
+func (p *ListMerchantByMerchantIdArgs) FastWrite(buf []byte) (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.FastWrite(buf)
+}
+
+func (p *ListMerchantByMerchantIdArgs) Size() (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.Size()
+}
+
+func (p *ListMerchantByMerchantIdArgs) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetReq() {
+		return out, nil
+	}
+	return proto.Marshal(p.Req)
+}
+
+func (p *ListMerchantByMerchantIdArgs) Unmarshal(in []byte) error {
+	msg := new(system.ListMerchantsByMerchantIdReq)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Req = msg
+	return nil
+}
+
+var ListMerchantByMerchantIdArgs_Req_DEFAULT *system.ListMerchantsByMerchantIdReq
+
+func (p *ListMerchantByMerchantIdArgs) GetReq() *system.ListMerchantsByMerchantIdReq {
+	if !p.IsSetReq() {
+		return ListMerchantByMerchantIdArgs_Req_DEFAULT
+	}
+	return p.Req
+}
+
+func (p *ListMerchantByMerchantIdArgs) IsSetReq() bool {
+	return p.Req != nil
+}
+
+func (p *ListMerchantByMerchantIdArgs) GetFirstArgument() interface{} {
+	return p.Req
+}
+
+type ListMerchantByMerchantIdResult struct {
+	Success *system.ListMerchantsByMerchantIdResp
+}
+
+var ListMerchantByMerchantIdResult_Success_DEFAULT *system.ListMerchantsByMerchantIdResp
+
+func (p *ListMerchantByMerchantIdResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetSuccess() {
+		p.Success = new(system.ListMerchantsByMerchantIdResp)
+	}
+	return p.Success.FastRead(buf, _type, number)
+}
+
+func (p *ListMerchantByMerchantIdResult) FastWrite(buf []byte) (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.FastWrite(buf)
+}
+
+func (p *ListMerchantByMerchantIdResult) Size() (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.Size()
+}
+
+func (p *ListMerchantByMerchantIdResult) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetSuccess() {
+		return out, nil
+	}
+	return proto.Marshal(p.Success)
+}
+
+func (p *ListMerchantByMerchantIdResult) Unmarshal(in []byte) error {
+	msg := new(system.ListMerchantsByMerchantIdResp)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Success = msg
+	return nil
+}
+
+func (p *ListMerchantByMerchantIdResult) GetSuccess() *system.ListMerchantsByMerchantIdResp {
+	if !p.IsSetSuccess() {
+		return ListMerchantByMerchantIdResult_Success_DEFAULT
+	}
+	return p.Success
+}
+
+func (p *ListMerchantByMerchantIdResult) SetSuccess(x interface{}) {
+	p.Success = x.(*system.ListMerchantsByMerchantIdResp)
+}
+
+func (p *ListMerchantByMerchantIdResult) IsSetSuccess() bool {
+	return p.Success != nil
+}
+
+func (p *ListMerchantByMerchantIdResult) GetResult() interface{} {
+	return p.Success
+}
+
+func listMerchantByActivityNumberHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
+	switch s := arg.(type) {
+	case *streaming.Args:
+		st := s.Stream
+		req := new(system.ListMerchantsByActivityNumberReq)
+		if err := st.RecvMsg(req); err != nil {
+			return err
+		}
+		resp, err := handler.(system.SystemService).ListMerchantByActivityNumber(ctx, req)
+		if err != nil {
+			return err
+		}
+		return st.SendMsg(resp)
+	case *ListMerchantByActivityNumberArgs:
+		success, err := handler.(system.SystemService).ListMerchantByActivityNumber(ctx, s.Req)
+		if err != nil {
+			return err
+		}
+		realResult := result.(*ListMerchantByActivityNumberResult)
+		realResult.Success = success
+		return nil
+	default:
+		return errInvalidMessageType
+	}
+}
+func newListMerchantByActivityNumberArgs() interface{} {
+	return &ListMerchantByActivityNumberArgs{}
+}
+
+func newListMerchantByActivityNumberResult() interface{} {
+	return &ListMerchantByActivityNumberResult{}
+}
+
+type ListMerchantByActivityNumberArgs struct {
+	Req *system.ListMerchantsByActivityNumberReq
+}
+
+func (p *ListMerchantByActivityNumberArgs) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetReq() {
+		p.Req = new(system.ListMerchantsByActivityNumberReq)
+	}
+	return p.Req.FastRead(buf, _type, number)
+}
+
+func (p *ListMerchantByActivityNumberArgs) FastWrite(buf []byte) (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.FastWrite(buf)
+}
+
+func (p *ListMerchantByActivityNumberArgs) Size() (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.Size()
+}
+
+func (p *ListMerchantByActivityNumberArgs) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetReq() {
+		return out, nil
+	}
+	return proto.Marshal(p.Req)
+}
+
+func (p *ListMerchantByActivityNumberArgs) Unmarshal(in []byte) error {
+	msg := new(system.ListMerchantsByActivityNumberReq)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Req = msg
+	return nil
+}
+
+var ListMerchantByActivityNumberArgs_Req_DEFAULT *system.ListMerchantsByActivityNumberReq
+
+func (p *ListMerchantByActivityNumberArgs) GetReq() *system.ListMerchantsByActivityNumberReq {
+	if !p.IsSetReq() {
+		return ListMerchantByActivityNumberArgs_Req_DEFAULT
+	}
+	return p.Req
+}
+
+func (p *ListMerchantByActivityNumberArgs) IsSetReq() bool {
+	return p.Req != nil
+}
+
+func (p *ListMerchantByActivityNumberArgs) GetFirstArgument() interface{} {
+	return p.Req
+}
+
+type ListMerchantByActivityNumberResult struct {
+	Success *system.ListMerchantsByActivityNumberResp
+}
+
+var ListMerchantByActivityNumberResult_Success_DEFAULT *system.ListMerchantsByActivityNumberResp
+
+func (p *ListMerchantByActivityNumberResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetSuccess() {
+		p.Success = new(system.ListMerchantsByActivityNumberResp)
+	}
+	return p.Success.FastRead(buf, _type, number)
+}
+
+func (p *ListMerchantByActivityNumberResult) FastWrite(buf []byte) (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.FastWrite(buf)
+}
+
+func (p *ListMerchantByActivityNumberResult) Size() (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.Size()
+}
+
+func (p *ListMerchantByActivityNumberResult) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetSuccess() {
+		return out, nil
+	}
+	return proto.Marshal(p.Success)
+}
+
+func (p *ListMerchantByActivityNumberResult) Unmarshal(in []byte) error {
+	msg := new(system.ListMerchantsByActivityNumberResp)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Success = msg
+	return nil
+}
+
+func (p *ListMerchantByActivityNumberResult) GetSuccess() *system.ListMerchantsByActivityNumberResp {
+	if !p.IsSetSuccess() {
+		return ListMerchantByActivityNumberResult_Success_DEFAULT
+	}
+	return p.Success
+}
+
+func (p *ListMerchantByActivityNumberResult) SetSuccess(x interface{}) {
+	p.Success = x.(*system.ListMerchantsByActivityNumberResp)
+}
+
+func (p *ListMerchantByActivityNumberResult) IsSetSuccess() bool {
+	return p.Success != nil
+}
+
+func (p *ListMerchantByActivityNumberResult) GetResult() interface{} {
+	return p.Success
+}
+
+func listActivityByActivityIdHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
+	switch s := arg.(type) {
+	case *streaming.Args:
+		st := s.Stream
+		req := new(system.ListActivitiesByActivityIdReq)
+		if err := st.RecvMsg(req); err != nil {
+			return err
+		}
+		resp, err := handler.(system.SystemService).ListActivityByActivityId(ctx, req)
+		if err != nil {
+			return err
+		}
+		return st.SendMsg(resp)
+	case *ListActivityByActivityIdArgs:
+		success, err := handler.(system.SystemService).ListActivityByActivityId(ctx, s.Req)
+		if err != nil {
+			return err
+		}
+		realResult := result.(*ListActivityByActivityIdResult)
+		realResult.Success = success
+		return nil
+	default:
+		return errInvalidMessageType
+	}
+}
+func newListActivityByActivityIdArgs() interface{} {
+	return &ListActivityByActivityIdArgs{}
+}
+
+func newListActivityByActivityIdResult() interface{} {
+	return &ListActivityByActivityIdResult{}
+}
+
+type ListActivityByActivityIdArgs struct {
+	Req *system.ListActivitiesByActivityIdReq
+}
+
+func (p *ListActivityByActivityIdArgs) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetReq() {
+		p.Req = new(system.ListActivitiesByActivityIdReq)
+	}
+	return p.Req.FastRead(buf, _type, number)
+}
+
+func (p *ListActivityByActivityIdArgs) FastWrite(buf []byte) (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.FastWrite(buf)
+}
+
+func (p *ListActivityByActivityIdArgs) Size() (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.Size()
+}
+
+func (p *ListActivityByActivityIdArgs) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetReq() {
+		return out, nil
+	}
+	return proto.Marshal(p.Req)
+}
+
+func (p *ListActivityByActivityIdArgs) Unmarshal(in []byte) error {
+	msg := new(system.ListActivitiesByActivityIdReq)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Req = msg
+	return nil
+}
+
+var ListActivityByActivityIdArgs_Req_DEFAULT *system.ListActivitiesByActivityIdReq
+
+func (p *ListActivityByActivityIdArgs) GetReq() *system.ListActivitiesByActivityIdReq {
+	if !p.IsSetReq() {
+		return ListActivityByActivityIdArgs_Req_DEFAULT
+	}
+	return p.Req
+}
+
+func (p *ListActivityByActivityIdArgs) IsSetReq() bool {
+	return p.Req != nil
+}
+
+func (p *ListActivityByActivityIdArgs) GetFirstArgument() interface{} {
+	return p.Req
+}
+
+type ListActivityByActivityIdResult struct {
+	Success *system.ListActivitiesByActivityIdResp
+}
+
+var ListActivityByActivityIdResult_Success_DEFAULT *system.ListActivitiesByActivityIdResp
+
+func (p *ListActivityByActivityIdResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetSuccess() {
+		p.Success = new(system.ListActivitiesByActivityIdResp)
+	}
+	return p.Success.FastRead(buf, _type, number)
+}
+
+func (p *ListActivityByActivityIdResult) FastWrite(buf []byte) (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.FastWrite(buf)
+}
+
+func (p *ListActivityByActivityIdResult) Size() (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.Size()
+}
+
+func (p *ListActivityByActivityIdResult) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetSuccess() {
+		return out, nil
+	}
+	return proto.Marshal(p.Success)
+}
+
+func (p *ListActivityByActivityIdResult) Unmarshal(in []byte) error {
+	msg := new(system.ListActivitiesByActivityIdResp)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Success = msg
+	return nil
+}
+
+func (p *ListActivityByActivityIdResult) GetSuccess() *system.ListActivitiesByActivityIdResp {
+	if !p.IsSetSuccess() {
+		return ListActivityByActivityIdResult_Success_DEFAULT
+	}
+	return p.Success
+}
+
+func (p *ListActivityByActivityIdResult) SetSuccess(x interface{}) {
+	p.Success = x.(*system.ListActivitiesByActivityIdResp)
+}
+
+func (p *ListActivityByActivityIdResult) IsSetSuccess() bool {
+	return p.Success != nil
+}
+
+func (p *ListActivityByActivityIdResult) GetResult() interface{} {
+	return p.Success
+}
+
 func stsSendVerifyCodeHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
 	switch s := arg.(type) {
 	case *streaming.Args:
@@ -3306,6 +3946,46 @@ func (p *kClient) ListMerchants(ctx context.Context, Req *system.ListMerchantsRe
 	_args.Req = Req
 	var _result ListMerchantsResult
 	if err = p.c.Call(ctx, "ListMerchants", &_args, &_result); err != nil {
+		return
+	}
+	return _result.GetSuccess(), nil
+}
+
+func (p *kClient) GetMerchantTotalData(ctx context.Context, Req *system.GetMerchantTotalDataReq) (r *system.GetMerchantTotalDataResp, err error) {
+	var _args GetMerchantTotalDataArgs
+	_args.Req = Req
+	var _result GetMerchantTotalDataResult
+	if err = p.c.Call(ctx, "GetMerchantTotalData", &_args, &_result); err != nil {
+		return
+	}
+	return _result.GetSuccess(), nil
+}
+
+func (p *kClient) ListMerchantByMerchantId(ctx context.Context, Req *system.ListMerchantsByMerchantIdReq) (r *system.ListMerchantsByMerchantIdResp, err error) {
+	var _args ListMerchantByMerchantIdArgs
+	_args.Req = Req
+	var _result ListMerchantByMerchantIdResult
+	if err = p.c.Call(ctx, "ListMerchantByMerchantId", &_args, &_result); err != nil {
+		return
+	}
+	return _result.GetSuccess(), nil
+}
+
+func (p *kClient) ListMerchantByActivityNumber(ctx context.Context, Req *system.ListMerchantsByActivityNumberReq) (r *system.ListMerchantsByActivityNumberResp, err error) {
+	var _args ListMerchantByActivityNumberArgs
+	_args.Req = Req
+	var _result ListMerchantByActivityNumberResult
+	if err = p.c.Call(ctx, "ListMerchantByActivityNumber", &_args, &_result); err != nil {
+		return
+	}
+	return _result.GetSuccess(), nil
+}
+
+func (p *kClient) ListActivityByActivityId(ctx context.Context, Req *system.ListActivitiesByActivityIdReq) (r *system.ListActivitiesByActivityIdResp, err error) {
+	var _args ListActivityByActivityIdArgs
+	_args.Req = Req
+	var _result ListActivityByActivityIdResult
+	if err = p.c.Call(ctx, "ListActivityByActivityId", &_args, &_result); err != nil {
 		return
 	}
 	return _result.GetSuccess(), nil

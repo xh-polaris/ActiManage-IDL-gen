@@ -2365,6 +2365,11 @@ func (x *MerchantUpdateSettingReq) FastRead(buf []byte, _type int8, number int32
 		if err != nil {
 			goto ReadFieldError
 		}
+	case 4:
+		offset, err = x.fastReadField4(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
 		if err != nil {
@@ -2379,6 +2384,11 @@ ReadFieldError:
 }
 
 func (x *MerchantUpdateSettingReq) fastReadField1(buf []byte, _type int8) (offset int, err error) {
+	x.Id, offset, err = fastpb.ReadString(buf, _type)
+	return offset, err
+}
+
+func (x *MerchantUpdateSettingReq) fastReadField2(buf []byte, _type int8) (offset int, err error) {
 	var v Header
 	offset, err = fastpb.ReadMessage(buf, _type, &v)
 	if err != nil {
@@ -2388,7 +2398,7 @@ func (x *MerchantUpdateSettingReq) fastReadField1(buf []byte, _type int8) (offse
 	return offset, nil
 }
 
-func (x *MerchantUpdateSettingReq) fastReadField2(buf []byte, _type int8) (offset int, err error) {
+func (x *MerchantUpdateSettingReq) fastReadField3(buf []byte, _type int8) (offset int, err error) {
 	var v Footer
 	offset, err = fastpb.ReadMessage(buf, _type, &v)
 	if err != nil {
@@ -2398,7 +2408,7 @@ func (x *MerchantUpdateSettingReq) fastReadField2(buf []byte, _type int8) (offse
 	return offset, nil
 }
 
-func (x *MerchantUpdateSettingReq) fastReadField3(buf []byte, _type int8) (offset int, err error) {
+func (x *MerchantUpdateSettingReq) fastReadField4(buf []byte, _type int8) (offset int, err error) {
 	var v Cover
 	offset, err = fastpb.ReadMessage(buf, _type, &v)
 	if err != nil {
@@ -2628,6 +2638,46 @@ func (x *MerchantGetInfoResp) FastRead(buf []byte, _type int8, number int32) (of
 		if err != nil {
 			goto ReadFieldError
 		}
+	case 6:
+		offset, err = x.fastReadField6(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	case 7:
+		offset, err = x.fastReadField7(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	case 8:
+		offset, err = x.fastReadField8(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	case 9:
+		offset, err = x.fastReadField9(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	case 10:
+		offset, err = x.fastReadField10(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	case 11:
+		offset, err = x.fastReadField11(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	case 12:
+		offset, err = x.fastReadField12(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	case 13:
+		offset, err = x.fastReadField13(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
 		if err != nil {
@@ -2652,7 +2702,7 @@ func (x *MerchantGetInfoResp) fastReadField2(buf []byte, _type int8) (offset int
 }
 
 func (x *MerchantGetInfoResp) fastReadField3(buf []byte, _type int8) (offset int, err error) {
-	x.Auth, offset, err = fastpb.ReadString(buf, _type)
+	x.Name, offset, err = fastpb.ReadString(buf, _type)
 	return offset, err
 }
 
@@ -2662,7 +2712,62 @@ func (x *MerchantGetInfoResp) fastReadField4(buf []byte, _type int8) (offset int
 }
 
 func (x *MerchantGetInfoResp) fastReadField5(buf []byte, _type int8) (offset int, err error) {
-	x.Name, offset, err = fastpb.ReadString(buf, _type)
+	var v Opening
+	offset, err = fastpb.ReadMessage(buf, _type, &v)
+	if err != nil {
+		return offset, err
+	}
+	x.Openings = append(x.Openings, &v)
+	return offset, nil
+}
+
+func (x *MerchantGetInfoResp) fastReadField6(buf []byte, _type int8) (offset int, err error) {
+	x.Phone, offset, err = fastpb.ReadString(buf, _type)
+	return offset, err
+}
+
+func (x *MerchantGetInfoResp) fastReadField7(buf []byte, _type int8) (offset int, err error) {
+	var v Location
+	offset, err = fastpb.ReadMessage(buf, _type, &v)
+	if err != nil {
+		return offset, err
+	}
+	x.Location = &v
+	return offset, nil
+}
+
+func (x *MerchantGetInfoResp) fastReadField8(buf []byte, _type int8) (offset int, err error) {
+	x.Description, offset, err = fastpb.ReadString(buf, _type)
+	return offset, err
+}
+
+func (x *MerchantGetInfoResp) fastReadField9(buf []byte, _type int8) (offset int, err error) {
+	var v string
+	v, offset, err = fastpb.ReadString(buf, _type)
+	if err != nil {
+		return offset, err
+	}
+	x.Licences = append(x.Licences, v)
+	return offset, err
+}
+
+func (x *MerchantGetInfoResp) fastReadField10(buf []byte, _type int8) (offset int, err error) {
+	x.CreateTime, offset, err = fastpb.ReadInt64(buf, _type)
+	return offset, err
+}
+
+func (x *MerchantGetInfoResp) fastReadField11(buf []byte, _type int8) (offset int, err error) {
+	x.UpdateTime, offset, err = fastpb.ReadInt64(buf, _type)
+	return offset, err
+}
+
+func (x *MerchantGetInfoResp) fastReadField12(buf []byte, _type int8) (offset int, err error) {
+	x.DeleteTime, offset, err = fastpb.ReadInt64(buf, _type)
+	return offset, err
+}
+
+func (x *MerchantGetInfoResp) fastReadField13(buf []byte, _type int8) (offset int, err error) {
+	x.Status, offset, err = fastpb.ReadInt64(buf, _type)
 	return offset, err
 }
 
@@ -3522,6 +3627,41 @@ func (x *StsSendVerifyCodeReq) fastReadField2(buf []byte, _type int8) (offset in
 
 func (x *StsSendVerifyCodeReq) fastReadField3(buf []byte, _type int8) (offset int, err error) {
 	x.Purpose, offset, err = fastpb.ReadString(buf, _type)
+	return offset, err
+}
+
+func (x *StsViewReq) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
+	switch number {
+	case 1:
+		offset, err = x.fastReadField1(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	case 2:
+		offset, err = x.fastReadField2(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	default:
+		offset, err = fastpb.Skip(buf, _type, number)
+		if err != nil {
+			goto SkipFieldError
+		}
+	}
+	return offset, nil
+SkipFieldError:
+	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
+ReadFieldError:
+	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_StsViewReq[number], err)
+}
+
+func (x *StsViewReq) fastReadField1(buf []byte, _type int8) (offset int, err error) {
+	x.TargetId, offset, err = fastpb.ReadString(buf, _type)
+	return offset, err
+}
+
+func (x *StsViewReq) fastReadField2(buf []byte, _type int8) (offset int, err error) {
+	x.Type, offset, err = fastpb.ReadInt64(buf, _type)
 	return offset, err
 }
 
@@ -5913,30 +6053,39 @@ func (x *MerchantUpdateSettingReq) FastWrite(buf []byte) (offset int) {
 	offset += x.fastWriteField1(buf[offset:])
 	offset += x.fastWriteField2(buf[offset:])
 	offset += x.fastWriteField3(buf[offset:])
+	offset += x.fastWriteField4(buf[offset:])
 	return offset
 }
 
 func (x *MerchantUpdateSettingReq) fastWriteField1(buf []byte) (offset int) {
-	if x.Header == nil {
+	if x.Id == "" {
 		return offset
 	}
-	offset += fastpb.WriteMessage(buf[offset:], 1, x.GetHeader())
+	offset += fastpb.WriteString(buf[offset:], 1, x.GetId())
 	return offset
 }
 
 func (x *MerchantUpdateSettingReq) fastWriteField2(buf []byte) (offset int) {
-	if x.Footer == nil {
+	if x.Header == nil {
 		return offset
 	}
-	offset += fastpb.WriteMessage(buf[offset:], 2, x.GetFooter())
+	offset += fastpb.WriteMessage(buf[offset:], 2, x.GetHeader())
 	return offset
 }
 
 func (x *MerchantUpdateSettingReq) fastWriteField3(buf []byte) (offset int) {
+	if x.Footer == nil {
+		return offset
+	}
+	offset += fastpb.WriteMessage(buf[offset:], 3, x.GetFooter())
+	return offset
+}
+
+func (x *MerchantUpdateSettingReq) fastWriteField4(buf []byte) (offset int) {
 	if x.Cover == nil {
 		return offset
 	}
-	offset += fastpb.WriteMessage(buf[offset:], 3, x.GetCover())
+	offset += fastpb.WriteMessage(buf[offset:], 4, x.GetCover())
 	return offset
 }
 
@@ -6082,6 +6231,14 @@ func (x *MerchantGetInfoResp) FastWrite(buf []byte) (offset int) {
 	offset += x.fastWriteField3(buf[offset:])
 	offset += x.fastWriteField4(buf[offset:])
 	offset += x.fastWriteField5(buf[offset:])
+	offset += x.fastWriteField6(buf[offset:])
+	offset += x.fastWriteField7(buf[offset:])
+	offset += x.fastWriteField8(buf[offset:])
+	offset += x.fastWriteField9(buf[offset:])
+	offset += x.fastWriteField10(buf[offset:])
+	offset += x.fastWriteField11(buf[offset:])
+	offset += x.fastWriteField12(buf[offset:])
+	offset += x.fastWriteField13(buf[offset:])
 	return offset
 }
 
@@ -6102,10 +6259,10 @@ func (x *MerchantGetInfoResp) fastWriteField2(buf []byte) (offset int) {
 }
 
 func (x *MerchantGetInfoResp) fastWriteField3(buf []byte) (offset int) {
-	if x.Auth == "" {
+	if x.Name == "" {
 		return offset
 	}
-	offset += fastpb.WriteString(buf[offset:], 3, x.GetAuth())
+	offset += fastpb.WriteString(buf[offset:], 3, x.GetName())
 	return offset
 }
 
@@ -6118,10 +6275,78 @@ func (x *MerchantGetInfoResp) fastWriteField4(buf []byte) (offset int) {
 }
 
 func (x *MerchantGetInfoResp) fastWriteField5(buf []byte) (offset int) {
-	if x.Name == "" {
+	if x.Openings == nil {
 		return offset
 	}
-	offset += fastpb.WriteString(buf[offset:], 5, x.GetName())
+	for i := range x.GetOpenings() {
+		offset += fastpb.WriteMessage(buf[offset:], 5, x.GetOpenings()[i])
+	}
+	return offset
+}
+
+func (x *MerchantGetInfoResp) fastWriteField6(buf []byte) (offset int) {
+	if x.Phone == "" {
+		return offset
+	}
+	offset += fastpb.WriteString(buf[offset:], 6, x.GetPhone())
+	return offset
+}
+
+func (x *MerchantGetInfoResp) fastWriteField7(buf []byte) (offset int) {
+	if x.Location == nil {
+		return offset
+	}
+	offset += fastpb.WriteMessage(buf[offset:], 7, x.GetLocation())
+	return offset
+}
+
+func (x *MerchantGetInfoResp) fastWriteField8(buf []byte) (offset int) {
+	if x.Description == "" {
+		return offset
+	}
+	offset += fastpb.WriteString(buf[offset:], 8, x.GetDescription())
+	return offset
+}
+
+func (x *MerchantGetInfoResp) fastWriteField9(buf []byte) (offset int) {
+	if len(x.Licences) == 0 {
+		return offset
+	}
+	for i := range x.GetLicences() {
+		offset += fastpb.WriteString(buf[offset:], 9, x.GetLicences()[i])
+	}
+	return offset
+}
+
+func (x *MerchantGetInfoResp) fastWriteField10(buf []byte) (offset int) {
+	if x.CreateTime == 0 {
+		return offset
+	}
+	offset += fastpb.WriteInt64(buf[offset:], 10, x.GetCreateTime())
+	return offset
+}
+
+func (x *MerchantGetInfoResp) fastWriteField11(buf []byte) (offset int) {
+	if x.UpdateTime == 0 {
+		return offset
+	}
+	offset += fastpb.WriteInt64(buf[offset:], 11, x.GetUpdateTime())
+	return offset
+}
+
+func (x *MerchantGetInfoResp) fastWriteField12(buf []byte) (offset int) {
+	if x.DeleteTime == 0 {
+		return offset
+	}
+	offset += fastpb.WriteInt64(buf[offset:], 12, x.GetDeleteTime())
+	return offset
+}
+
+func (x *MerchantGetInfoResp) fastWriteField13(buf []byte) (offset int) {
+	if x.Status == 0 {
+		return offset
+	}
+	offset += fastpb.WriteInt64(buf[offset:], 13, x.GetStatus())
 	return offset
 }
 
@@ -6748,6 +6973,31 @@ func (x *StsSendVerifyCodeReq) fastWriteField3(buf []byte) (offset int) {
 		return offset
 	}
 	offset += fastpb.WriteString(buf[offset:], 3, x.GetPurpose())
+	return offset
+}
+
+func (x *StsViewReq) FastWrite(buf []byte) (offset int) {
+	if x == nil {
+		return offset
+	}
+	offset += x.fastWriteField1(buf[offset:])
+	offset += x.fastWriteField2(buf[offset:])
+	return offset
+}
+
+func (x *StsViewReq) fastWriteField1(buf []byte) (offset int) {
+	if x.TargetId == "" {
+		return offset
+	}
+	offset += fastpb.WriteString(buf[offset:], 1, x.GetTargetId())
+	return offset
+}
+
+func (x *StsViewReq) fastWriteField2(buf []byte) (offset int) {
+	if x.Type == 0 {
+		return offset
+	}
+	offset += fastpb.WriteInt64(buf[offset:], 2, x.GetType())
 	return offset
 }
 
@@ -9004,30 +9254,39 @@ func (x *MerchantUpdateSettingReq) Size() (n int) {
 	n += x.sizeField1()
 	n += x.sizeField2()
 	n += x.sizeField3()
+	n += x.sizeField4()
 	return n
 }
 
 func (x *MerchantUpdateSettingReq) sizeField1() (n int) {
-	if x.Header == nil {
+	if x.Id == "" {
 		return n
 	}
-	n += fastpb.SizeMessage(1, x.GetHeader())
+	n += fastpb.SizeString(1, x.GetId())
 	return n
 }
 
 func (x *MerchantUpdateSettingReq) sizeField2() (n int) {
-	if x.Footer == nil {
+	if x.Header == nil {
 		return n
 	}
-	n += fastpb.SizeMessage(2, x.GetFooter())
+	n += fastpb.SizeMessage(2, x.GetHeader())
 	return n
 }
 
 func (x *MerchantUpdateSettingReq) sizeField3() (n int) {
+	if x.Footer == nil {
+		return n
+	}
+	n += fastpb.SizeMessage(3, x.GetFooter())
+	return n
+}
+
+func (x *MerchantUpdateSettingReq) sizeField4() (n int) {
 	if x.Cover == nil {
 		return n
 	}
-	n += fastpb.SizeMessage(3, x.GetCover())
+	n += fastpb.SizeMessage(4, x.GetCover())
 	return n
 }
 
@@ -9173,6 +9432,14 @@ func (x *MerchantGetInfoResp) Size() (n int) {
 	n += x.sizeField3()
 	n += x.sizeField4()
 	n += x.sizeField5()
+	n += x.sizeField6()
+	n += x.sizeField7()
+	n += x.sizeField8()
+	n += x.sizeField9()
+	n += x.sizeField10()
+	n += x.sizeField11()
+	n += x.sizeField12()
+	n += x.sizeField13()
 	return n
 }
 
@@ -9193,10 +9460,10 @@ func (x *MerchantGetInfoResp) sizeField2() (n int) {
 }
 
 func (x *MerchantGetInfoResp) sizeField3() (n int) {
-	if x.Auth == "" {
+	if x.Name == "" {
 		return n
 	}
-	n += fastpb.SizeString(3, x.GetAuth())
+	n += fastpb.SizeString(3, x.GetName())
 	return n
 }
 
@@ -9209,10 +9476,78 @@ func (x *MerchantGetInfoResp) sizeField4() (n int) {
 }
 
 func (x *MerchantGetInfoResp) sizeField5() (n int) {
-	if x.Name == "" {
+	if x.Openings == nil {
 		return n
 	}
-	n += fastpb.SizeString(5, x.GetName())
+	for i := range x.GetOpenings() {
+		n += fastpb.SizeMessage(5, x.GetOpenings()[i])
+	}
+	return n
+}
+
+func (x *MerchantGetInfoResp) sizeField6() (n int) {
+	if x.Phone == "" {
+		return n
+	}
+	n += fastpb.SizeString(6, x.GetPhone())
+	return n
+}
+
+func (x *MerchantGetInfoResp) sizeField7() (n int) {
+	if x.Location == nil {
+		return n
+	}
+	n += fastpb.SizeMessage(7, x.GetLocation())
+	return n
+}
+
+func (x *MerchantGetInfoResp) sizeField8() (n int) {
+	if x.Description == "" {
+		return n
+	}
+	n += fastpb.SizeString(8, x.GetDescription())
+	return n
+}
+
+func (x *MerchantGetInfoResp) sizeField9() (n int) {
+	if len(x.Licences) == 0 {
+		return n
+	}
+	for i := range x.GetLicences() {
+		n += fastpb.SizeString(9, x.GetLicences()[i])
+	}
+	return n
+}
+
+func (x *MerchantGetInfoResp) sizeField10() (n int) {
+	if x.CreateTime == 0 {
+		return n
+	}
+	n += fastpb.SizeInt64(10, x.GetCreateTime())
+	return n
+}
+
+func (x *MerchantGetInfoResp) sizeField11() (n int) {
+	if x.UpdateTime == 0 {
+		return n
+	}
+	n += fastpb.SizeInt64(11, x.GetUpdateTime())
+	return n
+}
+
+func (x *MerchantGetInfoResp) sizeField12() (n int) {
+	if x.DeleteTime == 0 {
+		return n
+	}
+	n += fastpb.SizeInt64(12, x.GetDeleteTime())
+	return n
+}
+
+func (x *MerchantGetInfoResp) sizeField13() (n int) {
+	if x.Status == 0 {
+		return n
+	}
+	n += fastpb.SizeInt64(13, x.GetStatus())
 	return n
 }
 
@@ -9839,6 +10174,31 @@ func (x *StsSendVerifyCodeReq) sizeField3() (n int) {
 		return n
 	}
 	n += fastpb.SizeString(3, x.GetPurpose())
+	return n
+}
+
+func (x *StsViewReq) Size() (n int) {
+	if x == nil {
+		return n
+	}
+	n += x.sizeField1()
+	n += x.sizeField2()
+	return n
+}
+
+func (x *StsViewReq) sizeField1() (n int) {
+	if x.TargetId == "" {
+		return n
+	}
+	n += fastpb.SizeString(1, x.GetTargetId())
+	return n
+}
+
+func (x *StsViewReq) sizeField2() (n int) {
+	if x.Type == 0 {
+		return n
+	}
+	n += fastpb.SizeInt64(2, x.GetType())
 	return n
 }
 
@@ -10628,9 +10988,10 @@ var fieldIDToName_MerchantGetSettingResp = map[int32]string{
 }
 
 var fieldIDToName_MerchantUpdateSettingReq = map[int32]string{
-	1: "Header",
-	2: "Footer",
-	3: "Cover",
+	1: "Id",
+	2: "Header",
+	3: "Footer",
+	4: "Cover",
 }
 
 var fieldIDToName_MerchantListBookRecordsReq = map[int32]string{
@@ -10656,11 +11017,19 @@ var fieldIDToName_MerchantUpdateInfoReq = map[int32]string{
 var fieldIDToName_MerchantGetInfoReq = map[int32]string{}
 
 var fieldIDToName_MerchantGetInfoResp = map[int32]string{
-	1: "Code",
-	2: "Msg",
-	3: "Auth",
-	4: "Logo",
-	5: "Name",
+	1:  "Code",
+	2:  "Msg",
+	3:  "Name",
+	4:  "Logo",
+	5:  "Openings",
+	6:  "Phone",
+	7:  "Location",
+	8:  "Description",
+	9:  "Licences",
+	10: "CreateTime",
+	11: "UpdateTime",
+	12: "DeleteTime",
+	13: "Status",
 }
 
 var fieldIDToName_MerchantSetPasswordReq = map[int32]string{
@@ -10766,6 +11135,11 @@ var fieldIDToName_StsSendVerifyCodeReq = map[int32]string{
 	1: "AuthId",
 	2: "AuthType",
 	3: "Purpose",
+}
+
+var fieldIDToName_StsViewReq = map[int32]string{
+	1: "TargetId",
+	2: "Type",
 }
 
 var fieldIDToName_ListActivitiesResp_Item = map[int32]string{

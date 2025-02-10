@@ -2500,6 +2500,11 @@ func (x *GetViewDataByMerchantReq) FastRead(buf []byte, _type int8, number int32
 		if err != nil {
 			goto ReadFieldError
 		}
+	case 2:
+		offset, err = x.fastReadField2(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
 		if err != nil {
@@ -2515,6 +2520,11 @@ ReadFieldError:
 
 func (x *GetViewDataByMerchantReq) fastReadField1(buf []byte, _type int8) (offset int, err error) {
 	x.Number, offset, err = fastpb.ReadInt64(buf, _type)
+	return offset, err
+}
+
+func (x *GetViewDataByMerchantReq) fastReadField2(buf []byte, _type int8) (offset int, err error) {
+	x.MerchantId, offset, err = fastpb.ReadString(buf, _type)
 	return offset, err
 }
 
@@ -4594,6 +4604,7 @@ func (x *GetViewDataByMerchantReq) FastWrite(buf []byte) (offset int) {
 		return offset
 	}
 	offset += x.fastWriteField1(buf[offset:])
+	offset += x.fastWriteField2(buf[offset:])
 	return offset
 }
 
@@ -4602,6 +4613,14 @@ func (x *GetViewDataByMerchantReq) fastWriteField1(buf []byte) (offset int) {
 		return offset
 	}
 	offset += fastpb.WriteInt64(buf[offset:], 1, x.GetNumber())
+	return offset
+}
+
+func (x *GetViewDataByMerchantReq) fastWriteField2(buf []byte) (offset int) {
+	if x.MerchantId == "" {
+		return offset
+	}
+	offset += fastpb.WriteString(buf[offset:], 2, x.GetMerchantId())
 	return offset
 }
 
@@ -6619,6 +6638,7 @@ func (x *GetViewDataByMerchantReq) Size() (n int) {
 		return n
 	}
 	n += x.sizeField1()
+	n += x.sizeField2()
 	return n
 }
 
@@ -6627,6 +6647,14 @@ func (x *GetViewDataByMerchantReq) sizeField1() (n int) {
 		return n
 	}
 	n += fastpb.SizeInt64(1, x.GetNumber())
+	return n
+}
+
+func (x *GetViewDataByMerchantReq) sizeField2() (n int) {
+	if x.MerchantId == "" {
+		return n
+	}
+	n += fastpb.SizeString(2, x.GetMerchantId())
 	return n
 }
 
@@ -7086,6 +7114,7 @@ var fieldIDToName_ListActivityIdsByBookRecordRankResp = map[int32]string{
 
 var fieldIDToName_GetViewDataByMerchantReq = map[int32]string{
 	1: "Number",
+	2: "MerchantId",
 }
 
 var fieldIDToName_GetViewDataByMerchantResp = map[int32]string{

@@ -2445,6 +2445,11 @@ func (x *ListActivityIdsByBookRecordRankReq) FastRead(buf []byte, _type int8, nu
 		if err != nil {
 			goto ReadFieldError
 		}
+	case 2:
+		offset, err = x.fastReadField2(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
 		if err != nil {
@@ -2460,6 +2465,11 @@ ReadFieldError:
 
 func (x *ListActivityIdsByBookRecordRankReq) fastReadField1(buf []byte, _type int8) (offset int, err error) {
 	x.Number, offset, err = fastpb.ReadInt64(buf, _type)
+	return offset, err
+}
+
+func (x *ListActivityIdsByBookRecordRankReq) fastReadField2(buf []byte, _type int8) (offset int, err error) {
+	x.MerchantId, offset, err = fastpb.ReadString(buf, _type)
 	return offset, err
 }
 
@@ -4570,6 +4580,7 @@ func (x *ListActivityIdsByBookRecordRankReq) FastWrite(buf []byte) (offset int) 
 		return offset
 	}
 	offset += x.fastWriteField1(buf[offset:])
+	offset += x.fastWriteField2(buf[offset:])
 	return offset
 }
 
@@ -4578,6 +4589,14 @@ func (x *ListActivityIdsByBookRecordRankReq) fastWriteField1(buf []byte) (offset
 		return offset
 	}
 	offset += fastpb.WriteInt64(buf[offset:], 1, x.GetNumber())
+	return offset
+}
+
+func (x *ListActivityIdsByBookRecordRankReq) fastWriteField2(buf []byte) (offset int) {
+	if x.MerchantId == "" {
+		return offset
+	}
+	offset += fastpb.WriteString(buf[offset:], 2, x.GetMerchantId())
 	return offset
 }
 
@@ -6604,6 +6623,7 @@ func (x *ListActivityIdsByBookRecordRankReq) Size() (n int) {
 		return n
 	}
 	n += x.sizeField1()
+	n += x.sizeField2()
 	return n
 }
 
@@ -6612,6 +6632,14 @@ func (x *ListActivityIdsByBookRecordRankReq) sizeField1() (n int) {
 		return n
 	}
 	n += fastpb.SizeInt64(1, x.GetNumber())
+	return n
+}
+
+func (x *ListActivityIdsByBookRecordRankReq) sizeField2() (n int) {
+	if x.MerchantId == "" {
+		return n
+	}
+	n += fastpb.SizeString(2, x.GetMerchantId())
 	return n
 }
 
@@ -7106,6 +7134,7 @@ var fieldIDToName_ListMerchantIdsByBookRecordRankResp = map[int32]string{
 
 var fieldIDToName_ListActivityIdsByBookRecordRankReq = map[int32]string{
 	1: "Number",
+	2: "MerchantId",
 }
 
 var fieldIDToName_ListActivityIdsByBookRecordRankResp = map[int32]string{

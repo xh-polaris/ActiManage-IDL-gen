@@ -2364,13 +2364,13 @@ ReadFieldError:
 }
 
 func (x *ListMerchantIdsByViewRankResp) fastReadField1(buf []byte, _type int8) (offset int, err error) {
-	var v string
-	v, offset, err = fastpb.ReadString(buf, _type)
+	var v ListMerchantIdsByViewRankResp_Item
+	offset, err = fastpb.ReadMessage(buf, _type, &v)
 	if err != nil {
 		return offset, err
 	}
-	x.Ids = append(x.Ids, v)
-	return offset, err
+	x.Items = append(x.Items, &v)
+	return offset, nil
 }
 
 func (x *ListMerchantIdsByBookRecordRankReq) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
@@ -2419,13 +2419,13 @@ ReadFieldError:
 }
 
 func (x *ListMerchantIdsByBookRecordRankResp) fastReadField1(buf []byte, _type int8) (offset int, err error) {
-	var v string
-	v, offset, err = fastpb.ReadString(buf, _type)
+	var v ListMerchantIdsByBookRecordRankResp_Item
+	offset, err = fastpb.ReadMessage(buf, _type, &v)
 	if err != nil {
 		return offset, err
 	}
-	x.Ids = append(x.Ids, v)
-	return offset, err
+	x.Items = append(x.Items, &v)
+	return offset, nil
 }
 
 func (x *ListActivityIdsByBookRecordRankReq) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
@@ -2474,13 +2474,13 @@ ReadFieldError:
 }
 
 func (x *ListActivityIdsByBookRecordRankResp) fastReadField1(buf []byte, _type int8) (offset int, err error) {
-	var v string
-	v, offset, err = fastpb.ReadString(buf, _type)
+	var v ListActivityIdsByBookRecordRankResp_Item
+	offset, err = fastpb.ReadMessage(buf, _type, &v)
 	if err != nil {
 		return offset, err
 	}
-	x.Ids = append(x.Ids, v)
-	return offset, err
+	x.Items = append(x.Items, &v)
+	return offset, nil
 }
 
 func (x *GetViewDataByMerchantReq) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
@@ -2570,6 +2570,111 @@ func (x *Response) fastReadField1(buf []byte, _type int8) (offset int, err error
 
 func (x *Response) fastReadField2(buf []byte, _type int8) (offset int, err error) {
 	x.Msg, offset, err = fastpb.ReadString(buf, _type)
+	return offset, err
+}
+
+func (x *ListMerchantIdsByViewRankResp_Item) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
+	switch number {
+	case 1:
+		offset, err = x.fastReadField1(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	case 2:
+		offset, err = x.fastReadField2(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	default:
+		offset, err = fastpb.Skip(buf, _type, number)
+		if err != nil {
+			goto SkipFieldError
+		}
+	}
+	return offset, nil
+SkipFieldError:
+	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
+ReadFieldError:
+	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_ListMerchantIdsByViewRankResp_Item[number], err)
+}
+
+func (x *ListMerchantIdsByViewRankResp_Item) fastReadField1(buf []byte, _type int8) (offset int, err error) {
+	x.Id, offset, err = fastpb.ReadString(buf, _type)
+	return offset, err
+}
+
+func (x *ListMerchantIdsByViewRankResp_Item) fastReadField2(buf []byte, _type int8) (offset int, err error) {
+	x.Number, offset, err = fastpb.ReadInt64(buf, _type)
+	return offset, err
+}
+
+func (x *ListMerchantIdsByBookRecordRankResp_Item) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
+	switch number {
+	case 1:
+		offset, err = x.fastReadField1(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	case 2:
+		offset, err = x.fastReadField2(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	default:
+		offset, err = fastpb.Skip(buf, _type, number)
+		if err != nil {
+			goto SkipFieldError
+		}
+	}
+	return offset, nil
+SkipFieldError:
+	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
+ReadFieldError:
+	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_ListMerchantIdsByBookRecordRankResp_Item[number], err)
+}
+
+func (x *ListMerchantIdsByBookRecordRankResp_Item) fastReadField1(buf []byte, _type int8) (offset int, err error) {
+	x.Id, offset, err = fastpb.ReadString(buf, _type)
+	return offset, err
+}
+
+func (x *ListMerchantIdsByBookRecordRankResp_Item) fastReadField2(buf []byte, _type int8) (offset int, err error) {
+	x.Number, offset, err = fastpb.ReadInt64(buf, _type)
+	return offset, err
+}
+
+func (x *ListActivityIdsByBookRecordRankResp_Item) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
+	switch number {
+	case 1:
+		offset, err = x.fastReadField1(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	case 2:
+		offset, err = x.fastReadField2(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	default:
+		offset, err = fastpb.Skip(buf, _type, number)
+		if err != nil {
+			goto SkipFieldError
+		}
+	}
+	return offset, nil
+SkipFieldError:
+	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
+ReadFieldError:
+	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_ListActivityIdsByBookRecordRankResp_Item[number], err)
+}
+
+func (x *ListActivityIdsByBookRecordRankResp_Item) fastReadField1(buf []byte, _type int8) (offset int, err error) {
+	x.Id, offset, err = fastpb.ReadString(buf, _type)
+	return offset, err
+}
+
+func (x *ListActivityIdsByBookRecordRankResp_Item) fastReadField2(buf []byte, _type int8) (offset int, err error) {
+	x.Number, offset, err = fastpb.ReadInt64(buf, _type)
 	return offset, err
 }
 
@@ -4388,11 +4493,11 @@ func (x *ListMerchantIdsByViewRankResp) FastWrite(buf []byte) (offset int) {
 }
 
 func (x *ListMerchantIdsByViewRankResp) fastWriteField1(buf []byte) (offset int) {
-	if len(x.Ids) == 0 {
+	if x.Items == nil {
 		return offset
 	}
-	for i := range x.GetIds() {
-		offset += fastpb.WriteString(buf[offset:], 1, x.GetIds()[i])
+	for i := range x.GetItems() {
+		offset += fastpb.WriteMessage(buf[offset:], 1, x.GetItems()[i])
 	}
 	return offset
 }
@@ -4422,11 +4527,11 @@ func (x *ListMerchantIdsByBookRecordRankResp) FastWrite(buf []byte) (offset int)
 }
 
 func (x *ListMerchantIdsByBookRecordRankResp) fastWriteField1(buf []byte) (offset int) {
-	if len(x.Ids) == 0 {
+	if x.Items == nil {
 		return offset
 	}
-	for i := range x.GetIds() {
-		offset += fastpb.WriteString(buf[offset:], 1, x.GetIds()[i])
+	for i := range x.GetItems() {
+		offset += fastpb.WriteMessage(buf[offset:], 1, x.GetItems()[i])
 	}
 	return offset
 }
@@ -4456,11 +4561,11 @@ func (x *ListActivityIdsByBookRecordRankResp) FastWrite(buf []byte) (offset int)
 }
 
 func (x *ListActivityIdsByBookRecordRankResp) fastWriteField1(buf []byte) (offset int) {
-	if len(x.Ids) == 0 {
+	if x.Items == nil {
 		return offset
 	}
-	for i := range x.GetIds() {
-		offset += fastpb.WriteString(buf[offset:], 1, x.GetIds()[i])
+	for i := range x.GetItems() {
+		offset += fastpb.WriteMessage(buf[offset:], 1, x.GetItems()[i])
 	}
 	return offset
 }
@@ -4521,6 +4626,81 @@ func (x *Response) fastWriteField2(buf []byte) (offset int) {
 		return offset
 	}
 	offset += fastpb.WriteString(buf[offset:], 2, x.GetMsg())
+	return offset
+}
+
+func (x *ListMerchantIdsByViewRankResp_Item) FastWrite(buf []byte) (offset int) {
+	if x == nil {
+		return offset
+	}
+	offset += x.fastWriteField1(buf[offset:])
+	offset += x.fastWriteField2(buf[offset:])
+	return offset
+}
+
+func (x *ListMerchantIdsByViewRankResp_Item) fastWriteField1(buf []byte) (offset int) {
+	if x.Id == "" {
+		return offset
+	}
+	offset += fastpb.WriteString(buf[offset:], 1, x.GetId())
+	return offset
+}
+
+func (x *ListMerchantIdsByViewRankResp_Item) fastWriteField2(buf []byte) (offset int) {
+	if x.Number == 0 {
+		return offset
+	}
+	offset += fastpb.WriteInt64(buf[offset:], 2, x.GetNumber())
+	return offset
+}
+
+func (x *ListMerchantIdsByBookRecordRankResp_Item) FastWrite(buf []byte) (offset int) {
+	if x == nil {
+		return offset
+	}
+	offset += x.fastWriteField1(buf[offset:])
+	offset += x.fastWriteField2(buf[offset:])
+	return offset
+}
+
+func (x *ListMerchantIdsByBookRecordRankResp_Item) fastWriteField1(buf []byte) (offset int) {
+	if x.Id == "" {
+		return offset
+	}
+	offset += fastpb.WriteString(buf[offset:], 1, x.GetId())
+	return offset
+}
+
+func (x *ListMerchantIdsByBookRecordRankResp_Item) fastWriteField2(buf []byte) (offset int) {
+	if x.Number == 0 {
+		return offset
+	}
+	offset += fastpb.WriteInt64(buf[offset:], 2, x.GetNumber())
+	return offset
+}
+
+func (x *ListActivityIdsByBookRecordRankResp_Item) FastWrite(buf []byte) (offset int) {
+	if x == nil {
+		return offset
+	}
+	offset += x.fastWriteField1(buf[offset:])
+	offset += x.fastWriteField2(buf[offset:])
+	return offset
+}
+
+func (x *ListActivityIdsByBookRecordRankResp_Item) fastWriteField1(buf []byte) (offset int) {
+	if x.Id == "" {
+		return offset
+	}
+	offset += fastpb.WriteString(buf[offset:], 1, x.GetId())
+	return offset
+}
+
+func (x *ListActivityIdsByBookRecordRankResp_Item) fastWriteField2(buf []byte) (offset int) {
+	if x.Number == 0 {
+		return offset
+	}
+	offset += fastpb.WriteInt64(buf[offset:], 2, x.GetNumber())
 	return offset
 }
 
@@ -6329,11 +6509,11 @@ func (x *ListMerchantIdsByViewRankResp) Size() (n int) {
 }
 
 func (x *ListMerchantIdsByViewRankResp) sizeField1() (n int) {
-	if len(x.Ids) == 0 {
+	if x.Items == nil {
 		return n
 	}
-	for i := range x.GetIds() {
-		n += fastpb.SizeString(1, x.GetIds()[i])
+	for i := range x.GetItems() {
+		n += fastpb.SizeMessage(1, x.GetItems()[i])
 	}
 	return n
 }
@@ -6363,11 +6543,11 @@ func (x *ListMerchantIdsByBookRecordRankResp) Size() (n int) {
 }
 
 func (x *ListMerchantIdsByBookRecordRankResp) sizeField1() (n int) {
-	if len(x.Ids) == 0 {
+	if x.Items == nil {
 		return n
 	}
-	for i := range x.GetIds() {
-		n += fastpb.SizeString(1, x.GetIds()[i])
+	for i := range x.GetItems() {
+		n += fastpb.SizeMessage(1, x.GetItems()[i])
 	}
 	return n
 }
@@ -6397,11 +6577,11 @@ func (x *ListActivityIdsByBookRecordRankResp) Size() (n int) {
 }
 
 func (x *ListActivityIdsByBookRecordRankResp) sizeField1() (n int) {
-	if len(x.Ids) == 0 {
+	if x.Items == nil {
 		return n
 	}
-	for i := range x.GetIds() {
-		n += fastpb.SizeString(1, x.GetIds()[i])
+	for i := range x.GetItems() {
+		n += fastpb.SizeMessage(1, x.GetItems()[i])
 	}
 	return n
 }
@@ -6462,6 +6642,81 @@ func (x *Response) sizeField2() (n int) {
 		return n
 	}
 	n += fastpb.SizeString(2, x.GetMsg())
+	return n
+}
+
+func (x *ListMerchantIdsByViewRankResp_Item) Size() (n int) {
+	if x == nil {
+		return n
+	}
+	n += x.sizeField1()
+	n += x.sizeField2()
+	return n
+}
+
+func (x *ListMerchantIdsByViewRankResp_Item) sizeField1() (n int) {
+	if x.Id == "" {
+		return n
+	}
+	n += fastpb.SizeString(1, x.GetId())
+	return n
+}
+
+func (x *ListMerchantIdsByViewRankResp_Item) sizeField2() (n int) {
+	if x.Number == 0 {
+		return n
+	}
+	n += fastpb.SizeInt64(2, x.GetNumber())
+	return n
+}
+
+func (x *ListMerchantIdsByBookRecordRankResp_Item) Size() (n int) {
+	if x == nil {
+		return n
+	}
+	n += x.sizeField1()
+	n += x.sizeField2()
+	return n
+}
+
+func (x *ListMerchantIdsByBookRecordRankResp_Item) sizeField1() (n int) {
+	if x.Id == "" {
+		return n
+	}
+	n += fastpb.SizeString(1, x.GetId())
+	return n
+}
+
+func (x *ListMerchantIdsByBookRecordRankResp_Item) sizeField2() (n int) {
+	if x.Number == 0 {
+		return n
+	}
+	n += fastpb.SizeInt64(2, x.GetNumber())
+	return n
+}
+
+func (x *ListActivityIdsByBookRecordRankResp_Item) Size() (n int) {
+	if x == nil {
+		return n
+	}
+	n += x.sizeField1()
+	n += x.sizeField2()
+	return n
+}
+
+func (x *ListActivityIdsByBookRecordRankResp_Item) sizeField1() (n int) {
+	if x.Id == "" {
+		return n
+	}
+	n += fastpb.SizeString(1, x.GetId())
+	return n
+}
+
+func (x *ListActivityIdsByBookRecordRankResp_Item) sizeField2() (n int) {
+	if x.Number == 0 {
+		return n
+	}
+	n += fastpb.SizeInt64(2, x.GetNumber())
 	return n
 }
 
@@ -6781,7 +7036,7 @@ var fieldIDToName_ListMerchantIdsByViewRankReq = map[int32]string{
 }
 
 var fieldIDToName_ListMerchantIdsByViewRankResp = map[int32]string{
-	1: "Ids",
+	1: "Items",
 }
 
 var fieldIDToName_ListMerchantIdsByBookRecordRankReq = map[int32]string{
@@ -6789,7 +7044,7 @@ var fieldIDToName_ListMerchantIdsByBookRecordRankReq = map[int32]string{
 }
 
 var fieldIDToName_ListMerchantIdsByBookRecordRankResp = map[int32]string{
-	1: "Ids",
+	1: "Items",
 }
 
 var fieldIDToName_ListActivityIdsByBookRecordRankReq = map[int32]string{
@@ -6797,7 +7052,7 @@ var fieldIDToName_ListActivityIdsByBookRecordRankReq = map[int32]string{
 }
 
 var fieldIDToName_ListActivityIdsByBookRecordRankResp = map[int32]string{
-	1: "Ids",
+	1: "Items",
 }
 
 var fieldIDToName_GetViewDataByMerchantReq = map[int32]string{
@@ -6811,6 +7066,21 @@ var fieldIDToName_GetViewDataByMerchantResp = map[int32]string{
 var fieldIDToName_Response = map[int32]string{
 	1: "Code",
 	2: "Msg",
+}
+
+var fieldIDToName_ListMerchantIdsByViewRankResp_Item = map[int32]string{
+	1: "Id",
+	2: "Number",
+}
+
+var fieldIDToName_ListMerchantIdsByBookRecordRankResp_Item = map[int32]string{
+	1: "Id",
+	2: "Number",
+}
+
+var fieldIDToName_ListActivityIdsByBookRecordRankResp_Item = map[int32]string{
+	1: "Id",
+	2: "Number",
 }
 
 var fieldIDToName_GetViewDataByMerchantResp_Item = map[int32]string{

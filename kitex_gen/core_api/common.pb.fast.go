@@ -3368,6 +3368,11 @@ func (x *SystemGetDashboardReq) FastRead(buf []byte, _type int8, number int32) (
 		if err != nil {
 			goto ReadFieldError
 		}
+	case 2:
+		offset, err = x.fastReadField2(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
 		if err != nil {
@@ -3386,6 +3391,11 @@ func (x *SystemGetDashboardReq) fastReadField1(buf []byte, _type int8) (offset i
 	return offset, err
 }
 
+func (x *SystemGetDashboardReq) fastReadField2(buf []byte, _type int8) (offset int, err error) {
+	x.ViewDataNumber, offset, err = fastpb.ReadInt64(buf, _type)
+	return offset, err
+}
+
 func (x *SystemGetDashboardResp) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
 	switch number {
 	default:
@@ -3401,6 +3411,16 @@ SkipFieldError:
 
 func (x *SystemGetOverallDashboardReq) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
 	switch number {
+	case 1:
+		offset, err = x.fastReadField1(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	case 2:
+		offset, err = x.fastReadField2(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
 		if err != nil {
@@ -3410,6 +3430,18 @@ func (x *SystemGetOverallDashboardReq) FastRead(buf []byte, _type int8, number i
 	return offset, nil
 SkipFieldError:
 	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
+ReadFieldError:
+	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_SystemGetOverallDashboardReq[number], err)
+}
+
+func (x *SystemGetOverallDashboardReq) fastReadField1(buf []byte, _type int8) (offset int, err error) {
+	x.LineNumber, offset, err = fastpb.ReadInt64(buf, _type)
+	return offset, err
+}
+
+func (x *SystemGetOverallDashboardReq) fastReadField2(buf []byte, _type int8) (offset int, err error) {
+	x.MerchantByBookRecordRank, offset, err = fastpb.ReadInt64(buf, _type)
+	return offset, err
 }
 
 func (x *SystemGetOverallDashboardResp) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
@@ -6802,6 +6834,7 @@ func (x *SystemGetDashboardReq) FastWrite(buf []byte) (offset int) {
 		return offset
 	}
 	offset += x.fastWriteField1(buf[offset:])
+	offset += x.fastWriteField2(buf[offset:])
 	return offset
 }
 
@@ -6810,6 +6843,14 @@ func (x *SystemGetDashboardReq) fastWriteField1(buf []byte) (offset int) {
 		return offset
 	}
 	offset += fastpb.WriteString(buf[offset:], 1, x.GetId())
+	return offset
+}
+
+func (x *SystemGetDashboardReq) fastWriteField2(buf []byte) (offset int) {
+	if x.ViewDataNumber == 0 {
+		return offset
+	}
+	offset += fastpb.WriteInt64(buf[offset:], 2, x.GetViewDataNumber())
 	return offset
 }
 
@@ -6824,6 +6865,24 @@ func (x *SystemGetOverallDashboardReq) FastWrite(buf []byte) (offset int) {
 	if x == nil {
 		return offset
 	}
+	offset += x.fastWriteField1(buf[offset:])
+	offset += x.fastWriteField2(buf[offset:])
+	return offset
+}
+
+func (x *SystemGetOverallDashboardReq) fastWriteField1(buf []byte) (offset int) {
+	if x.LineNumber == 0 {
+		return offset
+	}
+	offset += fastpb.WriteInt64(buf[offset:], 1, x.GetLineNumber())
+	return offset
+}
+
+func (x *SystemGetOverallDashboardReq) fastWriteField2(buf []byte) (offset int) {
+	if x.MerchantByBookRecordRank == 0 {
+		return offset
+	}
+	offset += fastpb.WriteInt64(buf[offset:], 2, x.GetMerchantByBookRecordRank())
 	return offset
 }
 
@@ -10012,6 +10071,7 @@ func (x *SystemGetDashboardReq) Size() (n int) {
 		return n
 	}
 	n += x.sizeField1()
+	n += x.sizeField2()
 	return n
 }
 
@@ -10020,6 +10080,14 @@ func (x *SystemGetDashboardReq) sizeField1() (n int) {
 		return n
 	}
 	n += fastpb.SizeString(1, x.GetId())
+	return n
+}
+
+func (x *SystemGetDashboardReq) sizeField2() (n int) {
+	if x.ViewDataNumber == 0 {
+		return n
+	}
+	n += fastpb.SizeInt64(2, x.GetViewDataNumber())
 	return n
 }
 
@@ -10034,6 +10102,24 @@ func (x *SystemGetOverallDashboardReq) Size() (n int) {
 	if x == nil {
 		return n
 	}
+	n += x.sizeField1()
+	n += x.sizeField2()
+	return n
+}
+
+func (x *SystemGetOverallDashboardReq) sizeField1() (n int) {
+	if x.LineNumber == 0 {
+		return n
+	}
+	n += fastpb.SizeInt64(1, x.GetLineNumber())
+	return n
+}
+
+func (x *SystemGetOverallDashboardReq) sizeField2() (n int) {
+	if x.MerchantByBookRecordRank == 0 {
+		return n
+	}
+	n += fastpb.SizeInt64(2, x.GetMerchantByBookRecordRank())
 	return n
 }
 
@@ -11129,11 +11215,15 @@ var fieldIDToName_SystemUpdateMerchantReq = map[int32]string{
 
 var fieldIDToName_SystemGetDashboardReq = map[int32]string{
 	1: "Id",
+	2: "ViewDataNumber",
 }
 
 var fieldIDToName_SystemGetDashboardResp = map[int32]string{}
 
-var fieldIDToName_SystemGetOverallDashboardReq = map[int32]string{}
+var fieldIDToName_SystemGetOverallDashboardReq = map[int32]string{
+	1: "LineNumber",
+	2: "MerchantByBookRecordRank",
+}
 
 var fieldIDToName_SystemGetOverallDashboardResp = map[int32]string{}
 

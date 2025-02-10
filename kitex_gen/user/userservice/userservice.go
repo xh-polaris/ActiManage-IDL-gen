@@ -190,17 +190,17 @@ var serviceMethods = map[string]kitex.MethodInfo{
 		false,
 		kitex.WithStreamingMode(kitex.StreamingUnary),
 	),
-	"ListMerchantIdRankRankByBookRecordRank": kitex.NewMethodInfo(
-		listMerchantIdRankRankByBookRecordRankHandler,
-		newListMerchantIdRankRankByBookRecordRankArgs,
-		newListMerchantIdRankRankByBookRecordRankResult,
+	"ListMerchantIdByBookRecordRank": kitex.NewMethodInfo(
+		listMerchantIdByBookRecordRankHandler,
+		newListMerchantIdByBookRecordRankArgs,
+		newListMerchantIdByBookRecordRankResult,
 		false,
 		kitex.WithStreamingMode(kitex.StreamingUnary),
 	),
-	"ListActivityIdRankRankByBookRecordRank": kitex.NewMethodInfo(
-		listActivityIdRankRankByBookRecordRankHandler,
-		newListActivityIdRankRankByBookRecordRankArgs,
-		newListActivityIdRankRankByBookRecordRankResult,
+	"ListActivityIdByBookRecordRank": kitex.NewMethodInfo(
+		listActivityIdByBookRecordRankHandler,
+		newListActivityIdByBookRecordRankArgs,
+		newListActivityIdByBookRecordRankResult,
 		false,
 		kitex.WithStreamingMode(kitex.StreamingUnary),
 	),
@@ -4102,7 +4102,7 @@ func (p *ListMerchantIdByViewRankResult) GetResult() interface{} {
 	return p.Success
 }
 
-func listMerchantIdRankRankByBookRecordRankHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
+func listMerchantIdByBookRecordRankHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
 	switch s := arg.(type) {
 	case *streaming.Args:
 		st := s.Stream
@@ -4110,64 +4110,64 @@ func listMerchantIdRankRankByBookRecordRankHandler(ctx context.Context, handler 
 		if err := st.RecvMsg(req); err != nil {
 			return err
 		}
-		resp, err := handler.(user.UserService).ListMerchantIdRankRankByBookRecordRank(ctx, req)
+		resp, err := handler.(user.UserService).ListMerchantIdByBookRecordRank(ctx, req)
 		if err != nil {
 			return err
 		}
 		return st.SendMsg(resp)
-	case *ListMerchantIdRankRankByBookRecordRankArgs:
-		success, err := handler.(user.UserService).ListMerchantIdRankRankByBookRecordRank(ctx, s.Req)
+	case *ListMerchantIdByBookRecordRankArgs:
+		success, err := handler.(user.UserService).ListMerchantIdByBookRecordRank(ctx, s.Req)
 		if err != nil {
 			return err
 		}
-		realResult := result.(*ListMerchantIdRankRankByBookRecordRankResult)
+		realResult := result.(*ListMerchantIdByBookRecordRankResult)
 		realResult.Success = success
 		return nil
 	default:
 		return errInvalidMessageType
 	}
 }
-func newListMerchantIdRankRankByBookRecordRankArgs() interface{} {
-	return &ListMerchantIdRankRankByBookRecordRankArgs{}
+func newListMerchantIdByBookRecordRankArgs() interface{} {
+	return &ListMerchantIdByBookRecordRankArgs{}
 }
 
-func newListMerchantIdRankRankByBookRecordRankResult() interface{} {
-	return &ListMerchantIdRankRankByBookRecordRankResult{}
+func newListMerchantIdByBookRecordRankResult() interface{} {
+	return &ListMerchantIdByBookRecordRankResult{}
 }
 
-type ListMerchantIdRankRankByBookRecordRankArgs struct {
+type ListMerchantIdByBookRecordRankArgs struct {
 	Req *user.ListMerchantIdsByBookRecordRankReq
 }
 
-func (p *ListMerchantIdRankRankByBookRecordRankArgs) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+func (p *ListMerchantIdByBookRecordRankArgs) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
 	if !p.IsSetReq() {
 		p.Req = new(user.ListMerchantIdsByBookRecordRankReq)
 	}
 	return p.Req.FastRead(buf, _type, number)
 }
 
-func (p *ListMerchantIdRankRankByBookRecordRankArgs) FastWrite(buf []byte) (n int) {
+func (p *ListMerchantIdByBookRecordRankArgs) FastWrite(buf []byte) (n int) {
 	if !p.IsSetReq() {
 		return 0
 	}
 	return p.Req.FastWrite(buf)
 }
 
-func (p *ListMerchantIdRankRankByBookRecordRankArgs) Size() (n int) {
+func (p *ListMerchantIdByBookRecordRankArgs) Size() (n int) {
 	if !p.IsSetReq() {
 		return 0
 	}
 	return p.Req.Size()
 }
 
-func (p *ListMerchantIdRankRankByBookRecordRankArgs) Marshal(out []byte) ([]byte, error) {
+func (p *ListMerchantIdByBookRecordRankArgs) Marshal(out []byte) ([]byte, error) {
 	if !p.IsSetReq() {
 		return out, nil
 	}
 	return proto.Marshal(p.Req)
 }
 
-func (p *ListMerchantIdRankRankByBookRecordRankArgs) Unmarshal(in []byte) error {
+func (p *ListMerchantIdByBookRecordRankArgs) Unmarshal(in []byte) error {
 	msg := new(user.ListMerchantIdsByBookRecordRankReq)
 	if err := proto.Unmarshal(in, msg); err != nil {
 		return err
@@ -4176,58 +4176,58 @@ func (p *ListMerchantIdRankRankByBookRecordRankArgs) Unmarshal(in []byte) error 
 	return nil
 }
 
-var ListMerchantIdRankRankByBookRecordRankArgs_Req_DEFAULT *user.ListMerchantIdsByBookRecordRankReq
+var ListMerchantIdByBookRecordRankArgs_Req_DEFAULT *user.ListMerchantIdsByBookRecordRankReq
 
-func (p *ListMerchantIdRankRankByBookRecordRankArgs) GetReq() *user.ListMerchantIdsByBookRecordRankReq {
+func (p *ListMerchantIdByBookRecordRankArgs) GetReq() *user.ListMerchantIdsByBookRecordRankReq {
 	if !p.IsSetReq() {
-		return ListMerchantIdRankRankByBookRecordRankArgs_Req_DEFAULT
+		return ListMerchantIdByBookRecordRankArgs_Req_DEFAULT
 	}
 	return p.Req
 }
 
-func (p *ListMerchantIdRankRankByBookRecordRankArgs) IsSetReq() bool {
+func (p *ListMerchantIdByBookRecordRankArgs) IsSetReq() bool {
 	return p.Req != nil
 }
 
-func (p *ListMerchantIdRankRankByBookRecordRankArgs) GetFirstArgument() interface{} {
+func (p *ListMerchantIdByBookRecordRankArgs) GetFirstArgument() interface{} {
 	return p.Req
 }
 
-type ListMerchantIdRankRankByBookRecordRankResult struct {
+type ListMerchantIdByBookRecordRankResult struct {
 	Success *user.ListMerchantIdsByBookRecordRankResp
 }
 
-var ListMerchantIdRankRankByBookRecordRankResult_Success_DEFAULT *user.ListMerchantIdsByBookRecordRankResp
+var ListMerchantIdByBookRecordRankResult_Success_DEFAULT *user.ListMerchantIdsByBookRecordRankResp
 
-func (p *ListMerchantIdRankRankByBookRecordRankResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+func (p *ListMerchantIdByBookRecordRankResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
 	if !p.IsSetSuccess() {
 		p.Success = new(user.ListMerchantIdsByBookRecordRankResp)
 	}
 	return p.Success.FastRead(buf, _type, number)
 }
 
-func (p *ListMerchantIdRankRankByBookRecordRankResult) FastWrite(buf []byte) (n int) {
+func (p *ListMerchantIdByBookRecordRankResult) FastWrite(buf []byte) (n int) {
 	if !p.IsSetSuccess() {
 		return 0
 	}
 	return p.Success.FastWrite(buf)
 }
 
-func (p *ListMerchantIdRankRankByBookRecordRankResult) Size() (n int) {
+func (p *ListMerchantIdByBookRecordRankResult) Size() (n int) {
 	if !p.IsSetSuccess() {
 		return 0
 	}
 	return p.Success.Size()
 }
 
-func (p *ListMerchantIdRankRankByBookRecordRankResult) Marshal(out []byte) ([]byte, error) {
+func (p *ListMerchantIdByBookRecordRankResult) Marshal(out []byte) ([]byte, error) {
 	if !p.IsSetSuccess() {
 		return out, nil
 	}
 	return proto.Marshal(p.Success)
 }
 
-func (p *ListMerchantIdRankRankByBookRecordRankResult) Unmarshal(in []byte) error {
+func (p *ListMerchantIdByBookRecordRankResult) Unmarshal(in []byte) error {
 	msg := new(user.ListMerchantIdsByBookRecordRankResp)
 	if err := proto.Unmarshal(in, msg); err != nil {
 		return err
@@ -4236,26 +4236,26 @@ func (p *ListMerchantIdRankRankByBookRecordRankResult) Unmarshal(in []byte) erro
 	return nil
 }
 
-func (p *ListMerchantIdRankRankByBookRecordRankResult) GetSuccess() *user.ListMerchantIdsByBookRecordRankResp {
+func (p *ListMerchantIdByBookRecordRankResult) GetSuccess() *user.ListMerchantIdsByBookRecordRankResp {
 	if !p.IsSetSuccess() {
-		return ListMerchantIdRankRankByBookRecordRankResult_Success_DEFAULT
+		return ListMerchantIdByBookRecordRankResult_Success_DEFAULT
 	}
 	return p.Success
 }
 
-func (p *ListMerchantIdRankRankByBookRecordRankResult) SetSuccess(x interface{}) {
+func (p *ListMerchantIdByBookRecordRankResult) SetSuccess(x interface{}) {
 	p.Success = x.(*user.ListMerchantIdsByBookRecordRankResp)
 }
 
-func (p *ListMerchantIdRankRankByBookRecordRankResult) IsSetSuccess() bool {
+func (p *ListMerchantIdByBookRecordRankResult) IsSetSuccess() bool {
 	return p.Success != nil
 }
 
-func (p *ListMerchantIdRankRankByBookRecordRankResult) GetResult() interface{} {
+func (p *ListMerchantIdByBookRecordRankResult) GetResult() interface{} {
 	return p.Success
 }
 
-func listActivityIdRankRankByBookRecordRankHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
+func listActivityIdByBookRecordRankHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
 	switch s := arg.(type) {
 	case *streaming.Args:
 		st := s.Stream
@@ -4263,64 +4263,64 @@ func listActivityIdRankRankByBookRecordRankHandler(ctx context.Context, handler 
 		if err := st.RecvMsg(req); err != nil {
 			return err
 		}
-		resp, err := handler.(user.UserService).ListActivityIdRankRankByBookRecordRank(ctx, req)
+		resp, err := handler.(user.UserService).ListActivityIdByBookRecordRank(ctx, req)
 		if err != nil {
 			return err
 		}
 		return st.SendMsg(resp)
-	case *ListActivityIdRankRankByBookRecordRankArgs:
-		success, err := handler.(user.UserService).ListActivityIdRankRankByBookRecordRank(ctx, s.Req)
+	case *ListActivityIdByBookRecordRankArgs:
+		success, err := handler.(user.UserService).ListActivityIdByBookRecordRank(ctx, s.Req)
 		if err != nil {
 			return err
 		}
-		realResult := result.(*ListActivityIdRankRankByBookRecordRankResult)
+		realResult := result.(*ListActivityIdByBookRecordRankResult)
 		realResult.Success = success
 		return nil
 	default:
 		return errInvalidMessageType
 	}
 }
-func newListActivityIdRankRankByBookRecordRankArgs() interface{} {
-	return &ListActivityIdRankRankByBookRecordRankArgs{}
+func newListActivityIdByBookRecordRankArgs() interface{} {
+	return &ListActivityIdByBookRecordRankArgs{}
 }
 
-func newListActivityIdRankRankByBookRecordRankResult() interface{} {
-	return &ListActivityIdRankRankByBookRecordRankResult{}
+func newListActivityIdByBookRecordRankResult() interface{} {
+	return &ListActivityIdByBookRecordRankResult{}
 }
 
-type ListActivityIdRankRankByBookRecordRankArgs struct {
+type ListActivityIdByBookRecordRankArgs struct {
 	Req *user.ListActivityIdsByBookRecordRankReq
 }
 
-func (p *ListActivityIdRankRankByBookRecordRankArgs) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+func (p *ListActivityIdByBookRecordRankArgs) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
 	if !p.IsSetReq() {
 		p.Req = new(user.ListActivityIdsByBookRecordRankReq)
 	}
 	return p.Req.FastRead(buf, _type, number)
 }
 
-func (p *ListActivityIdRankRankByBookRecordRankArgs) FastWrite(buf []byte) (n int) {
+func (p *ListActivityIdByBookRecordRankArgs) FastWrite(buf []byte) (n int) {
 	if !p.IsSetReq() {
 		return 0
 	}
 	return p.Req.FastWrite(buf)
 }
 
-func (p *ListActivityIdRankRankByBookRecordRankArgs) Size() (n int) {
+func (p *ListActivityIdByBookRecordRankArgs) Size() (n int) {
 	if !p.IsSetReq() {
 		return 0
 	}
 	return p.Req.Size()
 }
 
-func (p *ListActivityIdRankRankByBookRecordRankArgs) Marshal(out []byte) ([]byte, error) {
+func (p *ListActivityIdByBookRecordRankArgs) Marshal(out []byte) ([]byte, error) {
 	if !p.IsSetReq() {
 		return out, nil
 	}
 	return proto.Marshal(p.Req)
 }
 
-func (p *ListActivityIdRankRankByBookRecordRankArgs) Unmarshal(in []byte) error {
+func (p *ListActivityIdByBookRecordRankArgs) Unmarshal(in []byte) error {
 	msg := new(user.ListActivityIdsByBookRecordRankReq)
 	if err := proto.Unmarshal(in, msg); err != nil {
 		return err
@@ -4329,58 +4329,58 @@ func (p *ListActivityIdRankRankByBookRecordRankArgs) Unmarshal(in []byte) error 
 	return nil
 }
 
-var ListActivityIdRankRankByBookRecordRankArgs_Req_DEFAULT *user.ListActivityIdsByBookRecordRankReq
+var ListActivityIdByBookRecordRankArgs_Req_DEFAULT *user.ListActivityIdsByBookRecordRankReq
 
-func (p *ListActivityIdRankRankByBookRecordRankArgs) GetReq() *user.ListActivityIdsByBookRecordRankReq {
+func (p *ListActivityIdByBookRecordRankArgs) GetReq() *user.ListActivityIdsByBookRecordRankReq {
 	if !p.IsSetReq() {
-		return ListActivityIdRankRankByBookRecordRankArgs_Req_DEFAULT
+		return ListActivityIdByBookRecordRankArgs_Req_DEFAULT
 	}
 	return p.Req
 }
 
-func (p *ListActivityIdRankRankByBookRecordRankArgs) IsSetReq() bool {
+func (p *ListActivityIdByBookRecordRankArgs) IsSetReq() bool {
 	return p.Req != nil
 }
 
-func (p *ListActivityIdRankRankByBookRecordRankArgs) GetFirstArgument() interface{} {
+func (p *ListActivityIdByBookRecordRankArgs) GetFirstArgument() interface{} {
 	return p.Req
 }
 
-type ListActivityIdRankRankByBookRecordRankResult struct {
+type ListActivityIdByBookRecordRankResult struct {
 	Success *user.ListActivityIdsByBookRecordRankResp
 }
 
-var ListActivityIdRankRankByBookRecordRankResult_Success_DEFAULT *user.ListActivityIdsByBookRecordRankResp
+var ListActivityIdByBookRecordRankResult_Success_DEFAULT *user.ListActivityIdsByBookRecordRankResp
 
-func (p *ListActivityIdRankRankByBookRecordRankResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+func (p *ListActivityIdByBookRecordRankResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
 	if !p.IsSetSuccess() {
 		p.Success = new(user.ListActivityIdsByBookRecordRankResp)
 	}
 	return p.Success.FastRead(buf, _type, number)
 }
 
-func (p *ListActivityIdRankRankByBookRecordRankResult) FastWrite(buf []byte) (n int) {
+func (p *ListActivityIdByBookRecordRankResult) FastWrite(buf []byte) (n int) {
 	if !p.IsSetSuccess() {
 		return 0
 	}
 	return p.Success.FastWrite(buf)
 }
 
-func (p *ListActivityIdRankRankByBookRecordRankResult) Size() (n int) {
+func (p *ListActivityIdByBookRecordRankResult) Size() (n int) {
 	if !p.IsSetSuccess() {
 		return 0
 	}
 	return p.Success.Size()
 }
 
-func (p *ListActivityIdRankRankByBookRecordRankResult) Marshal(out []byte) ([]byte, error) {
+func (p *ListActivityIdByBookRecordRankResult) Marshal(out []byte) ([]byte, error) {
 	if !p.IsSetSuccess() {
 		return out, nil
 	}
 	return proto.Marshal(p.Success)
 }
 
-func (p *ListActivityIdRankRankByBookRecordRankResult) Unmarshal(in []byte) error {
+func (p *ListActivityIdByBookRecordRankResult) Unmarshal(in []byte) error {
 	msg := new(user.ListActivityIdsByBookRecordRankResp)
 	if err := proto.Unmarshal(in, msg); err != nil {
 		return err
@@ -4389,22 +4389,22 @@ func (p *ListActivityIdRankRankByBookRecordRankResult) Unmarshal(in []byte) erro
 	return nil
 }
 
-func (p *ListActivityIdRankRankByBookRecordRankResult) GetSuccess() *user.ListActivityIdsByBookRecordRankResp {
+func (p *ListActivityIdByBookRecordRankResult) GetSuccess() *user.ListActivityIdsByBookRecordRankResp {
 	if !p.IsSetSuccess() {
-		return ListActivityIdRankRankByBookRecordRankResult_Success_DEFAULT
+		return ListActivityIdByBookRecordRankResult_Success_DEFAULT
 	}
 	return p.Success
 }
 
-func (p *ListActivityIdRankRankByBookRecordRankResult) SetSuccess(x interface{}) {
+func (p *ListActivityIdByBookRecordRankResult) SetSuccess(x interface{}) {
 	p.Success = x.(*user.ListActivityIdsByBookRecordRankResp)
 }
 
-func (p *ListActivityIdRankRankByBookRecordRankResult) IsSetSuccess() bool {
+func (p *ListActivityIdByBookRecordRankResult) IsSetSuccess() bool {
 	return p.Success != nil
 }
 
-func (p *ListActivityIdRankRankByBookRecordRankResult) GetResult() interface{} {
+func (p *ListActivityIdByBookRecordRankResult) GetResult() interface{} {
 	return p.Success
 }
 
@@ -4821,21 +4821,21 @@ func (p *kClient) ListMerchantIdByViewRank(ctx context.Context, Req *user.ListMe
 	return _result.GetSuccess(), nil
 }
 
-func (p *kClient) ListMerchantIdRankRankByBookRecordRank(ctx context.Context, Req *user.ListMerchantIdsByBookRecordRankReq) (r *user.ListMerchantIdsByBookRecordRankResp, err error) {
-	var _args ListMerchantIdRankRankByBookRecordRankArgs
+func (p *kClient) ListMerchantIdByBookRecordRank(ctx context.Context, Req *user.ListMerchantIdsByBookRecordRankReq) (r *user.ListMerchantIdsByBookRecordRankResp, err error) {
+	var _args ListMerchantIdByBookRecordRankArgs
 	_args.Req = Req
-	var _result ListMerchantIdRankRankByBookRecordRankResult
-	if err = p.c.Call(ctx, "ListMerchantIdRankRankByBookRecordRank", &_args, &_result); err != nil {
+	var _result ListMerchantIdByBookRecordRankResult
+	if err = p.c.Call(ctx, "ListMerchantIdByBookRecordRank", &_args, &_result); err != nil {
 		return
 	}
 	return _result.GetSuccess(), nil
 }
 
-func (p *kClient) ListActivityIdRankRankByBookRecordRank(ctx context.Context, Req *user.ListActivityIdsByBookRecordRankReq) (r *user.ListActivityIdsByBookRecordRankResp, err error) {
-	var _args ListActivityIdRankRankByBookRecordRankArgs
+func (p *kClient) ListActivityIdByBookRecordRank(ctx context.Context, Req *user.ListActivityIdsByBookRecordRankReq) (r *user.ListActivityIdsByBookRecordRankResp, err error) {
+	var _args ListActivityIdByBookRecordRankArgs
 	_args.Req = Req
-	var _result ListActivityIdRankRankByBookRecordRankResult
-	if err = p.c.Call(ctx, "ListActivityIdRankRankByBookRecordRank", &_args, &_result); err != nil {
+	var _result ListActivityIdByBookRecordRankResult
+	if err = p.c.Call(ctx, "ListActivityIdByBookRecordRank", &_args, &_result); err != nil {
 		return
 	}
 	return _result.GetSuccess(), nil

@@ -36,8 +36,8 @@ type Client interface {
 	GetFavoriteAndViewOfActivity(ctx context.Context, Req *user.GetFavoriteAndViewOfActivityReq, callOptions ...callopt.Option) (r *user.GetFavoriteAndViewOfActivityResp, err error)
 	GetViewOfMerchant(ctx context.Context, Req *user.GetViewOfMerchantReq, callOptions ...callopt.Option) (r *user.GetViewOfMerchantResp, err error)
 	ListMerchantIdByViewRank(ctx context.Context, Req *user.ListMerchantIdsByViewRankReq, callOptions ...callopt.Option) (r *user.ListMerchantIdsByViewRankResp, err error)
-	ListMerchantIdRankRankByBookRecordRank(ctx context.Context, Req *user.ListMerchantIdsByBookRecordRankReq, callOptions ...callopt.Option) (r *user.ListMerchantIdsByBookRecordRankResp, err error)
-	ListActivityIdRankRankByBookRecordRank(ctx context.Context, Req *user.ListActivityIdsByBookRecordRankReq, callOptions ...callopt.Option) (r *user.ListActivityIdsByBookRecordRankResp, err error)
+	ListMerchantIdByBookRecordRank(ctx context.Context, Req *user.ListMerchantIdsByBookRecordRankReq, callOptions ...callopt.Option) (r *user.ListMerchantIdsByBookRecordRankResp, err error)
+	ListActivityIdByBookRecordRank(ctx context.Context, Req *user.ListActivityIdsByBookRecordRankReq, callOptions ...callopt.Option) (r *user.ListActivityIdsByBookRecordRankResp, err error)
 	GetViewDataByMerchant(ctx context.Context, Req *user.GetViewDataByMerchantReq, callOptions ...callopt.Option) (r *user.GetViewDataByMerchantResp, err error)
 }
 
@@ -195,14 +195,14 @@ func (p *kUserServiceClient) ListMerchantIdByViewRank(ctx context.Context, Req *
 	return p.kClient.ListMerchantIdByViewRank(ctx, Req)
 }
 
-func (p *kUserServiceClient) ListMerchantIdRankRankByBookRecordRank(ctx context.Context, Req *user.ListMerchantIdsByBookRecordRankReq, callOptions ...callopt.Option) (r *user.ListMerchantIdsByBookRecordRankResp, err error) {
+func (p *kUserServiceClient) ListMerchantIdByBookRecordRank(ctx context.Context, Req *user.ListMerchantIdsByBookRecordRankReq, callOptions ...callopt.Option) (r *user.ListMerchantIdsByBookRecordRankResp, err error) {
 	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
-	return p.kClient.ListMerchantIdRankRankByBookRecordRank(ctx, Req)
+	return p.kClient.ListMerchantIdByBookRecordRank(ctx, Req)
 }
 
-func (p *kUserServiceClient) ListActivityIdRankRankByBookRecordRank(ctx context.Context, Req *user.ListActivityIdsByBookRecordRankReq, callOptions ...callopt.Option) (r *user.ListActivityIdsByBookRecordRankResp, err error) {
+func (p *kUserServiceClient) ListActivityIdByBookRecordRank(ctx context.Context, Req *user.ListActivityIdsByBookRecordRankReq, callOptions ...callopt.Option) (r *user.ListActivityIdsByBookRecordRankResp, err error) {
 	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
-	return p.kClient.ListActivityIdRankRankByBookRecordRank(ctx, Req)
+	return p.kClient.ListActivityIdByBookRecordRank(ctx, Req)
 }
 
 func (p *kUserServiceClient) GetViewDataByMerchant(ctx context.Context, Req *user.GetViewDataByMerchantReq, callOptions ...callopt.Option) (r *user.GetViewDataByMerchantResp, err error) {

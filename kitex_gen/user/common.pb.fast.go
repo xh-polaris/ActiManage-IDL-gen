@@ -1497,6 +1497,11 @@ func (x *CreateBookRecordReq) FastRead(buf []byte, _type int8, number int32) (of
 		if err != nil {
 			goto ReadFieldError
 		}
+	case 6:
+		offset, err = x.fastReadField6(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
 		if err != nil {
@@ -1537,6 +1542,11 @@ func (x *CreateBookRecordReq) fastReadField4(buf []byte, _type int8) (offset int
 
 func (x *CreateBookRecordReq) fastReadField5(buf []byte, _type int8) (offset int, err error) {
 	x.Remark, offset, err = fastpb.ReadString(buf, _type)
+	return offset, err
+}
+
+func (x *CreateBookRecordReq) fastReadField6(buf []byte, _type int8) (offset int, err error) {
+	x.MerchantId, offset, err = fastpb.ReadString(buf, _type)
 	return offset, err
 }
 
@@ -3883,6 +3893,7 @@ func (x *CreateBookRecordReq) FastWrite(buf []byte) (offset int) {
 	offset += x.fastWriteField3(buf[offset:])
 	offset += x.fastWriteField4(buf[offset:])
 	offset += x.fastWriteField5(buf[offset:])
+	offset += x.fastWriteField6(buf[offset:])
 	return offset
 }
 
@@ -3925,6 +3936,14 @@ func (x *CreateBookRecordReq) fastWriteField5(buf []byte) (offset int) {
 		return offset
 	}
 	offset += fastpb.WriteString(buf[offset:], 5, x.GetRemark())
+	return offset
+}
+
+func (x *CreateBookRecordReq) fastWriteField6(buf []byte) (offset int) {
+	if x.MerchantId == "" {
+		return offset
+	}
+	offset += fastpb.WriteString(buf[offset:], 6, x.GetMerchantId())
 	return offset
 }
 
@@ -5899,6 +5918,7 @@ func (x *CreateBookRecordReq) Size() (n int) {
 	n += x.sizeField3()
 	n += x.sizeField4()
 	n += x.sizeField5()
+	n += x.sizeField6()
 	return n
 }
 
@@ -5941,6 +5961,14 @@ func (x *CreateBookRecordReq) sizeField5() (n int) {
 		return n
 	}
 	n += fastpb.SizeString(5, x.GetRemark())
+	return n
+}
+
+func (x *CreateBookRecordReq) sizeField6() (n int) {
+	if x.MerchantId == "" {
+		return n
+	}
+	n += fastpb.SizeString(6, x.GetMerchantId())
 	return n
 }
 
@@ -6924,6 +6952,7 @@ var fieldIDToName_CreateBookRecordReq = map[int32]string{
 	3: "ReserverIds",
 	4: "Arrival",
 	5: "Remark",
+	6: "MerchantId",
 }
 
 var fieldIDToName_CancelBookRecordReq = map[int32]string{

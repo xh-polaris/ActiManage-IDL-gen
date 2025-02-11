@@ -323,12 +323,12 @@ func (x *Location) fastReadField1(buf []byte, _type int8) (offset int, err error
 }
 
 func (x *Location) fastReadField2(buf []byte, _type int8) (offset int, err error) {
-	x.Longitude, offset, err = fastpb.ReadFloat(buf, _type)
+	x.Longitude, offset, err = fastpb.ReadDouble(buf, _type)
 	return offset, err
 }
 
 func (x *Location) fastReadField3(buf []byte, _type int8) (offset int, err error) {
-	x.Latitude, offset, err = fastpb.ReadFloat(buf, _type)
+	x.Latitude, offset, err = fastpb.ReadDouble(buf, _type)
 	return offset, err
 }
 
@@ -2305,6 +2305,11 @@ func (x *MerchantGetSettingResp) FastRead(buf []byte, _type int8, number int32) 
 		if err != nil {
 			goto ReadFieldError
 		}
+	case 6:
+		offset, err = x.fastReadField6(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
 		if err != nil {
@@ -2356,6 +2361,11 @@ func (x *MerchantGetSettingResp) fastReadField5(buf []byte, _type int8) (offset 
 	}
 	x.Cover = &v
 	return offset, nil
+}
+
+func (x *MerchantGetSettingResp) fastReadField6(buf []byte, _type int8) (offset int, err error) {
+	x.Id, offset, err = fastpb.ReadString(buf, _type)
+	return offset, err
 }
 
 func (x *MerchantUpdateSettingReq) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
@@ -3633,11 +3643,6 @@ func (x *StsApplySignedUrlResp) FastRead(buf []byte, _type int8, number int32) (
 		if err != nil {
 			goto ReadFieldError
 		}
-	case 4:
-		offset, err = x.fastReadField4(buf, _type)
-		if err != nil {
-			goto ReadFieldError
-		}
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
 		if err != nil {
@@ -3663,11 +3668,6 @@ func (x *StsApplySignedUrlResp) fastReadField2(buf []byte, _type int8) (offset i
 
 func (x *StsApplySignedUrlResp) fastReadField3(buf []byte, _type int8) (offset int, err error) {
 	x.Url, offset, err = fastpb.ReadString(buf, _type)
-	return offset, err
-}
-
-func (x *StsApplySignedUrlResp) fastReadField4(buf []byte, _type int8) (offset int, err error) {
-	x.SessionToken, offset, err = fastpb.ReadString(buf, _type)
 	return offset, err
 }
 
@@ -4869,7 +4869,7 @@ func (x *Location) fastWriteField2(buf []byte) (offset int) {
 	if x.Longitude == 0 {
 		return offset
 	}
-	offset += fastpb.WriteFloat(buf[offset:], 2, x.GetLongitude())
+	offset += fastpb.WriteDouble(buf[offset:], 2, x.GetLongitude())
 	return offset
 }
 
@@ -4877,7 +4877,7 @@ func (x *Location) fastWriteField3(buf []byte) (offset int) {
 	if x.Latitude == 0 {
 		return offset
 	}
-	offset += fastpb.WriteFloat(buf[offset:], 3, x.GetLatitude())
+	offset += fastpb.WriteDouble(buf[offset:], 3, x.GetLatitude())
 	return offset
 }
 
@@ -6348,6 +6348,7 @@ func (x *MerchantGetSettingResp) FastWrite(buf []byte) (offset int) {
 	offset += x.fastWriteField3(buf[offset:])
 	offset += x.fastWriteField4(buf[offset:])
 	offset += x.fastWriteField5(buf[offset:])
+	offset += x.fastWriteField6(buf[offset:])
 	return offset
 }
 
@@ -6388,6 +6389,14 @@ func (x *MerchantGetSettingResp) fastWriteField5(buf []byte) (offset int) {
 		return offset
 	}
 	offset += fastpb.WriteMessage(buf[offset:], 5, x.GetCover())
+	return offset
+}
+
+func (x *MerchantGetSettingResp) fastWriteField6(buf []byte) (offset int) {
+	if x.Id == "" {
+		return offset
+	}
+	offset += fastpb.WriteString(buf[offset:], 6, x.GetId())
 	return offset
 }
 
@@ -7312,7 +7321,6 @@ func (x *StsApplySignedUrlResp) FastWrite(buf []byte) (offset int) {
 	offset += x.fastWriteField1(buf[offset:])
 	offset += x.fastWriteField2(buf[offset:])
 	offset += x.fastWriteField3(buf[offset:])
-	offset += x.fastWriteField4(buf[offset:])
 	return offset
 }
 
@@ -7337,14 +7345,6 @@ func (x *StsApplySignedUrlResp) fastWriteField3(buf []byte) (offset int) {
 		return offset
 	}
 	offset += fastpb.WriteString(buf[offset:], 3, x.GetUrl())
-	return offset
-}
-
-func (x *StsApplySignedUrlResp) fastWriteField4(buf []byte) (offset int) {
-	if x.SessionToken == "" {
-		return offset
-	}
-	offset += fastpb.WriteString(buf[offset:], 4, x.GetSessionToken())
 	return offset
 }
 
@@ -8326,7 +8326,7 @@ func (x *Location) sizeField2() (n int) {
 	if x.Longitude == 0 {
 		return n
 	}
-	n += fastpb.SizeFloat(2, x.GetLongitude())
+	n += fastpb.SizeDouble(2, x.GetLongitude())
 	return n
 }
 
@@ -8334,7 +8334,7 @@ func (x *Location) sizeField3() (n int) {
 	if x.Latitude == 0 {
 		return n
 	}
-	n += fastpb.SizeFloat(3, x.GetLatitude())
+	n += fastpb.SizeDouble(3, x.GetLatitude())
 	return n
 }
 
@@ -9805,6 +9805,7 @@ func (x *MerchantGetSettingResp) Size() (n int) {
 	n += x.sizeField3()
 	n += x.sizeField4()
 	n += x.sizeField5()
+	n += x.sizeField6()
 	return n
 }
 
@@ -9845,6 +9846,14 @@ func (x *MerchantGetSettingResp) sizeField5() (n int) {
 		return n
 	}
 	n += fastpb.SizeMessage(5, x.GetCover())
+	return n
+}
+
+func (x *MerchantGetSettingResp) sizeField6() (n int) {
+	if x.Id == "" {
+		return n
+	}
+	n += fastpb.SizeString(6, x.GetId())
 	return n
 }
 
@@ -10769,7 +10778,6 @@ func (x *StsApplySignedUrlResp) Size() (n int) {
 	n += x.sizeField1()
 	n += x.sizeField2()
 	n += x.sizeField3()
-	n += x.sizeField4()
 	return n
 }
 
@@ -10794,14 +10802,6 @@ func (x *StsApplySignedUrlResp) sizeField3() (n int) {
 		return n
 	}
 	n += fastpb.SizeString(3, x.GetUrl())
-	return n
-}
-
-func (x *StsApplySignedUrlResp) sizeField4() (n int) {
-	if x.SessionToken == "" {
-		return n
-	}
-	n += fastpb.SizeString(4, x.GetSessionToken())
 	return n
 }
 
@@ -11834,6 +11834,7 @@ var fieldIDToName_MerchantGetSettingResp = map[int32]string{
 	3: "Header",
 	4: "Footer",
 	5: "Cover",
+	6: "Id",
 }
 
 var fieldIDToName_MerchantUpdateSettingReq = map[int32]string{
@@ -11981,7 +11982,6 @@ var fieldIDToName_StsApplySignedUrlResp = map[int32]string{
 	1: "Code",
 	2: "Msg",
 	3: "Url",
-	4: "SessionToken",
 }
 
 var fieldIDToName_StsAIModifyReq = map[int32]string{

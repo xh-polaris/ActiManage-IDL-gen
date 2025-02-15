@@ -85,6 +85,27 @@ var serviceMethods = map[string]kitex.MethodInfo{
 		false,
 		kitex.WithStreamingMode(kitex.StreamingUnary),
 	),
+	"GetMerchantInfoByUri": kitex.NewMethodInfo(
+		getMerchantInfoByUriHandler,
+		newGetMerchantInfoByUriArgs,
+		newGetMerchantInfoByUriResult,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingUnary),
+	),
+	"GetAd": kitex.NewMethodInfo(
+		getAdHandler,
+		newGetAdArgs,
+		newGetAdResult,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingUnary),
+	),
+	"SetAd": kitex.NewMethodInfo(
+		setAdHandler,
+		newSetAdArgs,
+		newSetAdResult,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingUnary),
+	),
 	"MerchantSetPassword": kitex.NewMethodInfo(
 		merchantSetPasswordHandler,
 		newMerchantSetPasswordArgs,
@@ -1688,6 +1709,465 @@ func (p *MerchantGetInfoResult) GetResult() interface{} {
 	return p.Success
 }
 
+func getMerchantInfoByUriHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
+	switch s := arg.(type) {
+	case *streaming.Args:
+		st := s.Stream
+		req := new(core_api.GetMerchantInfoByUriReq)
+		if err := st.RecvMsg(req); err != nil {
+			return err
+		}
+		resp, err := handler.(core_api.Merchant).GetMerchantInfoByUri(ctx, req)
+		if err != nil {
+			return err
+		}
+		return st.SendMsg(resp)
+	case *GetMerchantInfoByUriArgs:
+		success, err := handler.(core_api.Merchant).GetMerchantInfoByUri(ctx, s.Req)
+		if err != nil {
+			return err
+		}
+		realResult := result.(*GetMerchantInfoByUriResult)
+		realResult.Success = success
+		return nil
+	default:
+		return errInvalidMessageType
+	}
+}
+func newGetMerchantInfoByUriArgs() interface{} {
+	return &GetMerchantInfoByUriArgs{}
+}
+
+func newGetMerchantInfoByUriResult() interface{} {
+	return &GetMerchantInfoByUriResult{}
+}
+
+type GetMerchantInfoByUriArgs struct {
+	Req *core_api.GetMerchantInfoByUriReq
+}
+
+func (p *GetMerchantInfoByUriArgs) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetReq() {
+		p.Req = new(core_api.GetMerchantInfoByUriReq)
+	}
+	return p.Req.FastRead(buf, _type, number)
+}
+
+func (p *GetMerchantInfoByUriArgs) FastWrite(buf []byte) (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.FastWrite(buf)
+}
+
+func (p *GetMerchantInfoByUriArgs) Size() (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.Size()
+}
+
+func (p *GetMerchantInfoByUriArgs) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetReq() {
+		return out, nil
+	}
+	return proto.Marshal(p.Req)
+}
+
+func (p *GetMerchantInfoByUriArgs) Unmarshal(in []byte) error {
+	msg := new(core_api.GetMerchantInfoByUriReq)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Req = msg
+	return nil
+}
+
+var GetMerchantInfoByUriArgs_Req_DEFAULT *core_api.GetMerchantInfoByUriReq
+
+func (p *GetMerchantInfoByUriArgs) GetReq() *core_api.GetMerchantInfoByUriReq {
+	if !p.IsSetReq() {
+		return GetMerchantInfoByUriArgs_Req_DEFAULT
+	}
+	return p.Req
+}
+
+func (p *GetMerchantInfoByUriArgs) IsSetReq() bool {
+	return p.Req != nil
+}
+
+func (p *GetMerchantInfoByUriArgs) GetFirstArgument() interface{} {
+	return p.Req
+}
+
+type GetMerchantInfoByUriResult struct {
+	Success *core_api.GetMerchantInfoByUriResp
+}
+
+var GetMerchantInfoByUriResult_Success_DEFAULT *core_api.GetMerchantInfoByUriResp
+
+func (p *GetMerchantInfoByUriResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetSuccess() {
+		p.Success = new(core_api.GetMerchantInfoByUriResp)
+	}
+	return p.Success.FastRead(buf, _type, number)
+}
+
+func (p *GetMerchantInfoByUriResult) FastWrite(buf []byte) (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.FastWrite(buf)
+}
+
+func (p *GetMerchantInfoByUriResult) Size() (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.Size()
+}
+
+func (p *GetMerchantInfoByUriResult) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetSuccess() {
+		return out, nil
+	}
+	return proto.Marshal(p.Success)
+}
+
+func (p *GetMerchantInfoByUriResult) Unmarshal(in []byte) error {
+	msg := new(core_api.GetMerchantInfoByUriResp)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Success = msg
+	return nil
+}
+
+func (p *GetMerchantInfoByUriResult) GetSuccess() *core_api.GetMerchantInfoByUriResp {
+	if !p.IsSetSuccess() {
+		return GetMerchantInfoByUriResult_Success_DEFAULT
+	}
+	return p.Success
+}
+
+func (p *GetMerchantInfoByUriResult) SetSuccess(x interface{}) {
+	p.Success = x.(*core_api.GetMerchantInfoByUriResp)
+}
+
+func (p *GetMerchantInfoByUriResult) IsSetSuccess() bool {
+	return p.Success != nil
+}
+
+func (p *GetMerchantInfoByUriResult) GetResult() interface{} {
+	return p.Success
+}
+
+func getAdHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
+	switch s := arg.(type) {
+	case *streaming.Args:
+		st := s.Stream
+		req := new(core_api.GetAdReq)
+		if err := st.RecvMsg(req); err != nil {
+			return err
+		}
+		resp, err := handler.(core_api.Merchant).GetAd(ctx, req)
+		if err != nil {
+			return err
+		}
+		return st.SendMsg(resp)
+	case *GetAdArgs:
+		success, err := handler.(core_api.Merchant).GetAd(ctx, s.Req)
+		if err != nil {
+			return err
+		}
+		realResult := result.(*GetAdResult)
+		realResult.Success = success
+		return nil
+	default:
+		return errInvalidMessageType
+	}
+}
+func newGetAdArgs() interface{} {
+	return &GetAdArgs{}
+}
+
+func newGetAdResult() interface{} {
+	return &GetAdResult{}
+}
+
+type GetAdArgs struct {
+	Req *core_api.GetAdReq
+}
+
+func (p *GetAdArgs) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetReq() {
+		p.Req = new(core_api.GetAdReq)
+	}
+	return p.Req.FastRead(buf, _type, number)
+}
+
+func (p *GetAdArgs) FastWrite(buf []byte) (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.FastWrite(buf)
+}
+
+func (p *GetAdArgs) Size() (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.Size()
+}
+
+func (p *GetAdArgs) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetReq() {
+		return out, nil
+	}
+	return proto.Marshal(p.Req)
+}
+
+func (p *GetAdArgs) Unmarshal(in []byte) error {
+	msg := new(core_api.GetAdReq)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Req = msg
+	return nil
+}
+
+var GetAdArgs_Req_DEFAULT *core_api.GetAdReq
+
+func (p *GetAdArgs) GetReq() *core_api.GetAdReq {
+	if !p.IsSetReq() {
+		return GetAdArgs_Req_DEFAULT
+	}
+	return p.Req
+}
+
+func (p *GetAdArgs) IsSetReq() bool {
+	return p.Req != nil
+}
+
+func (p *GetAdArgs) GetFirstArgument() interface{} {
+	return p.Req
+}
+
+type GetAdResult struct {
+	Success *core_api.GetAdResp
+}
+
+var GetAdResult_Success_DEFAULT *core_api.GetAdResp
+
+func (p *GetAdResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetSuccess() {
+		p.Success = new(core_api.GetAdResp)
+	}
+	return p.Success.FastRead(buf, _type, number)
+}
+
+func (p *GetAdResult) FastWrite(buf []byte) (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.FastWrite(buf)
+}
+
+func (p *GetAdResult) Size() (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.Size()
+}
+
+func (p *GetAdResult) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetSuccess() {
+		return out, nil
+	}
+	return proto.Marshal(p.Success)
+}
+
+func (p *GetAdResult) Unmarshal(in []byte) error {
+	msg := new(core_api.GetAdResp)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Success = msg
+	return nil
+}
+
+func (p *GetAdResult) GetSuccess() *core_api.GetAdResp {
+	if !p.IsSetSuccess() {
+		return GetAdResult_Success_DEFAULT
+	}
+	return p.Success
+}
+
+func (p *GetAdResult) SetSuccess(x interface{}) {
+	p.Success = x.(*core_api.GetAdResp)
+}
+
+func (p *GetAdResult) IsSetSuccess() bool {
+	return p.Success != nil
+}
+
+func (p *GetAdResult) GetResult() interface{} {
+	return p.Success
+}
+
+func setAdHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
+	switch s := arg.(type) {
+	case *streaming.Args:
+		st := s.Stream
+		req := new(core_api.SetAdReq)
+		if err := st.RecvMsg(req); err != nil {
+			return err
+		}
+		resp, err := handler.(core_api.Merchant).SetAd(ctx, req)
+		if err != nil {
+			return err
+		}
+		return st.SendMsg(resp)
+	case *SetAdArgs:
+		success, err := handler.(core_api.Merchant).SetAd(ctx, s.Req)
+		if err != nil {
+			return err
+		}
+		realResult := result.(*SetAdResult)
+		realResult.Success = success
+		return nil
+	default:
+		return errInvalidMessageType
+	}
+}
+func newSetAdArgs() interface{} {
+	return &SetAdArgs{}
+}
+
+func newSetAdResult() interface{} {
+	return &SetAdResult{}
+}
+
+type SetAdArgs struct {
+	Req *core_api.SetAdReq
+}
+
+func (p *SetAdArgs) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetReq() {
+		p.Req = new(core_api.SetAdReq)
+	}
+	return p.Req.FastRead(buf, _type, number)
+}
+
+func (p *SetAdArgs) FastWrite(buf []byte) (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.FastWrite(buf)
+}
+
+func (p *SetAdArgs) Size() (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.Size()
+}
+
+func (p *SetAdArgs) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetReq() {
+		return out, nil
+	}
+	return proto.Marshal(p.Req)
+}
+
+func (p *SetAdArgs) Unmarshal(in []byte) error {
+	msg := new(core_api.SetAdReq)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Req = msg
+	return nil
+}
+
+var SetAdArgs_Req_DEFAULT *core_api.SetAdReq
+
+func (p *SetAdArgs) GetReq() *core_api.SetAdReq {
+	if !p.IsSetReq() {
+		return SetAdArgs_Req_DEFAULT
+	}
+	return p.Req
+}
+
+func (p *SetAdArgs) IsSetReq() bool {
+	return p.Req != nil
+}
+
+func (p *SetAdArgs) GetFirstArgument() interface{} {
+	return p.Req
+}
+
+type SetAdResult struct {
+	Success *core_api.Response
+}
+
+var SetAdResult_Success_DEFAULT *core_api.Response
+
+func (p *SetAdResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetSuccess() {
+		p.Success = new(core_api.Response)
+	}
+	return p.Success.FastRead(buf, _type, number)
+}
+
+func (p *SetAdResult) FastWrite(buf []byte) (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.FastWrite(buf)
+}
+
+func (p *SetAdResult) Size() (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.Size()
+}
+
+func (p *SetAdResult) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetSuccess() {
+		return out, nil
+	}
+	return proto.Marshal(p.Success)
+}
+
+func (p *SetAdResult) Unmarshal(in []byte) error {
+	msg := new(core_api.Response)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Success = msg
+	return nil
+}
+
+func (p *SetAdResult) GetSuccess() *core_api.Response {
+	if !p.IsSetSuccess() {
+		return SetAdResult_Success_DEFAULT
+	}
+	return p.Success
+}
+
+func (p *SetAdResult) SetSuccess(x interface{}) {
+	p.Success = x.(*core_api.Response)
+}
+
+func (p *SetAdResult) IsSetSuccess() bool {
+	return p.Success != nil
+}
+
+func (p *SetAdResult) GetResult() interface{} {
+	return p.Success
+}
+
 func merchantSetPasswordHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
 	switch s := arg.(type) {
 	case *streaming.Args:
@@ -1946,6 +2426,36 @@ func (p *kClient) MerchantGetInfo(ctx context.Context, Req *core_api.MerchantGet
 	_args.Req = Req
 	var _result MerchantGetInfoResult
 	if err = p.c.Call(ctx, "MerchantGetInfo", &_args, &_result); err != nil {
+		return
+	}
+	return _result.GetSuccess(), nil
+}
+
+func (p *kClient) GetMerchantInfoByUri(ctx context.Context, Req *core_api.GetMerchantInfoByUriReq) (r *core_api.GetMerchantInfoByUriResp, err error) {
+	var _args GetMerchantInfoByUriArgs
+	_args.Req = Req
+	var _result GetMerchantInfoByUriResult
+	if err = p.c.Call(ctx, "GetMerchantInfoByUri", &_args, &_result); err != nil {
+		return
+	}
+	return _result.GetSuccess(), nil
+}
+
+func (p *kClient) GetAd(ctx context.Context, Req *core_api.GetAdReq) (r *core_api.GetAdResp, err error) {
+	var _args GetAdArgs
+	_args.Req = Req
+	var _result GetAdResult
+	if err = p.c.Call(ctx, "GetAd", &_args, &_result); err != nil {
+		return
+	}
+	return _result.GetSuccess(), nil
+}
+
+func (p *kClient) SetAd(ctx context.Context, Req *core_api.SetAdReq) (r *core_api.Response, err error) {
+	var _args SetAdArgs
+	_args.Req = Req
+	var _result SetAdResult
+	if err = p.c.Call(ctx, "SetAd", &_args, &_result); err != nil {
 		return
 	}
 	return _result.GetSuccess(), nil

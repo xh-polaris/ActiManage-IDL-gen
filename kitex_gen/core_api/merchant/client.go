@@ -21,6 +21,9 @@ type Client interface {
 	MerchantListBookRecords(ctx context.Context, Req *core_api.MerchantListBookRecordsReq, callOptions ...callopt.Option) (r *core_api.MerchantListBookRecordsResp, err error)
 	MerchantUpdateInfo(ctx context.Context, Req *core_api.MerchantUpdateInfoReq, callOptions ...callopt.Option) (r *core_api.Response, err error)
 	MerchantGetInfo(ctx context.Context, Req *core_api.MerchantGetInfoReq, callOptions ...callopt.Option) (r *core_api.MerchantGetInfoResp, err error)
+	GetMerchantInfoByUri(ctx context.Context, Req *core_api.GetMerchantInfoByUriReq, callOptions ...callopt.Option) (r *core_api.GetMerchantInfoByUriResp, err error)
+	GetAd(ctx context.Context, Req *core_api.GetAdReq, callOptions ...callopt.Option) (r *core_api.GetAdResp, err error)
+	SetAd(ctx context.Context, Req *core_api.SetAdReq, callOptions ...callopt.Option) (r *core_api.Response, err error)
 	MerchantSetPassword(ctx context.Context, Req *core_api.MerchantSetPasswordReq, callOptions ...callopt.Option) (r *core_api.Response, err error)
 }
 
@@ -101,6 +104,21 @@ func (p *kMerchantClient) MerchantUpdateInfo(ctx context.Context, Req *core_api.
 func (p *kMerchantClient) MerchantGetInfo(ctx context.Context, Req *core_api.MerchantGetInfoReq, callOptions ...callopt.Option) (r *core_api.MerchantGetInfoResp, err error) {
 	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
 	return p.kClient.MerchantGetInfo(ctx, Req)
+}
+
+func (p *kMerchantClient) GetMerchantInfoByUri(ctx context.Context, Req *core_api.GetMerchantInfoByUriReq, callOptions ...callopt.Option) (r *core_api.GetMerchantInfoByUriResp, err error) {
+	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
+	return p.kClient.GetMerchantInfoByUri(ctx, Req)
+}
+
+func (p *kMerchantClient) GetAd(ctx context.Context, Req *core_api.GetAdReq, callOptions ...callopt.Option) (r *core_api.GetAdResp, err error) {
+	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
+	return p.kClient.GetAd(ctx, Req)
+}
+
+func (p *kMerchantClient) SetAd(ctx context.Context, Req *core_api.SetAdReq, callOptions ...callopt.Option) (r *core_api.Response, err error) {
+	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
+	return p.kClient.SetAd(ctx, Req)
 }
 
 func (p *kMerchantClient) MerchantSetPassword(ctx context.Context, Req *core_api.MerchantSetPasswordReq, callOptions ...callopt.Option) (r *core_api.Response, err error) {

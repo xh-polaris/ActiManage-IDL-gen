@@ -50,6 +50,27 @@ var serviceMethods = map[string]kitex.MethodInfo{
 		false,
 		kitex.WithStreamingMode(kitex.StreamingUnary),
 	),
+	"GetMerchantInfoByUri": kitex.NewMethodInfo(
+		getMerchantInfoByUriHandler,
+		newGetMerchantInfoByUriArgs,
+		newGetMerchantInfoByUriResult,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingUnary),
+	),
+	"GetAd": kitex.NewMethodInfo(
+		getAdHandler,
+		newGetAdArgs,
+		newGetAdResult,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingUnary),
+	),
+	"SetAd": kitex.NewMethodInfo(
+		setAdHandler,
+		newSetAdArgs,
+		newSetAdResult,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingUnary),
+	),
 	"CreateActivity": kitex.NewMethodInfo(
 		createActivityHandler,
 		newCreateActivityArgs,
@@ -1004,6 +1025,465 @@ func (p *UpdateMerchantInfoResult) IsSetSuccess() bool {
 }
 
 func (p *UpdateMerchantInfoResult) GetResult() interface{} {
+	return p.Success
+}
+
+func getMerchantInfoByUriHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
+	switch s := arg.(type) {
+	case *streaming.Args:
+		st := s.Stream
+		req := new(system.GetMerchantInfoByUriReq)
+		if err := st.RecvMsg(req); err != nil {
+			return err
+		}
+		resp, err := handler.(system.SystemService).GetMerchantInfoByUri(ctx, req)
+		if err != nil {
+			return err
+		}
+		return st.SendMsg(resp)
+	case *GetMerchantInfoByUriArgs:
+		success, err := handler.(system.SystemService).GetMerchantInfoByUri(ctx, s.Req)
+		if err != nil {
+			return err
+		}
+		realResult := result.(*GetMerchantInfoByUriResult)
+		realResult.Success = success
+		return nil
+	default:
+		return errInvalidMessageType
+	}
+}
+func newGetMerchantInfoByUriArgs() interface{} {
+	return &GetMerchantInfoByUriArgs{}
+}
+
+func newGetMerchantInfoByUriResult() interface{} {
+	return &GetMerchantInfoByUriResult{}
+}
+
+type GetMerchantInfoByUriArgs struct {
+	Req *system.GetMerchantInfoByUriReq
+}
+
+func (p *GetMerchantInfoByUriArgs) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetReq() {
+		p.Req = new(system.GetMerchantInfoByUriReq)
+	}
+	return p.Req.FastRead(buf, _type, number)
+}
+
+func (p *GetMerchantInfoByUriArgs) FastWrite(buf []byte) (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.FastWrite(buf)
+}
+
+func (p *GetMerchantInfoByUriArgs) Size() (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.Size()
+}
+
+func (p *GetMerchantInfoByUriArgs) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetReq() {
+		return out, nil
+	}
+	return proto.Marshal(p.Req)
+}
+
+func (p *GetMerchantInfoByUriArgs) Unmarshal(in []byte) error {
+	msg := new(system.GetMerchantInfoByUriReq)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Req = msg
+	return nil
+}
+
+var GetMerchantInfoByUriArgs_Req_DEFAULT *system.GetMerchantInfoByUriReq
+
+func (p *GetMerchantInfoByUriArgs) GetReq() *system.GetMerchantInfoByUriReq {
+	if !p.IsSetReq() {
+		return GetMerchantInfoByUriArgs_Req_DEFAULT
+	}
+	return p.Req
+}
+
+func (p *GetMerchantInfoByUriArgs) IsSetReq() bool {
+	return p.Req != nil
+}
+
+func (p *GetMerchantInfoByUriArgs) GetFirstArgument() interface{} {
+	return p.Req
+}
+
+type GetMerchantInfoByUriResult struct {
+	Success *system.GetMerchantInfoByUriResp
+}
+
+var GetMerchantInfoByUriResult_Success_DEFAULT *system.GetMerchantInfoByUriResp
+
+func (p *GetMerchantInfoByUriResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetSuccess() {
+		p.Success = new(system.GetMerchantInfoByUriResp)
+	}
+	return p.Success.FastRead(buf, _type, number)
+}
+
+func (p *GetMerchantInfoByUriResult) FastWrite(buf []byte) (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.FastWrite(buf)
+}
+
+func (p *GetMerchantInfoByUriResult) Size() (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.Size()
+}
+
+func (p *GetMerchantInfoByUriResult) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetSuccess() {
+		return out, nil
+	}
+	return proto.Marshal(p.Success)
+}
+
+func (p *GetMerchantInfoByUriResult) Unmarshal(in []byte) error {
+	msg := new(system.GetMerchantInfoByUriResp)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Success = msg
+	return nil
+}
+
+func (p *GetMerchantInfoByUriResult) GetSuccess() *system.GetMerchantInfoByUriResp {
+	if !p.IsSetSuccess() {
+		return GetMerchantInfoByUriResult_Success_DEFAULT
+	}
+	return p.Success
+}
+
+func (p *GetMerchantInfoByUriResult) SetSuccess(x interface{}) {
+	p.Success = x.(*system.GetMerchantInfoByUriResp)
+}
+
+func (p *GetMerchantInfoByUriResult) IsSetSuccess() bool {
+	return p.Success != nil
+}
+
+func (p *GetMerchantInfoByUriResult) GetResult() interface{} {
+	return p.Success
+}
+
+func getAdHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
+	switch s := arg.(type) {
+	case *streaming.Args:
+		st := s.Stream
+		req := new(system.GetAdReq)
+		if err := st.RecvMsg(req); err != nil {
+			return err
+		}
+		resp, err := handler.(system.SystemService).GetAd(ctx, req)
+		if err != nil {
+			return err
+		}
+		return st.SendMsg(resp)
+	case *GetAdArgs:
+		success, err := handler.(system.SystemService).GetAd(ctx, s.Req)
+		if err != nil {
+			return err
+		}
+		realResult := result.(*GetAdResult)
+		realResult.Success = success
+		return nil
+	default:
+		return errInvalidMessageType
+	}
+}
+func newGetAdArgs() interface{} {
+	return &GetAdArgs{}
+}
+
+func newGetAdResult() interface{} {
+	return &GetAdResult{}
+}
+
+type GetAdArgs struct {
+	Req *system.GetAdReq
+}
+
+func (p *GetAdArgs) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetReq() {
+		p.Req = new(system.GetAdReq)
+	}
+	return p.Req.FastRead(buf, _type, number)
+}
+
+func (p *GetAdArgs) FastWrite(buf []byte) (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.FastWrite(buf)
+}
+
+func (p *GetAdArgs) Size() (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.Size()
+}
+
+func (p *GetAdArgs) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetReq() {
+		return out, nil
+	}
+	return proto.Marshal(p.Req)
+}
+
+func (p *GetAdArgs) Unmarshal(in []byte) error {
+	msg := new(system.GetAdReq)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Req = msg
+	return nil
+}
+
+var GetAdArgs_Req_DEFAULT *system.GetAdReq
+
+func (p *GetAdArgs) GetReq() *system.GetAdReq {
+	if !p.IsSetReq() {
+		return GetAdArgs_Req_DEFAULT
+	}
+	return p.Req
+}
+
+func (p *GetAdArgs) IsSetReq() bool {
+	return p.Req != nil
+}
+
+func (p *GetAdArgs) GetFirstArgument() interface{} {
+	return p.Req
+}
+
+type GetAdResult struct {
+	Success *system.GetAdResp
+}
+
+var GetAdResult_Success_DEFAULT *system.GetAdResp
+
+func (p *GetAdResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetSuccess() {
+		p.Success = new(system.GetAdResp)
+	}
+	return p.Success.FastRead(buf, _type, number)
+}
+
+func (p *GetAdResult) FastWrite(buf []byte) (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.FastWrite(buf)
+}
+
+func (p *GetAdResult) Size() (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.Size()
+}
+
+func (p *GetAdResult) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetSuccess() {
+		return out, nil
+	}
+	return proto.Marshal(p.Success)
+}
+
+func (p *GetAdResult) Unmarshal(in []byte) error {
+	msg := new(system.GetAdResp)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Success = msg
+	return nil
+}
+
+func (p *GetAdResult) GetSuccess() *system.GetAdResp {
+	if !p.IsSetSuccess() {
+		return GetAdResult_Success_DEFAULT
+	}
+	return p.Success
+}
+
+func (p *GetAdResult) SetSuccess(x interface{}) {
+	p.Success = x.(*system.GetAdResp)
+}
+
+func (p *GetAdResult) IsSetSuccess() bool {
+	return p.Success != nil
+}
+
+func (p *GetAdResult) GetResult() interface{} {
+	return p.Success
+}
+
+func setAdHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
+	switch s := arg.(type) {
+	case *streaming.Args:
+		st := s.Stream
+		req := new(system.SetAdReq)
+		if err := st.RecvMsg(req); err != nil {
+			return err
+		}
+		resp, err := handler.(system.SystemService).SetAd(ctx, req)
+		if err != nil {
+			return err
+		}
+		return st.SendMsg(resp)
+	case *SetAdArgs:
+		success, err := handler.(system.SystemService).SetAd(ctx, s.Req)
+		if err != nil {
+			return err
+		}
+		realResult := result.(*SetAdResult)
+		realResult.Success = success
+		return nil
+	default:
+		return errInvalidMessageType
+	}
+}
+func newSetAdArgs() interface{} {
+	return &SetAdArgs{}
+}
+
+func newSetAdResult() interface{} {
+	return &SetAdResult{}
+}
+
+type SetAdArgs struct {
+	Req *system.SetAdReq
+}
+
+func (p *SetAdArgs) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetReq() {
+		p.Req = new(system.SetAdReq)
+	}
+	return p.Req.FastRead(buf, _type, number)
+}
+
+func (p *SetAdArgs) FastWrite(buf []byte) (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.FastWrite(buf)
+}
+
+func (p *SetAdArgs) Size() (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.Size()
+}
+
+func (p *SetAdArgs) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetReq() {
+		return out, nil
+	}
+	return proto.Marshal(p.Req)
+}
+
+func (p *SetAdArgs) Unmarshal(in []byte) error {
+	msg := new(system.SetAdReq)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Req = msg
+	return nil
+}
+
+var SetAdArgs_Req_DEFAULT *system.SetAdReq
+
+func (p *SetAdArgs) GetReq() *system.SetAdReq {
+	if !p.IsSetReq() {
+		return SetAdArgs_Req_DEFAULT
+	}
+	return p.Req
+}
+
+func (p *SetAdArgs) IsSetReq() bool {
+	return p.Req != nil
+}
+
+func (p *SetAdArgs) GetFirstArgument() interface{} {
+	return p.Req
+}
+
+type SetAdResult struct {
+	Success *system.Response
+}
+
+var SetAdResult_Success_DEFAULT *system.Response
+
+func (p *SetAdResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetSuccess() {
+		p.Success = new(system.Response)
+	}
+	return p.Success.FastRead(buf, _type, number)
+}
+
+func (p *SetAdResult) FastWrite(buf []byte) (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.FastWrite(buf)
+}
+
+func (p *SetAdResult) Size() (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.Size()
+}
+
+func (p *SetAdResult) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetSuccess() {
+		return out, nil
+	}
+	return proto.Marshal(p.Success)
+}
+
+func (p *SetAdResult) Unmarshal(in []byte) error {
+	msg := new(system.Response)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Success = msg
+	return nil
+}
+
+func (p *SetAdResult) GetSuccess() *system.Response {
+	if !p.IsSetSuccess() {
+		return SetAdResult_Success_DEFAULT
+	}
+	return p.Success
+}
+
+func (p *SetAdResult) SetSuccess(x interface{}) {
+	p.Success = x.(*system.Response)
+}
+
+func (p *SetAdResult) IsSetSuccess() bool {
+	return p.Success != nil
+}
+
+func (p *SetAdResult) GetResult() interface{} {
 	return p.Success
 }
 
@@ -3816,6 +4296,36 @@ func (p *kClient) UpdateMerchantInfo(ctx context.Context, Req *system.UpdateMerc
 	_args.Req = Req
 	var _result UpdateMerchantInfoResult
 	if err = p.c.Call(ctx, "UpdateMerchantInfo", &_args, &_result); err != nil {
+		return
+	}
+	return _result.GetSuccess(), nil
+}
+
+func (p *kClient) GetMerchantInfoByUri(ctx context.Context, Req *system.GetMerchantInfoByUriReq) (r *system.GetMerchantInfoByUriResp, err error) {
+	var _args GetMerchantInfoByUriArgs
+	_args.Req = Req
+	var _result GetMerchantInfoByUriResult
+	if err = p.c.Call(ctx, "GetMerchantInfoByUri", &_args, &_result); err != nil {
+		return
+	}
+	return _result.GetSuccess(), nil
+}
+
+func (p *kClient) GetAd(ctx context.Context, Req *system.GetAdReq) (r *system.GetAdResp, err error) {
+	var _args GetAdArgs
+	_args.Req = Req
+	var _result GetAdResult
+	if err = p.c.Call(ctx, "GetAd", &_args, &_result); err != nil {
+		return
+	}
+	return _result.GetSuccess(), nil
+}
+
+func (p *kClient) SetAd(ctx context.Context, Req *system.SetAdReq) (r *system.Response, err error) {
+	var _args SetAdArgs
+	_args.Req = Req
+	var _result SetAdResult
+	if err = p.c.Call(ctx, "SetAd", &_args, &_result); err != nil {
 		return
 	}
 	return _result.GetSuccess(), nil

@@ -16,6 +16,9 @@ type Client interface {
 	UpdateMerchantSetting(ctx context.Context, Req *system.UpdateSettingReq, callOptions ...callopt.Option) (r *system.Response, err error)
 	GetMerchantSetting(ctx context.Context, Req *system.GetMerchantSettingReq, callOptions ...callopt.Option) (r *system.GetMerchantSettingResp, err error)
 	UpdateMerchantInfo(ctx context.Context, Req *system.UpdateMerchantInfoReq, callOptions ...callopt.Option) (r *system.Response, err error)
+	GetMerchantInfoByUri(ctx context.Context, Req *system.GetMerchantInfoByUriReq, callOptions ...callopt.Option) (r *system.GetMerchantInfoByUriResp, err error)
+	GetAd(ctx context.Context, Req *system.GetAdReq, callOptions ...callopt.Option) (r *system.GetAdResp, err error)
+	SetAd(ctx context.Context, Req *system.SetAdReq, callOptions ...callopt.Option) (r *system.Response, err error)
 	CreateActivity(ctx context.Context, Req *system.CreateActivityReq, callOptions ...callopt.Option) (r *system.Response, err error)
 	TopActivity(ctx context.Context, Req *system.TopActivityReq, callOptions ...callopt.Option) (r *system.Response, err error)
 	DeleteActivity(ctx context.Context, Req *system.DeleteActivityReq, callOptions ...callopt.Option) (r *system.Response, err error)
@@ -88,6 +91,21 @@ func (p *kSystemServiceClient) GetMerchantSetting(ctx context.Context, Req *syst
 func (p *kSystemServiceClient) UpdateMerchantInfo(ctx context.Context, Req *system.UpdateMerchantInfoReq, callOptions ...callopt.Option) (r *system.Response, err error) {
 	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
 	return p.kClient.UpdateMerchantInfo(ctx, Req)
+}
+
+func (p *kSystemServiceClient) GetMerchantInfoByUri(ctx context.Context, Req *system.GetMerchantInfoByUriReq, callOptions ...callopt.Option) (r *system.GetMerchantInfoByUriResp, err error) {
+	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
+	return p.kClient.GetMerchantInfoByUri(ctx, Req)
+}
+
+func (p *kSystemServiceClient) GetAd(ctx context.Context, Req *system.GetAdReq, callOptions ...callopt.Option) (r *system.GetAdResp, err error) {
+	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
+	return p.kClient.GetAd(ctx, Req)
+}
+
+func (p *kSystemServiceClient) SetAd(ctx context.Context, Req *system.SetAdReq, callOptions ...callopt.Option) (r *system.Response, err error) {
+	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
+	return p.kClient.SetAd(ctx, Req)
 }
 
 func (p *kSystemServiceClient) CreateActivity(ctx context.Context, Req *system.CreateActivityReq, callOptions ...callopt.Option) (r *system.Response, err error) {

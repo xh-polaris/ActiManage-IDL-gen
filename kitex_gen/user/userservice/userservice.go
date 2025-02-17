@@ -120,6 +120,13 @@ var serviceMethods = map[string]kitex.MethodInfo{
 		false,
 		kitex.WithStreamingMode(kitex.StreamingUnary),
 	),
+	"CheckBookRecordByUserIdAndActivityId": kitex.NewMethodInfo(
+		checkBookRecordByUserIdAndActivityIdHandler,
+		newCheckBookRecordByUserIdAndActivityIdArgs,
+		newCheckBookRecordByUserIdAndActivityIdResult,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingUnary),
+	),
 	"CreateReceipt": kitex.NewMethodInfo(
 		createReceiptHandler,
 		newCreateReceiptArgs,
@@ -2572,6 +2579,159 @@ func (p *ListBookRecordsByActivityResult) GetResult() interface{} {
 	return p.Success
 }
 
+func checkBookRecordByUserIdAndActivityIdHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
+	switch s := arg.(type) {
+	case *streaming.Args:
+		st := s.Stream
+		req := new(user.CheckBookRecordByUserIdAndActivityIdReq)
+		if err := st.RecvMsg(req); err != nil {
+			return err
+		}
+		resp, err := handler.(user.UserService).CheckBookRecordByUserIdAndActivityId(ctx, req)
+		if err != nil {
+			return err
+		}
+		return st.SendMsg(resp)
+	case *CheckBookRecordByUserIdAndActivityIdArgs:
+		success, err := handler.(user.UserService).CheckBookRecordByUserIdAndActivityId(ctx, s.Req)
+		if err != nil {
+			return err
+		}
+		realResult := result.(*CheckBookRecordByUserIdAndActivityIdResult)
+		realResult.Success = success
+		return nil
+	default:
+		return errInvalidMessageType
+	}
+}
+func newCheckBookRecordByUserIdAndActivityIdArgs() interface{} {
+	return &CheckBookRecordByUserIdAndActivityIdArgs{}
+}
+
+func newCheckBookRecordByUserIdAndActivityIdResult() interface{} {
+	return &CheckBookRecordByUserIdAndActivityIdResult{}
+}
+
+type CheckBookRecordByUserIdAndActivityIdArgs struct {
+	Req *user.CheckBookRecordByUserIdAndActivityIdReq
+}
+
+func (p *CheckBookRecordByUserIdAndActivityIdArgs) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetReq() {
+		p.Req = new(user.CheckBookRecordByUserIdAndActivityIdReq)
+	}
+	return p.Req.FastRead(buf, _type, number)
+}
+
+func (p *CheckBookRecordByUserIdAndActivityIdArgs) FastWrite(buf []byte) (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.FastWrite(buf)
+}
+
+func (p *CheckBookRecordByUserIdAndActivityIdArgs) Size() (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.Size()
+}
+
+func (p *CheckBookRecordByUserIdAndActivityIdArgs) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetReq() {
+		return out, nil
+	}
+	return proto.Marshal(p.Req)
+}
+
+func (p *CheckBookRecordByUserIdAndActivityIdArgs) Unmarshal(in []byte) error {
+	msg := new(user.CheckBookRecordByUserIdAndActivityIdReq)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Req = msg
+	return nil
+}
+
+var CheckBookRecordByUserIdAndActivityIdArgs_Req_DEFAULT *user.CheckBookRecordByUserIdAndActivityIdReq
+
+func (p *CheckBookRecordByUserIdAndActivityIdArgs) GetReq() *user.CheckBookRecordByUserIdAndActivityIdReq {
+	if !p.IsSetReq() {
+		return CheckBookRecordByUserIdAndActivityIdArgs_Req_DEFAULT
+	}
+	return p.Req
+}
+
+func (p *CheckBookRecordByUserIdAndActivityIdArgs) IsSetReq() bool {
+	return p.Req != nil
+}
+
+func (p *CheckBookRecordByUserIdAndActivityIdArgs) GetFirstArgument() interface{} {
+	return p.Req
+}
+
+type CheckBookRecordByUserIdAndActivityIdResult struct {
+	Success *user.CheckBookRecordByUserIdAndActivityIdResp
+}
+
+var CheckBookRecordByUserIdAndActivityIdResult_Success_DEFAULT *user.CheckBookRecordByUserIdAndActivityIdResp
+
+func (p *CheckBookRecordByUserIdAndActivityIdResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetSuccess() {
+		p.Success = new(user.CheckBookRecordByUserIdAndActivityIdResp)
+	}
+	return p.Success.FastRead(buf, _type, number)
+}
+
+func (p *CheckBookRecordByUserIdAndActivityIdResult) FastWrite(buf []byte) (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.FastWrite(buf)
+}
+
+func (p *CheckBookRecordByUserIdAndActivityIdResult) Size() (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.Size()
+}
+
+func (p *CheckBookRecordByUserIdAndActivityIdResult) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetSuccess() {
+		return out, nil
+	}
+	return proto.Marshal(p.Success)
+}
+
+func (p *CheckBookRecordByUserIdAndActivityIdResult) Unmarshal(in []byte) error {
+	msg := new(user.CheckBookRecordByUserIdAndActivityIdResp)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Success = msg
+	return nil
+}
+
+func (p *CheckBookRecordByUserIdAndActivityIdResult) GetSuccess() *user.CheckBookRecordByUserIdAndActivityIdResp {
+	if !p.IsSetSuccess() {
+		return CheckBookRecordByUserIdAndActivityIdResult_Success_DEFAULT
+	}
+	return p.Success
+}
+
+func (p *CheckBookRecordByUserIdAndActivityIdResult) SetSuccess(x interface{}) {
+	p.Success = x.(*user.CheckBookRecordByUserIdAndActivityIdResp)
+}
+
+func (p *CheckBookRecordByUserIdAndActivityIdResult) IsSetSuccess() bool {
+	return p.Success != nil
+}
+
+func (p *CheckBookRecordByUserIdAndActivityIdResult) GetResult() interface{} {
+	return p.Success
+}
+
 func createReceiptHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
 	switch s := arg.(type) {
 	case *streaming.Args:
@@ -4716,6 +4876,16 @@ func (p *kClient) ListBookRecordsByActivity(ctx context.Context, Req *user.ListB
 	_args.Req = Req
 	var _result ListBookRecordsByActivityResult
 	if err = p.c.Call(ctx, "ListBookRecordsByActivity", &_args, &_result); err != nil {
+		return
+	}
+	return _result.GetSuccess(), nil
+}
+
+func (p *kClient) CheckBookRecordByUserIdAndActivityId(ctx context.Context, Req *user.CheckBookRecordByUserIdAndActivityIdReq) (r *user.CheckBookRecordByUserIdAndActivityIdResp, err error) {
+	var _args CheckBookRecordByUserIdAndActivityIdArgs
+	_args.Req = Req
+	var _result CheckBookRecordByUserIdAndActivityIdResult
+	if err = p.c.Call(ctx, "CheckBookRecordByUserIdAndActivityId", &_args, &_result); err != nil {
 		return
 	}
 	return _result.GetSuccess(), nil

@@ -1873,6 +1873,66 @@ func (x *ListBookRecordsByActivityResp) fastReadField4(buf []byte, _type int8) (
 	return offset, err
 }
 
+func (x *CheckBookRecordByUserIdAndActivityIdReq) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
+	switch number {
+	case 1:
+		offset, err = x.fastReadField1(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	case 2:
+		offset, err = x.fastReadField2(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	default:
+		offset, err = fastpb.Skip(buf, _type, number)
+		if err != nil {
+			goto SkipFieldError
+		}
+	}
+	return offset, nil
+SkipFieldError:
+	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
+ReadFieldError:
+	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_CheckBookRecordByUserIdAndActivityIdReq[number], err)
+}
+
+func (x *CheckBookRecordByUserIdAndActivityIdReq) fastReadField1(buf []byte, _type int8) (offset int, err error) {
+	x.UserId, offset, err = fastpb.ReadString(buf, _type)
+	return offset, err
+}
+
+func (x *CheckBookRecordByUserIdAndActivityIdReq) fastReadField2(buf []byte, _type int8) (offset int, err error) {
+	x.ActivityId, offset, err = fastpb.ReadString(buf, _type)
+	return offset, err
+}
+
+func (x *CheckBookRecordByUserIdAndActivityIdResp) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
+	switch number {
+	case 1:
+		offset, err = x.fastReadField1(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	default:
+		offset, err = fastpb.Skip(buf, _type, number)
+		if err != nil {
+			goto SkipFieldError
+		}
+	}
+	return offset, nil
+SkipFieldError:
+	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
+ReadFieldError:
+	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_CheckBookRecordByUserIdAndActivityIdResp[number], err)
+}
+
+func (x *CheckBookRecordByUserIdAndActivityIdResp) fastReadField1(buf []byte, _type int8) (offset int, err error) {
+	x.Booked, offset, err = fastpb.ReadInt64(buf, _type)
+	return offset, err
+}
+
 func (x *CreateReceiptReq) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
 	switch number {
 	case 1:
@@ -4194,6 +4254,47 @@ func (x *ListBookRecordsByActivityResp) fastWriteField4(buf []byte) (offset int)
 	return offset
 }
 
+func (x *CheckBookRecordByUserIdAndActivityIdReq) FastWrite(buf []byte) (offset int) {
+	if x == nil {
+		return offset
+	}
+	offset += x.fastWriteField1(buf[offset:])
+	offset += x.fastWriteField2(buf[offset:])
+	return offset
+}
+
+func (x *CheckBookRecordByUserIdAndActivityIdReq) fastWriteField1(buf []byte) (offset int) {
+	if x.UserId == "" {
+		return offset
+	}
+	offset += fastpb.WriteString(buf[offset:], 1, x.GetUserId())
+	return offset
+}
+
+func (x *CheckBookRecordByUserIdAndActivityIdReq) fastWriteField2(buf []byte) (offset int) {
+	if x.ActivityId == "" {
+		return offset
+	}
+	offset += fastpb.WriteString(buf[offset:], 2, x.GetActivityId())
+	return offset
+}
+
+func (x *CheckBookRecordByUserIdAndActivityIdResp) FastWrite(buf []byte) (offset int) {
+	if x == nil {
+		return offset
+	}
+	offset += x.fastWriteField1(buf[offset:])
+	return offset
+}
+
+func (x *CheckBookRecordByUserIdAndActivityIdResp) fastWriteField1(buf []byte) (offset int) {
+	if x.Booked == 0 {
+		return offset
+	}
+	offset += fastpb.WriteInt64(buf[offset:], 1, x.GetBooked())
+	return offset
+}
+
 func (x *CreateReceiptReq) FastWrite(buf []byte) (offset int) {
 	if x == nil {
 		return offset
@@ -6237,6 +6338,47 @@ func (x *ListBookRecordsByActivityResp) sizeField4() (n int) {
 	return n
 }
 
+func (x *CheckBookRecordByUserIdAndActivityIdReq) Size() (n int) {
+	if x == nil {
+		return n
+	}
+	n += x.sizeField1()
+	n += x.sizeField2()
+	return n
+}
+
+func (x *CheckBookRecordByUserIdAndActivityIdReq) sizeField1() (n int) {
+	if x.UserId == "" {
+		return n
+	}
+	n += fastpb.SizeString(1, x.GetUserId())
+	return n
+}
+
+func (x *CheckBookRecordByUserIdAndActivityIdReq) sizeField2() (n int) {
+	if x.ActivityId == "" {
+		return n
+	}
+	n += fastpb.SizeString(2, x.GetActivityId())
+	return n
+}
+
+func (x *CheckBookRecordByUserIdAndActivityIdResp) Size() (n int) {
+	if x == nil {
+		return n
+	}
+	n += x.sizeField1()
+	return n
+}
+
+func (x *CheckBookRecordByUserIdAndActivityIdResp) sizeField1() (n int) {
+	if x.Booked == 0 {
+		return n
+	}
+	n += fastpb.SizeInt64(1, x.GetBooked())
+	return n
+}
+
 func (x *CreateReceiptReq) Size() (n int) {
 	if x == nil {
 		return n
@@ -7052,6 +7194,15 @@ var fieldIDToName_ListBookRecordsByActivityResp = map[int32]string{
 	2: "Msg",
 	3: "Records",
 	4: "Total",
+}
+
+var fieldIDToName_CheckBookRecordByUserIdAndActivityIdReq = map[int32]string{
+	1: "UserId",
+	2: "ActivityId",
+}
+
+var fieldIDToName_CheckBookRecordByUserIdAndActivityIdResp = map[int32]string{
+	1: "Booked",
 }
 
 var fieldIDToName_CreateReceiptReq = map[int32]string{

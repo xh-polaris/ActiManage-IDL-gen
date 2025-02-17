@@ -2761,6 +2761,11 @@ func (x *MerchantGetInfoResp) FastRead(buf []byte, _type int8, number int32) (of
 		if err != nil {
 			goto ReadFieldError
 		}
+	case 14:
+		offset, err = x.fastReadField14(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
 		if err != nil {
@@ -2851,6 +2856,11 @@ func (x *MerchantGetInfoResp) fastReadField12(buf []byte, _type int8) (offset in
 
 func (x *MerchantGetInfoResp) fastReadField13(buf []byte, _type int8) (offset int, err error) {
 	x.Status, offset, err = fastpb.ReadInt64(buf, _type)
+	return offset, err
+}
+
+func (x *MerchantGetInfoResp) fastReadField14(buf []byte, _type int8) (offset int, err error) {
+	x.Uri, offset, err = fastpb.ReadString(buf, _type)
 	return offset, err
 }
 
@@ -6903,6 +6913,7 @@ func (x *MerchantGetInfoResp) FastWrite(buf []byte) (offset int) {
 	offset += x.fastWriteField11(buf[offset:])
 	offset += x.fastWriteField12(buf[offset:])
 	offset += x.fastWriteField13(buf[offset:])
+	offset += x.fastWriteField14(buf[offset:])
 	return offset
 }
 
@@ -7011,6 +7022,14 @@ func (x *MerchantGetInfoResp) fastWriteField13(buf []byte) (offset int) {
 		return offset
 	}
 	offset += fastpb.WriteInt64(buf[offset:], 13, x.GetStatus())
+	return offset
+}
+
+func (x *MerchantGetInfoResp) fastWriteField14(buf []byte) (offset int) {
+	if x.Uri == "" {
+		return offset
+	}
+	offset += fastpb.WriteString(buf[offset:], 14, x.GetUri())
 	return offset
 }
 
@@ -10550,6 +10569,7 @@ func (x *MerchantGetInfoResp) Size() (n int) {
 	n += x.sizeField11()
 	n += x.sizeField12()
 	n += x.sizeField13()
+	n += x.sizeField14()
 	return n
 }
 
@@ -10658,6 +10678,14 @@ func (x *MerchantGetInfoResp) sizeField13() (n int) {
 		return n
 	}
 	n += fastpb.SizeInt64(13, x.GetStatus())
+	return n
+}
+
+func (x *MerchantGetInfoResp) sizeField14() (n int) {
+	if x.Uri == "" {
+		return n
+	}
+	n += fastpb.SizeString(14, x.GetUri())
 	return n
 }
 
@@ -12530,6 +12558,7 @@ var fieldIDToName_MerchantGetInfoResp = map[int32]string{
 	11: "UpdateTime",
 	12: "DeleteTime",
 	13: "Status",
+	14: "Uri",
 }
 
 var fieldIDToName_MerchantSetPasswordReq = map[int32]string{

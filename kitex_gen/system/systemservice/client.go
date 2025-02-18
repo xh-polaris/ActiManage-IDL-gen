@@ -37,6 +37,7 @@ type Client interface {
 	ListMerchantByActivityNumber(ctx context.Context, Req *system.ListMerchantsByActivityNumberReq, callOptions ...callopt.Option) (r *system.ListMerchantsByActivityNumberResp, err error)
 	ListActivityByActivityId(ctx context.Context, Req *system.ListActivitiesByActivityIdReq, callOptions ...callopt.Option) (r *system.ListActivitiesByActivityIdResp, err error)
 	StsSendVerifyCode(ctx context.Context, Req *system.StsSendVerifyCodeReq, callOptions ...callopt.Option) (r *system.Response, err error)
+	StsCheckVerifyCode(ctx context.Context, Req *system.StsCheckVerifyCodeReq, callOptions ...callopt.Option) (r *system.Response, err error)
 }
 
 // NewClient creates a client for the service defined in IDL.
@@ -196,4 +197,9 @@ func (p *kSystemServiceClient) ListActivityByActivityId(ctx context.Context, Req
 func (p *kSystemServiceClient) StsSendVerifyCode(ctx context.Context, Req *system.StsSendVerifyCodeReq, callOptions ...callopt.Option) (r *system.Response, err error) {
 	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
 	return p.kClient.StsSendVerifyCode(ctx, Req)
+}
+
+func (p *kSystemServiceClient) StsCheckVerifyCode(ctx context.Context, Req *system.StsCheckVerifyCodeReq, callOptions ...callopt.Option) (r *system.Response, err error) {
+	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
+	return p.kClient.StsCheckVerifyCode(ctx, Req)
 }

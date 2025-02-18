@@ -2742,6 +2742,41 @@ func (x *StsSendVerifyCodeReq) fastReadField3(buf []byte, _type int8) (offset in
 	return offset, err
 }
 
+func (x *StsCheckVerifyCodeReq) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
+	switch number {
+	case 1:
+		offset, err = x.fastReadField1(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	case 2:
+		offset, err = x.fastReadField2(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	default:
+		offset, err = fastpb.Skip(buf, _type, number)
+		if err != nil {
+			goto SkipFieldError
+		}
+	}
+	return offset, nil
+SkipFieldError:
+	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
+ReadFieldError:
+	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_StsCheckVerifyCodeReq[number], err)
+}
+
+func (x *StsCheckVerifyCodeReq) fastReadField1(buf []byte, _type int8) (offset int, err error) {
+	x.VerifyId, offset, err = fastpb.ReadString(buf, _type)
+	return offset, err
+}
+
+func (x *StsCheckVerifyCodeReq) fastReadField2(buf []byte, _type int8) (offset int, err error) {
+	x.VerifyCode, offset, err = fastpb.ReadString(buf, _type)
+	return offset, err
+}
+
 func (x *Response) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
 	switch number {
 	case 1:
@@ -4966,6 +5001,31 @@ func (x *StsSendVerifyCodeReq) fastWriteField3(buf []byte) (offset int) {
 	return offset
 }
 
+func (x *StsCheckVerifyCodeReq) FastWrite(buf []byte) (offset int) {
+	if x == nil {
+		return offset
+	}
+	offset += x.fastWriteField1(buf[offset:])
+	offset += x.fastWriteField2(buf[offset:])
+	return offset
+}
+
+func (x *StsCheckVerifyCodeReq) fastWriteField1(buf []byte) (offset int) {
+	if x.VerifyId == "" {
+		return offset
+	}
+	offset += fastpb.WriteString(buf[offset:], 1, x.GetVerifyId())
+	return offset
+}
+
+func (x *StsCheckVerifyCodeReq) fastWriteField2(buf []byte) (offset int) {
+	if x.VerifyCode == "" {
+		return offset
+	}
+	offset += fastpb.WriteString(buf[offset:], 2, x.GetVerifyCode())
+	return offset
+}
+
 func (x *Response) FastWrite(buf []byte) (offset int) {
 	if x == nil {
 		return offset
@@ -7126,6 +7186,31 @@ func (x *StsSendVerifyCodeReq) sizeField3() (n int) {
 	return n
 }
 
+func (x *StsCheckVerifyCodeReq) Size() (n int) {
+	if x == nil {
+		return n
+	}
+	n += x.sizeField1()
+	n += x.sizeField2()
+	return n
+}
+
+func (x *StsCheckVerifyCodeReq) sizeField1() (n int) {
+	if x.VerifyId == "" {
+		return n
+	}
+	n += fastpb.SizeString(1, x.GetVerifyId())
+	return n
+}
+
+func (x *StsCheckVerifyCodeReq) sizeField2() (n int) {
+	if x.VerifyCode == "" {
+		return n
+	}
+	n += fastpb.SizeString(2, x.GetVerifyCode())
+	return n
+}
+
 func (x *Response) Size() (n int) {
 	if x == nil {
 		return n
@@ -7635,6 +7720,11 @@ var fieldIDToName_StsSendVerifyCodeReq = map[int32]string{
 	1: "AuthId",
 	2: "AuthType",
 	3: "Purpose",
+}
+
+var fieldIDToName_StsCheckVerifyCodeReq = map[int32]string{
+	1: "VerifyId",
+	2: "VerifyCode",
 }
 
 var fieldIDToName_Response = map[int32]string{

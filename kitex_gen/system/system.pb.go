@@ -27,7 +27,7 @@ var file_ActiManage_system_system_proto_rawDesc = []byte{
 	0x74, 0x65, 0x6d, 0x2f, 0x73, 0x79, 0x73, 0x74, 0x65, 0x6d, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f,
 	0x12, 0x06, 0x73, 0x79, 0x73, 0x74, 0x65, 0x6d, 0x1a, 0x1e, 0x41, 0x63, 0x74, 0x69, 0x4d, 0x61,
 	0x6e, 0x61, 0x67, 0x65, 0x2f, 0x73, 0x79, 0x73, 0x74, 0x65, 0x6d, 0x2f, 0x63, 0x6f, 0x6d, 0x6d,
-	0x6f, 0x6e, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x32, 0xec, 0x0e, 0x0a, 0x0d, 0x53, 0x79, 0x73,
+	0x6f, 0x6e, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x32, 0xb3, 0x0f, 0x0a, 0x0d, 0x53, 0x79, 0x73,
 	0x74, 0x65, 0x6d, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x12, 0x44, 0x0a, 0x0d, 0x4d, 0x65,
 	0x72, 0x63, 0x68, 0x61, 0x6e, 0x74, 0x4c, 0x6f, 0x67, 0x69, 0x6e, 0x12, 0x18, 0x2e, 0x73, 0x79,
 	0x73, 0x74, 0x65, 0x6d, 0x2e, 0x4d, 0x65, 0x72, 0x63, 0x68, 0x61, 0x6e, 0x74, 0x4c, 0x6f, 0x67,
@@ -146,11 +146,16 @@ var file_ActiManage_system_system_proto_rawDesc = []byte{
 	0x69, 0x66, 0x79, 0x43, 0x6f, 0x64, 0x65, 0x12, 0x1c, 0x2e, 0x73, 0x79, 0x73, 0x74, 0x65, 0x6d,
 	0x2e, 0x53, 0x74, 0x73, 0x53, 0x65, 0x6e, 0x64, 0x56, 0x65, 0x72, 0x69, 0x66, 0x79, 0x43, 0x6f,
 	0x64, 0x65, 0x52, 0x65, 0x71, 0x1a, 0x10, 0x2e, 0x73, 0x79, 0x73, 0x74, 0x65, 0x6d, 0x2e, 0x52,
-	0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x42, 0x3b, 0x5a, 0x39, 0x67, 0x69, 0x74, 0x68, 0x75,
-	0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x78, 0x68, 0x2d, 0x70, 0x6f, 0x6c, 0x61, 0x72, 0x69, 0x73,
-	0x2f, 0x41, 0x63, 0x74, 0x69, 0x4d, 0x61, 0x6e, 0x61, 0x67, 0x65, 0x2d, 0x49, 0x44, 0x4c, 0x2d,
-	0x67, 0x65, 0x6e, 0x2f, 0x6b, 0x69, 0x74, 0x65, 0x78, 0x5f, 0x67, 0x65, 0x6e, 0x2f, 0x73, 0x79,
-	0x73, 0x74, 0x65, 0x6d, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x45, 0x0a, 0x12, 0x53, 0x74, 0x73, 0x43, 0x68,
+	0x65, 0x63, 0x6b, 0x56, 0x65, 0x72, 0x69, 0x66, 0x79, 0x43, 0x6f, 0x64, 0x65, 0x12, 0x1d, 0x2e,
+	0x73, 0x79, 0x73, 0x74, 0x65, 0x6d, 0x2e, 0x53, 0x74, 0x73, 0x43, 0x68, 0x65, 0x63, 0x6b, 0x56,
+	0x65, 0x72, 0x69, 0x66, 0x79, 0x43, 0x6f, 0x64, 0x65, 0x52, 0x65, 0x71, 0x1a, 0x10, 0x2e, 0x73,
+	0x79, 0x73, 0x74, 0x65, 0x6d, 0x2e, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x42, 0x3b,
+	0x5a, 0x39, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x78, 0x68, 0x2d,
+	0x70, 0x6f, 0x6c, 0x61, 0x72, 0x69, 0x73, 0x2f, 0x41, 0x63, 0x74, 0x69, 0x4d, 0x61, 0x6e, 0x61,
+	0x67, 0x65, 0x2d, 0x49, 0x44, 0x4c, 0x2d, 0x67, 0x65, 0x6e, 0x2f, 0x6b, 0x69, 0x74, 0x65, 0x78,
+	0x5f, 0x67, 0x65, 0x6e, 0x2f, 0x73, 0x79, 0x73, 0x74, 0x65, 0x6d, 0x62, 0x06, 0x70, 0x72, 0x6f,
+	0x74, 0x6f, 0x33,
 }
 
 var file_ActiManage_system_system_proto_goTypes = []interface{}{
@@ -180,20 +185,21 @@ var file_ActiManage_system_system_proto_goTypes = []interface{}{
 	(*ListMerchantsByActivityNumberReq)(nil),  // 23: system.ListMerchantsByActivityNumberReq
 	(*ListActivitiesByActivityIdReq)(nil),     // 24: system.ListActivitiesByActivityIdReq
 	(*StsSendVerifyCodeReq)(nil),              // 25: system.StsSendVerifyCodeReq
-	(*MerchantLoginResp)(nil),                 // 26: system.MerchantLoginResp
-	(*Response)(nil),                          // 27: system.Response
-	(*GetMerchantSettingResp)(nil),            // 28: system.GetMerchantSettingResp
-	(*GetMerchantInfoByUriResp)(nil),          // 29: system.GetMerchantInfoByUriResp
-	(*GetAdResp)(nil),                         // 30: system.GetAdResp
-	(*ListActivitiesResp)(nil),                // 31: system.ListActivitiesResp
-	(*GetActivityResp)(nil),                   // 32: system.GetActivityResp
-	(*AdminLoginResp)(nil),                    // 33: system.AdminLoginResp
-	(*GetMerchantInfoResp)(nil),               // 34: system.GetMerchantInfoResp
-	(*ListMerchantsResp)(nil),                 // 35: system.ListMerchantsResp
-	(*GetMerchantTotalDataResp)(nil),          // 36: system.GetMerchantTotalDataResp
-	(*ListMerchantsByMerchantIdResp)(nil),     // 37: system.ListMerchantsByMerchantIdResp
-	(*ListMerchantsByActivityNumberResp)(nil), // 38: system.ListMerchantsByActivityNumberResp
-	(*ListActivitiesByActivityIdResp)(nil),    // 39: system.ListActivitiesByActivityIdResp
+	(*StsCheckVerifyCodeReq)(nil),             // 26: system.StsCheckVerifyCodeReq
+	(*MerchantLoginResp)(nil),                 // 27: system.MerchantLoginResp
+	(*Response)(nil),                          // 28: system.Response
+	(*GetMerchantSettingResp)(nil),            // 29: system.GetMerchantSettingResp
+	(*GetMerchantInfoByUriResp)(nil),          // 30: system.GetMerchantInfoByUriResp
+	(*GetAdResp)(nil),                         // 31: system.GetAdResp
+	(*ListActivitiesResp)(nil),                // 32: system.ListActivitiesResp
+	(*GetActivityResp)(nil),                   // 33: system.GetActivityResp
+	(*AdminLoginResp)(nil),                    // 34: system.AdminLoginResp
+	(*GetMerchantInfoResp)(nil),               // 35: system.GetMerchantInfoResp
+	(*ListMerchantsResp)(nil),                 // 36: system.ListMerchantsResp
+	(*GetMerchantTotalDataResp)(nil),          // 37: system.GetMerchantTotalDataResp
+	(*ListMerchantsByMerchantIdResp)(nil),     // 38: system.ListMerchantsByMerchantIdResp
+	(*ListMerchantsByActivityNumberResp)(nil), // 39: system.ListMerchantsByActivityNumberResp
+	(*ListActivitiesByActivityIdResp)(nil),    // 40: system.ListActivitiesByActivityIdResp
 }
 var file_ActiManage_system_system_proto_depIdxs = []int32{
 	0,  // 0: system.SystemService.MerchantLogin:input_type -> system.MerchantLoginReq
@@ -222,34 +228,36 @@ var file_ActiManage_system_system_proto_depIdxs = []int32{
 	23, // 23: system.SystemService.ListMerchantByActivityNumber:input_type -> system.ListMerchantsByActivityNumberReq
 	24, // 24: system.SystemService.ListActivityByActivityId:input_type -> system.ListActivitiesByActivityIdReq
 	25, // 25: system.SystemService.StsSendVerifyCode:input_type -> system.StsSendVerifyCodeReq
-	26, // 26: system.SystemService.MerchantLogin:output_type -> system.MerchantLoginResp
-	27, // 27: system.SystemService.MerchantSetPassword:output_type -> system.Response
-	27, // 28: system.SystemService.UpdateMerchantSetting:output_type -> system.Response
-	28, // 29: system.SystemService.GetMerchantSetting:output_type -> system.GetMerchantSettingResp
-	27, // 30: system.SystemService.UpdateMerchantInfo:output_type -> system.Response
-	29, // 31: system.SystemService.GetMerchantInfoByUri:output_type -> system.GetMerchantInfoByUriResp
-	30, // 32: system.SystemService.GetAd:output_type -> system.GetAdResp
-	27, // 33: system.SystemService.SetAd:output_type -> system.Response
-	27, // 34: system.SystemService.CreateActivity:output_type -> system.Response
-	27, // 35: system.SystemService.TopActivity:output_type -> system.Response
-	27, // 36: system.SystemService.DeleteActivity:output_type -> system.Response
-	27, // 37: system.SystemService.UpdateActivity:output_type -> system.Response
-	31, // 38: system.SystemService.ListActivities:output_type -> system.ListActivitiesResp
-	32, // 39: system.SystemService.GetActivity:output_type -> system.GetActivityResp
-	33, // 40: system.SystemService.AdminLogin:output_type -> system.AdminLoginResp
-	27, // 41: system.SystemService.AdminSetPassword:output_type -> system.Response
-	27, // 42: system.SystemService.CreateMerchant:output_type -> system.Response
-	27, // 43: system.SystemService.UpdateMerchant:output_type -> system.Response
-	27, // 44: system.SystemService.DeleteMerchant:output_type -> system.Response
-	34, // 45: system.SystemService.GetMerchantInfo:output_type -> system.GetMerchantInfoResp
-	35, // 46: system.SystemService.ListMerchants:output_type -> system.ListMerchantsResp
-	36, // 47: system.SystemService.GetMerchantTotalData:output_type -> system.GetMerchantTotalDataResp
-	37, // 48: system.SystemService.ListMerchantByMerchantId:output_type -> system.ListMerchantsByMerchantIdResp
-	38, // 49: system.SystemService.ListMerchantByActivityNumber:output_type -> system.ListMerchantsByActivityNumberResp
-	39, // 50: system.SystemService.ListActivityByActivityId:output_type -> system.ListActivitiesByActivityIdResp
-	27, // 51: system.SystemService.StsSendVerifyCode:output_type -> system.Response
-	26, // [26:52] is the sub-list for method output_type
-	0,  // [0:26] is the sub-list for method input_type
+	26, // 26: system.SystemService.StsCheckVerifyCode:input_type -> system.StsCheckVerifyCodeReq
+	27, // 27: system.SystemService.MerchantLogin:output_type -> system.MerchantLoginResp
+	28, // 28: system.SystemService.MerchantSetPassword:output_type -> system.Response
+	28, // 29: system.SystemService.UpdateMerchantSetting:output_type -> system.Response
+	29, // 30: system.SystemService.GetMerchantSetting:output_type -> system.GetMerchantSettingResp
+	28, // 31: system.SystemService.UpdateMerchantInfo:output_type -> system.Response
+	30, // 32: system.SystemService.GetMerchantInfoByUri:output_type -> system.GetMerchantInfoByUriResp
+	31, // 33: system.SystemService.GetAd:output_type -> system.GetAdResp
+	28, // 34: system.SystemService.SetAd:output_type -> system.Response
+	28, // 35: system.SystemService.CreateActivity:output_type -> system.Response
+	28, // 36: system.SystemService.TopActivity:output_type -> system.Response
+	28, // 37: system.SystemService.DeleteActivity:output_type -> system.Response
+	28, // 38: system.SystemService.UpdateActivity:output_type -> system.Response
+	32, // 39: system.SystemService.ListActivities:output_type -> system.ListActivitiesResp
+	33, // 40: system.SystemService.GetActivity:output_type -> system.GetActivityResp
+	34, // 41: system.SystemService.AdminLogin:output_type -> system.AdminLoginResp
+	28, // 42: system.SystemService.AdminSetPassword:output_type -> system.Response
+	28, // 43: system.SystemService.CreateMerchant:output_type -> system.Response
+	28, // 44: system.SystemService.UpdateMerchant:output_type -> system.Response
+	28, // 45: system.SystemService.DeleteMerchant:output_type -> system.Response
+	35, // 46: system.SystemService.GetMerchantInfo:output_type -> system.GetMerchantInfoResp
+	36, // 47: system.SystemService.ListMerchants:output_type -> system.ListMerchantsResp
+	37, // 48: system.SystemService.GetMerchantTotalData:output_type -> system.GetMerchantTotalDataResp
+	38, // 49: system.SystemService.ListMerchantByMerchantId:output_type -> system.ListMerchantsByMerchantIdResp
+	39, // 50: system.SystemService.ListMerchantByActivityNumber:output_type -> system.ListMerchantsByActivityNumberResp
+	40, // 51: system.SystemService.ListActivityByActivityId:output_type -> system.ListActivitiesByActivityIdResp
+	28, // 52: system.SystemService.StsSendVerifyCode:output_type -> system.Response
+	28, // 53: system.SystemService.StsCheckVerifyCode:output_type -> system.Response
+	27, // [27:54] is the sub-list for method output_type
+	0,  // [0:27] is the sub-list for method input_type
 	0,  // [0:0] is the sub-list for extension type_name
 	0,  // [0:0] is the sub-list for extension extendee
 	0,  // [0:0] is the sub-list for field type_name
@@ -311,4 +319,5 @@ type SystemService interface {
 	ListMerchantByActivityNumber(ctx context.Context, req *ListMerchantsByActivityNumberReq) (res *ListMerchantsByActivityNumberResp, err error)
 	ListActivityByActivityId(ctx context.Context, req *ListActivitiesByActivityIdReq) (res *ListActivitiesByActivityIdResp, err error)
 	StsSendVerifyCode(ctx context.Context, req *StsSendVerifyCodeReq) (res *Response, err error)
+	StsCheckVerifyCode(ctx context.Context, req *StsCheckVerifyCodeReq) (res *Response, err error)
 }

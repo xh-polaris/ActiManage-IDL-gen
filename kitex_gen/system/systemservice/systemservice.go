@@ -197,6 +197,13 @@ var serviceMethods = map[string]kitex.MethodInfo{
 		false,
 		kitex.WithStreamingMode(kitex.StreamingUnary),
 	),
+	"StsCheckVerifyCode": kitex.NewMethodInfo(
+		stsCheckVerifyCodeHandler,
+		newStsCheckVerifyCodeArgs,
+		newStsCheckVerifyCodeResult,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingUnary),
+	),
 }
 
 var (
@@ -4241,6 +4248,159 @@ func (p *StsSendVerifyCodeResult) GetResult() interface{} {
 	return p.Success
 }
 
+func stsCheckVerifyCodeHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
+	switch s := arg.(type) {
+	case *streaming.Args:
+		st := s.Stream
+		req := new(system.StsCheckVerifyCodeReq)
+		if err := st.RecvMsg(req); err != nil {
+			return err
+		}
+		resp, err := handler.(system.SystemService).StsCheckVerifyCode(ctx, req)
+		if err != nil {
+			return err
+		}
+		return st.SendMsg(resp)
+	case *StsCheckVerifyCodeArgs:
+		success, err := handler.(system.SystemService).StsCheckVerifyCode(ctx, s.Req)
+		if err != nil {
+			return err
+		}
+		realResult := result.(*StsCheckVerifyCodeResult)
+		realResult.Success = success
+		return nil
+	default:
+		return errInvalidMessageType
+	}
+}
+func newStsCheckVerifyCodeArgs() interface{} {
+	return &StsCheckVerifyCodeArgs{}
+}
+
+func newStsCheckVerifyCodeResult() interface{} {
+	return &StsCheckVerifyCodeResult{}
+}
+
+type StsCheckVerifyCodeArgs struct {
+	Req *system.StsCheckVerifyCodeReq
+}
+
+func (p *StsCheckVerifyCodeArgs) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetReq() {
+		p.Req = new(system.StsCheckVerifyCodeReq)
+	}
+	return p.Req.FastRead(buf, _type, number)
+}
+
+func (p *StsCheckVerifyCodeArgs) FastWrite(buf []byte) (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.FastWrite(buf)
+}
+
+func (p *StsCheckVerifyCodeArgs) Size() (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.Size()
+}
+
+func (p *StsCheckVerifyCodeArgs) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetReq() {
+		return out, nil
+	}
+	return proto.Marshal(p.Req)
+}
+
+func (p *StsCheckVerifyCodeArgs) Unmarshal(in []byte) error {
+	msg := new(system.StsCheckVerifyCodeReq)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Req = msg
+	return nil
+}
+
+var StsCheckVerifyCodeArgs_Req_DEFAULT *system.StsCheckVerifyCodeReq
+
+func (p *StsCheckVerifyCodeArgs) GetReq() *system.StsCheckVerifyCodeReq {
+	if !p.IsSetReq() {
+		return StsCheckVerifyCodeArgs_Req_DEFAULT
+	}
+	return p.Req
+}
+
+func (p *StsCheckVerifyCodeArgs) IsSetReq() bool {
+	return p.Req != nil
+}
+
+func (p *StsCheckVerifyCodeArgs) GetFirstArgument() interface{} {
+	return p.Req
+}
+
+type StsCheckVerifyCodeResult struct {
+	Success *system.Response
+}
+
+var StsCheckVerifyCodeResult_Success_DEFAULT *system.Response
+
+func (p *StsCheckVerifyCodeResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetSuccess() {
+		p.Success = new(system.Response)
+	}
+	return p.Success.FastRead(buf, _type, number)
+}
+
+func (p *StsCheckVerifyCodeResult) FastWrite(buf []byte) (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.FastWrite(buf)
+}
+
+func (p *StsCheckVerifyCodeResult) Size() (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.Size()
+}
+
+func (p *StsCheckVerifyCodeResult) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetSuccess() {
+		return out, nil
+	}
+	return proto.Marshal(p.Success)
+}
+
+func (p *StsCheckVerifyCodeResult) Unmarshal(in []byte) error {
+	msg := new(system.Response)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Success = msg
+	return nil
+}
+
+func (p *StsCheckVerifyCodeResult) GetSuccess() *system.Response {
+	if !p.IsSetSuccess() {
+		return StsCheckVerifyCodeResult_Success_DEFAULT
+	}
+	return p.Success
+}
+
+func (p *StsCheckVerifyCodeResult) SetSuccess(x interface{}) {
+	p.Success = x.(*system.Response)
+}
+
+func (p *StsCheckVerifyCodeResult) IsSetSuccess() bool {
+	return p.Success != nil
+}
+
+func (p *StsCheckVerifyCodeResult) GetResult() interface{} {
+	return p.Success
+}
+
 type kClient struct {
 	c client.Client
 }
@@ -4506,6 +4666,16 @@ func (p *kClient) StsSendVerifyCode(ctx context.Context, Req *system.StsSendVeri
 	_args.Req = Req
 	var _result StsSendVerifyCodeResult
 	if err = p.c.Call(ctx, "StsSendVerifyCode", &_args, &_result); err != nil {
+		return
+	}
+	return _result.GetSuccess(), nil
+}
+
+func (p *kClient) StsCheckVerifyCode(ctx context.Context, Req *system.StsCheckVerifyCodeReq) (r *system.Response, err error) {
+	var _args StsCheckVerifyCodeArgs
+	_args.Req = Req
+	var _result StsCheckVerifyCodeResult
+	if err = p.c.Call(ctx, "StsCheckVerifyCode", &_args, &_result); err != nil {
 		return
 	}
 	return _result.GetSuccess(), nil

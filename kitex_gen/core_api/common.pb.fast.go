@@ -2782,7 +2782,7 @@ func (x *MerchantListBookRecordsResp) fastReadField2(buf []byte, _type int8) (of
 }
 
 func (x *MerchantListBookRecordsResp) fastReadField3(buf []byte, _type int8) (offset int, err error) {
-	var v MerchantListBookRecordsResp_BookRecord
+	var v MerchantListBookRecordsResp_Item
 	offset, err = fastpb.ReadMessage(buf, _type, &v)
 	if err != nil {
 		return offset, err
@@ -4789,7 +4789,7 @@ func (x *MerchantCreateActivityReq_ActivitySetting) fastReadField3(buf []byte, _
 	return offset, err
 }
 
-func (x *MerchantListBookRecordsResp_BookRecord) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
+func (x *MerchantListBookRecordsResp_Item) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
 	switch number {
 	case 1:
 		offset, err = x.fastReadField1(buf, _type)
@@ -4856,60 +4856,60 @@ func (x *MerchantListBookRecordsResp_BookRecord) FastRead(buf []byte, _type int8
 SkipFieldError:
 	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
 ReadFieldError:
-	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_MerchantListBookRecordsResp_BookRecord[number], err)
+	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_MerchantListBookRecordsResp_Item[number], err)
 }
 
-func (x *MerchantListBookRecordsResp_BookRecord) fastReadField1(buf []byte, _type int8) (offset int, err error) {
+func (x *MerchantListBookRecordsResp_Item) fastReadField1(buf []byte, _type int8) (offset int, err error) {
 	x.Id, offset, err = fastpb.ReadString(buf, _type)
 	return offset, err
 }
 
-func (x *MerchantListBookRecordsResp_BookRecord) fastReadField2(buf []byte, _type int8) (offset int, err error) {
+func (x *MerchantListBookRecordsResp_Item) fastReadField2(buf []byte, _type int8) (offset int, err error) {
 	x.ActivityId, offset, err = fastpb.ReadString(buf, _type)
 	return offset, err
 }
 
-func (x *MerchantListBookRecordsResp_BookRecord) fastReadField3(buf []byte, _type int8) (offset int, err error) {
+func (x *MerchantListBookRecordsResp_Item) fastReadField3(buf []byte, _type int8) (offset int, err error) {
 	x.UserId, offset, err = fastpb.ReadString(buf, _type)
 	return offset, err
 }
 
-func (x *MerchantListBookRecordsResp_BookRecord) fastReadField4(buf []byte, _type int8) (offset int, err error) {
+func (x *MerchantListBookRecordsResp_Item) fastReadField4(buf []byte, _type int8) (offset int, err error) {
 	x.Name, offset, err = fastpb.ReadString(buf, _type)
 	return offset, err
 }
 
-func (x *MerchantListBookRecordsResp_BookRecord) fastReadField5(buf []byte, _type int8) (offset int, err error) {
+func (x *MerchantListBookRecordsResp_Item) fastReadField5(buf []byte, _type int8) (offset int, err error) {
 	x.Gender, offset, err = fastpb.ReadInt64(buf, _type)
 	return offset, err
 }
 
-func (x *MerchantListBookRecordsResp_BookRecord) fastReadField6(buf []byte, _type int8) (offset int, err error) {
+func (x *MerchantListBookRecordsResp_Item) fastReadField6(buf []byte, _type int8) (offset int, err error) {
 	x.Phone, offset, err = fastpb.ReadString(buf, _type)
 	return offset, err
 }
 
-func (x *MerchantListBookRecordsResp_BookRecord) fastReadField7(buf []byte, _type int8) (offset int, err error) {
+func (x *MerchantListBookRecordsResp_Item) fastReadField7(buf []byte, _type int8) (offset int, err error) {
 	x.Email, offset, err = fastpb.ReadString(buf, _type)
 	return offset, err
 }
 
-func (x *MerchantListBookRecordsResp_BookRecord) fastReadField8(buf []byte, _type int8) (offset int, err error) {
+func (x *MerchantListBookRecordsResp_Item) fastReadField8(buf []byte, _type int8) (offset int, err error) {
 	x.Relation, offset, err = fastpb.ReadString(buf, _type)
 	return offset, err
 }
 
-func (x *MerchantListBookRecordsResp_BookRecord) fastReadField9(buf []byte, _type int8) (offset int, err error) {
+func (x *MerchantListBookRecordsResp_Item) fastReadField9(buf []byte, _type int8) (offset int, err error) {
 	x.Timestamp, offset, err = fastpb.ReadInt64(buf, _type)
 	return offset, err
 }
 
-func (x *MerchantListBookRecordsResp_BookRecord) fastReadField10(buf []byte, _type int8) (offset int, err error) {
+func (x *MerchantListBookRecordsResp_Item) fastReadField10(buf []byte, _type int8) (offset int, err error) {
 	x.Arrival, offset, err = fastpb.ReadInt64(buf, _type)
 	return offset, err
 }
 
-func (x *MerchantListBookRecordsResp_BookRecord) fastReadField11(buf []byte, _type int8) (offset int, err error) {
+func (x *MerchantListBookRecordsResp_Item) fastReadField11(buf []byte, _type int8) (offset int, err error) {
 	x.Remark, offset, err = fastpb.ReadString(buf, _type)
 	return offset, err
 }
@@ -8679,7 +8679,7 @@ func (x *MerchantCreateActivityReq_ActivitySetting) fastWriteField3(buf []byte) 
 	return offset
 }
 
-func (x *MerchantListBookRecordsResp_BookRecord) FastWrite(buf []byte) (offset int) {
+func (x *MerchantListBookRecordsResp_Item) FastWrite(buf []byte) (offset int) {
 	if x == nil {
 		return offset
 	}
@@ -8697,7 +8697,7 @@ func (x *MerchantListBookRecordsResp_BookRecord) FastWrite(buf []byte) (offset i
 	return offset
 }
 
-func (x *MerchantListBookRecordsResp_BookRecord) fastWriteField1(buf []byte) (offset int) {
+func (x *MerchantListBookRecordsResp_Item) fastWriteField1(buf []byte) (offset int) {
 	if x.Id == "" {
 		return offset
 	}
@@ -8705,7 +8705,7 @@ func (x *MerchantListBookRecordsResp_BookRecord) fastWriteField1(buf []byte) (of
 	return offset
 }
 
-func (x *MerchantListBookRecordsResp_BookRecord) fastWriteField2(buf []byte) (offset int) {
+func (x *MerchantListBookRecordsResp_Item) fastWriteField2(buf []byte) (offset int) {
 	if x.ActivityId == "" {
 		return offset
 	}
@@ -8713,7 +8713,7 @@ func (x *MerchantListBookRecordsResp_BookRecord) fastWriteField2(buf []byte) (of
 	return offset
 }
 
-func (x *MerchantListBookRecordsResp_BookRecord) fastWriteField3(buf []byte) (offset int) {
+func (x *MerchantListBookRecordsResp_Item) fastWriteField3(buf []byte) (offset int) {
 	if x.UserId == "" {
 		return offset
 	}
@@ -8721,7 +8721,7 @@ func (x *MerchantListBookRecordsResp_BookRecord) fastWriteField3(buf []byte) (of
 	return offset
 }
 
-func (x *MerchantListBookRecordsResp_BookRecord) fastWriteField4(buf []byte) (offset int) {
+func (x *MerchantListBookRecordsResp_Item) fastWriteField4(buf []byte) (offset int) {
 	if x.Name == "" {
 		return offset
 	}
@@ -8729,7 +8729,7 @@ func (x *MerchantListBookRecordsResp_BookRecord) fastWriteField4(buf []byte) (of
 	return offset
 }
 
-func (x *MerchantListBookRecordsResp_BookRecord) fastWriteField5(buf []byte) (offset int) {
+func (x *MerchantListBookRecordsResp_Item) fastWriteField5(buf []byte) (offset int) {
 	if x.Gender == 0 {
 		return offset
 	}
@@ -8737,7 +8737,7 @@ func (x *MerchantListBookRecordsResp_BookRecord) fastWriteField5(buf []byte) (of
 	return offset
 }
 
-func (x *MerchantListBookRecordsResp_BookRecord) fastWriteField6(buf []byte) (offset int) {
+func (x *MerchantListBookRecordsResp_Item) fastWriteField6(buf []byte) (offset int) {
 	if x.Phone == "" {
 		return offset
 	}
@@ -8745,7 +8745,7 @@ func (x *MerchantListBookRecordsResp_BookRecord) fastWriteField6(buf []byte) (of
 	return offset
 }
 
-func (x *MerchantListBookRecordsResp_BookRecord) fastWriteField7(buf []byte) (offset int) {
+func (x *MerchantListBookRecordsResp_Item) fastWriteField7(buf []byte) (offset int) {
 	if x.Email == "" {
 		return offset
 	}
@@ -8753,7 +8753,7 @@ func (x *MerchantListBookRecordsResp_BookRecord) fastWriteField7(buf []byte) (of
 	return offset
 }
 
-func (x *MerchantListBookRecordsResp_BookRecord) fastWriteField8(buf []byte) (offset int) {
+func (x *MerchantListBookRecordsResp_Item) fastWriteField8(buf []byte) (offset int) {
 	if x.Relation == "" {
 		return offset
 	}
@@ -8761,7 +8761,7 @@ func (x *MerchantListBookRecordsResp_BookRecord) fastWriteField8(buf []byte) (of
 	return offset
 }
 
-func (x *MerchantListBookRecordsResp_BookRecord) fastWriteField9(buf []byte) (offset int) {
+func (x *MerchantListBookRecordsResp_Item) fastWriteField9(buf []byte) (offset int) {
 	if x.Timestamp == 0 {
 		return offset
 	}
@@ -8769,7 +8769,7 @@ func (x *MerchantListBookRecordsResp_BookRecord) fastWriteField9(buf []byte) (of
 	return offset
 }
 
-func (x *MerchantListBookRecordsResp_BookRecord) fastWriteField10(buf []byte) (offset int) {
+func (x *MerchantListBookRecordsResp_Item) fastWriteField10(buf []byte) (offset int) {
 	if x.Arrival == 0 {
 		return offset
 	}
@@ -8777,7 +8777,7 @@ func (x *MerchantListBookRecordsResp_BookRecord) fastWriteField10(buf []byte) (o
 	return offset
 }
 
-func (x *MerchantListBookRecordsResp_BookRecord) fastWriteField11(buf []byte) (offset int) {
+func (x *MerchantListBookRecordsResp_Item) fastWriteField11(buf []byte) (offset int) {
 	if x.Remark == "" {
 		return offset
 	}
@@ -12497,7 +12497,7 @@ func (x *MerchantCreateActivityReq_ActivitySetting) sizeField3() (n int) {
 	return n
 }
 
-func (x *MerchantListBookRecordsResp_BookRecord) Size() (n int) {
+func (x *MerchantListBookRecordsResp_Item) Size() (n int) {
 	if x == nil {
 		return n
 	}
@@ -12515,7 +12515,7 @@ func (x *MerchantListBookRecordsResp_BookRecord) Size() (n int) {
 	return n
 }
 
-func (x *MerchantListBookRecordsResp_BookRecord) sizeField1() (n int) {
+func (x *MerchantListBookRecordsResp_Item) sizeField1() (n int) {
 	if x.Id == "" {
 		return n
 	}
@@ -12523,7 +12523,7 @@ func (x *MerchantListBookRecordsResp_BookRecord) sizeField1() (n int) {
 	return n
 }
 
-func (x *MerchantListBookRecordsResp_BookRecord) sizeField2() (n int) {
+func (x *MerchantListBookRecordsResp_Item) sizeField2() (n int) {
 	if x.ActivityId == "" {
 		return n
 	}
@@ -12531,7 +12531,7 @@ func (x *MerchantListBookRecordsResp_BookRecord) sizeField2() (n int) {
 	return n
 }
 
-func (x *MerchantListBookRecordsResp_BookRecord) sizeField3() (n int) {
+func (x *MerchantListBookRecordsResp_Item) sizeField3() (n int) {
 	if x.UserId == "" {
 		return n
 	}
@@ -12539,7 +12539,7 @@ func (x *MerchantListBookRecordsResp_BookRecord) sizeField3() (n int) {
 	return n
 }
 
-func (x *MerchantListBookRecordsResp_BookRecord) sizeField4() (n int) {
+func (x *MerchantListBookRecordsResp_Item) sizeField4() (n int) {
 	if x.Name == "" {
 		return n
 	}
@@ -12547,7 +12547,7 @@ func (x *MerchantListBookRecordsResp_BookRecord) sizeField4() (n int) {
 	return n
 }
 
-func (x *MerchantListBookRecordsResp_BookRecord) sizeField5() (n int) {
+func (x *MerchantListBookRecordsResp_Item) sizeField5() (n int) {
 	if x.Gender == 0 {
 		return n
 	}
@@ -12555,7 +12555,7 @@ func (x *MerchantListBookRecordsResp_BookRecord) sizeField5() (n int) {
 	return n
 }
 
-func (x *MerchantListBookRecordsResp_BookRecord) sizeField6() (n int) {
+func (x *MerchantListBookRecordsResp_Item) sizeField6() (n int) {
 	if x.Phone == "" {
 		return n
 	}
@@ -12563,7 +12563,7 @@ func (x *MerchantListBookRecordsResp_BookRecord) sizeField6() (n int) {
 	return n
 }
 
-func (x *MerchantListBookRecordsResp_BookRecord) sizeField7() (n int) {
+func (x *MerchantListBookRecordsResp_Item) sizeField7() (n int) {
 	if x.Email == "" {
 		return n
 	}
@@ -12571,7 +12571,7 @@ func (x *MerchantListBookRecordsResp_BookRecord) sizeField7() (n int) {
 	return n
 }
 
-func (x *MerchantListBookRecordsResp_BookRecord) sizeField8() (n int) {
+func (x *MerchantListBookRecordsResp_Item) sizeField8() (n int) {
 	if x.Relation == "" {
 		return n
 	}
@@ -12579,7 +12579,7 @@ func (x *MerchantListBookRecordsResp_BookRecord) sizeField8() (n int) {
 	return n
 }
 
-func (x *MerchantListBookRecordsResp_BookRecord) sizeField9() (n int) {
+func (x *MerchantListBookRecordsResp_Item) sizeField9() (n int) {
 	if x.Timestamp == 0 {
 		return n
 	}
@@ -12587,7 +12587,7 @@ func (x *MerchantListBookRecordsResp_BookRecord) sizeField9() (n int) {
 	return n
 }
 
-func (x *MerchantListBookRecordsResp_BookRecord) sizeField10() (n int) {
+func (x *MerchantListBookRecordsResp_Item) sizeField10() (n int) {
 	if x.Arrival == 0 {
 		return n
 	}
@@ -12595,7 +12595,7 @@ func (x *MerchantListBookRecordsResp_BookRecord) sizeField10() (n int) {
 	return n
 }
 
-func (x *MerchantListBookRecordsResp_BookRecord) sizeField11() (n int) {
+func (x *MerchantListBookRecordsResp_Item) sizeField11() (n int) {
 	if x.Remark == "" {
 		return n
 	}
@@ -13313,7 +13313,7 @@ var fieldIDToName_MerchantCreateActivityReq_ActivitySetting = map[int32]string{
 	3: "End",
 }
 
-var fieldIDToName_MerchantListBookRecordsResp_BookRecord = map[int32]string{
+var fieldIDToName_MerchantListBookRecordsResp_Item = map[int32]string{
 	1:  "Id",
 	2:  "ActivityId",
 	3:  "UserId",

@@ -134,6 +134,13 @@ var serviceMethods = map[string]kitex.MethodInfo{
 		false,
 		kitex.WithStreamingMode(kitex.StreamingUnary),
 	),
+	"ListActivitiesByView": kitex.NewMethodInfo(
+		listActivitiesByViewHandler,
+		newListActivitiesByViewArgs,
+		newListActivitiesByViewResult,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingUnary),
+	),
 }
 
 var (
@@ -2801,6 +2808,159 @@ func (p *GetMerchantInfoResult) GetResult() interface{} {
 	return p.Success
 }
 
+func listActivitiesByViewHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
+	switch s := arg.(type) {
+	case *streaming.Args:
+		st := s.Stream
+		req := new(core_api.ListActivitiesByViewReq)
+		if err := st.RecvMsg(req); err != nil {
+			return err
+		}
+		resp, err := handler.(core_api.User).ListActivitiesByView(ctx, req)
+		if err != nil {
+			return err
+		}
+		return st.SendMsg(resp)
+	case *ListActivitiesByViewArgs:
+		success, err := handler.(core_api.User).ListActivitiesByView(ctx, s.Req)
+		if err != nil {
+			return err
+		}
+		realResult := result.(*ListActivitiesByViewResult)
+		realResult.Success = success
+		return nil
+	default:
+		return errInvalidMessageType
+	}
+}
+func newListActivitiesByViewArgs() interface{} {
+	return &ListActivitiesByViewArgs{}
+}
+
+func newListActivitiesByViewResult() interface{} {
+	return &ListActivitiesByViewResult{}
+}
+
+type ListActivitiesByViewArgs struct {
+	Req *core_api.ListActivitiesByViewReq
+}
+
+func (p *ListActivitiesByViewArgs) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetReq() {
+		p.Req = new(core_api.ListActivitiesByViewReq)
+	}
+	return p.Req.FastRead(buf, _type, number)
+}
+
+func (p *ListActivitiesByViewArgs) FastWrite(buf []byte) (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.FastWrite(buf)
+}
+
+func (p *ListActivitiesByViewArgs) Size() (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.Size()
+}
+
+func (p *ListActivitiesByViewArgs) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetReq() {
+		return out, nil
+	}
+	return proto.Marshal(p.Req)
+}
+
+func (p *ListActivitiesByViewArgs) Unmarshal(in []byte) error {
+	msg := new(core_api.ListActivitiesByViewReq)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Req = msg
+	return nil
+}
+
+var ListActivitiesByViewArgs_Req_DEFAULT *core_api.ListActivitiesByViewReq
+
+func (p *ListActivitiesByViewArgs) GetReq() *core_api.ListActivitiesByViewReq {
+	if !p.IsSetReq() {
+		return ListActivitiesByViewArgs_Req_DEFAULT
+	}
+	return p.Req
+}
+
+func (p *ListActivitiesByViewArgs) IsSetReq() bool {
+	return p.Req != nil
+}
+
+func (p *ListActivitiesByViewArgs) GetFirstArgument() interface{} {
+	return p.Req
+}
+
+type ListActivitiesByViewResult struct {
+	Success *core_api.ListActivitiesByViewResp
+}
+
+var ListActivitiesByViewResult_Success_DEFAULT *core_api.ListActivitiesByViewResp
+
+func (p *ListActivitiesByViewResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetSuccess() {
+		p.Success = new(core_api.ListActivitiesByViewResp)
+	}
+	return p.Success.FastRead(buf, _type, number)
+}
+
+func (p *ListActivitiesByViewResult) FastWrite(buf []byte) (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.FastWrite(buf)
+}
+
+func (p *ListActivitiesByViewResult) Size() (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.Size()
+}
+
+func (p *ListActivitiesByViewResult) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetSuccess() {
+		return out, nil
+	}
+	return proto.Marshal(p.Success)
+}
+
+func (p *ListActivitiesByViewResult) Unmarshal(in []byte) error {
+	msg := new(core_api.ListActivitiesByViewResp)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Success = msg
+	return nil
+}
+
+func (p *ListActivitiesByViewResult) GetSuccess() *core_api.ListActivitiesByViewResp {
+	if !p.IsSetSuccess() {
+		return ListActivitiesByViewResult_Success_DEFAULT
+	}
+	return p.Success
+}
+
+func (p *ListActivitiesByViewResult) SetSuccess(x interface{}) {
+	p.Success = x.(*core_api.ListActivitiesByViewResp)
+}
+
+func (p *ListActivitiesByViewResult) IsSetSuccess() bool {
+	return p.Success != nil
+}
+
+func (p *ListActivitiesByViewResult) GetResult() interface{} {
+	return p.Success
+}
+
 type kClient struct {
 	c client.Client
 }
@@ -2976,6 +3136,16 @@ func (p *kClient) GetMerchantInfo(ctx context.Context, Req *core_api.GetMerchant
 	_args.Req = Req
 	var _result GetMerchantInfoResult
 	if err = p.c.Call(ctx, "GetMerchantInfo", &_args, &_result); err != nil {
+		return
+	}
+	return _result.GetSuccess(), nil
+}
+
+func (p *kClient) ListActivitiesByView(ctx context.Context, Req *core_api.ListActivitiesByViewReq) (r *core_api.ListActivitiesByViewResp, err error) {
+	var _args ListActivitiesByViewArgs
+	_args.Req = Req
+	var _result ListActivitiesByViewResult
+	if err = p.c.Call(ctx, "ListActivitiesByView", &_args, &_result); err != nil {
 		return
 	}
 	return _result.GetSuccess(), nil

@@ -2210,6 +2210,11 @@ func (x *CreateViewReq) FastRead(buf []byte, _type int8, number int32) (offset i
 		if err != nil {
 			goto ReadFieldError
 		}
+	case 3:
+		offset, err = x.fastReadField3(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
 		if err != nil {
@@ -2230,6 +2235,11 @@ func (x *CreateViewReq) fastReadField1(buf []byte, _type int8) (offset int, err 
 
 func (x *CreateViewReq) fastReadField2(buf []byte, _type int8) (offset int, err error) {
 	x.Type, offset, err = fastpb.ReadInt64(buf, _type)
+	return offset, err
+}
+
+func (x *CreateViewReq) fastReadField3(buf []byte, _type int8) (offset int, err error) {
+	x.UserId, offset, err = fastpb.ReadString(buf, _type)
 	return offset, err
 }
 
@@ -2629,6 +2639,76 @@ func (x *GetViewDataByMerchantResp) fastReadField1(buf []byte, _type int8) (offs
 	}
 	x.Items = append(x.Items, &v)
 	return offset, nil
+}
+
+func (x *ListActivityIdsByViewReq) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
+	switch number {
+	case 1:
+		offset, err = x.fastReadField1(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	case 2:
+		offset, err = x.fastReadField2(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	default:
+		offset, err = fastpb.Skip(buf, _type, number)
+		if err != nil {
+			goto SkipFieldError
+		}
+	}
+	return offset, nil
+SkipFieldError:
+	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
+ReadFieldError:
+	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_ListActivityIdsByViewReq[number], err)
+}
+
+func (x *ListActivityIdsByViewReq) fastReadField1(buf []byte, _type int8) (offset int, err error) {
+	x.UserId, offset, err = fastpb.ReadString(buf, _type)
+	return offset, err
+}
+
+func (x *ListActivityIdsByViewReq) fastReadField2(buf []byte, _type int8) (offset int, err error) {
+	var v basic.Paging
+	offset, err = fastpb.ReadMessage(buf, _type, &v)
+	if err != nil {
+		return offset, err
+	}
+	x.Paging = &v
+	return offset, nil
+}
+
+func (x *ListActivityIdsByViewResp) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
+	switch number {
+	case 1:
+		offset, err = x.fastReadField1(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	default:
+		offset, err = fastpb.Skip(buf, _type, number)
+		if err != nil {
+			goto SkipFieldError
+		}
+	}
+	return offset, nil
+SkipFieldError:
+	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
+ReadFieldError:
+	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_ListActivityIdsByViewResp[number], err)
+}
+
+func (x *ListActivityIdsByViewResp) fastReadField1(buf []byte, _type int8) (offset int, err error) {
+	var v string
+	v, offset, err = fastpb.ReadString(buf, _type)
+	if err != nil {
+		return offset, err
+	}
+	x.Ids = append(x.Ids, v)
+	return offset, err
 }
 
 func (x *Response) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
@@ -4652,6 +4732,7 @@ func (x *CreateViewReq) FastWrite(buf []byte) (offset int) {
 	}
 	offset += x.fastWriteField1(buf[offset:])
 	offset += x.fastWriteField2(buf[offset:])
+	offset += x.fastWriteField3(buf[offset:])
 	return offset
 }
 
@@ -4668,6 +4749,14 @@ func (x *CreateViewReq) fastWriteField2(buf []byte) (offset int) {
 		return offset
 	}
 	offset += fastpb.WriteInt64(buf[offset:], 2, x.GetType())
+	return offset
+}
+
+func (x *CreateViewReq) fastWriteField3(buf []byte) (offset int) {
+	if x.UserId == "" {
+		return offset
+	}
+	offset += fastpb.WriteString(buf[offset:], 3, x.GetUserId())
 	return offset
 }
 
@@ -4926,6 +5015,49 @@ func (x *GetViewDataByMerchantResp) fastWriteField1(buf []byte) (offset int) {
 	}
 	for i := range x.GetItems() {
 		offset += fastpb.WriteMessage(buf[offset:], 1, x.GetItems()[i])
+	}
+	return offset
+}
+
+func (x *ListActivityIdsByViewReq) FastWrite(buf []byte) (offset int) {
+	if x == nil {
+		return offset
+	}
+	offset += x.fastWriteField1(buf[offset:])
+	offset += x.fastWriteField2(buf[offset:])
+	return offset
+}
+
+func (x *ListActivityIdsByViewReq) fastWriteField1(buf []byte) (offset int) {
+	if x.UserId == "" {
+		return offset
+	}
+	offset += fastpb.WriteString(buf[offset:], 1, x.GetUserId())
+	return offset
+}
+
+func (x *ListActivityIdsByViewReq) fastWriteField2(buf []byte) (offset int) {
+	if x.Paging == nil {
+		return offset
+	}
+	offset += fastpb.WriteMessage(buf[offset:], 2, x.GetPaging())
+	return offset
+}
+
+func (x *ListActivityIdsByViewResp) FastWrite(buf []byte) (offset int) {
+	if x == nil {
+		return offset
+	}
+	offset += x.fastWriteField1(buf[offset:])
+	return offset
+}
+
+func (x *ListActivityIdsByViewResp) fastWriteField1(buf []byte) (offset int) {
+	if len(x.Ids) == 0 {
+		return offset
+	}
+	for i := range x.GetIds() {
+		offset += fastpb.WriteString(buf[offset:], 1, x.GetIds()[i])
 	}
 	return offset
 }
@@ -6869,6 +7001,7 @@ func (x *CreateViewReq) Size() (n int) {
 	}
 	n += x.sizeField1()
 	n += x.sizeField2()
+	n += x.sizeField3()
 	return n
 }
 
@@ -6885,6 +7018,14 @@ func (x *CreateViewReq) sizeField2() (n int) {
 		return n
 	}
 	n += fastpb.SizeInt64(2, x.GetType())
+	return n
+}
+
+func (x *CreateViewReq) sizeField3() (n int) {
+	if x.UserId == "" {
+		return n
+	}
+	n += fastpb.SizeString(3, x.GetUserId())
 	return n
 }
 
@@ -7143,6 +7284,49 @@ func (x *GetViewDataByMerchantResp) sizeField1() (n int) {
 	}
 	for i := range x.GetItems() {
 		n += fastpb.SizeMessage(1, x.GetItems()[i])
+	}
+	return n
+}
+
+func (x *ListActivityIdsByViewReq) Size() (n int) {
+	if x == nil {
+		return n
+	}
+	n += x.sizeField1()
+	n += x.sizeField2()
+	return n
+}
+
+func (x *ListActivityIdsByViewReq) sizeField1() (n int) {
+	if x.UserId == "" {
+		return n
+	}
+	n += fastpb.SizeString(1, x.GetUserId())
+	return n
+}
+
+func (x *ListActivityIdsByViewReq) sizeField2() (n int) {
+	if x.Paging == nil {
+		return n
+	}
+	n += fastpb.SizeMessage(2, x.GetPaging())
+	return n
+}
+
+func (x *ListActivityIdsByViewResp) Size() (n int) {
+	if x == nil {
+		return n
+	}
+	n += x.sizeField1()
+	return n
+}
+
+func (x *ListActivityIdsByViewResp) sizeField1() (n int) {
+	if len(x.Ids) == 0 {
+		return n
+	}
+	for i := range x.GetIds() {
+		n += fastpb.SizeString(1, x.GetIds()[i])
 	}
 	return n
 }
@@ -7675,6 +7859,7 @@ var fieldIDToName_CancelFavoriteReq = map[int32]string{
 var fieldIDToName_CreateViewReq = map[int32]string{
 	1: "TargetId",
 	2: "Type",
+	3: "UserId",
 }
 
 var fieldIDToName_IncViewReq = map[int32]string{
@@ -7733,6 +7918,15 @@ var fieldIDToName_GetViewDataByMerchantReq = map[int32]string{
 
 var fieldIDToName_GetViewDataByMerchantResp = map[int32]string{
 	1: "Items",
+}
+
+var fieldIDToName_ListActivityIdsByViewReq = map[int32]string{
+	1: "UserId",
+	2: "Paging",
+}
+
+var fieldIDToName_ListActivityIdsByViewResp = map[int32]string{
+	1: "Ids",
 }
 
 var fieldIDToName_Response = map[int32]string{

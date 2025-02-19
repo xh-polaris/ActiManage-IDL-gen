@@ -36,6 +36,7 @@ type Client interface {
 	CreateView(ctx context.Context, Req *user.CreateViewReq, callOptions ...callopt.Option) (r *user.Response, err error)
 	GetFavoriteAndViewOfActivity(ctx context.Context, Req *user.GetFavoriteAndViewOfActivityReq, callOptions ...callopt.Option) (r *user.GetFavoriteAndViewOfActivityResp, err error)
 	GetViewOfMerchant(ctx context.Context, Req *user.GetViewOfMerchantReq, callOptions ...callopt.Option) (r *user.GetViewOfMerchantResp, err error)
+	ListActivityIdsByView(ctx context.Context, Req *user.ListActivityIdsByViewReq, callOptions ...callopt.Option) (r *user.ListActivityIdsByViewResp, err error)
 	ListMerchantIdByViewRank(ctx context.Context, Req *user.ListMerchantIdsByViewRankReq, callOptions ...callopt.Option) (r *user.ListMerchantIdsByViewRankResp, err error)
 	ListMerchantIdByBookRecordRank(ctx context.Context, Req *user.ListMerchantIdsByBookRecordRankReq, callOptions ...callopt.Option) (r *user.ListMerchantIdsByBookRecordRankResp, err error)
 	ListActivityIdByBookRecordRank(ctx context.Context, Req *user.ListActivityIdsByBookRecordRankReq, callOptions ...callopt.Option) (r *user.ListActivityIdsByBookRecordRankResp, err error)
@@ -194,6 +195,11 @@ func (p *kUserServiceClient) GetFavoriteAndViewOfActivity(ctx context.Context, R
 func (p *kUserServiceClient) GetViewOfMerchant(ctx context.Context, Req *user.GetViewOfMerchantReq, callOptions ...callopt.Option) (r *user.GetViewOfMerchantResp, err error) {
 	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
 	return p.kClient.GetViewOfMerchant(ctx, Req)
+}
+
+func (p *kUserServiceClient) ListActivityIdsByView(ctx context.Context, Req *user.ListActivityIdsByViewReq, callOptions ...callopt.Option) (r *user.ListActivityIdsByViewResp, err error) {
+	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
+	return p.kClient.ListActivityIdsByView(ctx, Req)
 }
 
 func (p *kUserServiceClient) ListMerchantIdByViewRank(ctx context.Context, Req *user.ListMerchantIdsByViewRankReq, callOptions ...callopt.Option) (r *user.ListMerchantIdsByViewRankResp, err error) {

@@ -28,6 +28,7 @@ type Client interface {
 	UpdateUserInfo(ctx context.Context, Req *core_api.UpdateUserInfoReq, callOptions ...callopt.Option) (r *core_api.Response, err error)
 	UpdateNotice(ctx context.Context, Req *core_api.UpdateNoticeReq, callOptions ...callopt.Option) (r *core_api.Response, err error)
 	GetMerchantInfo(ctx context.Context, Req *core_api.GetMerchantInfoReq, callOptions ...callopt.Option) (r *core_api.GetMerchantInfoResp, err error)
+	ListActivitiesByView(ctx context.Context, Req *core_api.ListActivitiesByViewReq, callOptions ...callopt.Option) (r *core_api.ListActivitiesByViewResp, err error)
 }
 
 // NewClient creates a client for the service defined in IDL.
@@ -142,4 +143,9 @@ func (p *kUserClient) UpdateNotice(ctx context.Context, Req *core_api.UpdateNoti
 func (p *kUserClient) GetMerchantInfo(ctx context.Context, Req *core_api.GetMerchantInfoReq, callOptions ...callopt.Option) (r *core_api.GetMerchantInfoResp, err error) {
 	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
 	return p.kClient.GetMerchantInfo(ctx, Req)
+}
+
+func (p *kUserClient) ListActivitiesByView(ctx context.Context, Req *core_api.ListActivitiesByViewReq, callOptions ...callopt.Option) (r *core_api.ListActivitiesByViewResp, err error) {
+	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
+	return p.kClient.ListActivitiesByView(ctx, Req)
 }

@@ -190,6 +190,13 @@ var serviceMethods = map[string]kitex.MethodInfo{
 		false,
 		kitex.WithStreamingMode(kitex.StreamingUnary),
 	),
+	"ListActivityIdsByView": kitex.NewMethodInfo(
+		listActivityIdsByViewHandler,
+		newListActivityIdsByViewArgs,
+		newListActivityIdsByViewResult,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingUnary),
+	),
 	"ListMerchantIdByViewRank": kitex.NewMethodInfo(
 		listMerchantIdByViewRankHandler,
 		newListMerchantIdByViewRankArgs,
@@ -4109,6 +4116,159 @@ func (p *GetViewOfMerchantResult) GetResult() interface{} {
 	return p.Success
 }
 
+func listActivityIdsByViewHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
+	switch s := arg.(type) {
+	case *streaming.Args:
+		st := s.Stream
+		req := new(user.ListActivityIdsByViewReq)
+		if err := st.RecvMsg(req); err != nil {
+			return err
+		}
+		resp, err := handler.(user.UserService).ListActivityIdsByView(ctx, req)
+		if err != nil {
+			return err
+		}
+		return st.SendMsg(resp)
+	case *ListActivityIdsByViewArgs:
+		success, err := handler.(user.UserService).ListActivityIdsByView(ctx, s.Req)
+		if err != nil {
+			return err
+		}
+		realResult := result.(*ListActivityIdsByViewResult)
+		realResult.Success = success
+		return nil
+	default:
+		return errInvalidMessageType
+	}
+}
+func newListActivityIdsByViewArgs() interface{} {
+	return &ListActivityIdsByViewArgs{}
+}
+
+func newListActivityIdsByViewResult() interface{} {
+	return &ListActivityIdsByViewResult{}
+}
+
+type ListActivityIdsByViewArgs struct {
+	Req *user.ListActivityIdsByViewReq
+}
+
+func (p *ListActivityIdsByViewArgs) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetReq() {
+		p.Req = new(user.ListActivityIdsByViewReq)
+	}
+	return p.Req.FastRead(buf, _type, number)
+}
+
+func (p *ListActivityIdsByViewArgs) FastWrite(buf []byte) (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.FastWrite(buf)
+}
+
+func (p *ListActivityIdsByViewArgs) Size() (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.Size()
+}
+
+func (p *ListActivityIdsByViewArgs) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetReq() {
+		return out, nil
+	}
+	return proto.Marshal(p.Req)
+}
+
+func (p *ListActivityIdsByViewArgs) Unmarshal(in []byte) error {
+	msg := new(user.ListActivityIdsByViewReq)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Req = msg
+	return nil
+}
+
+var ListActivityIdsByViewArgs_Req_DEFAULT *user.ListActivityIdsByViewReq
+
+func (p *ListActivityIdsByViewArgs) GetReq() *user.ListActivityIdsByViewReq {
+	if !p.IsSetReq() {
+		return ListActivityIdsByViewArgs_Req_DEFAULT
+	}
+	return p.Req
+}
+
+func (p *ListActivityIdsByViewArgs) IsSetReq() bool {
+	return p.Req != nil
+}
+
+func (p *ListActivityIdsByViewArgs) GetFirstArgument() interface{} {
+	return p.Req
+}
+
+type ListActivityIdsByViewResult struct {
+	Success *user.ListActivityIdsByViewResp
+}
+
+var ListActivityIdsByViewResult_Success_DEFAULT *user.ListActivityIdsByViewResp
+
+func (p *ListActivityIdsByViewResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetSuccess() {
+		p.Success = new(user.ListActivityIdsByViewResp)
+	}
+	return p.Success.FastRead(buf, _type, number)
+}
+
+func (p *ListActivityIdsByViewResult) FastWrite(buf []byte) (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.FastWrite(buf)
+}
+
+func (p *ListActivityIdsByViewResult) Size() (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.Size()
+}
+
+func (p *ListActivityIdsByViewResult) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetSuccess() {
+		return out, nil
+	}
+	return proto.Marshal(p.Success)
+}
+
+func (p *ListActivityIdsByViewResult) Unmarshal(in []byte) error {
+	msg := new(user.ListActivityIdsByViewResp)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Success = msg
+	return nil
+}
+
+func (p *ListActivityIdsByViewResult) GetSuccess() *user.ListActivityIdsByViewResp {
+	if !p.IsSetSuccess() {
+		return ListActivityIdsByViewResult_Success_DEFAULT
+	}
+	return p.Success
+}
+
+func (p *ListActivityIdsByViewResult) SetSuccess(x interface{}) {
+	p.Success = x.(*user.ListActivityIdsByViewResp)
+}
+
+func (p *ListActivityIdsByViewResult) IsSetSuccess() bool {
+	return p.Success != nil
+}
+
+func (p *ListActivityIdsByViewResult) GetResult() interface{} {
+	return p.Success
+}
+
 func listMerchantIdByViewRankHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
 	switch s := arg.(type) {
 	case *streaming.Args:
@@ -4976,6 +5136,16 @@ func (p *kClient) GetViewOfMerchant(ctx context.Context, Req *user.GetViewOfMerc
 	_args.Req = Req
 	var _result GetViewOfMerchantResult
 	if err = p.c.Call(ctx, "GetViewOfMerchant", &_args, &_result); err != nil {
+		return
+	}
+	return _result.GetSuccess(), nil
+}
+
+func (p *kClient) ListActivityIdsByView(ctx context.Context, Req *user.ListActivityIdsByViewReq) (r *user.ListActivityIdsByViewResp, err error) {
+	var _args ListActivityIdsByViewArgs
+	_args.Req = Req
+	var _result ListActivityIdsByViewResult
+	if err = p.c.Call(ctx, "ListActivityIdsByView", &_args, &_result); err != nil {
 		return
 	}
 	return _result.GetSuccess(), nil

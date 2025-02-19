@@ -2688,6 +2688,11 @@ func (x *ListActivityIdsByViewResp) FastRead(buf []byte, _type int8, number int3
 		if err != nil {
 			goto ReadFieldError
 		}
+	case 2:
+		offset, err = x.fastReadField2(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
 		if err != nil {
@@ -2708,6 +2713,11 @@ func (x *ListActivityIdsByViewResp) fastReadField1(buf []byte, _type int8) (offs
 		return offset, err
 	}
 	x.Ids = append(x.Ids, v)
+	return offset, err
+}
+
+func (x *ListActivityIdsByViewResp) fastReadField2(buf []byte, _type int8) (offset int, err error) {
+	x.Total, offset, err = fastpb.ReadInt64(buf, _type)
 	return offset, err
 }
 
@@ -5049,6 +5059,7 @@ func (x *ListActivityIdsByViewResp) FastWrite(buf []byte) (offset int) {
 		return offset
 	}
 	offset += x.fastWriteField1(buf[offset:])
+	offset += x.fastWriteField2(buf[offset:])
 	return offset
 }
 
@@ -5059,6 +5070,14 @@ func (x *ListActivityIdsByViewResp) fastWriteField1(buf []byte) (offset int) {
 	for i := range x.GetIds() {
 		offset += fastpb.WriteString(buf[offset:], 1, x.GetIds()[i])
 	}
+	return offset
+}
+
+func (x *ListActivityIdsByViewResp) fastWriteField2(buf []byte) (offset int) {
+	if x.Total == 0 {
+		return offset
+	}
+	offset += fastpb.WriteInt64(buf[offset:], 2, x.GetTotal())
 	return offset
 }
 
@@ -7318,6 +7337,7 @@ func (x *ListActivityIdsByViewResp) Size() (n int) {
 		return n
 	}
 	n += x.sizeField1()
+	n += x.sizeField2()
 	return n
 }
 
@@ -7328,6 +7348,14 @@ func (x *ListActivityIdsByViewResp) sizeField1() (n int) {
 	for i := range x.GetIds() {
 		n += fastpb.SizeString(1, x.GetIds()[i])
 	}
+	return n
+}
+
+func (x *ListActivityIdsByViewResp) sizeField2() (n int) {
+	if x.Total == 0 {
+		return n
+	}
+	n += fastpb.SizeInt64(2, x.GetTotal())
 	return n
 }
 
@@ -7927,6 +7955,7 @@ var fieldIDToName_ListActivityIdsByViewReq = map[int32]string{
 
 var fieldIDToName_ListActivityIdsByViewResp = map[int32]string{
 	1: "Ids",
+	2: "Total",
 }
 
 var fieldIDToName_Response = map[int32]string{

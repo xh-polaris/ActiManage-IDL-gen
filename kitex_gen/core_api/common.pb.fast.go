@@ -2868,6 +2868,11 @@ func (x *MerchantListBookRecordsResp) FastRead(buf []byte, _type int8, number in
 		if err != nil {
 			goto ReadFieldError
 		}
+	case 5:
+		offset, err = x.fastReadField5(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
 		if err != nil {
@@ -2903,6 +2908,11 @@ func (x *MerchantListBookRecordsResp) fastReadField3(buf []byte, _type int8) (of
 
 func (x *MerchantListBookRecordsResp) fastReadField4(buf []byte, _type int8) (offset int, err error) {
 	x.Total, offset, err = fastpb.ReadInt64(buf, _type)
+	return offset, err
+}
+
+func (x *MerchantListBookRecordsResp) fastReadField5(buf []byte, _type int8) (offset int, err error) {
+	x.CurrentBooked, offset, err = fastpb.ReadInt64(buf, _type)
 	return offset, err
 }
 
@@ -7563,6 +7573,7 @@ func (x *MerchantListBookRecordsResp) FastWrite(buf []byte) (offset int) {
 	offset += x.fastWriteField2(buf[offset:])
 	offset += x.fastWriteField3(buf[offset:])
 	offset += x.fastWriteField4(buf[offset:])
+	offset += x.fastWriteField5(buf[offset:])
 	return offset
 }
 
@@ -7597,6 +7608,14 @@ func (x *MerchantListBookRecordsResp) fastWriteField4(buf []byte) (offset int) {
 		return offset
 	}
 	offset += fastpb.WriteInt64(buf[offset:], 4, x.GetTotal())
+	return offset
+}
+
+func (x *MerchantListBookRecordsResp) fastWriteField5(buf []byte) (offset int) {
+	if x.CurrentBooked == 0 {
+		return offset
+	}
+	offset += fastpb.WriteInt64(buf[offset:], 5, x.GetCurrentBooked())
 	return offset
 }
 
@@ -11631,6 +11650,7 @@ func (x *MerchantListBookRecordsResp) Size() (n int) {
 	n += x.sizeField2()
 	n += x.sizeField3()
 	n += x.sizeField4()
+	n += x.sizeField5()
 	return n
 }
 
@@ -11665,6 +11685,14 @@ func (x *MerchantListBookRecordsResp) sizeField4() (n int) {
 		return n
 	}
 	n += fastpb.SizeInt64(4, x.GetTotal())
+	return n
+}
+
+func (x *MerchantListBookRecordsResp) sizeField5() (n int) {
+	if x.CurrentBooked == 0 {
+		return n
+	}
+	n += fastpb.SizeInt64(5, x.GetCurrentBooked())
 	return n
 }
 
@@ -13925,6 +13953,7 @@ var fieldIDToName_MerchantListBookRecordsResp = map[int32]string{
 	2: "Msg",
 	3: "BookRecords",
 	4: "Total",
+	5: "CurrentBooked",
 }
 
 var fieldIDToName_MerchantUpdateInfoReq = map[int32]string{

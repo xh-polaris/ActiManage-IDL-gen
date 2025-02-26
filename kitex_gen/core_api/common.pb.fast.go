@@ -1168,6 +1168,11 @@ func (x *GetActivityResp) FastRead(buf []byte, _type int8, number int32) (offset
 		if err != nil {
 			goto ReadFieldError
 		}
+	case 23:
+		offset, err = x.fastReadField23(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
 		if err != nil {
@@ -1303,6 +1308,11 @@ func (x *GetActivityResp) fastReadField21(buf []byte, _type int8) (offset int, e
 
 func (x *GetActivityResp) fastReadField22(buf []byte, _type int8) (offset int, err error) {
 	x.IsFavorite, offset, err = fastpb.ReadInt64(buf, _type)
+	return offset, err
+}
+
+func (x *GetActivityResp) fastReadField23(buf []byte, _type int8) (offset int, err error) {
+	x.CurrentBooked, offset, err = fastpb.ReadInt64(buf, _type)
 	return offset, err
 }
 
@@ -6232,6 +6242,7 @@ func (x *GetActivityResp) FastWrite(buf []byte) (offset int) {
 	offset += x.fastWriteField20(buf[offset:])
 	offset += x.fastWriteField21(buf[offset:])
 	offset += x.fastWriteField22(buf[offset:])
+	offset += x.fastWriteField23(buf[offset:])
 	return offset
 }
 
@@ -6410,6 +6421,14 @@ func (x *GetActivityResp) fastWriteField22(buf []byte) (offset int) {
 		return offset
 	}
 	offset += fastpb.WriteInt64(buf[offset:], 22, x.GetIsFavorite())
+	return offset
+}
+
+func (x *GetActivityResp) fastWriteField23(buf []byte) (offset int) {
+	if x.CurrentBooked == 0 {
+		return offset
+	}
+	offset += fastpb.WriteInt64(buf[offset:], 23, x.GetCurrentBooked())
 	return offset
 }
 
@@ -10291,6 +10310,7 @@ func (x *GetActivityResp) Size() (n int) {
 	n += x.sizeField20()
 	n += x.sizeField21()
 	n += x.sizeField22()
+	n += x.sizeField23()
 	return n
 }
 
@@ -10469,6 +10489,14 @@ func (x *GetActivityResp) sizeField22() (n int) {
 		return n
 	}
 	n += fastpb.SizeInt64(22, x.GetIsFavorite())
+	return n
+}
+
+func (x *GetActivityResp) sizeField23() (n int) {
+	if x.CurrentBooked == 0 {
+		return n
+	}
+	n += fastpb.SizeInt64(23, x.GetCurrentBooked())
 	return n
 }
 
@@ -13708,6 +13736,7 @@ var fieldIDToName_GetActivityResp = map[int32]string{
 	20: "View",
 	21: "Booked",
 	22: "IsFavorite",
+	23: "CurrentBooked",
 }
 
 var fieldIDToName_DoFavoriteReq = map[int32]string{

@@ -1915,6 +1915,11 @@ func (x *CheckBookRecordByUserIdAndActivityIdResp) FastRead(buf []byte, _type in
 		if err != nil {
 			goto ReadFieldError
 		}
+	case 2:
+		offset, err = x.fastReadField2(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
 		if err != nil {
@@ -1930,6 +1935,11 @@ ReadFieldError:
 
 func (x *CheckBookRecordByUserIdAndActivityIdResp) fastReadField1(buf []byte, _type int8) (offset int, err error) {
 	x.Booked, offset, err = fastpb.ReadInt64(buf, _type)
+	return offset, err
+}
+
+func (x *CheckBookRecordByUserIdAndActivityIdResp) fastReadField2(buf []byte, _type int8) (offset int, err error) {
+	x.CurrentBooked, offset, err = fastpb.ReadInt64(buf, _type)
 	return offset, err
 }
 
@@ -4574,6 +4584,7 @@ func (x *CheckBookRecordByUserIdAndActivityIdResp) FastWrite(buf []byte) (offset
 		return offset
 	}
 	offset += x.fastWriteField1(buf[offset:])
+	offset += x.fastWriteField2(buf[offset:])
 	return offset
 }
 
@@ -4582,6 +4593,14 @@ func (x *CheckBookRecordByUserIdAndActivityIdResp) fastWriteField1(buf []byte) (
 		return offset
 	}
 	offset += fastpb.WriteInt64(buf[offset:], 1, x.GetBooked())
+	return offset
+}
+
+func (x *CheckBookRecordByUserIdAndActivityIdResp) fastWriteField2(buf []byte) (offset int) {
+	if x.CurrentBooked == 0 {
+		return offset
+	}
+	offset += fastpb.WriteInt64(buf[offset:], 2, x.GetCurrentBooked())
 	return offset
 }
 
@@ -6877,6 +6896,7 @@ func (x *CheckBookRecordByUserIdAndActivityIdResp) Size() (n int) {
 		return n
 	}
 	n += x.sizeField1()
+	n += x.sizeField2()
 	return n
 }
 
@@ -6885,6 +6905,14 @@ func (x *CheckBookRecordByUserIdAndActivityIdResp) sizeField1() (n int) {
 		return n
 	}
 	n += fastpb.SizeInt64(1, x.GetBooked())
+	return n
+}
+
+func (x *CheckBookRecordByUserIdAndActivityIdResp) sizeField2() (n int) {
+	if x.CurrentBooked == 0 {
+		return n
+	}
+	n += fastpb.SizeInt64(2, x.GetCurrentBooked())
 	return n
 }
 
@@ -7931,6 +7959,7 @@ var fieldIDToName_CheckBookRecordByUserIdAndActivityIdReq = map[int32]string{
 
 var fieldIDToName_CheckBookRecordByUserIdAndActivityIdResp = map[int32]string{
 	1: "Booked",
+	2: "CurrentBooked",
 }
 
 var fieldIDToName_CreateReceiptReq = map[int32]string{

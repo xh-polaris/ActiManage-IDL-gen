@@ -1163,6 +1163,11 @@ func (x *GetActivityResp) FastRead(buf []byte, _type int8, number int32) (offset
 		if err != nil {
 			goto ReadFieldError
 		}
+	case 22:
+		offset, err = x.fastReadField22(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
 		if err != nil {
@@ -1293,6 +1298,11 @@ func (x *GetActivityResp) fastReadField20(buf []byte, _type int8) (offset int, e
 
 func (x *GetActivityResp) fastReadField21(buf []byte, _type int8) (offset int, err error) {
 	x.Booked, offset, err = fastpb.ReadInt64(buf, _type)
+	return offset, err
+}
+
+func (x *GetActivityResp) fastReadField22(buf []byte, _type int8) (offset int, err error) {
+	x.IsFavorite, offset, err = fastpb.ReadInt64(buf, _type)
 	return offset, err
 }
 
@@ -4521,6 +4531,11 @@ func (x *ListActivitiesResp_Item) FastRead(buf []byte, _type int8, number int32)
 		if err != nil {
 			goto ReadFieldError
 		}
+	case 15:
+		offset, err = x.fastReadField15(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
 		if err != nil {
@@ -4616,6 +4631,11 @@ func (x *ListActivitiesResp_Item) fastReadField13(buf []byte, _type int8) (offse
 
 func (x *ListActivitiesResp_Item) fastReadField14(buf []byte, _type int8) (offset int, err error) {
 	x.View, offset, err = fastpb.ReadInt64(buf, _type)
+	return offset, err
+}
+
+func (x *ListActivitiesResp_Item) fastReadField15(buf []byte, _type int8) (offset int, err error) {
+	x.IsFavorite, offset, err = fastpb.ReadInt64(buf, _type)
 	return offset, err
 }
 
@@ -6211,6 +6231,7 @@ func (x *GetActivityResp) FastWrite(buf []byte) (offset int) {
 	offset += x.fastWriteField19(buf[offset:])
 	offset += x.fastWriteField20(buf[offset:])
 	offset += x.fastWriteField21(buf[offset:])
+	offset += x.fastWriteField22(buf[offset:])
 	return offset
 }
 
@@ -6381,6 +6402,14 @@ func (x *GetActivityResp) fastWriteField21(buf []byte) (offset int) {
 		return offset
 	}
 	offset += fastpb.WriteInt64(buf[offset:], 21, x.GetBooked())
+	return offset
+}
+
+func (x *GetActivityResp) fastWriteField22(buf []byte) (offset int) {
+	if x.IsFavorite == 0 {
+		return offset
+	}
+	offset += fastpb.WriteInt64(buf[offset:], 22, x.GetIsFavorite())
 	return offset
 }
 
@@ -8720,6 +8749,7 @@ func (x *ListActivitiesResp_Item) FastWrite(buf []byte) (offset int) {
 	offset += x.fastWriteField12(buf[offset:])
 	offset += x.fastWriteField13(buf[offset:])
 	offset += x.fastWriteField14(buf[offset:])
+	offset += x.fastWriteField15(buf[offset:])
 	return offset
 }
 
@@ -8834,6 +8864,14 @@ func (x *ListActivitiesResp_Item) fastWriteField14(buf []byte) (offset int) {
 		return offset
 	}
 	offset += fastpb.WriteInt64(buf[offset:], 14, x.GetView())
+	return offset
+}
+
+func (x *ListActivitiesResp_Item) fastWriteField15(buf []byte) (offset int) {
+	if x.IsFavorite == 0 {
+		return offset
+	}
+	offset += fastpb.WriteInt64(buf[offset:], 15, x.GetIsFavorite())
 	return offset
 }
 
@@ -10252,6 +10290,7 @@ func (x *GetActivityResp) Size() (n int) {
 	n += x.sizeField19()
 	n += x.sizeField20()
 	n += x.sizeField21()
+	n += x.sizeField22()
 	return n
 }
 
@@ -10422,6 +10461,14 @@ func (x *GetActivityResp) sizeField21() (n int) {
 		return n
 	}
 	n += fastpb.SizeInt64(21, x.GetBooked())
+	return n
+}
+
+func (x *GetActivityResp) sizeField22() (n int) {
+	if x.IsFavorite == 0 {
+		return n
+	}
+	n += fastpb.SizeInt64(22, x.GetIsFavorite())
 	return n
 }
 
@@ -12761,6 +12808,7 @@ func (x *ListActivitiesResp_Item) Size() (n int) {
 	n += x.sizeField12()
 	n += x.sizeField13()
 	n += x.sizeField14()
+	n += x.sizeField15()
 	return n
 }
 
@@ -12875,6 +12923,14 @@ func (x *ListActivitiesResp_Item) sizeField14() (n int) {
 		return n
 	}
 	n += fastpb.SizeInt64(14, x.GetView())
+	return n
+}
+
+func (x *ListActivitiesResp_Item) sizeField15() (n int) {
+	if x.IsFavorite == 0 {
+		return n
+	}
+	n += fastpb.SizeInt64(15, x.GetIsFavorite())
 	return n
 }
 
@@ -13651,6 +13707,7 @@ var fieldIDToName_GetActivityResp = map[int32]string{
 	19: "Favorite",
 	20: "View",
 	21: "Booked",
+	22: "IsFavorite",
 }
 
 var fieldIDToName_DoFavoriteReq = map[int32]string{
@@ -14039,6 +14096,7 @@ var fieldIDToName_ListActivitiesResp_Item = map[int32]string{
 	12: "Status",
 	13: "Favorite",
 	14: "View",
+	15: "IsFavorite",
 }
 
 var fieldIDToName_ListActivitiesByViewResp_Item = map[int32]string{

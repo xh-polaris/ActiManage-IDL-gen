@@ -33,6 +33,7 @@ type Client interface {
 	MarkReceiptRead(ctx context.Context, Req *user.MarkReceiptReadReq, callOptions ...callopt.Option) (r *user.Response, err error)
 	DoFavorite(ctx context.Context, Req *user.DoFavoriteReq, callOptions ...callopt.Option) (r *user.Response, err error)
 	CancelFavorite(ctx context.Context, Req *user.CancelFavoriteReq, callOptions ...callopt.Option) (r *user.Response, err error)
+	CheckFavorite(ctx context.Context, Req *user.CheckFavoriteReq, callOptions ...callopt.Option) (r *user.Response, err error)
 	CreateView(ctx context.Context, Req *user.CreateViewReq, callOptions ...callopt.Option) (r *user.Response, err error)
 	GetFavoriteAndViewOfActivity(ctx context.Context, Req *user.GetFavoriteAndViewOfActivityReq, callOptions ...callopt.Option) (r *user.GetFavoriteAndViewOfActivityResp, err error)
 	GetViewOfMerchant(ctx context.Context, Req *user.GetViewOfMerchantReq, callOptions ...callopt.Option) (r *user.GetViewOfMerchantResp, err error)
@@ -180,6 +181,11 @@ func (p *kUserServiceClient) DoFavorite(ctx context.Context, Req *user.DoFavorit
 func (p *kUserServiceClient) CancelFavorite(ctx context.Context, Req *user.CancelFavoriteReq, callOptions ...callopt.Option) (r *user.Response, err error) {
 	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
 	return p.kClient.CancelFavorite(ctx, Req)
+}
+
+func (p *kUserServiceClient) CheckFavorite(ctx context.Context, Req *user.CheckFavoriteReq, callOptions ...callopt.Option) (r *user.Response, err error) {
+	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
+	return p.kClient.CheckFavorite(ctx, Req)
 }
 
 func (p *kUserServiceClient) CreateView(ctx context.Context, Req *user.CreateViewReq, callOptions ...callopt.Option) (r *user.Response, err error) {

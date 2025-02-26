@@ -169,6 +169,13 @@ var serviceMethods = map[string]kitex.MethodInfo{
 		false,
 		kitex.WithStreamingMode(kitex.StreamingUnary),
 	),
+	"CheckFavorite": kitex.NewMethodInfo(
+		checkFavoriteHandler,
+		newCheckFavoriteArgs,
+		newCheckFavoriteResult,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingUnary),
+	),
 	"CreateView": kitex.NewMethodInfo(
 		createViewHandler,
 		newCreateViewArgs,
@@ -3657,6 +3664,159 @@ func (p *CancelFavoriteResult) GetResult() interface{} {
 	return p.Success
 }
 
+func checkFavoriteHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
+	switch s := arg.(type) {
+	case *streaming.Args:
+		st := s.Stream
+		req := new(user.CheckFavoriteReq)
+		if err := st.RecvMsg(req); err != nil {
+			return err
+		}
+		resp, err := handler.(user.UserService).CheckFavorite(ctx, req)
+		if err != nil {
+			return err
+		}
+		return st.SendMsg(resp)
+	case *CheckFavoriteArgs:
+		success, err := handler.(user.UserService).CheckFavorite(ctx, s.Req)
+		if err != nil {
+			return err
+		}
+		realResult := result.(*CheckFavoriteResult)
+		realResult.Success = success
+		return nil
+	default:
+		return errInvalidMessageType
+	}
+}
+func newCheckFavoriteArgs() interface{} {
+	return &CheckFavoriteArgs{}
+}
+
+func newCheckFavoriteResult() interface{} {
+	return &CheckFavoriteResult{}
+}
+
+type CheckFavoriteArgs struct {
+	Req *user.CheckFavoriteReq
+}
+
+func (p *CheckFavoriteArgs) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetReq() {
+		p.Req = new(user.CheckFavoriteReq)
+	}
+	return p.Req.FastRead(buf, _type, number)
+}
+
+func (p *CheckFavoriteArgs) FastWrite(buf []byte) (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.FastWrite(buf)
+}
+
+func (p *CheckFavoriteArgs) Size() (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.Size()
+}
+
+func (p *CheckFavoriteArgs) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetReq() {
+		return out, nil
+	}
+	return proto.Marshal(p.Req)
+}
+
+func (p *CheckFavoriteArgs) Unmarshal(in []byte) error {
+	msg := new(user.CheckFavoriteReq)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Req = msg
+	return nil
+}
+
+var CheckFavoriteArgs_Req_DEFAULT *user.CheckFavoriteReq
+
+func (p *CheckFavoriteArgs) GetReq() *user.CheckFavoriteReq {
+	if !p.IsSetReq() {
+		return CheckFavoriteArgs_Req_DEFAULT
+	}
+	return p.Req
+}
+
+func (p *CheckFavoriteArgs) IsSetReq() bool {
+	return p.Req != nil
+}
+
+func (p *CheckFavoriteArgs) GetFirstArgument() interface{} {
+	return p.Req
+}
+
+type CheckFavoriteResult struct {
+	Success *user.Response
+}
+
+var CheckFavoriteResult_Success_DEFAULT *user.Response
+
+func (p *CheckFavoriteResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetSuccess() {
+		p.Success = new(user.Response)
+	}
+	return p.Success.FastRead(buf, _type, number)
+}
+
+func (p *CheckFavoriteResult) FastWrite(buf []byte) (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.FastWrite(buf)
+}
+
+func (p *CheckFavoriteResult) Size() (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.Size()
+}
+
+func (p *CheckFavoriteResult) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetSuccess() {
+		return out, nil
+	}
+	return proto.Marshal(p.Success)
+}
+
+func (p *CheckFavoriteResult) Unmarshal(in []byte) error {
+	msg := new(user.Response)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Success = msg
+	return nil
+}
+
+func (p *CheckFavoriteResult) GetSuccess() *user.Response {
+	if !p.IsSetSuccess() {
+		return CheckFavoriteResult_Success_DEFAULT
+	}
+	return p.Success
+}
+
+func (p *CheckFavoriteResult) SetSuccess(x interface{}) {
+	p.Success = x.(*user.Response)
+}
+
+func (p *CheckFavoriteResult) IsSetSuccess() bool {
+	return p.Success != nil
+}
+
+func (p *CheckFavoriteResult) GetResult() interface{} {
+	return p.Success
+}
+
 func createViewHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
 	switch s := arg.(type) {
 	case *streaming.Args:
@@ -5106,6 +5266,16 @@ func (p *kClient) CancelFavorite(ctx context.Context, Req *user.CancelFavoriteRe
 	_args.Req = Req
 	var _result CancelFavoriteResult
 	if err = p.c.Call(ctx, "CancelFavorite", &_args, &_result); err != nil {
+		return
+	}
+	return _result.GetSuccess(), nil
+}
+
+func (p *kClient) CheckFavorite(ctx context.Context, Req *user.CheckFavoriteReq) (r *user.Response, err error) {
+	var _args CheckFavoriteArgs
+	_args.Req = Req
+	var _result CheckFavoriteResult
+	if err = p.c.Call(ctx, "CheckFavorite", &_args, &_result); err != nil {
 		return
 	}
 	return _result.GetSuccess(), nil

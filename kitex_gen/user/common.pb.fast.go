@@ -2198,6 +2198,41 @@ func (x *CancelFavoriteReq) fastReadField2(buf []byte, _type int8) (offset int, 
 	return offset, err
 }
 
+func (x *CheckFavoriteReq) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
+	switch number {
+	case 1:
+		offset, err = x.fastReadField1(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	case 2:
+		offset, err = x.fastReadField2(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	default:
+		offset, err = fastpb.Skip(buf, _type, number)
+		if err != nil {
+			goto SkipFieldError
+		}
+	}
+	return offset, nil
+SkipFieldError:
+	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
+ReadFieldError:
+	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_CheckFavoriteReq[number], err)
+}
+
+func (x *CheckFavoriteReq) fastReadField1(buf []byte, _type int8) (offset int, err error) {
+	x.UserId, offset, err = fastpb.ReadString(buf, _type)
+	return offset, err
+}
+
+func (x *CheckFavoriteReq) fastReadField2(buf []byte, _type int8) (offset int, err error) {
+	x.ActivityId, offset, err = fastpb.ReadString(buf, _type)
+	return offset, err
+}
+
 func (x *CreateViewReq) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
 	switch number {
 	case 1:
@@ -4736,6 +4771,31 @@ func (x *CancelFavoriteReq) fastWriteField2(buf []byte) (offset int) {
 	return offset
 }
 
+func (x *CheckFavoriteReq) FastWrite(buf []byte) (offset int) {
+	if x == nil {
+		return offset
+	}
+	offset += x.fastWriteField1(buf[offset:])
+	offset += x.fastWriteField2(buf[offset:])
+	return offset
+}
+
+func (x *CheckFavoriteReq) fastWriteField1(buf []byte) (offset int) {
+	if x.UserId == "" {
+		return offset
+	}
+	offset += fastpb.WriteString(buf[offset:], 1, x.GetUserId())
+	return offset
+}
+
+func (x *CheckFavoriteReq) fastWriteField2(buf []byte) (offset int) {
+	if x.ActivityId == "" {
+		return offset
+	}
+	offset += fastpb.WriteString(buf[offset:], 2, x.GetActivityId())
+	return offset
+}
+
 func (x *CreateViewReq) FastWrite(buf []byte) (offset int) {
 	if x == nil {
 		return offset
@@ -7014,6 +7074,31 @@ func (x *CancelFavoriteReq) sizeField2() (n int) {
 	return n
 }
 
+func (x *CheckFavoriteReq) Size() (n int) {
+	if x == nil {
+		return n
+	}
+	n += x.sizeField1()
+	n += x.sizeField2()
+	return n
+}
+
+func (x *CheckFavoriteReq) sizeField1() (n int) {
+	if x.UserId == "" {
+		return n
+	}
+	n += fastpb.SizeString(1, x.GetUserId())
+	return n
+}
+
+func (x *CheckFavoriteReq) sizeField2() (n int) {
+	if x.ActivityId == "" {
+		return n
+	}
+	n += fastpb.SizeString(2, x.GetActivityId())
+	return n
+}
+
 func (x *CreateViewReq) Size() (n int) {
 	if x == nil {
 		return n
@@ -7880,6 +7965,11 @@ var fieldIDToName_DoFavoriteReq = map[int32]string{
 }
 
 var fieldIDToName_CancelFavoriteReq = map[int32]string{
+	1: "UserId",
+	2: "ActivityId",
+}
+
+var fieldIDToName_CheckFavoriteReq = map[int32]string{
 	1: "UserId",
 	2: "ActivityId",
 }

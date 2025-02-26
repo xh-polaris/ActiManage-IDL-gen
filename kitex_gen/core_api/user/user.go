@@ -106,6 +106,13 @@ var serviceMethods = map[string]kitex.MethodInfo{
 		false,
 		kitex.WithStreamingMode(kitex.StreamingUnary),
 	),
+	"UpdateReserver": kitex.NewMethodInfo(
+		updateReserverHandler,
+		newUpdateReserverArgs,
+		newUpdateReserverResult,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingUnary),
+	),
 	"GetUserInfo": kitex.NewMethodInfo(
 		getUserInfoHandler,
 		newGetUserInfoArgs,
@@ -2196,6 +2203,159 @@ func (p *DeleteReserverResult) GetResult() interface{} {
 	return p.Success
 }
 
+func updateReserverHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
+	switch s := arg.(type) {
+	case *streaming.Args:
+		st := s.Stream
+		req := new(core_api.UpdateReserverReq)
+		if err := st.RecvMsg(req); err != nil {
+			return err
+		}
+		resp, err := handler.(core_api.User).UpdateReserver(ctx, req)
+		if err != nil {
+			return err
+		}
+		return st.SendMsg(resp)
+	case *UpdateReserverArgs:
+		success, err := handler.(core_api.User).UpdateReserver(ctx, s.Req)
+		if err != nil {
+			return err
+		}
+		realResult := result.(*UpdateReserverResult)
+		realResult.Success = success
+		return nil
+	default:
+		return errInvalidMessageType
+	}
+}
+func newUpdateReserverArgs() interface{} {
+	return &UpdateReserverArgs{}
+}
+
+func newUpdateReserverResult() interface{} {
+	return &UpdateReserverResult{}
+}
+
+type UpdateReserverArgs struct {
+	Req *core_api.UpdateReserverReq
+}
+
+func (p *UpdateReserverArgs) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetReq() {
+		p.Req = new(core_api.UpdateReserverReq)
+	}
+	return p.Req.FastRead(buf, _type, number)
+}
+
+func (p *UpdateReserverArgs) FastWrite(buf []byte) (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.FastWrite(buf)
+}
+
+func (p *UpdateReserverArgs) Size() (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.Size()
+}
+
+func (p *UpdateReserverArgs) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetReq() {
+		return out, nil
+	}
+	return proto.Marshal(p.Req)
+}
+
+func (p *UpdateReserverArgs) Unmarshal(in []byte) error {
+	msg := new(core_api.UpdateReserverReq)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Req = msg
+	return nil
+}
+
+var UpdateReserverArgs_Req_DEFAULT *core_api.UpdateReserverReq
+
+func (p *UpdateReserverArgs) GetReq() *core_api.UpdateReserverReq {
+	if !p.IsSetReq() {
+		return UpdateReserverArgs_Req_DEFAULT
+	}
+	return p.Req
+}
+
+func (p *UpdateReserverArgs) IsSetReq() bool {
+	return p.Req != nil
+}
+
+func (p *UpdateReserverArgs) GetFirstArgument() interface{} {
+	return p.Req
+}
+
+type UpdateReserverResult struct {
+	Success *core_api.Response
+}
+
+var UpdateReserverResult_Success_DEFAULT *core_api.Response
+
+func (p *UpdateReserverResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetSuccess() {
+		p.Success = new(core_api.Response)
+	}
+	return p.Success.FastRead(buf, _type, number)
+}
+
+func (p *UpdateReserverResult) FastWrite(buf []byte) (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.FastWrite(buf)
+}
+
+func (p *UpdateReserverResult) Size() (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.Size()
+}
+
+func (p *UpdateReserverResult) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetSuccess() {
+		return out, nil
+	}
+	return proto.Marshal(p.Success)
+}
+
+func (p *UpdateReserverResult) Unmarshal(in []byte) error {
+	msg := new(core_api.Response)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Success = msg
+	return nil
+}
+
+func (p *UpdateReserverResult) GetSuccess() *core_api.Response {
+	if !p.IsSetSuccess() {
+		return UpdateReserverResult_Success_DEFAULT
+	}
+	return p.Success
+}
+
+func (p *UpdateReserverResult) SetSuccess(x interface{}) {
+	p.Success = x.(*core_api.Response)
+}
+
+func (p *UpdateReserverResult) IsSetSuccess() bool {
+	return p.Success != nil
+}
+
+func (p *UpdateReserverResult) GetResult() interface{} {
+	return p.Success
+}
+
 func getUserInfoHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
 	switch s := arg.(type) {
 	case *streaming.Args:
@@ -3096,6 +3256,16 @@ func (p *kClient) DeleteReserver(ctx context.Context, Req *core_api.DeleteReserv
 	_args.Req = Req
 	var _result DeleteReserverResult
 	if err = p.c.Call(ctx, "DeleteReserver", &_args, &_result); err != nil {
+		return
+	}
+	return _result.GetSuccess(), nil
+}
+
+func (p *kClient) UpdateReserver(ctx context.Context, Req *core_api.UpdateReserverReq) (r *core_api.Response, err error) {
+	var _args UpdateReserverArgs
+	_args.Req = Req
+	var _result UpdateReserverResult
+	if err = p.c.Call(ctx, "UpdateReserver", &_args, &_result); err != nil {
 		return
 	}
 	return _result.GetSuccess(), nil

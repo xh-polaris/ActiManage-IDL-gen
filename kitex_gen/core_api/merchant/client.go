@@ -13,6 +13,7 @@ import (
 type Client interface {
 	MerchantListActivities(ctx context.Context, Req *core_api.MerchantListActivitiesReq, callOptions ...callopt.Option) (r *core_api.MerchantListActivitiesResp, err error)
 	MerchantCreateActivity(ctx context.Context, Req *core_api.MerchantCreateActivityReq, callOptions ...callopt.Option) (r *core_api.Response, err error)
+	MerchantUpdateActivity(ctx context.Context, Req *core_api.MerchantUpdateActivityReq, callOptions ...callopt.Option) (r *core_api.Response, err error)
 	MerchantDeleteActivity(ctx context.Context, Req *core_api.MerchantDeleteActivityReq, callOptions ...callopt.Option) (r *core_api.Response, err error)
 	MerchantTopActivity(ctx context.Context, Req *core_api.MerchantTopActivityReq, callOptions ...callopt.Option) (r *core_api.Response, err error)
 	MerchantLogin(ctx context.Context, Req *core_api.MerchantLoginReq, callOptions ...callopt.Option) (r *core_api.MerchantLoginResp, err error)
@@ -64,6 +65,11 @@ func (p *kMerchantClient) MerchantListActivities(ctx context.Context, Req *core_
 func (p *kMerchantClient) MerchantCreateActivity(ctx context.Context, Req *core_api.MerchantCreateActivityReq, callOptions ...callopt.Option) (r *core_api.Response, err error) {
 	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
 	return p.kClient.MerchantCreateActivity(ctx, Req)
+}
+
+func (p *kMerchantClient) MerchantUpdateActivity(ctx context.Context, Req *core_api.MerchantUpdateActivityReq, callOptions ...callopt.Option) (r *core_api.Response, err error) {
+	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
+	return p.kClient.MerchantUpdateActivity(ctx, Req)
 }
 
 func (p *kMerchantClient) MerchantDeleteActivity(ctx context.Context, Req *core_api.MerchantDeleteActivityReq, callOptions ...callopt.Option) (r *core_api.Response, err error) {

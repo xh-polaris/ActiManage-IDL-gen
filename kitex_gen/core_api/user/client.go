@@ -24,6 +24,7 @@ type Client interface {
 	ListReservers(ctx context.Context, Req *core_api.ListReserversReq, callOptions ...callopt.Option) (r *core_api.ListReserversResp, err error)
 	CreateReserver(ctx context.Context, Req *core_api.CreateReserverReq, callOptions ...callopt.Option) (r *core_api.Response, err error)
 	DeleteReserver(ctx context.Context, Req *core_api.DeleteReserverReq, callOptions ...callopt.Option) (r *core_api.Response, err error)
+	UpdateReserver(ctx context.Context, Req *core_api.UpdateReserverReq, callOptions ...callopt.Option) (r *core_api.Response, err error)
 	GetUserInfo(ctx context.Context, Req *core_api.GetUserInfoReq, callOptions ...callopt.Option) (r *core_api.GetUserInfoResp, err error)
 	UpdateUserInfo(ctx context.Context, Req *core_api.UpdateUserInfoReq, callOptions ...callopt.Option) (r *core_api.Response, err error)
 	UpdateNotice(ctx context.Context, Req *core_api.UpdateNoticeReq, callOptions ...callopt.Option) (r *core_api.Response, err error)
@@ -123,6 +124,11 @@ func (p *kUserClient) CreateReserver(ctx context.Context, Req *core_api.CreateRe
 func (p *kUserClient) DeleteReserver(ctx context.Context, Req *core_api.DeleteReserverReq, callOptions ...callopt.Option) (r *core_api.Response, err error) {
 	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
 	return p.kClient.DeleteReserver(ctx, Req)
+}
+
+func (p *kUserClient) UpdateReserver(ctx context.Context, Req *core_api.UpdateReserverReq, callOptions ...callopt.Option) (r *core_api.Response, err error) {
+	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
+	return p.kClient.UpdateReserver(ctx, Req)
 }
 
 func (p *kUserClient) GetUserInfo(ctx context.Context, Req *core_api.GetUserInfoReq, callOptions ...callopt.Option) (r *core_api.GetUserInfoResp, err error) {

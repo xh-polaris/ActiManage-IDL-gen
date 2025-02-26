@@ -29,6 +29,13 @@ var serviceMethods = map[string]kitex.MethodInfo{
 		false,
 		kitex.WithStreamingMode(kitex.StreamingUnary),
 	),
+	"MerchantUpdateActivity": kitex.NewMethodInfo(
+		merchantUpdateActivityHandler,
+		newMerchantUpdateActivityArgs,
+		newMerchantUpdateActivityResult,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingUnary),
+	),
 	"MerchantDeleteActivity": kitex.NewMethodInfo(
 		merchantDeleteActivityHandler,
 		newMerchantDeleteActivityArgs,
@@ -482,6 +489,159 @@ func (p *MerchantCreateActivityResult) IsSetSuccess() bool {
 }
 
 func (p *MerchantCreateActivityResult) GetResult() interface{} {
+	return p.Success
+}
+
+func merchantUpdateActivityHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
+	switch s := arg.(type) {
+	case *streaming.Args:
+		st := s.Stream
+		req := new(core_api.MerchantUpdateActivityReq)
+		if err := st.RecvMsg(req); err != nil {
+			return err
+		}
+		resp, err := handler.(core_api.Merchant).MerchantUpdateActivity(ctx, req)
+		if err != nil {
+			return err
+		}
+		return st.SendMsg(resp)
+	case *MerchantUpdateActivityArgs:
+		success, err := handler.(core_api.Merchant).MerchantUpdateActivity(ctx, s.Req)
+		if err != nil {
+			return err
+		}
+		realResult := result.(*MerchantUpdateActivityResult)
+		realResult.Success = success
+		return nil
+	default:
+		return errInvalidMessageType
+	}
+}
+func newMerchantUpdateActivityArgs() interface{} {
+	return &MerchantUpdateActivityArgs{}
+}
+
+func newMerchantUpdateActivityResult() interface{} {
+	return &MerchantUpdateActivityResult{}
+}
+
+type MerchantUpdateActivityArgs struct {
+	Req *core_api.MerchantUpdateActivityReq
+}
+
+func (p *MerchantUpdateActivityArgs) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetReq() {
+		p.Req = new(core_api.MerchantUpdateActivityReq)
+	}
+	return p.Req.FastRead(buf, _type, number)
+}
+
+func (p *MerchantUpdateActivityArgs) FastWrite(buf []byte) (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.FastWrite(buf)
+}
+
+func (p *MerchantUpdateActivityArgs) Size() (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.Size()
+}
+
+func (p *MerchantUpdateActivityArgs) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetReq() {
+		return out, nil
+	}
+	return proto.Marshal(p.Req)
+}
+
+func (p *MerchantUpdateActivityArgs) Unmarshal(in []byte) error {
+	msg := new(core_api.MerchantUpdateActivityReq)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Req = msg
+	return nil
+}
+
+var MerchantUpdateActivityArgs_Req_DEFAULT *core_api.MerchantUpdateActivityReq
+
+func (p *MerchantUpdateActivityArgs) GetReq() *core_api.MerchantUpdateActivityReq {
+	if !p.IsSetReq() {
+		return MerchantUpdateActivityArgs_Req_DEFAULT
+	}
+	return p.Req
+}
+
+func (p *MerchantUpdateActivityArgs) IsSetReq() bool {
+	return p.Req != nil
+}
+
+func (p *MerchantUpdateActivityArgs) GetFirstArgument() interface{} {
+	return p.Req
+}
+
+type MerchantUpdateActivityResult struct {
+	Success *core_api.Response
+}
+
+var MerchantUpdateActivityResult_Success_DEFAULT *core_api.Response
+
+func (p *MerchantUpdateActivityResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetSuccess() {
+		p.Success = new(core_api.Response)
+	}
+	return p.Success.FastRead(buf, _type, number)
+}
+
+func (p *MerchantUpdateActivityResult) FastWrite(buf []byte) (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.FastWrite(buf)
+}
+
+func (p *MerchantUpdateActivityResult) Size() (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.Size()
+}
+
+func (p *MerchantUpdateActivityResult) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetSuccess() {
+		return out, nil
+	}
+	return proto.Marshal(p.Success)
+}
+
+func (p *MerchantUpdateActivityResult) Unmarshal(in []byte) error {
+	msg := new(core_api.Response)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Success = msg
+	return nil
+}
+
+func (p *MerchantUpdateActivityResult) GetSuccess() *core_api.Response {
+	if !p.IsSetSuccess() {
+		return MerchantUpdateActivityResult_Success_DEFAULT
+	}
+	return p.Success
+}
+
+func (p *MerchantUpdateActivityResult) SetSuccess(x interface{}) {
+	p.Success = x.(*core_api.Response)
+}
+
+func (p *MerchantUpdateActivityResult) IsSetSuccess() bool {
+	return p.Success != nil
+}
+
+func (p *MerchantUpdateActivityResult) GetResult() interface{} {
 	return p.Success
 }
 
@@ -2346,6 +2506,16 @@ func (p *kClient) MerchantCreateActivity(ctx context.Context, Req *core_api.Merc
 	_args.Req = Req
 	var _result MerchantCreateActivityResult
 	if err = p.c.Call(ctx, "MerchantCreateActivity", &_args, &_result); err != nil {
+		return
+	}
+	return _result.GetSuccess(), nil
+}
+
+func (p *kClient) MerchantUpdateActivity(ctx context.Context, Req *core_api.MerchantUpdateActivityReq) (r *core_api.Response, err error) {
+	var _args MerchantUpdateActivityArgs
+	_args.Req = Req
+	var _result MerchantUpdateActivityResult
+	if err = p.c.Call(ctx, "MerchantUpdateActivity", &_args, &_result); err != nil {
 		return
 	}
 	return _result.GetSuccess(), nil

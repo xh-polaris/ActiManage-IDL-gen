@@ -4866,7 +4866,7 @@ func (x *StsViewReq) fastReadField1(buf []byte, _type int8) (offset int, err err
 }
 
 func (x *StsViewReq) fastReadField2(buf []byte, _type int8) (offset int, err error) {
-	x.Type, offset, err = fastpb.ReadInt64(buf, _type)
+	x.TargetType, offset, err = fastpb.ReadInt64(buf, _type)
 	return offset, err
 }
 
@@ -9455,10 +9455,10 @@ func (x *StsViewReq) fastWriteField1(buf []byte) (offset int) {
 }
 
 func (x *StsViewReq) fastWriteField2(buf []byte) (offset int) {
-	if x.Type == 0 {
+	if x.TargetType == 0 {
 		return offset
 	}
-	offset += fastpb.WriteInt64(buf[offset:], 2, x.GetType())
+	offset += fastpb.WriteInt64(buf[offset:], 2, x.GetTargetType())
 	return offset
 }
 
@@ -13834,10 +13834,10 @@ func (x *StsViewReq) sizeField1() (n int) {
 }
 
 func (x *StsViewReq) sizeField2() (n int) {
-	if x.Type == 0 {
+	if x.TargetType == 0 {
 		return n
 	}
-	n += fastpb.SizeInt64(2, x.GetType())
+	n += fastpb.SizeInt64(2, x.GetTargetType())
 	return n
 }
 
@@ -15173,7 +15173,7 @@ var fieldIDToName_StsSendVerifyCodeReq = map[int32]string{
 
 var fieldIDToName_StsViewReq = map[int32]string{
 	1: "TargetId",
-	2: "Type",
+	2: "TargetType",
 }
 
 var fieldIDToName_ListActivitiesResp_Item = map[int32]string{

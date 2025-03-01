@@ -27,6 +27,11 @@ type Client interface {
 	GetAd(ctx context.Context, Req *core_api.GetAdReq, callOptions ...callopt.Option) (r *core_api.GetAdResp, err error)
 	SetAd(ctx context.Context, Req *core_api.SetAdReq, callOptions ...callopt.Option) (r *core_api.Response, err error)
 	MerchantSetPassword(ctx context.Context, Req *core_api.MerchantSetPasswordReq, callOptions ...callopt.Option) (r *core_api.Response, err error)
+	MerchantListUsers(ctx context.Context, Req *core_api.MerchantListUsersReq, callOptions ...callopt.Option) (r *core_api.MerchantListUsersResp, err error)
+	MerchantListReservers(ctx context.Context, Req *core_api.MerchantListReserversReq, callOptions ...callopt.Option) (r *core_api.MerchantListReserversResp, err error)
+	MerchantListViews(ctx context.Context, Req *core_api.MerchantListViewsReq, callOptions ...callopt.Option) (r *core_api.MerchantListViewsResp, err error)
+	MerchantListFavorites(ctx context.Context, Req *core_api.MerchantListFavoritesReq, callOptions ...callopt.Option) (r *core_api.MerchantListFavoritesResp, err error)
+	MerchantListAllBookRecords(ctx context.Context, Req *core_api.MerchantListAllBookRecordsReq, callOptions ...callopt.Option) (r *core_api.MerchantListAllBookRecordsResp, err error)
 }
 
 // NewClient creates a client for the service defined in IDL.
@@ -136,4 +141,29 @@ func (p *kMerchantClient) SetAd(ctx context.Context, Req *core_api.SetAdReq, cal
 func (p *kMerchantClient) MerchantSetPassword(ctx context.Context, Req *core_api.MerchantSetPasswordReq, callOptions ...callopt.Option) (r *core_api.Response, err error) {
 	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
 	return p.kClient.MerchantSetPassword(ctx, Req)
+}
+
+func (p *kMerchantClient) MerchantListUsers(ctx context.Context, Req *core_api.MerchantListUsersReq, callOptions ...callopt.Option) (r *core_api.MerchantListUsersResp, err error) {
+	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
+	return p.kClient.MerchantListUsers(ctx, Req)
+}
+
+func (p *kMerchantClient) MerchantListReservers(ctx context.Context, Req *core_api.MerchantListReserversReq, callOptions ...callopt.Option) (r *core_api.MerchantListReserversResp, err error) {
+	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
+	return p.kClient.MerchantListReservers(ctx, Req)
+}
+
+func (p *kMerchantClient) MerchantListViews(ctx context.Context, Req *core_api.MerchantListViewsReq, callOptions ...callopt.Option) (r *core_api.MerchantListViewsResp, err error) {
+	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
+	return p.kClient.MerchantListViews(ctx, Req)
+}
+
+func (p *kMerchantClient) MerchantListFavorites(ctx context.Context, Req *core_api.MerchantListFavoritesReq, callOptions ...callopt.Option) (r *core_api.MerchantListFavoritesResp, err error) {
+	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
+	return p.kClient.MerchantListFavorites(ctx, Req)
+}
+
+func (p *kMerchantClient) MerchantListAllBookRecords(ctx context.Context, Req *core_api.MerchantListAllBookRecordsReq, callOptions ...callopt.Option) (r *core_api.MerchantListAllBookRecordsResp, err error) {
+	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
+	return p.kClient.MerchantListAllBookRecords(ctx, Req)
 }

@@ -17,6 +17,11 @@ type Client interface {
 	UpdateUserInfo(ctx context.Context, Req *user.UpdateUserInfoReq, callOptions ...callopt.Option) (r *user.Response, err error)
 	SetPassword(ctx context.Context, Req *user.SetPasswordReq, callOptions ...callopt.Option) (r *user.Response, err error)
 	SetNotice(ctx context.Context, Req *user.SetNoticeReq, callOptions ...callopt.Option) (r *user.Response, err error)
+	MerchantListUsers(ctx context.Context, Req *user.MerchantListUsersReq, callOptions ...callopt.Option) (r *user.MerchantListUsersResp, err error)
+	MerchantListReservers(ctx context.Context, Req *user.MerchantListReserversReq, callOptions ...callopt.Option) (r *user.MerchantListReserversResp, err error)
+	MerchantListViews(ctx context.Context, Req *user.MerchantListViewsReq, callOptions ...callopt.Option) (r *user.MerchantListViewsResp, err error)
+	MerchantListFavorites(ctx context.Context, Req *user.MerchantListFavoritesReq, callOptions ...callopt.Option) (r *user.MerchantListFavoritesResp, err error)
+	MerchantListAllBookRecords(ctx context.Context, Req *user.MerchantListAllBookRecordsReq, callOptions ...callopt.Option) (r *user.MerchantListAllBookRecordsResp, err error)
 	CreateReserver(ctx context.Context, Req *user.CreateReserverReq, callOptions ...callopt.Option) (r *user.Response, err error)
 	DeleteReserver(ctx context.Context, Req *user.DeleteReserverReq, callOptions ...callopt.Option) (r *user.Response, err error)
 	UpdateReserver(ctx context.Context, Req *user.UpdateReserverReq, callOptions ...callopt.Option) (r *user.Response, err error)
@@ -101,6 +106,31 @@ func (p *kUserServiceClient) SetPassword(ctx context.Context, Req *user.SetPassw
 func (p *kUserServiceClient) SetNotice(ctx context.Context, Req *user.SetNoticeReq, callOptions ...callopt.Option) (r *user.Response, err error) {
 	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
 	return p.kClient.SetNotice(ctx, Req)
+}
+
+func (p *kUserServiceClient) MerchantListUsers(ctx context.Context, Req *user.MerchantListUsersReq, callOptions ...callopt.Option) (r *user.MerchantListUsersResp, err error) {
+	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
+	return p.kClient.MerchantListUsers(ctx, Req)
+}
+
+func (p *kUserServiceClient) MerchantListReservers(ctx context.Context, Req *user.MerchantListReserversReq, callOptions ...callopt.Option) (r *user.MerchantListReserversResp, err error) {
+	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
+	return p.kClient.MerchantListReservers(ctx, Req)
+}
+
+func (p *kUserServiceClient) MerchantListViews(ctx context.Context, Req *user.MerchantListViewsReq, callOptions ...callopt.Option) (r *user.MerchantListViewsResp, err error) {
+	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
+	return p.kClient.MerchantListViews(ctx, Req)
+}
+
+func (p *kUserServiceClient) MerchantListFavorites(ctx context.Context, Req *user.MerchantListFavoritesReq, callOptions ...callopt.Option) (r *user.MerchantListFavoritesResp, err error) {
+	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
+	return p.kClient.MerchantListFavorites(ctx, Req)
+}
+
+func (p *kUserServiceClient) MerchantListAllBookRecords(ctx context.Context, Req *user.MerchantListAllBookRecordsReq, callOptions ...callopt.Option) (r *user.MerchantListAllBookRecordsResp, err error) {
+	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
+	return p.kClient.MerchantListAllBookRecords(ctx, Req)
 }
 
 func (p *kUserServiceClient) CreateReserver(ctx context.Context, Req *user.CreateReserverReq, callOptions ...callopt.Option) (r *user.Response, err error) {

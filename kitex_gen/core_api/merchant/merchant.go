@@ -127,6 +127,41 @@ var serviceMethods = map[string]kitex.MethodInfo{
 		false,
 		kitex.WithStreamingMode(kitex.StreamingUnary),
 	),
+	"MerchantListUsers": kitex.NewMethodInfo(
+		merchantListUsersHandler,
+		newMerchantListUsersArgs,
+		newMerchantListUsersResult,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingUnary),
+	),
+	"MerchantListReservers": kitex.NewMethodInfo(
+		merchantListReserversHandler,
+		newMerchantListReserversArgs,
+		newMerchantListReserversResult,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingUnary),
+	),
+	"MerchantListViews": kitex.NewMethodInfo(
+		merchantListViewsHandler,
+		newMerchantListViewsArgs,
+		newMerchantListViewsResult,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingUnary),
+	),
+	"MerchantListFavorites": kitex.NewMethodInfo(
+		merchantListFavoritesHandler,
+		newMerchantListFavoritesArgs,
+		newMerchantListFavoritesResult,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingUnary),
+	),
+	"MerchantListAllBookRecords": kitex.NewMethodInfo(
+		merchantListAllBookRecordsHandler,
+		newMerchantListAllBookRecordsArgs,
+		newMerchantListAllBookRecordsResult,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingUnary),
+	),
 }
 
 var (
@@ -2641,6 +2676,771 @@ func (p *MerchantSetPasswordResult) GetResult() interface{} {
 	return p.Success
 }
 
+func merchantListUsersHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
+	switch s := arg.(type) {
+	case *streaming.Args:
+		st := s.Stream
+		req := new(core_api.MerchantListUsersReq)
+		if err := st.RecvMsg(req); err != nil {
+			return err
+		}
+		resp, err := handler.(core_api.Merchant).MerchantListUsers(ctx, req)
+		if err != nil {
+			return err
+		}
+		return st.SendMsg(resp)
+	case *MerchantListUsersArgs:
+		success, err := handler.(core_api.Merchant).MerchantListUsers(ctx, s.Req)
+		if err != nil {
+			return err
+		}
+		realResult := result.(*MerchantListUsersResult)
+		realResult.Success = success
+		return nil
+	default:
+		return errInvalidMessageType
+	}
+}
+func newMerchantListUsersArgs() interface{} {
+	return &MerchantListUsersArgs{}
+}
+
+func newMerchantListUsersResult() interface{} {
+	return &MerchantListUsersResult{}
+}
+
+type MerchantListUsersArgs struct {
+	Req *core_api.MerchantListUsersReq
+}
+
+func (p *MerchantListUsersArgs) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetReq() {
+		p.Req = new(core_api.MerchantListUsersReq)
+	}
+	return p.Req.FastRead(buf, _type, number)
+}
+
+func (p *MerchantListUsersArgs) FastWrite(buf []byte) (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.FastWrite(buf)
+}
+
+func (p *MerchantListUsersArgs) Size() (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.Size()
+}
+
+func (p *MerchantListUsersArgs) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetReq() {
+		return out, nil
+	}
+	return proto.Marshal(p.Req)
+}
+
+func (p *MerchantListUsersArgs) Unmarshal(in []byte) error {
+	msg := new(core_api.MerchantListUsersReq)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Req = msg
+	return nil
+}
+
+var MerchantListUsersArgs_Req_DEFAULT *core_api.MerchantListUsersReq
+
+func (p *MerchantListUsersArgs) GetReq() *core_api.MerchantListUsersReq {
+	if !p.IsSetReq() {
+		return MerchantListUsersArgs_Req_DEFAULT
+	}
+	return p.Req
+}
+
+func (p *MerchantListUsersArgs) IsSetReq() bool {
+	return p.Req != nil
+}
+
+func (p *MerchantListUsersArgs) GetFirstArgument() interface{} {
+	return p.Req
+}
+
+type MerchantListUsersResult struct {
+	Success *core_api.MerchantListUsersResp
+}
+
+var MerchantListUsersResult_Success_DEFAULT *core_api.MerchantListUsersResp
+
+func (p *MerchantListUsersResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetSuccess() {
+		p.Success = new(core_api.MerchantListUsersResp)
+	}
+	return p.Success.FastRead(buf, _type, number)
+}
+
+func (p *MerchantListUsersResult) FastWrite(buf []byte) (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.FastWrite(buf)
+}
+
+func (p *MerchantListUsersResult) Size() (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.Size()
+}
+
+func (p *MerchantListUsersResult) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetSuccess() {
+		return out, nil
+	}
+	return proto.Marshal(p.Success)
+}
+
+func (p *MerchantListUsersResult) Unmarshal(in []byte) error {
+	msg := new(core_api.MerchantListUsersResp)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Success = msg
+	return nil
+}
+
+func (p *MerchantListUsersResult) GetSuccess() *core_api.MerchantListUsersResp {
+	if !p.IsSetSuccess() {
+		return MerchantListUsersResult_Success_DEFAULT
+	}
+	return p.Success
+}
+
+func (p *MerchantListUsersResult) SetSuccess(x interface{}) {
+	p.Success = x.(*core_api.MerchantListUsersResp)
+}
+
+func (p *MerchantListUsersResult) IsSetSuccess() bool {
+	return p.Success != nil
+}
+
+func (p *MerchantListUsersResult) GetResult() interface{} {
+	return p.Success
+}
+
+func merchantListReserversHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
+	switch s := arg.(type) {
+	case *streaming.Args:
+		st := s.Stream
+		req := new(core_api.MerchantListReserversReq)
+		if err := st.RecvMsg(req); err != nil {
+			return err
+		}
+		resp, err := handler.(core_api.Merchant).MerchantListReservers(ctx, req)
+		if err != nil {
+			return err
+		}
+		return st.SendMsg(resp)
+	case *MerchantListReserversArgs:
+		success, err := handler.(core_api.Merchant).MerchantListReservers(ctx, s.Req)
+		if err != nil {
+			return err
+		}
+		realResult := result.(*MerchantListReserversResult)
+		realResult.Success = success
+		return nil
+	default:
+		return errInvalidMessageType
+	}
+}
+func newMerchantListReserversArgs() interface{} {
+	return &MerchantListReserversArgs{}
+}
+
+func newMerchantListReserversResult() interface{} {
+	return &MerchantListReserversResult{}
+}
+
+type MerchantListReserversArgs struct {
+	Req *core_api.MerchantListReserversReq
+}
+
+func (p *MerchantListReserversArgs) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetReq() {
+		p.Req = new(core_api.MerchantListReserversReq)
+	}
+	return p.Req.FastRead(buf, _type, number)
+}
+
+func (p *MerchantListReserversArgs) FastWrite(buf []byte) (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.FastWrite(buf)
+}
+
+func (p *MerchantListReserversArgs) Size() (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.Size()
+}
+
+func (p *MerchantListReserversArgs) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetReq() {
+		return out, nil
+	}
+	return proto.Marshal(p.Req)
+}
+
+func (p *MerchantListReserversArgs) Unmarshal(in []byte) error {
+	msg := new(core_api.MerchantListReserversReq)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Req = msg
+	return nil
+}
+
+var MerchantListReserversArgs_Req_DEFAULT *core_api.MerchantListReserversReq
+
+func (p *MerchantListReserversArgs) GetReq() *core_api.MerchantListReserversReq {
+	if !p.IsSetReq() {
+		return MerchantListReserversArgs_Req_DEFAULT
+	}
+	return p.Req
+}
+
+func (p *MerchantListReserversArgs) IsSetReq() bool {
+	return p.Req != nil
+}
+
+func (p *MerchantListReserversArgs) GetFirstArgument() interface{} {
+	return p.Req
+}
+
+type MerchantListReserversResult struct {
+	Success *core_api.MerchantListReserversResp
+}
+
+var MerchantListReserversResult_Success_DEFAULT *core_api.MerchantListReserversResp
+
+func (p *MerchantListReserversResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetSuccess() {
+		p.Success = new(core_api.MerchantListReserversResp)
+	}
+	return p.Success.FastRead(buf, _type, number)
+}
+
+func (p *MerchantListReserversResult) FastWrite(buf []byte) (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.FastWrite(buf)
+}
+
+func (p *MerchantListReserversResult) Size() (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.Size()
+}
+
+func (p *MerchantListReserversResult) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetSuccess() {
+		return out, nil
+	}
+	return proto.Marshal(p.Success)
+}
+
+func (p *MerchantListReserversResult) Unmarshal(in []byte) error {
+	msg := new(core_api.MerchantListReserversResp)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Success = msg
+	return nil
+}
+
+func (p *MerchantListReserversResult) GetSuccess() *core_api.MerchantListReserversResp {
+	if !p.IsSetSuccess() {
+		return MerchantListReserversResult_Success_DEFAULT
+	}
+	return p.Success
+}
+
+func (p *MerchantListReserversResult) SetSuccess(x interface{}) {
+	p.Success = x.(*core_api.MerchantListReserversResp)
+}
+
+func (p *MerchantListReserversResult) IsSetSuccess() bool {
+	return p.Success != nil
+}
+
+func (p *MerchantListReserversResult) GetResult() interface{} {
+	return p.Success
+}
+
+func merchantListViewsHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
+	switch s := arg.(type) {
+	case *streaming.Args:
+		st := s.Stream
+		req := new(core_api.MerchantListViewsReq)
+		if err := st.RecvMsg(req); err != nil {
+			return err
+		}
+		resp, err := handler.(core_api.Merchant).MerchantListViews(ctx, req)
+		if err != nil {
+			return err
+		}
+		return st.SendMsg(resp)
+	case *MerchantListViewsArgs:
+		success, err := handler.(core_api.Merchant).MerchantListViews(ctx, s.Req)
+		if err != nil {
+			return err
+		}
+		realResult := result.(*MerchantListViewsResult)
+		realResult.Success = success
+		return nil
+	default:
+		return errInvalidMessageType
+	}
+}
+func newMerchantListViewsArgs() interface{} {
+	return &MerchantListViewsArgs{}
+}
+
+func newMerchantListViewsResult() interface{} {
+	return &MerchantListViewsResult{}
+}
+
+type MerchantListViewsArgs struct {
+	Req *core_api.MerchantListViewsReq
+}
+
+func (p *MerchantListViewsArgs) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetReq() {
+		p.Req = new(core_api.MerchantListViewsReq)
+	}
+	return p.Req.FastRead(buf, _type, number)
+}
+
+func (p *MerchantListViewsArgs) FastWrite(buf []byte) (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.FastWrite(buf)
+}
+
+func (p *MerchantListViewsArgs) Size() (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.Size()
+}
+
+func (p *MerchantListViewsArgs) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetReq() {
+		return out, nil
+	}
+	return proto.Marshal(p.Req)
+}
+
+func (p *MerchantListViewsArgs) Unmarshal(in []byte) error {
+	msg := new(core_api.MerchantListViewsReq)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Req = msg
+	return nil
+}
+
+var MerchantListViewsArgs_Req_DEFAULT *core_api.MerchantListViewsReq
+
+func (p *MerchantListViewsArgs) GetReq() *core_api.MerchantListViewsReq {
+	if !p.IsSetReq() {
+		return MerchantListViewsArgs_Req_DEFAULT
+	}
+	return p.Req
+}
+
+func (p *MerchantListViewsArgs) IsSetReq() bool {
+	return p.Req != nil
+}
+
+func (p *MerchantListViewsArgs) GetFirstArgument() interface{} {
+	return p.Req
+}
+
+type MerchantListViewsResult struct {
+	Success *core_api.MerchantListViewsResp
+}
+
+var MerchantListViewsResult_Success_DEFAULT *core_api.MerchantListViewsResp
+
+func (p *MerchantListViewsResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetSuccess() {
+		p.Success = new(core_api.MerchantListViewsResp)
+	}
+	return p.Success.FastRead(buf, _type, number)
+}
+
+func (p *MerchantListViewsResult) FastWrite(buf []byte) (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.FastWrite(buf)
+}
+
+func (p *MerchantListViewsResult) Size() (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.Size()
+}
+
+func (p *MerchantListViewsResult) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetSuccess() {
+		return out, nil
+	}
+	return proto.Marshal(p.Success)
+}
+
+func (p *MerchantListViewsResult) Unmarshal(in []byte) error {
+	msg := new(core_api.MerchantListViewsResp)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Success = msg
+	return nil
+}
+
+func (p *MerchantListViewsResult) GetSuccess() *core_api.MerchantListViewsResp {
+	if !p.IsSetSuccess() {
+		return MerchantListViewsResult_Success_DEFAULT
+	}
+	return p.Success
+}
+
+func (p *MerchantListViewsResult) SetSuccess(x interface{}) {
+	p.Success = x.(*core_api.MerchantListViewsResp)
+}
+
+func (p *MerchantListViewsResult) IsSetSuccess() bool {
+	return p.Success != nil
+}
+
+func (p *MerchantListViewsResult) GetResult() interface{} {
+	return p.Success
+}
+
+func merchantListFavoritesHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
+	switch s := arg.(type) {
+	case *streaming.Args:
+		st := s.Stream
+		req := new(core_api.MerchantListFavoritesReq)
+		if err := st.RecvMsg(req); err != nil {
+			return err
+		}
+		resp, err := handler.(core_api.Merchant).MerchantListFavorites(ctx, req)
+		if err != nil {
+			return err
+		}
+		return st.SendMsg(resp)
+	case *MerchantListFavoritesArgs:
+		success, err := handler.(core_api.Merchant).MerchantListFavorites(ctx, s.Req)
+		if err != nil {
+			return err
+		}
+		realResult := result.(*MerchantListFavoritesResult)
+		realResult.Success = success
+		return nil
+	default:
+		return errInvalidMessageType
+	}
+}
+func newMerchantListFavoritesArgs() interface{} {
+	return &MerchantListFavoritesArgs{}
+}
+
+func newMerchantListFavoritesResult() interface{} {
+	return &MerchantListFavoritesResult{}
+}
+
+type MerchantListFavoritesArgs struct {
+	Req *core_api.MerchantListFavoritesReq
+}
+
+func (p *MerchantListFavoritesArgs) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetReq() {
+		p.Req = new(core_api.MerchantListFavoritesReq)
+	}
+	return p.Req.FastRead(buf, _type, number)
+}
+
+func (p *MerchantListFavoritesArgs) FastWrite(buf []byte) (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.FastWrite(buf)
+}
+
+func (p *MerchantListFavoritesArgs) Size() (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.Size()
+}
+
+func (p *MerchantListFavoritesArgs) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetReq() {
+		return out, nil
+	}
+	return proto.Marshal(p.Req)
+}
+
+func (p *MerchantListFavoritesArgs) Unmarshal(in []byte) error {
+	msg := new(core_api.MerchantListFavoritesReq)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Req = msg
+	return nil
+}
+
+var MerchantListFavoritesArgs_Req_DEFAULT *core_api.MerchantListFavoritesReq
+
+func (p *MerchantListFavoritesArgs) GetReq() *core_api.MerchantListFavoritesReq {
+	if !p.IsSetReq() {
+		return MerchantListFavoritesArgs_Req_DEFAULT
+	}
+	return p.Req
+}
+
+func (p *MerchantListFavoritesArgs) IsSetReq() bool {
+	return p.Req != nil
+}
+
+func (p *MerchantListFavoritesArgs) GetFirstArgument() interface{} {
+	return p.Req
+}
+
+type MerchantListFavoritesResult struct {
+	Success *core_api.MerchantListFavoritesResp
+}
+
+var MerchantListFavoritesResult_Success_DEFAULT *core_api.MerchantListFavoritesResp
+
+func (p *MerchantListFavoritesResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetSuccess() {
+		p.Success = new(core_api.MerchantListFavoritesResp)
+	}
+	return p.Success.FastRead(buf, _type, number)
+}
+
+func (p *MerchantListFavoritesResult) FastWrite(buf []byte) (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.FastWrite(buf)
+}
+
+func (p *MerchantListFavoritesResult) Size() (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.Size()
+}
+
+func (p *MerchantListFavoritesResult) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetSuccess() {
+		return out, nil
+	}
+	return proto.Marshal(p.Success)
+}
+
+func (p *MerchantListFavoritesResult) Unmarshal(in []byte) error {
+	msg := new(core_api.MerchantListFavoritesResp)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Success = msg
+	return nil
+}
+
+func (p *MerchantListFavoritesResult) GetSuccess() *core_api.MerchantListFavoritesResp {
+	if !p.IsSetSuccess() {
+		return MerchantListFavoritesResult_Success_DEFAULT
+	}
+	return p.Success
+}
+
+func (p *MerchantListFavoritesResult) SetSuccess(x interface{}) {
+	p.Success = x.(*core_api.MerchantListFavoritesResp)
+}
+
+func (p *MerchantListFavoritesResult) IsSetSuccess() bool {
+	return p.Success != nil
+}
+
+func (p *MerchantListFavoritesResult) GetResult() interface{} {
+	return p.Success
+}
+
+func merchantListAllBookRecordsHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
+	switch s := arg.(type) {
+	case *streaming.Args:
+		st := s.Stream
+		req := new(core_api.MerchantListAllBookRecordsReq)
+		if err := st.RecvMsg(req); err != nil {
+			return err
+		}
+		resp, err := handler.(core_api.Merchant).MerchantListAllBookRecords(ctx, req)
+		if err != nil {
+			return err
+		}
+		return st.SendMsg(resp)
+	case *MerchantListAllBookRecordsArgs:
+		success, err := handler.(core_api.Merchant).MerchantListAllBookRecords(ctx, s.Req)
+		if err != nil {
+			return err
+		}
+		realResult := result.(*MerchantListAllBookRecordsResult)
+		realResult.Success = success
+		return nil
+	default:
+		return errInvalidMessageType
+	}
+}
+func newMerchantListAllBookRecordsArgs() interface{} {
+	return &MerchantListAllBookRecordsArgs{}
+}
+
+func newMerchantListAllBookRecordsResult() interface{} {
+	return &MerchantListAllBookRecordsResult{}
+}
+
+type MerchantListAllBookRecordsArgs struct {
+	Req *core_api.MerchantListAllBookRecordsReq
+}
+
+func (p *MerchantListAllBookRecordsArgs) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetReq() {
+		p.Req = new(core_api.MerchantListAllBookRecordsReq)
+	}
+	return p.Req.FastRead(buf, _type, number)
+}
+
+func (p *MerchantListAllBookRecordsArgs) FastWrite(buf []byte) (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.FastWrite(buf)
+}
+
+func (p *MerchantListAllBookRecordsArgs) Size() (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.Size()
+}
+
+func (p *MerchantListAllBookRecordsArgs) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetReq() {
+		return out, nil
+	}
+	return proto.Marshal(p.Req)
+}
+
+func (p *MerchantListAllBookRecordsArgs) Unmarshal(in []byte) error {
+	msg := new(core_api.MerchantListAllBookRecordsReq)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Req = msg
+	return nil
+}
+
+var MerchantListAllBookRecordsArgs_Req_DEFAULT *core_api.MerchantListAllBookRecordsReq
+
+func (p *MerchantListAllBookRecordsArgs) GetReq() *core_api.MerchantListAllBookRecordsReq {
+	if !p.IsSetReq() {
+		return MerchantListAllBookRecordsArgs_Req_DEFAULT
+	}
+	return p.Req
+}
+
+func (p *MerchantListAllBookRecordsArgs) IsSetReq() bool {
+	return p.Req != nil
+}
+
+func (p *MerchantListAllBookRecordsArgs) GetFirstArgument() interface{} {
+	return p.Req
+}
+
+type MerchantListAllBookRecordsResult struct {
+	Success *core_api.MerchantListAllBookRecordsResp
+}
+
+var MerchantListAllBookRecordsResult_Success_DEFAULT *core_api.MerchantListAllBookRecordsResp
+
+func (p *MerchantListAllBookRecordsResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetSuccess() {
+		p.Success = new(core_api.MerchantListAllBookRecordsResp)
+	}
+	return p.Success.FastRead(buf, _type, number)
+}
+
+func (p *MerchantListAllBookRecordsResult) FastWrite(buf []byte) (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.FastWrite(buf)
+}
+
+func (p *MerchantListAllBookRecordsResult) Size() (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.Size()
+}
+
+func (p *MerchantListAllBookRecordsResult) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetSuccess() {
+		return out, nil
+	}
+	return proto.Marshal(p.Success)
+}
+
+func (p *MerchantListAllBookRecordsResult) Unmarshal(in []byte) error {
+	msg := new(core_api.MerchantListAllBookRecordsResp)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Success = msg
+	return nil
+}
+
+func (p *MerchantListAllBookRecordsResult) GetSuccess() *core_api.MerchantListAllBookRecordsResp {
+	if !p.IsSetSuccess() {
+		return MerchantListAllBookRecordsResult_Success_DEFAULT
+	}
+	return p.Success
+}
+
+func (p *MerchantListAllBookRecordsResult) SetSuccess(x interface{}) {
+	p.Success = x.(*core_api.MerchantListAllBookRecordsResp)
+}
+
+func (p *MerchantListAllBookRecordsResult) IsSetSuccess() bool {
+	return p.Success != nil
+}
+
+func (p *MerchantListAllBookRecordsResult) GetResult() interface{} {
+	return p.Success
+}
+
 type kClient struct {
 	c client.Client
 }
@@ -2806,6 +3606,56 @@ func (p *kClient) MerchantSetPassword(ctx context.Context, Req *core_api.Merchan
 	_args.Req = Req
 	var _result MerchantSetPasswordResult
 	if err = p.c.Call(ctx, "MerchantSetPassword", &_args, &_result); err != nil {
+		return
+	}
+	return _result.GetSuccess(), nil
+}
+
+func (p *kClient) MerchantListUsers(ctx context.Context, Req *core_api.MerchantListUsersReq) (r *core_api.MerchantListUsersResp, err error) {
+	var _args MerchantListUsersArgs
+	_args.Req = Req
+	var _result MerchantListUsersResult
+	if err = p.c.Call(ctx, "MerchantListUsers", &_args, &_result); err != nil {
+		return
+	}
+	return _result.GetSuccess(), nil
+}
+
+func (p *kClient) MerchantListReservers(ctx context.Context, Req *core_api.MerchantListReserversReq) (r *core_api.MerchantListReserversResp, err error) {
+	var _args MerchantListReserversArgs
+	_args.Req = Req
+	var _result MerchantListReserversResult
+	if err = p.c.Call(ctx, "MerchantListReservers", &_args, &_result); err != nil {
+		return
+	}
+	return _result.GetSuccess(), nil
+}
+
+func (p *kClient) MerchantListViews(ctx context.Context, Req *core_api.MerchantListViewsReq) (r *core_api.MerchantListViewsResp, err error) {
+	var _args MerchantListViewsArgs
+	_args.Req = Req
+	var _result MerchantListViewsResult
+	if err = p.c.Call(ctx, "MerchantListViews", &_args, &_result); err != nil {
+		return
+	}
+	return _result.GetSuccess(), nil
+}
+
+func (p *kClient) MerchantListFavorites(ctx context.Context, Req *core_api.MerchantListFavoritesReq) (r *core_api.MerchantListFavoritesResp, err error) {
+	var _args MerchantListFavoritesArgs
+	_args.Req = Req
+	var _result MerchantListFavoritesResult
+	if err = p.c.Call(ctx, "MerchantListFavorites", &_args, &_result); err != nil {
+		return
+	}
+	return _result.GetSuccess(), nil
+}
+
+func (p *kClient) MerchantListAllBookRecords(ctx context.Context, Req *core_api.MerchantListAllBookRecordsReq) (r *core_api.MerchantListAllBookRecordsResp, err error) {
+	var _args MerchantListAllBookRecordsArgs
+	_args.Req = Req
+	var _result MerchantListAllBookRecordsResult
+	if err = p.c.Call(ctx, "MerchantListAllBookRecords", &_args, &_result); err != nil {
 		return
 	}
 	return _result.GetSuccess(), nil

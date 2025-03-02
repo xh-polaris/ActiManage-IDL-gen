@@ -6427,11 +6427,6 @@ func (x *MerchantListViewsResp_Item) FastRead(buf []byte, _type int8, number int
 		if err != nil {
 			goto ReadFieldError
 		}
-	case 4:
-		offset, err = x.fastReadField4(buf, _type)
-		if err != nil {
-			goto ReadFieldError
-		}
 	case 5:
 		offset, err = x.fastReadField5(buf, _type)
 		if err != nil {
@@ -6480,11 +6475,6 @@ func (x *MerchantListViewsResp_Item) fastReadField3(buf []byte, _type int8) (off
 	return offset, err
 }
 
-func (x *MerchantListViewsResp_Item) fastReadField4(buf []byte, _type int8) (offset int, err error) {
-	x.ActivityCover, offset, err = fastpb.ReadString(buf, _type)
-	return offset, err
-}
-
 func (x *MerchantListViewsResp_Item) fastReadField5(buf []byte, _type int8) (offset int, err error) {
 	x.UserId, offset, err = fastpb.ReadString(buf, _type)
 	return offset, err
@@ -6519,11 +6509,6 @@ func (x *MerchantListFavoritesResp_Item) FastRead(buf []byte, _type int8, number
 		}
 	case 3:
 		offset, err = x.fastReadField3(buf, _type)
-		if err != nil {
-			goto ReadFieldError
-		}
-	case 4:
-		offset, err = x.fastReadField4(buf, _type)
 		if err != nil {
 			goto ReadFieldError
 		}
@@ -6572,11 +6557,6 @@ func (x *MerchantListFavoritesResp_Item) fastReadField2(buf []byte, _type int8) 
 
 func (x *MerchantListFavoritesResp_Item) fastReadField3(buf []byte, _type int8) (offset int, err error) {
 	x.ActivityName, offset, err = fastpb.ReadString(buf, _type)
-	return offset, err
-}
-
-func (x *MerchantListFavoritesResp_Item) fastReadField4(buf []byte, _type int8) (offset int, err error) {
-	x.ActivityCover, offset, err = fastpb.ReadString(buf, _type)
 	return offset, err
 }
 
@@ -6712,6 +6692,11 @@ func (x *MerchantListAllBookRecordsResp_BookItem) FastRead(buf []byte, _type int
 		if err != nil {
 			goto ReadFieldError
 		}
+	case 13:
+		offset, err = x.fastReadField13(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
 		if err != nil {
@@ -6782,6 +6767,11 @@ func (x *MerchantListAllBookRecordsResp_BookItem) fastReadField11(buf []byte, _t
 
 func (x *MerchantListAllBookRecordsResp_BookItem) fastReadField12(buf []byte, _type int8) (offset int, err error) {
 	x.Avatar, offset, err = fastpb.ReadString(buf, _type)
+	return offset, err
+}
+
+func (x *MerchantListAllBookRecordsResp_BookItem) fastReadField13(buf []byte, _type int8) (offset int, err error) {
+	x.ActivityName, offset, err = fastpb.ReadString(buf, _type)
 	return offset, err
 }
 
@@ -11834,7 +11824,6 @@ func (x *MerchantListViewsResp_Item) FastWrite(buf []byte) (offset int) {
 	offset += x.fastWriteField1(buf[offset:])
 	offset += x.fastWriteField2(buf[offset:])
 	offset += x.fastWriteField3(buf[offset:])
-	offset += x.fastWriteField4(buf[offset:])
 	offset += x.fastWriteField5(buf[offset:])
 	offset += x.fastWriteField6(buf[offset:])
 	offset += x.fastWriteField7(buf[offset:])
@@ -11863,14 +11852,6 @@ func (x *MerchantListViewsResp_Item) fastWriteField3(buf []byte) (offset int) {
 		return offset
 	}
 	offset += fastpb.WriteString(buf[offset:], 3, x.GetActivityName())
-	return offset
-}
-
-func (x *MerchantListViewsResp_Item) fastWriteField4(buf []byte) (offset int) {
-	if x.ActivityCover == "" {
-		return offset
-	}
-	offset += fastpb.WriteString(buf[offset:], 4, x.GetActivityCover())
 	return offset
 }
 
@@ -11913,7 +11894,6 @@ func (x *MerchantListFavoritesResp_Item) FastWrite(buf []byte) (offset int) {
 	offset += x.fastWriteField1(buf[offset:])
 	offset += x.fastWriteField2(buf[offset:])
 	offset += x.fastWriteField3(buf[offset:])
-	offset += x.fastWriteField4(buf[offset:])
 	offset += x.fastWriteField5(buf[offset:])
 	offset += x.fastWriteField6(buf[offset:])
 	offset += x.fastWriteField7(buf[offset:])
@@ -11942,14 +11922,6 @@ func (x *MerchantListFavoritesResp_Item) fastWriteField3(buf []byte) (offset int
 		return offset
 	}
 	offset += fastpb.WriteString(buf[offset:], 3, x.GetActivityName())
-	return offset
-}
-
-func (x *MerchantListFavoritesResp_Item) fastWriteField4(buf []byte) (offset int) {
-	if x.ActivityCover == "" {
-		return offset
-	}
-	offset += fastpb.WriteString(buf[offset:], 4, x.GetActivityCover())
 	return offset
 }
 
@@ -12043,6 +12015,7 @@ func (x *MerchantListAllBookRecordsResp_BookItem) FastWrite(buf []byte) (offset 
 	offset += x.fastWriteField10(buf[offset:])
 	offset += x.fastWriteField11(buf[offset:])
 	offset += x.fastWriteField12(buf[offset:])
+	offset += x.fastWriteField13(buf[offset:])
 	return offset
 }
 
@@ -12133,6 +12106,14 @@ func (x *MerchantListAllBookRecordsResp_BookItem) fastWriteField12(buf []byte) (
 		return offset
 	}
 	offset += fastpb.WriteString(buf[offset:], 12, x.GetAvatar())
+	return offset
+}
+
+func (x *MerchantListAllBookRecordsResp_BookItem) fastWriteField13(buf []byte) (offset int) {
+	if x.ActivityName == "" {
+		return offset
+	}
+	offset += fastpb.WriteString(buf[offset:], 13, x.GetActivityName())
 	return offset
 }
 
@@ -17112,7 +17093,6 @@ func (x *MerchantListViewsResp_Item) Size() (n int) {
 	n += x.sizeField1()
 	n += x.sizeField2()
 	n += x.sizeField3()
-	n += x.sizeField4()
 	n += x.sizeField5()
 	n += x.sizeField6()
 	n += x.sizeField7()
@@ -17141,14 +17121,6 @@ func (x *MerchantListViewsResp_Item) sizeField3() (n int) {
 		return n
 	}
 	n += fastpb.SizeString(3, x.GetActivityName())
-	return n
-}
-
-func (x *MerchantListViewsResp_Item) sizeField4() (n int) {
-	if x.ActivityCover == "" {
-		return n
-	}
-	n += fastpb.SizeString(4, x.GetActivityCover())
 	return n
 }
 
@@ -17191,7 +17163,6 @@ func (x *MerchantListFavoritesResp_Item) Size() (n int) {
 	n += x.sizeField1()
 	n += x.sizeField2()
 	n += x.sizeField3()
-	n += x.sizeField4()
 	n += x.sizeField5()
 	n += x.sizeField6()
 	n += x.sizeField7()
@@ -17220,14 +17191,6 @@ func (x *MerchantListFavoritesResp_Item) sizeField3() (n int) {
 		return n
 	}
 	n += fastpb.SizeString(3, x.GetActivityName())
-	return n
-}
-
-func (x *MerchantListFavoritesResp_Item) sizeField4() (n int) {
-	if x.ActivityCover == "" {
-		return n
-	}
-	n += fastpb.SizeString(4, x.GetActivityCover())
 	return n
 }
 
@@ -17321,6 +17284,7 @@ func (x *MerchantListAllBookRecordsResp_BookItem) Size() (n int) {
 	n += x.sizeField10()
 	n += x.sizeField11()
 	n += x.sizeField12()
+	n += x.sizeField13()
 	return n
 }
 
@@ -17411,6 +17375,14 @@ func (x *MerchantListAllBookRecordsResp_BookItem) sizeField12() (n int) {
 		return n
 	}
 	n += fastpb.SizeString(12, x.GetAvatar())
+	return n
+}
+
+func (x *MerchantListAllBookRecordsResp_BookItem) sizeField13() (n int) {
+	if x.ActivityName == "" {
+		return n
+	}
+	n += fastpb.SizeString(13, x.GetActivityName())
 	return n
 }
 
@@ -18365,7 +18337,6 @@ var fieldIDToName_MerchantListViewsResp_Item = map[int32]string{
 	1: "Id",
 	2: "ActivityId",
 	3: "ActivityName",
-	4: "ActivityCover",
 	5: "UserId",
 	6: "CreateTime",
 	7: "Username",
@@ -18376,7 +18347,6 @@ var fieldIDToName_MerchantListFavoritesResp_Item = map[int32]string{
 	1: "Id",
 	2: "ActivityId",
 	3: "ActivityName",
-	4: "ActivityCover",
 	5: "UserId",
 	6: "CreateTime",
 	7: "Username",
@@ -18402,6 +18372,7 @@ var fieldIDToName_MerchantListAllBookRecordsResp_BookItem = map[int32]string{
 	10: "Status",
 	11: "Name",
 	12: "Avatar",
+	13: "ActivityName",
 }
 
 var fieldIDToName_MerchantGetNewUserNumberResp_Item = map[int32]string{

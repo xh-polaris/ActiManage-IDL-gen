@@ -1586,7 +1586,7 @@ type GetAdResp struct {
 
 	Code int64  `protobuf:"varint,1,opt,name=code,proto3" json:"code,omitempty"`
 	Msg  string `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`
-	Ad   *Ad    `protobuf:"bytes,3,opt,name=ad,proto3" json:"ad,omitempty"`
+	Ad   *Ad    `protobuf:"bytes,3,opt,name=ad,proto3" json:"ad,omitempty"` // 广告
 }
 
 func (x *GetAdResp) Reset() {

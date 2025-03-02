@@ -3218,6 +3218,11 @@ func (x *MerchantGetNewUserNumberReq) FastRead(buf []byte, _type int8, number in
 		if err != nil {
 			goto ReadFieldError
 		}
+	case 3:
+		offset, err = x.fastReadField3(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
 		if err != nil {
@@ -3238,6 +3243,11 @@ func (x *MerchantGetNewUserNumberReq) fastReadField1(buf []byte, _type int8) (of
 
 func (x *MerchantGetNewUserNumberReq) fastReadField2(buf []byte, _type int8) (offset int, err error) {
 	x.To, offset, err = fastpb.ReadInt64(buf, _type)
+	return offset, err
+}
+
+func (x *MerchantGetNewUserNumberReq) fastReadField3(buf []byte, _type int8) (offset int, err error) {
+	x.MerchantId, offset, err = fastpb.ReadString(buf, _type)
 	return offset, err
 }
 
@@ -6437,6 +6447,7 @@ func (x *MerchantGetNewUserNumberReq) FastWrite(buf []byte) (offset int) {
 	}
 	offset += x.fastWriteField1(buf[offset:])
 	offset += x.fastWriteField2(buf[offset:])
+	offset += x.fastWriteField3(buf[offset:])
 	return offset
 }
 
@@ -6453,6 +6464,14 @@ func (x *MerchantGetNewUserNumberReq) fastWriteField2(buf []byte) (offset int) {
 		return offset
 	}
 	offset += fastpb.WriteInt64(buf[offset:], 2, x.GetTo())
+	return offset
+}
+
+func (x *MerchantGetNewUserNumberReq) fastWriteField3(buf []byte) (offset int) {
+	if x.MerchantId == "" {
+		return offset
+	}
+	offset += fastpb.WriteString(buf[offset:], 3, x.GetMerchantId())
 	return offset
 }
 
@@ -9465,6 +9484,7 @@ func (x *MerchantGetNewUserNumberReq) Size() (n int) {
 	}
 	n += x.sizeField1()
 	n += x.sizeField2()
+	n += x.sizeField3()
 	return n
 }
 
@@ -9481,6 +9501,14 @@ func (x *MerchantGetNewUserNumberReq) sizeField2() (n int) {
 		return n
 	}
 	n += fastpb.SizeInt64(2, x.GetTo())
+	return n
+}
+
+func (x *MerchantGetNewUserNumberReq) sizeField3() (n int) {
+	if x.MerchantId == "" {
+		return n
+	}
+	n += fastpb.SizeString(3, x.GetMerchantId())
 	return n
 }
 
@@ -10541,6 +10569,7 @@ var fieldIDToName_ListActivityIdsByViewResp = map[int32]string{
 var fieldIDToName_MerchantGetNewUserNumberReq = map[int32]string{
 	1: "From",
 	2: "To",
+	3: "MerchantId",
 }
 
 var fieldIDToName_MerchantGetNewUserNumberResp = map[int32]string{

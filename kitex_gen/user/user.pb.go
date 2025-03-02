@@ -27,7 +27,7 @@ var file_ActiManage_user_user_proto_rawDesc = []byte{
 	0x72, 0x2f, 0x75, 0x73, 0x65, 0x72, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x12, 0x04, 0x75, 0x73,
 	0x65, 0x72, 0x1a, 0x1c, 0x41, 0x63, 0x74, 0x69, 0x4d, 0x61, 0x6e, 0x61, 0x67, 0x65, 0x2f, 0x75,
 	0x73, 0x65, 0x72, 0x2f, 0x63, 0x6f, 0x6d, 0x6d, 0x6f, 0x6e, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f,
-	0x32, 0x9f, 0x15, 0x0a, 0x0b, 0x55, 0x73, 0x65, 0x72, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65,
+	0x32, 0x82, 0x16, 0x0a, 0x0b, 0x55, 0x73, 0x65, 0x72, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65,
 	0x12, 0x37, 0x0a, 0x0a, 0x55, 0x73, 0x65, 0x72, 0x53, 0x69, 0x67, 0x6e, 0x55, 0x70, 0x12, 0x13,
 	0x2e, 0x75, 0x73, 0x65, 0x72, 0x2e, 0x55, 0x73, 0x65, 0x72, 0x53, 0x69, 0x67, 0x6e, 0x55, 0x70,
 	0x52, 0x65, 0x71, 0x1a, 0x14, 0x2e, 0x75, 0x73, 0x65, 0x72, 0x2e, 0x55, 0x73, 0x65, 0x72, 0x53,
@@ -197,11 +197,17 @@ var file_ActiManage_user_user_proto_rawDesc = []byte{
 	0x44, 0x61, 0x74, 0x61, 0x42, 0x79, 0x4d, 0x65, 0x72, 0x63, 0x68, 0x61, 0x6e, 0x74, 0x52, 0x65,
 	0x71, 0x1a, 0x1f, 0x2e, 0x75, 0x73, 0x65, 0x72, 0x2e, 0x47, 0x65, 0x74, 0x56, 0x69, 0x65, 0x77,
 	0x44, 0x61, 0x74, 0x61, 0x42, 0x79, 0x4d, 0x65, 0x72, 0x63, 0x68, 0x61, 0x6e, 0x74, 0x52, 0x65,
-	0x73, 0x70, 0x42, 0x39, 0x5a, 0x37, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d,
-	0x2f, 0x78, 0x68, 0x2d, 0x70, 0x6f, 0x6c, 0x61, 0x72, 0x69, 0x73, 0x2f, 0x41, 0x63, 0x74, 0x69,
-	0x4d, 0x61, 0x6e, 0x61, 0x67, 0x65, 0x2d, 0x49, 0x44, 0x4c, 0x2d, 0x67, 0x65, 0x6e, 0x2f, 0x6b,
-	0x69, 0x74, 0x65, 0x78, 0x5f, 0x67, 0x65, 0x6e, 0x2f, 0x75, 0x73, 0x65, 0x72, 0x62, 0x06, 0x70,
-	0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x73, 0x70, 0x12, 0x61, 0x0a, 0x18, 0x4d, 0x65, 0x72, 0x63, 0x68, 0x61, 0x6e, 0x74, 0x47, 0x65,
+	0x74, 0x4e, 0x65, 0x77, 0x55, 0x73, 0x65, 0x72, 0x4e, 0x75, 0x6d, 0x62, 0x65, 0x72, 0x12, 0x21,
+	0x2e, 0x75, 0x73, 0x65, 0x72, 0x2e, 0x4d, 0x65, 0x72, 0x63, 0x68, 0x61, 0x6e, 0x74, 0x47, 0x65,
+	0x74, 0x4e, 0x65, 0x77, 0x55, 0x73, 0x65, 0x72, 0x4e, 0x75, 0x6d, 0x62, 0x65, 0x72, 0x52, 0x65,
+	0x71, 0x1a, 0x22, 0x2e, 0x75, 0x73, 0x65, 0x72, 0x2e, 0x4d, 0x65, 0x72, 0x63, 0x68, 0x61, 0x6e,
+	0x74, 0x47, 0x65, 0x74, 0x4e, 0x65, 0x77, 0x55, 0x73, 0x65, 0x72, 0x4e, 0x75, 0x6d, 0x62, 0x65,
+	0x72, 0x52, 0x65, 0x73, 0x70, 0x42, 0x39, 0x5a, 0x37, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e,
+	0x63, 0x6f, 0x6d, 0x2f, 0x78, 0x68, 0x2d, 0x70, 0x6f, 0x6c, 0x61, 0x72, 0x69, 0x73, 0x2f, 0x41,
+	0x63, 0x74, 0x69, 0x4d, 0x61, 0x6e, 0x61, 0x67, 0x65, 0x2d, 0x49, 0x44, 0x4c, 0x2d, 0x67, 0x65,
+	0x6e, 0x2f, 0x6b, 0x69, 0x74, 0x65, 0x78, 0x5f, 0x67, 0x65, 0x6e, 0x2f, 0x75, 0x73, 0x65, 0x72,
+	0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var file_ActiManage_user_user_proto_goTypes = []interface{}{
@@ -241,28 +247,30 @@ var file_ActiManage_user_user_proto_goTypes = []interface{}{
 	(*ListMerchantIdsByBookRecordRankReq)(nil),       // 33: user.ListMerchantIdsByBookRecordRankReq
 	(*ListActivityIdsByBookRecordRankReq)(nil),       // 34: user.ListActivityIdsByBookRecordRankReq
 	(*GetViewDataByMerchantReq)(nil),                 // 35: user.GetViewDataByMerchantReq
-	(*UserSignUpResp)(nil),                           // 36: user.UserSignUpResp
-	(*UserLoginResp)(nil),                            // 37: user.UserLoginResp
-	(*GetUserInfoResp)(nil),                          // 38: user.GetUserInfoResp
-	(*Response)(nil),                                 // 39: user.Response
-	(*MerchantListUsersResp)(nil),                    // 40: user.MerchantListUsersResp
-	(*MerchantListReserversResp)(nil),                // 41: user.MerchantListReserversResp
-	(*MerchantListViewsResp)(nil),                    // 42: user.MerchantListViewsResp
-	(*MerchantListFavoritesResp)(nil),                // 43: user.MerchantListFavoritesResp
-	(*MerchantListAllBookRecordsResp)(nil),           // 44: user.MerchantListAllBookRecordsResp
-	(*ListReserversResp)(nil),                        // 45: user.ListReserversResp
-	(*GetBookRecordResp)(nil),                        // 46: user.GetBookRecordResp
-	(*ListBookRecordsByUserResp)(nil),                // 47: user.ListBookRecordsByUserResp
-	(*ListBookRecordsByActivityResp)(nil),            // 48: user.ListBookRecordsByActivityResp
-	(*CheckBookRecordByUserIdAndActivityIdResp)(nil), // 49: user.CheckBookRecordByUserIdAndActivityIdResp
-	(*ListReceiptsResp)(nil),                         // 50: user.ListReceiptsResp
-	(*GetFavoriteAndViewOfActivityResp)(nil),         // 51: user.GetFavoriteAndViewOfActivityResp
-	(*GetViewOfMerchantResp)(nil),                    // 52: user.GetViewOfMerchantResp
-	(*ListActivityIdsByViewResp)(nil),                // 53: user.ListActivityIdsByViewResp
-	(*ListMerchantIdsByViewRankResp)(nil),            // 54: user.ListMerchantIdsByViewRankResp
-	(*ListMerchantIdsByBookRecordRankResp)(nil),      // 55: user.ListMerchantIdsByBookRecordRankResp
-	(*ListActivityIdsByBookRecordRankResp)(nil),      // 56: user.ListActivityIdsByBookRecordRankResp
-	(*GetViewDataByMerchantResp)(nil),                // 57: user.GetViewDataByMerchantResp
+	(*MerchantGetNewUserNumberReq)(nil),              // 36: user.MerchantGetNewUserNumberReq
+	(*UserSignUpResp)(nil),                           // 37: user.UserSignUpResp
+	(*UserLoginResp)(nil),                            // 38: user.UserLoginResp
+	(*GetUserInfoResp)(nil),                          // 39: user.GetUserInfoResp
+	(*Response)(nil),                                 // 40: user.Response
+	(*MerchantListUsersResp)(nil),                    // 41: user.MerchantListUsersResp
+	(*MerchantListReserversResp)(nil),                // 42: user.MerchantListReserversResp
+	(*MerchantListViewsResp)(nil),                    // 43: user.MerchantListViewsResp
+	(*MerchantListFavoritesResp)(nil),                // 44: user.MerchantListFavoritesResp
+	(*MerchantListAllBookRecordsResp)(nil),           // 45: user.MerchantListAllBookRecordsResp
+	(*ListReserversResp)(nil),                        // 46: user.ListReserversResp
+	(*GetBookRecordResp)(nil),                        // 47: user.GetBookRecordResp
+	(*ListBookRecordsByUserResp)(nil),                // 48: user.ListBookRecordsByUserResp
+	(*ListBookRecordsByActivityResp)(nil),            // 49: user.ListBookRecordsByActivityResp
+	(*CheckBookRecordByUserIdAndActivityIdResp)(nil), // 50: user.CheckBookRecordByUserIdAndActivityIdResp
+	(*ListReceiptsResp)(nil),                         // 51: user.ListReceiptsResp
+	(*GetFavoriteAndViewOfActivityResp)(nil),         // 52: user.GetFavoriteAndViewOfActivityResp
+	(*GetViewOfMerchantResp)(nil),                    // 53: user.GetViewOfMerchantResp
+	(*ListActivityIdsByViewResp)(nil),                // 54: user.ListActivityIdsByViewResp
+	(*ListMerchantIdsByViewRankResp)(nil),            // 55: user.ListMerchantIdsByViewRankResp
+	(*ListMerchantIdsByBookRecordRankResp)(nil),      // 56: user.ListMerchantIdsByBookRecordRankResp
+	(*ListActivityIdsByBookRecordRankResp)(nil),      // 57: user.ListActivityIdsByBookRecordRankResp
+	(*GetViewDataByMerchantResp)(nil),                // 58: user.GetViewDataByMerchantResp
+	(*MerchantGetNewUserNumberResp)(nil),             // 59: user.MerchantGetNewUserNumberResp
 }
 var file_ActiManage_user_user_proto_depIdxs = []int32{
 	0,  // 0: user.UserService.UserSignUp:input_type -> user.UserSignUpReq
@@ -301,44 +309,46 @@ var file_ActiManage_user_user_proto_depIdxs = []int32{
 	33, // 33: user.UserService.ListMerchantIdByBookRecordRank:input_type -> user.ListMerchantIdsByBookRecordRankReq
 	34, // 34: user.UserService.ListActivityIdByBookRecordRank:input_type -> user.ListActivityIdsByBookRecordRankReq
 	35, // 35: user.UserService.GetViewDataByMerchant:input_type -> user.GetViewDataByMerchantReq
-	36, // 36: user.UserService.UserSignUp:output_type -> user.UserSignUpResp
-	37, // 37: user.UserService.UserLogin:output_type -> user.UserLoginResp
-	38, // 38: user.UserService.GetUserInfo:output_type -> user.GetUserInfoResp
-	39, // 39: user.UserService.UpdateUserInfo:output_type -> user.Response
-	39, // 40: user.UserService.SetPassword:output_type -> user.Response
-	39, // 41: user.UserService.SetNotice:output_type -> user.Response
-	40, // 42: user.UserService.MerchantListUsers:output_type -> user.MerchantListUsersResp
-	41, // 43: user.UserService.MerchantListReservers:output_type -> user.MerchantListReserversResp
-	42, // 44: user.UserService.MerchantListViews:output_type -> user.MerchantListViewsResp
-	43, // 45: user.UserService.MerchantListFavorites:output_type -> user.MerchantListFavoritesResp
-	44, // 46: user.UserService.MerchantListAllBookRecords:output_type -> user.MerchantListAllBookRecordsResp
-	39, // 47: user.UserService.CreateReserver:output_type -> user.Response
-	39, // 48: user.UserService.DeleteReserver:output_type -> user.Response
-	39, // 49: user.UserService.UpdateReserver:output_type -> user.Response
-	45, // 50: user.UserService.ListReservers:output_type -> user.ListReserversResp
-	39, // 51: user.UserService.CreateBookRecord:output_type -> user.Response
-	39, // 52: user.UserService.CancelBookRecord:output_type -> user.Response
-	46, // 53: user.UserService.GetBookRecordDetail:output_type -> user.GetBookRecordResp
-	47, // 54: user.UserService.ListBookRecordsByUser:output_type -> user.ListBookRecordsByUserResp
-	48, // 55: user.UserService.ListBookRecordsByActivity:output_type -> user.ListBookRecordsByActivityResp
-	49, // 56: user.UserService.CheckBookRecordByUserIdAndActivityId:output_type -> user.CheckBookRecordByUserIdAndActivityIdResp
-	39, // 57: user.UserService.CreateReceipt:output_type -> user.Response
-	39, // 58: user.UserService.DeleteReceipt:output_type -> user.Response
-	50, // 59: user.UserService.ListReceipts:output_type -> user.ListReceiptsResp
-	39, // 60: user.UserService.MarkReceiptRead:output_type -> user.Response
-	39, // 61: user.UserService.DoFavorite:output_type -> user.Response
-	39, // 62: user.UserService.CancelFavorite:output_type -> user.Response
-	39, // 63: user.UserService.CheckFavorite:output_type -> user.Response
-	39, // 64: user.UserService.CreateView:output_type -> user.Response
-	51, // 65: user.UserService.GetFavoriteAndViewOfActivity:output_type -> user.GetFavoriteAndViewOfActivityResp
-	52, // 66: user.UserService.GetViewOfMerchant:output_type -> user.GetViewOfMerchantResp
-	53, // 67: user.UserService.ListActivityIdsByView:output_type -> user.ListActivityIdsByViewResp
-	54, // 68: user.UserService.ListMerchantIdByViewRank:output_type -> user.ListMerchantIdsByViewRankResp
-	55, // 69: user.UserService.ListMerchantIdByBookRecordRank:output_type -> user.ListMerchantIdsByBookRecordRankResp
-	56, // 70: user.UserService.ListActivityIdByBookRecordRank:output_type -> user.ListActivityIdsByBookRecordRankResp
-	57, // 71: user.UserService.GetViewDataByMerchant:output_type -> user.GetViewDataByMerchantResp
-	36, // [36:72] is the sub-list for method output_type
-	0,  // [0:36] is the sub-list for method input_type
+	36, // 36: user.UserService.MerchantGetNewUserNumber:input_type -> user.MerchantGetNewUserNumberReq
+	37, // 37: user.UserService.UserSignUp:output_type -> user.UserSignUpResp
+	38, // 38: user.UserService.UserLogin:output_type -> user.UserLoginResp
+	39, // 39: user.UserService.GetUserInfo:output_type -> user.GetUserInfoResp
+	40, // 40: user.UserService.UpdateUserInfo:output_type -> user.Response
+	40, // 41: user.UserService.SetPassword:output_type -> user.Response
+	40, // 42: user.UserService.SetNotice:output_type -> user.Response
+	41, // 43: user.UserService.MerchantListUsers:output_type -> user.MerchantListUsersResp
+	42, // 44: user.UserService.MerchantListReservers:output_type -> user.MerchantListReserversResp
+	43, // 45: user.UserService.MerchantListViews:output_type -> user.MerchantListViewsResp
+	44, // 46: user.UserService.MerchantListFavorites:output_type -> user.MerchantListFavoritesResp
+	45, // 47: user.UserService.MerchantListAllBookRecords:output_type -> user.MerchantListAllBookRecordsResp
+	40, // 48: user.UserService.CreateReserver:output_type -> user.Response
+	40, // 49: user.UserService.DeleteReserver:output_type -> user.Response
+	40, // 50: user.UserService.UpdateReserver:output_type -> user.Response
+	46, // 51: user.UserService.ListReservers:output_type -> user.ListReserversResp
+	40, // 52: user.UserService.CreateBookRecord:output_type -> user.Response
+	40, // 53: user.UserService.CancelBookRecord:output_type -> user.Response
+	47, // 54: user.UserService.GetBookRecordDetail:output_type -> user.GetBookRecordResp
+	48, // 55: user.UserService.ListBookRecordsByUser:output_type -> user.ListBookRecordsByUserResp
+	49, // 56: user.UserService.ListBookRecordsByActivity:output_type -> user.ListBookRecordsByActivityResp
+	50, // 57: user.UserService.CheckBookRecordByUserIdAndActivityId:output_type -> user.CheckBookRecordByUserIdAndActivityIdResp
+	40, // 58: user.UserService.CreateReceipt:output_type -> user.Response
+	40, // 59: user.UserService.DeleteReceipt:output_type -> user.Response
+	51, // 60: user.UserService.ListReceipts:output_type -> user.ListReceiptsResp
+	40, // 61: user.UserService.MarkReceiptRead:output_type -> user.Response
+	40, // 62: user.UserService.DoFavorite:output_type -> user.Response
+	40, // 63: user.UserService.CancelFavorite:output_type -> user.Response
+	40, // 64: user.UserService.CheckFavorite:output_type -> user.Response
+	40, // 65: user.UserService.CreateView:output_type -> user.Response
+	52, // 66: user.UserService.GetFavoriteAndViewOfActivity:output_type -> user.GetFavoriteAndViewOfActivityResp
+	53, // 67: user.UserService.GetViewOfMerchant:output_type -> user.GetViewOfMerchantResp
+	54, // 68: user.UserService.ListActivityIdsByView:output_type -> user.ListActivityIdsByViewResp
+	55, // 69: user.UserService.ListMerchantIdByViewRank:output_type -> user.ListMerchantIdsByViewRankResp
+	56, // 70: user.UserService.ListMerchantIdByBookRecordRank:output_type -> user.ListMerchantIdsByBookRecordRankResp
+	57, // 71: user.UserService.ListActivityIdByBookRecordRank:output_type -> user.ListActivityIdsByBookRecordRankResp
+	58, // 72: user.UserService.GetViewDataByMerchant:output_type -> user.GetViewDataByMerchantResp
+	59, // 73: user.UserService.MerchantGetNewUserNumber:output_type -> user.MerchantGetNewUserNumberResp
+	37, // [37:74] is the sub-list for method output_type
+	0,  // [0:37] is the sub-list for method input_type
 	0,  // [0:0] is the sub-list for extension type_name
 	0,  // [0:0] is the sub-list for extension extendee
 	0,  // [0:0] is the sub-list for field type_name
@@ -410,4 +420,5 @@ type UserService interface {
 	ListMerchantIdByBookRecordRank(ctx context.Context, req *ListMerchantIdsByBookRecordRankReq) (res *ListMerchantIdsByBookRecordRankResp, err error)
 	ListActivityIdByBookRecordRank(ctx context.Context, req *ListActivityIdsByBookRecordRankReq) (res *ListActivityIdsByBookRecordRankResp, err error)
 	GetViewDataByMerchant(ctx context.Context, req *GetViewDataByMerchantReq) (res *GetViewDataByMerchantResp, err error)
+	MerchantGetNewUserNumber(ctx context.Context, req *MerchantGetNewUserNumberReq) (res *MerchantGetNewUserNumberResp, err error)
 }

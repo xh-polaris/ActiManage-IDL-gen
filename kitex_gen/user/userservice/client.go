@@ -47,6 +47,7 @@ type Client interface {
 	ListMerchantIdByBookRecordRank(ctx context.Context, Req *user.ListMerchantIdsByBookRecordRankReq, callOptions ...callopt.Option) (r *user.ListMerchantIdsByBookRecordRankResp, err error)
 	ListActivityIdByBookRecordRank(ctx context.Context, Req *user.ListActivityIdsByBookRecordRankReq, callOptions ...callopt.Option) (r *user.ListActivityIdsByBookRecordRankResp, err error)
 	GetViewDataByMerchant(ctx context.Context, Req *user.GetViewDataByMerchantReq, callOptions ...callopt.Option) (r *user.GetViewDataByMerchantResp, err error)
+	MerchantGetNewUserNumber(ctx context.Context, Req *user.MerchantGetNewUserNumberReq, callOptions ...callopt.Option) (r *user.MerchantGetNewUserNumberResp, err error)
 }
 
 // NewClient creates a client for the service defined in IDL.
@@ -256,4 +257,9 @@ func (p *kUserServiceClient) ListActivityIdByBookRecordRank(ctx context.Context,
 func (p *kUserServiceClient) GetViewDataByMerchant(ctx context.Context, Req *user.GetViewDataByMerchantReq, callOptions ...callopt.Option) (r *user.GetViewDataByMerchantResp, err error) {
 	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
 	return p.kClient.GetViewDataByMerchant(ctx, Req)
+}
+
+func (p *kUserServiceClient) MerchantGetNewUserNumber(ctx context.Context, Req *user.MerchantGetNewUserNumberReq, callOptions ...callopt.Option) (r *user.MerchantGetNewUserNumberResp, err error) {
+	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
+	return p.kClient.MerchantGetNewUserNumber(ctx, Req)
 }

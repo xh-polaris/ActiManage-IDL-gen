@@ -190,6 +190,13 @@ var serviceMethods = map[string]kitex.MethodInfo{
 		false,
 		kitex.WithStreamingMode(kitex.StreamingUnary),
 	),
+	"MerchantGetActivityNumber": kitex.NewMethodInfo(
+		merchantGetActivityNumberHandler,
+		newMerchantGetActivityNumberArgs,
+		newMerchantGetActivityNumberResult,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingUnary),
+	),
 	"StsSendVerifyCode": kitex.NewMethodInfo(
 		stsSendVerifyCodeHandler,
 		newStsSendVerifyCodeArgs,
@@ -4095,6 +4102,159 @@ func (p *ListActivityByActivityIdResult) GetResult() interface{} {
 	return p.Success
 }
 
+func merchantGetActivityNumberHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
+	switch s := arg.(type) {
+	case *streaming.Args:
+		st := s.Stream
+		req := new(system.MerchantGetActivityNumberReq)
+		if err := st.RecvMsg(req); err != nil {
+			return err
+		}
+		resp, err := handler.(system.SystemService).MerchantGetActivityNumber(ctx, req)
+		if err != nil {
+			return err
+		}
+		return st.SendMsg(resp)
+	case *MerchantGetActivityNumberArgs:
+		success, err := handler.(system.SystemService).MerchantGetActivityNumber(ctx, s.Req)
+		if err != nil {
+			return err
+		}
+		realResult := result.(*MerchantGetActivityNumberResult)
+		realResult.Success = success
+		return nil
+	default:
+		return errInvalidMessageType
+	}
+}
+func newMerchantGetActivityNumberArgs() interface{} {
+	return &MerchantGetActivityNumberArgs{}
+}
+
+func newMerchantGetActivityNumberResult() interface{} {
+	return &MerchantGetActivityNumberResult{}
+}
+
+type MerchantGetActivityNumberArgs struct {
+	Req *system.MerchantGetActivityNumberReq
+}
+
+func (p *MerchantGetActivityNumberArgs) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetReq() {
+		p.Req = new(system.MerchantGetActivityNumberReq)
+	}
+	return p.Req.FastRead(buf, _type, number)
+}
+
+func (p *MerchantGetActivityNumberArgs) FastWrite(buf []byte) (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.FastWrite(buf)
+}
+
+func (p *MerchantGetActivityNumberArgs) Size() (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.Size()
+}
+
+func (p *MerchantGetActivityNumberArgs) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetReq() {
+		return out, nil
+	}
+	return proto.Marshal(p.Req)
+}
+
+func (p *MerchantGetActivityNumberArgs) Unmarshal(in []byte) error {
+	msg := new(system.MerchantGetActivityNumberReq)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Req = msg
+	return nil
+}
+
+var MerchantGetActivityNumberArgs_Req_DEFAULT *system.MerchantGetActivityNumberReq
+
+func (p *MerchantGetActivityNumberArgs) GetReq() *system.MerchantGetActivityNumberReq {
+	if !p.IsSetReq() {
+		return MerchantGetActivityNumberArgs_Req_DEFAULT
+	}
+	return p.Req
+}
+
+func (p *MerchantGetActivityNumberArgs) IsSetReq() bool {
+	return p.Req != nil
+}
+
+func (p *MerchantGetActivityNumberArgs) GetFirstArgument() interface{} {
+	return p.Req
+}
+
+type MerchantGetActivityNumberResult struct {
+	Success *system.MerchantGetActivityNumberResp
+}
+
+var MerchantGetActivityNumberResult_Success_DEFAULT *system.MerchantGetActivityNumberResp
+
+func (p *MerchantGetActivityNumberResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetSuccess() {
+		p.Success = new(system.MerchantGetActivityNumberResp)
+	}
+	return p.Success.FastRead(buf, _type, number)
+}
+
+func (p *MerchantGetActivityNumberResult) FastWrite(buf []byte) (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.FastWrite(buf)
+}
+
+func (p *MerchantGetActivityNumberResult) Size() (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.Size()
+}
+
+func (p *MerchantGetActivityNumberResult) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetSuccess() {
+		return out, nil
+	}
+	return proto.Marshal(p.Success)
+}
+
+func (p *MerchantGetActivityNumberResult) Unmarshal(in []byte) error {
+	msg := new(system.MerchantGetActivityNumberResp)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Success = msg
+	return nil
+}
+
+func (p *MerchantGetActivityNumberResult) GetSuccess() *system.MerchantGetActivityNumberResp {
+	if !p.IsSetSuccess() {
+		return MerchantGetActivityNumberResult_Success_DEFAULT
+	}
+	return p.Success
+}
+
+func (p *MerchantGetActivityNumberResult) SetSuccess(x interface{}) {
+	p.Success = x.(*system.MerchantGetActivityNumberResp)
+}
+
+func (p *MerchantGetActivityNumberResult) IsSetSuccess() bool {
+	return p.Success != nil
+}
+
+func (p *MerchantGetActivityNumberResult) GetResult() interface{} {
+	return p.Success
+}
+
 func stsSendVerifyCodeHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
 	switch s := arg.(type) {
 	case *streaming.Args:
@@ -4656,6 +4816,16 @@ func (p *kClient) ListActivityByActivityId(ctx context.Context, Req *system.List
 	_args.Req = Req
 	var _result ListActivityByActivityIdResult
 	if err = p.c.Call(ctx, "ListActivityByActivityId", &_args, &_result); err != nil {
+		return
+	}
+	return _result.GetSuccess(), nil
+}
+
+func (p *kClient) MerchantGetActivityNumber(ctx context.Context, Req *system.MerchantGetActivityNumberReq) (r *system.MerchantGetActivityNumberResp, err error) {
+	var _args MerchantGetActivityNumberArgs
+	_args.Req = Req
+	var _result MerchantGetActivityNumberResult
+	if err = p.c.Call(ctx, "MerchantGetActivityNumber", &_args, &_result); err != nil {
 		return
 	}
 	return _result.GetSuccess(), nil

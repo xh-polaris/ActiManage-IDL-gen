@@ -267,6 +267,13 @@ var serviceMethods = map[string]kitex.MethodInfo{
 		false,
 		kitex.WithStreamingMode(kitex.StreamingUnary),
 	),
+	"MerchantGetNewUserNumber": kitex.NewMethodInfo(
+		merchantGetNewUserNumberHandler,
+		newMerchantGetNewUserNumberArgs,
+		newMerchantGetNewUserNumberResult,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingUnary),
+	),
 }
 
 var (
@@ -5841,6 +5848,159 @@ func (p *GetViewDataByMerchantResult) GetResult() interface{} {
 	return p.Success
 }
 
+func merchantGetNewUserNumberHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
+	switch s := arg.(type) {
+	case *streaming.Args:
+		st := s.Stream
+		req := new(user.MerchantGetNewUserNumberReq)
+		if err := st.RecvMsg(req); err != nil {
+			return err
+		}
+		resp, err := handler.(user.UserService).MerchantGetNewUserNumber(ctx, req)
+		if err != nil {
+			return err
+		}
+		return st.SendMsg(resp)
+	case *MerchantGetNewUserNumberArgs:
+		success, err := handler.(user.UserService).MerchantGetNewUserNumber(ctx, s.Req)
+		if err != nil {
+			return err
+		}
+		realResult := result.(*MerchantGetNewUserNumberResult)
+		realResult.Success = success
+		return nil
+	default:
+		return errInvalidMessageType
+	}
+}
+func newMerchantGetNewUserNumberArgs() interface{} {
+	return &MerchantGetNewUserNumberArgs{}
+}
+
+func newMerchantGetNewUserNumberResult() interface{} {
+	return &MerchantGetNewUserNumberResult{}
+}
+
+type MerchantGetNewUserNumberArgs struct {
+	Req *user.MerchantGetNewUserNumberReq
+}
+
+func (p *MerchantGetNewUserNumberArgs) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetReq() {
+		p.Req = new(user.MerchantGetNewUserNumberReq)
+	}
+	return p.Req.FastRead(buf, _type, number)
+}
+
+func (p *MerchantGetNewUserNumberArgs) FastWrite(buf []byte) (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.FastWrite(buf)
+}
+
+func (p *MerchantGetNewUserNumberArgs) Size() (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.Size()
+}
+
+func (p *MerchantGetNewUserNumberArgs) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetReq() {
+		return out, nil
+	}
+	return proto.Marshal(p.Req)
+}
+
+func (p *MerchantGetNewUserNumberArgs) Unmarshal(in []byte) error {
+	msg := new(user.MerchantGetNewUserNumberReq)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Req = msg
+	return nil
+}
+
+var MerchantGetNewUserNumberArgs_Req_DEFAULT *user.MerchantGetNewUserNumberReq
+
+func (p *MerchantGetNewUserNumberArgs) GetReq() *user.MerchantGetNewUserNumberReq {
+	if !p.IsSetReq() {
+		return MerchantGetNewUserNumberArgs_Req_DEFAULT
+	}
+	return p.Req
+}
+
+func (p *MerchantGetNewUserNumberArgs) IsSetReq() bool {
+	return p.Req != nil
+}
+
+func (p *MerchantGetNewUserNumberArgs) GetFirstArgument() interface{} {
+	return p.Req
+}
+
+type MerchantGetNewUserNumberResult struct {
+	Success *user.MerchantGetNewUserNumberResp
+}
+
+var MerchantGetNewUserNumberResult_Success_DEFAULT *user.MerchantGetNewUserNumberResp
+
+func (p *MerchantGetNewUserNumberResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetSuccess() {
+		p.Success = new(user.MerchantGetNewUserNumberResp)
+	}
+	return p.Success.FastRead(buf, _type, number)
+}
+
+func (p *MerchantGetNewUserNumberResult) FastWrite(buf []byte) (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.FastWrite(buf)
+}
+
+func (p *MerchantGetNewUserNumberResult) Size() (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.Size()
+}
+
+func (p *MerchantGetNewUserNumberResult) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetSuccess() {
+		return out, nil
+	}
+	return proto.Marshal(p.Success)
+}
+
+func (p *MerchantGetNewUserNumberResult) Unmarshal(in []byte) error {
+	msg := new(user.MerchantGetNewUserNumberResp)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Success = msg
+	return nil
+}
+
+func (p *MerchantGetNewUserNumberResult) GetSuccess() *user.MerchantGetNewUserNumberResp {
+	if !p.IsSetSuccess() {
+		return MerchantGetNewUserNumberResult_Success_DEFAULT
+	}
+	return p.Success
+}
+
+func (p *MerchantGetNewUserNumberResult) SetSuccess(x interface{}) {
+	p.Success = x.(*user.MerchantGetNewUserNumberResp)
+}
+
+func (p *MerchantGetNewUserNumberResult) IsSetSuccess() bool {
+	return p.Success != nil
+}
+
+func (p *MerchantGetNewUserNumberResult) GetResult() interface{} {
+	return p.Success
+}
+
 type kClient struct {
 	c client.Client
 }
@@ -6206,6 +6366,16 @@ func (p *kClient) GetViewDataByMerchant(ctx context.Context, Req *user.GetViewDa
 	_args.Req = Req
 	var _result GetViewDataByMerchantResult
 	if err = p.c.Call(ctx, "GetViewDataByMerchant", &_args, &_result); err != nil {
+		return
+	}
+	return _result.GetSuccess(), nil
+}
+
+func (p *kClient) MerchantGetNewUserNumber(ctx context.Context, Req *user.MerchantGetNewUserNumberReq) (r *user.MerchantGetNewUserNumberResp, err error) {
+	var _args MerchantGetNewUserNumberArgs
+	_args.Req = Req
+	var _result MerchantGetNewUserNumberResult
+	if err = p.c.Call(ctx, "MerchantGetNewUserNumber", &_args, &_result); err != nil {
 		return
 	}
 	return _result.GetSuccess(), nil

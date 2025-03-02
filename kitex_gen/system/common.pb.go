@@ -3346,6 +3346,109 @@ func (x *ListActivitiesByActivityIdResp) GetItems() []*ListActivitiesByActivityI
 	return nil
 }
 
+// 获取商家新增活动数
+type MerchantGetActivityNumberReq struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	From int64 `protobuf:"varint,1,opt,name=from,proto3" json:"from,omitempty"`
+	To   int64 `protobuf:"varint,2,opt,name=to,proto3" json:"to,omitempty"`
+}
+
+func (x *MerchantGetActivityNumberReq) Reset() {
+	*x = MerchantGetActivityNumberReq{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_ActiManage_system_common_proto_msgTypes[49]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *MerchantGetActivityNumberReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*MerchantGetActivityNumberReq) ProtoMessage() {}
+
+func (x *MerchantGetActivityNumberReq) ProtoReflect() protoreflect.Message {
+	mi := &file_ActiManage_system_common_proto_msgTypes[49]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use MerchantGetActivityNumberReq.ProtoReflect.Descriptor instead.
+func (*MerchantGetActivityNumberReq) Descriptor() ([]byte, []int) {
+	return file_ActiManage_system_common_proto_rawDescGZIP(), []int{49}
+}
+
+func (x *MerchantGetActivityNumberReq) GetFrom() int64 {
+	if x != nil {
+		return x.From
+	}
+	return 0
+}
+
+func (x *MerchantGetActivityNumberReq) GetTo() int64 {
+	if x != nil {
+		return x.To
+	}
+	return 0
+}
+
+type MerchantGetActivityNumberResp struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Items []*MerchantGetActivityNumberResp_Item `protobuf:"bytes,1,rep,name=items,proto3" json:"items,omitempty"`
+}
+
+func (x *MerchantGetActivityNumberResp) Reset() {
+	*x = MerchantGetActivityNumberResp{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_ActiManage_system_common_proto_msgTypes[50]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *MerchantGetActivityNumberResp) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*MerchantGetActivityNumberResp) ProtoMessage() {}
+
+func (x *MerchantGetActivityNumberResp) ProtoReflect() protoreflect.Message {
+	mi := &file_ActiManage_system_common_proto_msgTypes[50]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use MerchantGetActivityNumberResp.ProtoReflect.Descriptor instead.
+func (*MerchantGetActivityNumberResp) Descriptor() ([]byte, []int) {
+	return file_ActiManage_system_common_proto_rawDescGZIP(), []int{50}
+}
+
+func (x *MerchantGetActivityNumberResp) GetItems() []*MerchantGetActivityNumberResp_Item {
+	if x != nil {
+		return x.Items
+	}
+	return nil
+}
+
 // 验证码
 type StsSendVerifyCodeReq struct {
 	state         protoimpl.MessageState
@@ -3360,7 +3463,7 @@ type StsSendVerifyCodeReq struct {
 func (x *StsSendVerifyCodeReq) Reset() {
 	*x = StsSendVerifyCodeReq{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_ActiManage_system_common_proto_msgTypes[49]
+		mi := &file_ActiManage_system_common_proto_msgTypes[51]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -3373,7 +3476,7 @@ func (x *StsSendVerifyCodeReq) String() string {
 func (*StsSendVerifyCodeReq) ProtoMessage() {}
 
 func (x *StsSendVerifyCodeReq) ProtoReflect() protoreflect.Message {
-	mi := &file_ActiManage_system_common_proto_msgTypes[49]
+	mi := &file_ActiManage_system_common_proto_msgTypes[51]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3386,7 +3489,7 @@ func (x *StsSendVerifyCodeReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StsSendVerifyCodeReq.ProtoReflect.Descriptor instead.
 func (*StsSendVerifyCodeReq) Descriptor() ([]byte, []int) {
-	return file_ActiManage_system_common_proto_rawDescGZIP(), []int{49}
+	return file_ActiManage_system_common_proto_rawDescGZIP(), []int{51}
 }
 
 func (x *StsSendVerifyCodeReq) GetAuthId() string {
@@ -3423,7 +3526,7 @@ type StsCheckVerifyCodeReq struct {
 func (x *StsCheckVerifyCodeReq) Reset() {
 	*x = StsCheckVerifyCodeReq{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_ActiManage_system_common_proto_msgTypes[50]
+		mi := &file_ActiManage_system_common_proto_msgTypes[52]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -3436,7 +3539,7 @@ func (x *StsCheckVerifyCodeReq) String() string {
 func (*StsCheckVerifyCodeReq) ProtoMessage() {}
 
 func (x *StsCheckVerifyCodeReq) ProtoReflect() protoreflect.Message {
-	mi := &file_ActiManage_system_common_proto_msgTypes[50]
+	mi := &file_ActiManage_system_common_proto_msgTypes[52]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3449,7 +3552,7 @@ func (x *StsCheckVerifyCodeReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StsCheckVerifyCodeReq.ProtoReflect.Descriptor instead.
 func (*StsCheckVerifyCodeReq) Descriptor() ([]byte, []int) {
-	return file_ActiManage_system_common_proto_rawDescGZIP(), []int{50}
+	return file_ActiManage_system_common_proto_rawDescGZIP(), []int{52}
 }
 
 func (x *StsCheckVerifyCodeReq) GetVerifyId() string {
@@ -3479,7 +3582,7 @@ type Response struct {
 func (x *Response) Reset() {
 	*x = Response{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_ActiManage_system_common_proto_msgTypes[51]
+		mi := &file_ActiManage_system_common_proto_msgTypes[53]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -3492,7 +3595,7 @@ func (x *Response) String() string {
 func (*Response) ProtoMessage() {}
 
 func (x *Response) ProtoReflect() protoreflect.Message {
-	mi := &file_ActiManage_system_common_proto_msgTypes[51]
+	mi := &file_ActiManage_system_common_proto_msgTypes[53]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3505,7 +3608,7 @@ func (x *Response) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Response.ProtoReflect.Descriptor instead.
 func (*Response) Descriptor() ([]byte, []int) {
-	return file_ActiManage_system_common_proto_rawDescGZIP(), []int{51}
+	return file_ActiManage_system_common_proto_rawDescGZIP(), []int{53}
 }
 
 func (x *Response) GetCode() int64 {
@@ -3535,7 +3638,7 @@ type ListMerchantsResp_Item struct {
 func (x *ListMerchantsResp_Item) Reset() {
 	*x = ListMerchantsResp_Item{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_ActiManage_system_common_proto_msgTypes[52]
+		mi := &file_ActiManage_system_common_proto_msgTypes[54]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -3548,7 +3651,7 @@ func (x *ListMerchantsResp_Item) String() string {
 func (*ListMerchantsResp_Item) ProtoMessage() {}
 
 func (x *ListMerchantsResp_Item) ProtoReflect() protoreflect.Message {
-	mi := &file_ActiManage_system_common_proto_msgTypes[52]
+	mi := &file_ActiManage_system_common_proto_msgTypes[54]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3597,7 +3700,7 @@ type GetMerchantTotalDataResp_Item struct {
 func (x *GetMerchantTotalDataResp_Item) Reset() {
 	*x = GetMerchantTotalDataResp_Item{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_ActiManage_system_common_proto_msgTypes[53]
+		mi := &file_ActiManage_system_common_proto_msgTypes[55]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -3610,7 +3713,7 @@ func (x *GetMerchantTotalDataResp_Item) String() string {
 func (*GetMerchantTotalDataResp_Item) ProtoMessage() {}
 
 func (x *GetMerchantTotalDataResp_Item) ProtoReflect() protoreflect.Message {
-	mi := &file_ActiManage_system_common_proto_msgTypes[53]
+	mi := &file_ActiManage_system_common_proto_msgTypes[55]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3653,7 +3756,7 @@ type ListMerchantsByMerchantIdResp_Item struct {
 func (x *ListMerchantsByMerchantIdResp_Item) Reset() {
 	*x = ListMerchantsByMerchantIdResp_Item{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_ActiManage_system_common_proto_msgTypes[54]
+		mi := &file_ActiManage_system_common_proto_msgTypes[56]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -3666,7 +3769,7 @@ func (x *ListMerchantsByMerchantIdResp_Item) String() string {
 func (*ListMerchantsByMerchantIdResp_Item) ProtoMessage() {}
 
 func (x *ListMerchantsByMerchantIdResp_Item) ProtoReflect() protoreflect.Message {
-	mi := &file_ActiManage_system_common_proto_msgTypes[54]
+	mi := &file_ActiManage_system_common_proto_msgTypes[56]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3717,7 +3820,7 @@ type ListMerchantsByActivityNumberResp_Item struct {
 func (x *ListMerchantsByActivityNumberResp_Item) Reset() {
 	*x = ListMerchantsByActivityNumberResp_Item{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_ActiManage_system_common_proto_msgTypes[55]
+		mi := &file_ActiManage_system_common_proto_msgTypes[57]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -3730,7 +3833,7 @@ func (x *ListMerchantsByActivityNumberResp_Item) String() string {
 func (*ListMerchantsByActivityNumberResp_Item) ProtoMessage() {}
 
 func (x *ListMerchantsByActivityNumberResp_Item) ProtoReflect() protoreflect.Message {
-	mi := &file_ActiManage_system_common_proto_msgTypes[55]
+	mi := &file_ActiManage_system_common_proto_msgTypes[57]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3786,7 +3889,7 @@ type ListActivitiesByActivityIdResp_Item struct {
 func (x *ListActivitiesByActivityIdResp_Item) Reset() {
 	*x = ListActivitiesByActivityIdResp_Item{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_ActiManage_system_common_proto_msgTypes[56]
+		mi := &file_ActiManage_system_common_proto_msgTypes[58]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -3799,7 +3902,7 @@ func (x *ListActivitiesByActivityIdResp_Item) String() string {
 func (*ListActivitiesByActivityIdResp_Item) ProtoMessage() {}
 
 func (x *ListActivitiesByActivityIdResp_Item) ProtoReflect() protoreflect.Message {
-	mi := &file_ActiManage_system_common_proto_msgTypes[56]
+	mi := &file_ActiManage_system_common_proto_msgTypes[58]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3827,6 +3930,61 @@ func (x *ListActivitiesByActivityIdResp_Item) GetName() string {
 		return x.Name
 	}
 	return ""
+}
+
+type MerchantGetActivityNumberResp_Item struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Number    int64 `protobuf:"varint,1,opt,name=number,proto3" json:"number,omitempty"`
+	Timestamp int64 `protobuf:"varint,2,opt,name=timestamp,proto3" json:"timestamp,omitempty"`
+}
+
+func (x *MerchantGetActivityNumberResp_Item) Reset() {
+	*x = MerchantGetActivityNumberResp_Item{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_ActiManage_system_common_proto_msgTypes[59]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *MerchantGetActivityNumberResp_Item) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*MerchantGetActivityNumberResp_Item) ProtoMessage() {}
+
+func (x *MerchantGetActivityNumberResp_Item) ProtoReflect() protoreflect.Message {
+	mi := &file_ActiManage_system_common_proto_msgTypes[59]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use MerchantGetActivityNumberResp_Item.ProtoReflect.Descriptor instead.
+func (*MerchantGetActivityNumberResp_Item) Descriptor() ([]byte, []int) {
+	return file_ActiManage_system_common_proto_rawDescGZIP(), []int{50, 0}
+}
+
+func (x *MerchantGetActivityNumberResp_Item) GetNumber() int64 {
+	if x != nil {
+		return x.Number
+	}
+	return 0
+}
+
+func (x *MerchantGetActivityNumberResp_Item) GetTimestamp() int64 {
+	if x != nil {
+		return x.Timestamp
+	}
+	return 0
 }
 
 var File_ActiManage_system_common_proto protoreflect.FileDescriptor
@@ -4223,26 +4381,40 @@ var file_ActiManage_system_common_proto_rawDesc = []byte{
 	0x74, 0x65, 0x6d, 0x73, 0x1a, 0x2a, 0x0a, 0x04, 0x49, 0x74, 0x65, 0x6d, 0x12, 0x0e, 0x0a, 0x02,
 	0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x02, 0x69, 0x64, 0x12, 0x12, 0x0a, 0x04,
 	0x6e, 0x61, 0x6d, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x6e, 0x61, 0x6d, 0x65,
-	0x22, 0x64, 0x0a, 0x14, 0x53, 0x74, 0x73, 0x53, 0x65, 0x6e, 0x64, 0x56, 0x65, 0x72, 0x69, 0x66,
-	0x79, 0x43, 0x6f, 0x64, 0x65, 0x52, 0x65, 0x71, 0x12, 0x16, 0x0a, 0x06, 0x61, 0x75, 0x74, 0x68,
-	0x49, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x06, 0x61, 0x75, 0x74, 0x68, 0x49, 0x64,
-	0x12, 0x1a, 0x0a, 0x08, 0x61, 0x75, 0x74, 0x68, 0x54, 0x79, 0x70, 0x65, 0x18, 0x02, 0x20, 0x01,
-	0x28, 0x09, 0x52, 0x08, 0x61, 0x75, 0x74, 0x68, 0x54, 0x79, 0x70, 0x65, 0x12, 0x18, 0x0a, 0x07,
-	0x70, 0x75, 0x72, 0x70, 0x6f, 0x73, 0x65, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x70,
-	0x75, 0x72, 0x70, 0x6f, 0x73, 0x65, 0x22, 0x53, 0x0a, 0x15, 0x53, 0x74, 0x73, 0x43, 0x68, 0x65,
-	0x63, 0x6b, 0x56, 0x65, 0x72, 0x69, 0x66, 0x79, 0x43, 0x6f, 0x64, 0x65, 0x52, 0x65, 0x71, 0x12,
-	0x1a, 0x0a, 0x08, 0x76, 0x65, 0x72, 0x69, 0x66, 0x79, 0x49, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28,
-	0x09, 0x52, 0x08, 0x76, 0x65, 0x72, 0x69, 0x66, 0x79, 0x49, 0x64, 0x12, 0x1e, 0x0a, 0x0a, 0x76,
-	0x65, 0x72, 0x69, 0x66, 0x79, 0x43, 0x6f, 0x64, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52,
-	0x0a, 0x76, 0x65, 0x72, 0x69, 0x66, 0x79, 0x43, 0x6f, 0x64, 0x65, 0x22, 0x30, 0x0a, 0x08, 0x52,
-	0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x12, 0x0a, 0x04, 0x63, 0x6f, 0x64, 0x65, 0x18,
-	0x01, 0x20, 0x01, 0x28, 0x03, 0x52, 0x04, 0x63, 0x6f, 0x64, 0x65, 0x12, 0x10, 0x0a, 0x03, 0x6d,
-	0x73, 0x67, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x03, 0x6d, 0x73, 0x67, 0x42, 0x3b, 0x5a,
-	0x39, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x78, 0x68, 0x2d, 0x70,
-	0x6f, 0x6c, 0x61, 0x72, 0x69, 0x73, 0x2f, 0x41, 0x63, 0x74, 0x69, 0x4d, 0x61, 0x6e, 0x61, 0x67,
-	0x65, 0x2d, 0x49, 0x44, 0x4c, 0x2d, 0x67, 0x65, 0x6e, 0x2f, 0x6b, 0x69, 0x74, 0x65, 0x78, 0x5f,
-	0x67, 0x65, 0x6e, 0x2f, 0x73, 0x79, 0x73, 0x74, 0x65, 0x6d, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74,
-	0x6f, 0x33,
+	0x22, 0x42, 0x0a, 0x1c, 0x4d, 0x65, 0x72, 0x63, 0x68, 0x61, 0x6e, 0x74, 0x47, 0x65, 0x74, 0x41,
+	0x63, 0x74, 0x69, 0x76, 0x69, 0x74, 0x79, 0x4e, 0x75, 0x6d, 0x62, 0x65, 0x72, 0x52, 0x65, 0x71,
+	0x12, 0x12, 0x0a, 0x04, 0x66, 0x72, 0x6f, 0x6d, 0x18, 0x01, 0x20, 0x01, 0x28, 0x03, 0x52, 0x04,
+	0x66, 0x72, 0x6f, 0x6d, 0x12, 0x0e, 0x0a, 0x02, 0x74, 0x6f, 0x18, 0x02, 0x20, 0x01, 0x28, 0x03,
+	0x52, 0x02, 0x74, 0x6f, 0x22, 0x9f, 0x01, 0x0a, 0x1d, 0x4d, 0x65, 0x72, 0x63, 0x68, 0x61, 0x6e,
+	0x74, 0x47, 0x65, 0x74, 0x41, 0x63, 0x74, 0x69, 0x76, 0x69, 0x74, 0x79, 0x4e, 0x75, 0x6d, 0x62,
+	0x65, 0x72, 0x52, 0x65, 0x73, 0x70, 0x12, 0x40, 0x0a, 0x05, 0x69, 0x74, 0x65, 0x6d, 0x73, 0x18,
+	0x01, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x2a, 0x2e, 0x73, 0x79, 0x73, 0x74, 0x65, 0x6d, 0x2e, 0x4d,
+	0x65, 0x72, 0x63, 0x68, 0x61, 0x6e, 0x74, 0x47, 0x65, 0x74, 0x41, 0x63, 0x74, 0x69, 0x76, 0x69,
+	0x74, 0x79, 0x4e, 0x75, 0x6d, 0x62, 0x65, 0x72, 0x52, 0x65, 0x73, 0x70, 0x2e, 0x49, 0x74, 0x65,
+	0x6d, 0x52, 0x05, 0x69, 0x74, 0x65, 0x6d, 0x73, 0x1a, 0x3c, 0x0a, 0x04, 0x49, 0x74, 0x65, 0x6d,
+	0x12, 0x16, 0x0a, 0x06, 0x6e, 0x75, 0x6d, 0x62, 0x65, 0x72, 0x18, 0x01, 0x20, 0x01, 0x28, 0x03,
+	0x52, 0x06, 0x6e, 0x75, 0x6d, 0x62, 0x65, 0x72, 0x12, 0x1c, 0x0a, 0x09, 0x74, 0x69, 0x6d, 0x65,
+	0x73, 0x74, 0x61, 0x6d, 0x70, 0x18, 0x02, 0x20, 0x01, 0x28, 0x03, 0x52, 0x09, 0x74, 0x69, 0x6d,
+	0x65, 0x73, 0x74, 0x61, 0x6d, 0x70, 0x22, 0x64, 0x0a, 0x14, 0x53, 0x74, 0x73, 0x53, 0x65, 0x6e,
+	0x64, 0x56, 0x65, 0x72, 0x69, 0x66, 0x79, 0x43, 0x6f, 0x64, 0x65, 0x52, 0x65, 0x71, 0x12, 0x16,
+	0x0a, 0x06, 0x61, 0x75, 0x74, 0x68, 0x49, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x06,
+	0x61, 0x75, 0x74, 0x68, 0x49, 0x64, 0x12, 0x1a, 0x0a, 0x08, 0x61, 0x75, 0x74, 0x68, 0x54, 0x79,
+	0x70, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x08, 0x61, 0x75, 0x74, 0x68, 0x54, 0x79,
+	0x70, 0x65, 0x12, 0x18, 0x0a, 0x07, 0x70, 0x75, 0x72, 0x70, 0x6f, 0x73, 0x65, 0x18, 0x03, 0x20,
+	0x01, 0x28, 0x09, 0x52, 0x07, 0x70, 0x75, 0x72, 0x70, 0x6f, 0x73, 0x65, 0x22, 0x53, 0x0a, 0x15,
+	0x53, 0x74, 0x73, 0x43, 0x68, 0x65, 0x63, 0x6b, 0x56, 0x65, 0x72, 0x69, 0x66, 0x79, 0x43, 0x6f,
+	0x64, 0x65, 0x52, 0x65, 0x71, 0x12, 0x1a, 0x0a, 0x08, 0x76, 0x65, 0x72, 0x69, 0x66, 0x79, 0x49,
+	0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x08, 0x76, 0x65, 0x72, 0x69, 0x66, 0x79, 0x49,
+	0x64, 0x12, 0x1e, 0x0a, 0x0a, 0x76, 0x65, 0x72, 0x69, 0x66, 0x79, 0x43, 0x6f, 0x64, 0x65, 0x18,
+	0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0a, 0x76, 0x65, 0x72, 0x69, 0x66, 0x79, 0x43, 0x6f, 0x64,
+	0x65, 0x22, 0x30, 0x0a, 0x08, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x12, 0x0a,
+	0x04, 0x63, 0x6f, 0x64, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x03, 0x52, 0x04, 0x63, 0x6f, 0x64,
+	0x65, 0x12, 0x10, 0x0a, 0x03, 0x6d, 0x73, 0x67, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x03,
+	0x6d, 0x73, 0x67, 0x42, 0x3b, 0x5a, 0x39, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f,
+	0x6d, 0x2f, 0x78, 0x68, 0x2d, 0x70, 0x6f, 0x6c, 0x61, 0x72, 0x69, 0x73, 0x2f, 0x41, 0x63, 0x74,
+	0x69, 0x4d, 0x61, 0x6e, 0x61, 0x67, 0x65, 0x2d, 0x49, 0x44, 0x4c, 0x2d, 0x67, 0x65, 0x6e, 0x2f,
+	0x6b, 0x69, 0x74, 0x65, 0x78, 0x5f, 0x67, 0x65, 0x6e, 0x2f, 0x73, 0x79, 0x73, 0x74, 0x65, 0x6d,
+	0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -4257,7 +4429,7 @@ func file_ActiManage_system_common_proto_rawDescGZIP() []byte {
 	return file_ActiManage_system_common_proto_rawDescData
 }
 
-var file_ActiManage_system_common_proto_msgTypes = make([]protoimpl.MessageInfo, 57)
+var file_ActiManage_system_common_proto_msgTypes = make([]protoimpl.MessageInfo, 60)
 var file_ActiManage_system_common_proto_goTypes = []interface{}{
 	(*Opening)(nil),                                // 0: system.Opening
 	(*Location)(nil),                               // 1: system.Location
@@ -4308,15 +4480,18 @@ var file_ActiManage_system_common_proto_goTypes = []interface{}{
 	(*ListMerchantsByActivityNumberResp)(nil),      // 46: system.ListMerchantsByActivityNumberResp
 	(*ListActivitiesByActivityIdReq)(nil),          // 47: system.ListActivitiesByActivityIdReq
 	(*ListActivitiesByActivityIdResp)(nil),         // 48: system.ListActivitiesByActivityIdResp
-	(*StsSendVerifyCodeReq)(nil),                   // 49: system.StsSendVerifyCodeReq
-	(*StsCheckVerifyCodeReq)(nil),                  // 50: system.StsCheckVerifyCodeReq
-	(*Response)(nil),                               // 51: system.Response
-	(*ListMerchantsResp_Item)(nil),                 // 52: system.ListMerchantsResp.Item
-	(*GetMerchantTotalDataResp_Item)(nil),          // 53: system.GetMerchantTotalDataResp.Item
-	(*ListMerchantsByMerchantIdResp_Item)(nil),     // 54: system.ListMerchantsByMerchantIdResp.Item
-	(*ListMerchantsByActivityNumberResp_Item)(nil), // 55: system.ListMerchantsByActivityNumberResp.Item
-	(*ListActivitiesByActivityIdResp_Item)(nil),    // 56: system.ListActivitiesByActivityIdResp.Item
-	(*basic.Paging)(nil),                           // 57: basic.Paging
+	(*MerchantGetActivityNumberReq)(nil),           // 49: system.MerchantGetActivityNumberReq
+	(*MerchantGetActivityNumberResp)(nil),          // 50: system.MerchantGetActivityNumberResp
+	(*StsSendVerifyCodeReq)(nil),                   // 51: system.StsSendVerifyCodeReq
+	(*StsCheckVerifyCodeReq)(nil),                  // 52: system.StsCheckVerifyCodeReq
+	(*Response)(nil),                               // 53: system.Response
+	(*ListMerchantsResp_Item)(nil),                 // 54: system.ListMerchantsResp.Item
+	(*GetMerchantTotalDataResp_Item)(nil),          // 55: system.GetMerchantTotalDataResp.Item
+	(*ListMerchantsByMerchantIdResp_Item)(nil),     // 56: system.ListMerchantsByMerchantIdResp.Item
+	(*ListMerchantsByActivityNumberResp_Item)(nil), // 57: system.ListMerchantsByActivityNumberResp.Item
+	(*ListActivitiesByActivityIdResp_Item)(nil),    // 58: system.ListActivitiesByActivityIdResp.Item
+	(*MerchantGetActivityNumberResp_Item)(nil),     // 59: system.MerchantGetActivityNumberResp.Item
+	(*basic.Paging)(nil),                           // 60: basic.Paging
 }
 var file_ActiManage_system_common_proto_depIdxs = []int32{
 	0,  // 0: system.Merchant.openings:type_name -> system.Opening
@@ -4338,7 +4513,7 @@ var file_ActiManage_system_common_proto_depIdxs = []int32{
 	7,  // 16: system.CreateActivityReq.setting:type_name -> system.ActivitySetting
 	1,  // 17: system.CreateActivityReq.location:type_name -> system.Location
 	8,  // 18: system.UpdateActivityReq.activity:type_name -> system.Activity
-	57, // 19: system.ListActivitiesReq.paging:type_name -> basic.Paging
+	60, // 19: system.ListActivitiesReq.paging:type_name -> basic.Paging
 	8,  // 20: system.ListActivitiesResp.activities:type_name -> system.Activity
 	8,  // 21: system.GetActivityResp.activity:type_name -> system.Activity
 	0,  // 22: system.CreateMerchantReq.openings:type_name -> system.Opening
@@ -4346,17 +4521,18 @@ var file_ActiManage_system_common_proto_depIdxs = []int32{
 	2,  // 24: system.UpdateMerchantReq.merchant:type_name -> system.Merchant
 	0,  // 25: system.GetMerchantInfoResp.openings:type_name -> system.Opening
 	1,  // 26: system.GetMerchantInfoResp.location:type_name -> system.Location
-	57, // 27: system.ListMerchantsReq.paging:type_name -> basic.Paging
-	52, // 28: system.ListMerchantsResp.merchants:type_name -> system.ListMerchantsResp.Item
-	53, // 29: system.GetMerchantTotalDataResp.items:type_name -> system.GetMerchantTotalDataResp.Item
-	54, // 30: system.ListMerchantsByMerchantIdResp.items:type_name -> system.ListMerchantsByMerchantIdResp.Item
-	55, // 31: system.ListMerchantsByActivityNumberResp.items:type_name -> system.ListMerchantsByActivityNumberResp.Item
-	56, // 32: system.ListActivitiesByActivityIdResp.items:type_name -> system.ListActivitiesByActivityIdResp.Item
-	33, // [33:33] is the sub-list for method output_type
-	33, // [33:33] is the sub-list for method input_type
-	33, // [33:33] is the sub-list for extension type_name
-	33, // [33:33] is the sub-list for extension extendee
-	0,  // [0:33] is the sub-list for field type_name
+	60, // 27: system.ListMerchantsReq.paging:type_name -> basic.Paging
+	54, // 28: system.ListMerchantsResp.merchants:type_name -> system.ListMerchantsResp.Item
+	55, // 29: system.GetMerchantTotalDataResp.items:type_name -> system.GetMerchantTotalDataResp.Item
+	56, // 30: system.ListMerchantsByMerchantIdResp.items:type_name -> system.ListMerchantsByMerchantIdResp.Item
+	57, // 31: system.ListMerchantsByActivityNumberResp.items:type_name -> system.ListMerchantsByActivityNumberResp.Item
+	58, // 32: system.ListActivitiesByActivityIdResp.items:type_name -> system.ListActivitiesByActivityIdResp.Item
+	59, // 33: system.MerchantGetActivityNumberResp.items:type_name -> system.MerchantGetActivityNumberResp.Item
+	34, // [34:34] is the sub-list for method output_type
+	34, // [34:34] is the sub-list for method input_type
+	34, // [34:34] is the sub-list for extension type_name
+	34, // [34:34] is the sub-list for extension extendee
+	0,  // [0:34] is the sub-list for field type_name
 }
 
 func init() { file_ActiManage_system_common_proto_init() }
@@ -4954,7 +5130,7 @@ func file_ActiManage_system_common_proto_init() {
 			}
 		}
 		file_ActiManage_system_common_proto_msgTypes[49].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*StsSendVerifyCodeReq); i {
+			switch v := v.(*MerchantGetActivityNumberReq); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -4966,7 +5142,7 @@ func file_ActiManage_system_common_proto_init() {
 			}
 		}
 		file_ActiManage_system_common_proto_msgTypes[50].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*StsCheckVerifyCodeReq); i {
+			switch v := v.(*MerchantGetActivityNumberResp); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -4978,7 +5154,7 @@ func file_ActiManage_system_common_proto_init() {
 			}
 		}
 		file_ActiManage_system_common_proto_msgTypes[51].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*Response); i {
+			switch v := v.(*StsSendVerifyCodeReq); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -4990,7 +5166,7 @@ func file_ActiManage_system_common_proto_init() {
 			}
 		}
 		file_ActiManage_system_common_proto_msgTypes[52].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ListMerchantsResp_Item); i {
+			switch v := v.(*StsCheckVerifyCodeReq); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -5002,7 +5178,7 @@ func file_ActiManage_system_common_proto_init() {
 			}
 		}
 		file_ActiManage_system_common_proto_msgTypes[53].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*GetMerchantTotalDataResp_Item); i {
+			switch v := v.(*Response); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -5014,7 +5190,7 @@ func file_ActiManage_system_common_proto_init() {
 			}
 		}
 		file_ActiManage_system_common_proto_msgTypes[54].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ListMerchantsByMerchantIdResp_Item); i {
+			switch v := v.(*ListMerchantsResp_Item); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -5026,7 +5202,7 @@ func file_ActiManage_system_common_proto_init() {
 			}
 		}
 		file_ActiManage_system_common_proto_msgTypes[55].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ListMerchantsByActivityNumberResp_Item); i {
+			switch v := v.(*GetMerchantTotalDataResp_Item); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -5038,7 +5214,43 @@ func file_ActiManage_system_common_proto_init() {
 			}
 		}
 		file_ActiManage_system_common_proto_msgTypes[56].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*ListMerchantsByMerchantIdResp_Item); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_ActiManage_system_common_proto_msgTypes[57].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*ListMerchantsByActivityNumberResp_Item); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_ActiManage_system_common_proto_msgTypes[58].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*ListActivitiesByActivityIdResp_Item); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_ActiManage_system_common_proto_msgTypes[59].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*MerchantGetActivityNumberResp_Item); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -5056,7 +5268,7 @@ func file_ActiManage_system_common_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_ActiManage_system_common_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   57,
+			NumMessages:   60,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

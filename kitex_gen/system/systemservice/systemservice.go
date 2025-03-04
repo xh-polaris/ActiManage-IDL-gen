@@ -176,6 +176,13 @@ var serviceMethods = map[string]kitex.MethodInfo{
 		false,
 		kitex.WithStreamingMode(kitex.StreamingUnary),
 	),
+	"ResetMerchantPassword": kitex.NewMethodInfo(
+		resetMerchantPasswordHandler,
+		newResetMerchantPasswordArgs,
+		newResetMerchantPasswordResult,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingUnary),
+	),
 	"GetMerchantTotalData": kitex.NewMethodInfo(
 		getMerchantTotalDataHandler,
 		newGetMerchantTotalDataArgs,
@@ -3810,6 +3817,159 @@ func (p *UpdateMerchantMoreInfoResult) GetResult() interface{} {
 	return p.Success
 }
 
+func resetMerchantPasswordHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
+	switch s := arg.(type) {
+	case *streaming.Args:
+		st := s.Stream
+		req := new(system.ResetMerchantPasswordReq)
+		if err := st.RecvMsg(req); err != nil {
+			return err
+		}
+		resp, err := handler.(system.SystemService).ResetMerchantPassword(ctx, req)
+		if err != nil {
+			return err
+		}
+		return st.SendMsg(resp)
+	case *ResetMerchantPasswordArgs:
+		success, err := handler.(system.SystemService).ResetMerchantPassword(ctx, s.Req)
+		if err != nil {
+			return err
+		}
+		realResult := result.(*ResetMerchantPasswordResult)
+		realResult.Success = success
+		return nil
+	default:
+		return errInvalidMessageType
+	}
+}
+func newResetMerchantPasswordArgs() interface{} {
+	return &ResetMerchantPasswordArgs{}
+}
+
+func newResetMerchantPasswordResult() interface{} {
+	return &ResetMerchantPasswordResult{}
+}
+
+type ResetMerchantPasswordArgs struct {
+	Req *system.ResetMerchantPasswordReq
+}
+
+func (p *ResetMerchantPasswordArgs) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetReq() {
+		p.Req = new(system.ResetMerchantPasswordReq)
+	}
+	return p.Req.FastRead(buf, _type, number)
+}
+
+func (p *ResetMerchantPasswordArgs) FastWrite(buf []byte) (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.FastWrite(buf)
+}
+
+func (p *ResetMerchantPasswordArgs) Size() (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.Size()
+}
+
+func (p *ResetMerchantPasswordArgs) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetReq() {
+		return out, nil
+	}
+	return proto.Marshal(p.Req)
+}
+
+func (p *ResetMerchantPasswordArgs) Unmarshal(in []byte) error {
+	msg := new(system.ResetMerchantPasswordReq)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Req = msg
+	return nil
+}
+
+var ResetMerchantPasswordArgs_Req_DEFAULT *system.ResetMerchantPasswordReq
+
+func (p *ResetMerchantPasswordArgs) GetReq() *system.ResetMerchantPasswordReq {
+	if !p.IsSetReq() {
+		return ResetMerchantPasswordArgs_Req_DEFAULT
+	}
+	return p.Req
+}
+
+func (p *ResetMerchantPasswordArgs) IsSetReq() bool {
+	return p.Req != nil
+}
+
+func (p *ResetMerchantPasswordArgs) GetFirstArgument() interface{} {
+	return p.Req
+}
+
+type ResetMerchantPasswordResult struct {
+	Success *system.Response
+}
+
+var ResetMerchantPasswordResult_Success_DEFAULT *system.Response
+
+func (p *ResetMerchantPasswordResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetSuccess() {
+		p.Success = new(system.Response)
+	}
+	return p.Success.FastRead(buf, _type, number)
+}
+
+func (p *ResetMerchantPasswordResult) FastWrite(buf []byte) (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.FastWrite(buf)
+}
+
+func (p *ResetMerchantPasswordResult) Size() (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.Size()
+}
+
+func (p *ResetMerchantPasswordResult) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetSuccess() {
+		return out, nil
+	}
+	return proto.Marshal(p.Success)
+}
+
+func (p *ResetMerchantPasswordResult) Unmarshal(in []byte) error {
+	msg := new(system.Response)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Success = msg
+	return nil
+}
+
+func (p *ResetMerchantPasswordResult) GetSuccess() *system.Response {
+	if !p.IsSetSuccess() {
+		return ResetMerchantPasswordResult_Success_DEFAULT
+	}
+	return p.Success
+}
+
+func (p *ResetMerchantPasswordResult) SetSuccess(x interface{}) {
+	p.Success = x.(*system.Response)
+}
+
+func (p *ResetMerchantPasswordResult) IsSetSuccess() bool {
+	return p.Success != nil
+}
+
+func (p *ResetMerchantPasswordResult) GetResult() interface{} {
+	return p.Success
+}
+
 func getMerchantTotalDataHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
 	switch s := arg.(type) {
 	case *streaming.Args:
@@ -5116,6 +5276,16 @@ func (p *kClient) UpdateMerchantMoreInfo(ctx context.Context, Req *system.Update
 	_args.Req = Req
 	var _result UpdateMerchantMoreInfoResult
 	if err = p.c.Call(ctx, "UpdateMerchantMoreInfo", &_args, &_result); err != nil {
+		return
+	}
+	return _result.GetSuccess(), nil
+}
+
+func (p *kClient) ResetMerchantPassword(ctx context.Context, Req *system.ResetMerchantPasswordReq) (r *system.Response, err error) {
+	var _args ResetMerchantPasswordArgs
+	_args.Req = Req
+	var _result ResetMerchantPasswordResult
+	if err = p.c.Call(ctx, "ResetMerchantPassword", &_args, &_result); err != nil {
 		return
 	}
 	return _result.GetSuccess(), nil

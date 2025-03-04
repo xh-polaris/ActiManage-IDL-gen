@@ -1977,6 +1977,41 @@ func (x *AdminSetPasswordReq) fastReadField3(buf []byte, _type int8) (offset int
 	return offset, err
 }
 
+func (x *ResetMerchantPasswordReq) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
+	switch number {
+	case 1:
+		offset, err = x.fastReadField1(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	case 2:
+		offset, err = x.fastReadField2(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	default:
+		offset, err = fastpb.Skip(buf, _type, number)
+		if err != nil {
+			goto SkipFieldError
+		}
+	}
+	return offset, nil
+SkipFieldError:
+	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
+ReadFieldError:
+	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_ResetMerchantPasswordReq[number], err)
+}
+
+func (x *ResetMerchantPasswordReq) fastReadField1(buf []byte, _type int8) (offset int, err error) {
+	x.MerchantId, offset, err = fastpb.ReadString(buf, _type)
+	return offset, err
+}
+
+func (x *ResetMerchantPasswordReq) fastReadField2(buf []byte, _type int8) (offset int, err error) {
+	x.NewPassword, offset, err = fastpb.ReadString(buf, _type)
+	return offset, err
+}
+
 func (x *CreateMerchantReq) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
 	switch number {
 	case 1:
@@ -4697,6 +4732,31 @@ func (x *AdminSetPasswordReq) fastWriteField3(buf []byte) (offset int) {
 	return offset
 }
 
+func (x *ResetMerchantPasswordReq) FastWrite(buf []byte) (offset int) {
+	if x == nil {
+		return offset
+	}
+	offset += x.fastWriteField1(buf[offset:])
+	offset += x.fastWriteField2(buf[offset:])
+	return offset
+}
+
+func (x *ResetMerchantPasswordReq) fastWriteField1(buf []byte) (offset int) {
+	if x.MerchantId == "" {
+		return offset
+	}
+	offset += fastpb.WriteString(buf[offset:], 1, x.GetMerchantId())
+	return offset
+}
+
+func (x *ResetMerchantPasswordReq) fastWriteField2(buf []byte) (offset int) {
+	if x.NewPassword == "" {
+		return offset
+	}
+	offset += fastpb.WriteString(buf[offset:], 2, x.GetNewPassword())
+	return offset
+}
+
 func (x *CreateMerchantReq) FastWrite(buf []byte) (offset int) {
 	if x == nil {
 		return offset
@@ -7052,6 +7112,31 @@ func (x *AdminSetPasswordReq) sizeField3() (n int) {
 	return n
 }
 
+func (x *ResetMerchantPasswordReq) Size() (n int) {
+	if x == nil {
+		return n
+	}
+	n += x.sizeField1()
+	n += x.sizeField2()
+	return n
+}
+
+func (x *ResetMerchantPasswordReq) sizeField1() (n int) {
+	if x.MerchantId == "" {
+		return n
+	}
+	n += fastpb.SizeString(1, x.GetMerchantId())
+	return n
+}
+
+func (x *ResetMerchantPasswordReq) sizeField2() (n int) {
+	if x.NewPassword == "" {
+		return n
+	}
+	n += fastpb.SizeString(2, x.GetNewPassword())
+	return n
+}
+
 func (x *CreateMerchantReq) Size() (n int) {
 	if x == nil {
 		return n
@@ -8202,6 +8287,11 @@ var fieldIDToName_AdminSetPasswordReq = map[int32]string{
 	1: "Id",
 	2: "OldPassword",
 	3: "NewPassword",
+}
+
+var fieldIDToName_ResetMerchantPasswordReq = map[int32]string{
+	1: "MerchantId",
+	2: "NewPassword",
 }
 
 var fieldIDToName_CreateMerchantReq = map[int32]string{

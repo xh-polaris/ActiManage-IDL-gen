@@ -34,6 +34,8 @@ type Client interface {
 	MerchantListAllBookRecords(ctx context.Context, Req *core_api.MerchantListAllBookRecordsReq, callOptions ...callopt.Option) (r *core_api.MerchantListAllBookRecordsResp, err error)
 	MerchantGetNewUserNumber(ctx context.Context, Req *core_api.MerchantGetNewUserNumberReq, callOptions ...callopt.Option) (r *core_api.MerchantGetNewUserNumberResp, err error)
 	MerchantGetActivityNumber(ctx context.Context, Req *core_api.MerchantGetActivityNumberReq, callOptions ...callopt.Option) (r *core_api.MerchantGetActivityNumberResp, err error)
+	GetMerchantMoreInfo(ctx context.Context, Req *core_api.GetMerchantMoreInfoReq, callOptions ...callopt.Option) (r *core_api.GetMerchantMoreInfoResp, err error)
+	UpdateMerchantMoreInfo(ctx context.Context, Req *core_api.UpdateMerchantMoreInfoReq, callOptions ...callopt.Option) (r *core_api.Response, err error)
 }
 
 // NewClient creates a client for the service defined in IDL.
@@ -178,4 +180,14 @@ func (p *kMerchantClient) MerchantGetNewUserNumber(ctx context.Context, Req *cor
 func (p *kMerchantClient) MerchantGetActivityNumber(ctx context.Context, Req *core_api.MerchantGetActivityNumberReq, callOptions ...callopt.Option) (r *core_api.MerchantGetActivityNumberResp, err error) {
 	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
 	return p.kClient.MerchantGetActivityNumber(ctx, Req)
+}
+
+func (p *kMerchantClient) GetMerchantMoreInfo(ctx context.Context, Req *core_api.GetMerchantMoreInfoReq, callOptions ...callopt.Option) (r *core_api.GetMerchantMoreInfoResp, err error) {
+	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
+	return p.kClient.GetMerchantMoreInfo(ctx, Req)
+}
+
+func (p *kMerchantClient) UpdateMerchantMoreInfo(ctx context.Context, Req *core_api.UpdateMerchantMoreInfoReq, callOptions ...callopt.Option) (r *core_api.Response, err error) {
+	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
+	return p.kClient.UpdateMerchantMoreInfo(ctx, Req)
 }

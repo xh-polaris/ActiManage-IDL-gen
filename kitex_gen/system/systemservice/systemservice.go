@@ -162,6 +162,20 @@ var serviceMethods = map[string]kitex.MethodInfo{
 		false,
 		kitex.WithStreamingMode(kitex.StreamingUnary),
 	),
+	"GetMerchantMoreInfo": kitex.NewMethodInfo(
+		getMerchantMoreInfoHandler,
+		newGetMerchantMoreInfoArgs,
+		newGetMerchantMoreInfoResult,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingUnary),
+	),
+	"UpdateMerchantMoreInfo": kitex.NewMethodInfo(
+		updateMerchantMoreInfoHandler,
+		newUpdateMerchantMoreInfoArgs,
+		newUpdateMerchantMoreInfoResult,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingUnary),
+	),
 	"GetMerchantTotalData": kitex.NewMethodInfo(
 		getMerchantTotalDataHandler,
 		newGetMerchantTotalDataArgs,
@@ -3490,6 +3504,312 @@ func (p *ListMerchantsResult) GetResult() interface{} {
 	return p.Success
 }
 
+func getMerchantMoreInfoHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
+	switch s := arg.(type) {
+	case *streaming.Args:
+		st := s.Stream
+		req := new(system.GetMerchantMoreInfoReq)
+		if err := st.RecvMsg(req); err != nil {
+			return err
+		}
+		resp, err := handler.(system.SystemService).GetMerchantMoreInfo(ctx, req)
+		if err != nil {
+			return err
+		}
+		return st.SendMsg(resp)
+	case *GetMerchantMoreInfoArgs:
+		success, err := handler.(system.SystemService).GetMerchantMoreInfo(ctx, s.Req)
+		if err != nil {
+			return err
+		}
+		realResult := result.(*GetMerchantMoreInfoResult)
+		realResult.Success = success
+		return nil
+	default:
+		return errInvalidMessageType
+	}
+}
+func newGetMerchantMoreInfoArgs() interface{} {
+	return &GetMerchantMoreInfoArgs{}
+}
+
+func newGetMerchantMoreInfoResult() interface{} {
+	return &GetMerchantMoreInfoResult{}
+}
+
+type GetMerchantMoreInfoArgs struct {
+	Req *system.GetMerchantMoreInfoReq
+}
+
+func (p *GetMerchantMoreInfoArgs) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetReq() {
+		p.Req = new(system.GetMerchantMoreInfoReq)
+	}
+	return p.Req.FastRead(buf, _type, number)
+}
+
+func (p *GetMerchantMoreInfoArgs) FastWrite(buf []byte) (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.FastWrite(buf)
+}
+
+func (p *GetMerchantMoreInfoArgs) Size() (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.Size()
+}
+
+func (p *GetMerchantMoreInfoArgs) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetReq() {
+		return out, nil
+	}
+	return proto.Marshal(p.Req)
+}
+
+func (p *GetMerchantMoreInfoArgs) Unmarshal(in []byte) error {
+	msg := new(system.GetMerchantMoreInfoReq)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Req = msg
+	return nil
+}
+
+var GetMerchantMoreInfoArgs_Req_DEFAULT *system.GetMerchantMoreInfoReq
+
+func (p *GetMerchantMoreInfoArgs) GetReq() *system.GetMerchantMoreInfoReq {
+	if !p.IsSetReq() {
+		return GetMerchantMoreInfoArgs_Req_DEFAULT
+	}
+	return p.Req
+}
+
+func (p *GetMerchantMoreInfoArgs) IsSetReq() bool {
+	return p.Req != nil
+}
+
+func (p *GetMerchantMoreInfoArgs) GetFirstArgument() interface{} {
+	return p.Req
+}
+
+type GetMerchantMoreInfoResult struct {
+	Success *system.GetMerchantMoreInfoResp
+}
+
+var GetMerchantMoreInfoResult_Success_DEFAULT *system.GetMerchantMoreInfoResp
+
+func (p *GetMerchantMoreInfoResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetSuccess() {
+		p.Success = new(system.GetMerchantMoreInfoResp)
+	}
+	return p.Success.FastRead(buf, _type, number)
+}
+
+func (p *GetMerchantMoreInfoResult) FastWrite(buf []byte) (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.FastWrite(buf)
+}
+
+func (p *GetMerchantMoreInfoResult) Size() (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.Size()
+}
+
+func (p *GetMerchantMoreInfoResult) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetSuccess() {
+		return out, nil
+	}
+	return proto.Marshal(p.Success)
+}
+
+func (p *GetMerchantMoreInfoResult) Unmarshal(in []byte) error {
+	msg := new(system.GetMerchantMoreInfoResp)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Success = msg
+	return nil
+}
+
+func (p *GetMerchantMoreInfoResult) GetSuccess() *system.GetMerchantMoreInfoResp {
+	if !p.IsSetSuccess() {
+		return GetMerchantMoreInfoResult_Success_DEFAULT
+	}
+	return p.Success
+}
+
+func (p *GetMerchantMoreInfoResult) SetSuccess(x interface{}) {
+	p.Success = x.(*system.GetMerchantMoreInfoResp)
+}
+
+func (p *GetMerchantMoreInfoResult) IsSetSuccess() bool {
+	return p.Success != nil
+}
+
+func (p *GetMerchantMoreInfoResult) GetResult() interface{} {
+	return p.Success
+}
+
+func updateMerchantMoreInfoHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
+	switch s := arg.(type) {
+	case *streaming.Args:
+		st := s.Stream
+		req := new(system.UpdateMerchantMoreInfoReq)
+		if err := st.RecvMsg(req); err != nil {
+			return err
+		}
+		resp, err := handler.(system.SystemService).UpdateMerchantMoreInfo(ctx, req)
+		if err != nil {
+			return err
+		}
+		return st.SendMsg(resp)
+	case *UpdateMerchantMoreInfoArgs:
+		success, err := handler.(system.SystemService).UpdateMerchantMoreInfo(ctx, s.Req)
+		if err != nil {
+			return err
+		}
+		realResult := result.(*UpdateMerchantMoreInfoResult)
+		realResult.Success = success
+		return nil
+	default:
+		return errInvalidMessageType
+	}
+}
+func newUpdateMerchantMoreInfoArgs() interface{} {
+	return &UpdateMerchantMoreInfoArgs{}
+}
+
+func newUpdateMerchantMoreInfoResult() interface{} {
+	return &UpdateMerchantMoreInfoResult{}
+}
+
+type UpdateMerchantMoreInfoArgs struct {
+	Req *system.UpdateMerchantMoreInfoReq
+}
+
+func (p *UpdateMerchantMoreInfoArgs) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetReq() {
+		p.Req = new(system.UpdateMerchantMoreInfoReq)
+	}
+	return p.Req.FastRead(buf, _type, number)
+}
+
+func (p *UpdateMerchantMoreInfoArgs) FastWrite(buf []byte) (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.FastWrite(buf)
+}
+
+func (p *UpdateMerchantMoreInfoArgs) Size() (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.Size()
+}
+
+func (p *UpdateMerchantMoreInfoArgs) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetReq() {
+		return out, nil
+	}
+	return proto.Marshal(p.Req)
+}
+
+func (p *UpdateMerchantMoreInfoArgs) Unmarshal(in []byte) error {
+	msg := new(system.UpdateMerchantMoreInfoReq)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Req = msg
+	return nil
+}
+
+var UpdateMerchantMoreInfoArgs_Req_DEFAULT *system.UpdateMerchantMoreInfoReq
+
+func (p *UpdateMerchantMoreInfoArgs) GetReq() *system.UpdateMerchantMoreInfoReq {
+	if !p.IsSetReq() {
+		return UpdateMerchantMoreInfoArgs_Req_DEFAULT
+	}
+	return p.Req
+}
+
+func (p *UpdateMerchantMoreInfoArgs) IsSetReq() bool {
+	return p.Req != nil
+}
+
+func (p *UpdateMerchantMoreInfoArgs) GetFirstArgument() interface{} {
+	return p.Req
+}
+
+type UpdateMerchantMoreInfoResult struct {
+	Success *system.Response
+}
+
+var UpdateMerchantMoreInfoResult_Success_DEFAULT *system.Response
+
+func (p *UpdateMerchantMoreInfoResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetSuccess() {
+		p.Success = new(system.Response)
+	}
+	return p.Success.FastRead(buf, _type, number)
+}
+
+func (p *UpdateMerchantMoreInfoResult) FastWrite(buf []byte) (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.FastWrite(buf)
+}
+
+func (p *UpdateMerchantMoreInfoResult) Size() (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.Size()
+}
+
+func (p *UpdateMerchantMoreInfoResult) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetSuccess() {
+		return out, nil
+	}
+	return proto.Marshal(p.Success)
+}
+
+func (p *UpdateMerchantMoreInfoResult) Unmarshal(in []byte) error {
+	msg := new(system.Response)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Success = msg
+	return nil
+}
+
+func (p *UpdateMerchantMoreInfoResult) GetSuccess() *system.Response {
+	if !p.IsSetSuccess() {
+		return UpdateMerchantMoreInfoResult_Success_DEFAULT
+	}
+	return p.Success
+}
+
+func (p *UpdateMerchantMoreInfoResult) SetSuccess(x interface{}) {
+	p.Success = x.(*system.Response)
+}
+
+func (p *UpdateMerchantMoreInfoResult) IsSetSuccess() bool {
+	return p.Success != nil
+}
+
+func (p *UpdateMerchantMoreInfoResult) GetResult() interface{} {
+	return p.Success
+}
+
 func getMerchantTotalDataHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
 	switch s := arg.(type) {
 	case *streaming.Args:
@@ -4776,6 +5096,26 @@ func (p *kClient) ListMerchants(ctx context.Context, Req *system.ListMerchantsRe
 	_args.Req = Req
 	var _result ListMerchantsResult
 	if err = p.c.Call(ctx, "ListMerchants", &_args, &_result); err != nil {
+		return
+	}
+	return _result.GetSuccess(), nil
+}
+
+func (p *kClient) GetMerchantMoreInfo(ctx context.Context, Req *system.GetMerchantMoreInfoReq) (r *system.GetMerchantMoreInfoResp, err error) {
+	var _args GetMerchantMoreInfoArgs
+	_args.Req = Req
+	var _result GetMerchantMoreInfoResult
+	if err = p.c.Call(ctx, "GetMerchantMoreInfo", &_args, &_result); err != nil {
+		return
+	}
+	return _result.GetSuccess(), nil
+}
+
+func (p *kClient) UpdateMerchantMoreInfo(ctx context.Context, Req *system.UpdateMerchantMoreInfoReq) (r *system.Response, err error) {
+	var _args UpdateMerchantMoreInfoArgs
+	_args.Req = Req
+	var _result UpdateMerchantMoreInfoResult
+	if err = p.c.Call(ctx, "UpdateMerchantMoreInfo", &_args, &_result); err != nil {
 		return
 	}
 	return _result.GetSuccess(), nil

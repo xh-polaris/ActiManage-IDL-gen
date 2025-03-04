@@ -32,6 +32,8 @@ type Client interface {
 	DeleteMerchant(ctx context.Context, Req *system.DeleteMerchantReq, callOptions ...callopt.Option) (r *system.Response, err error)
 	GetMerchantInfo(ctx context.Context, Req *system.GetMerchantInfoReq, callOptions ...callopt.Option) (r *system.GetMerchantInfoResp, err error)
 	ListMerchants(ctx context.Context, Req *system.ListMerchantsReq, callOptions ...callopt.Option) (r *system.ListMerchantsResp, err error)
+	GetMerchantMoreInfo(ctx context.Context, Req *system.GetMerchantMoreInfoReq, callOptions ...callopt.Option) (r *system.GetMerchantMoreInfoResp, err error)
+	UpdateMerchantMoreInfo(ctx context.Context, Req *system.UpdateMerchantMoreInfoReq, callOptions ...callopt.Option) (r *system.Response, err error)
 	GetMerchantTotalData(ctx context.Context, Req *system.GetMerchantTotalDataReq, callOptions ...callopt.Option) (r *system.GetMerchantTotalDataResp, err error)
 	ListMerchantByMerchantId(ctx context.Context, Req *system.ListMerchantsByMerchantIdReq, callOptions ...callopt.Option) (r *system.ListMerchantsByMerchantIdResp, err error)
 	ListMerchantByActivityNumber(ctx context.Context, Req *system.ListMerchantsByActivityNumberReq, callOptions ...callopt.Option) (r *system.ListMerchantsByActivityNumberResp, err error)
@@ -173,6 +175,16 @@ func (p *kSystemServiceClient) GetMerchantInfo(ctx context.Context, Req *system.
 func (p *kSystemServiceClient) ListMerchants(ctx context.Context, Req *system.ListMerchantsReq, callOptions ...callopt.Option) (r *system.ListMerchantsResp, err error) {
 	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
 	return p.kClient.ListMerchants(ctx, Req)
+}
+
+func (p *kSystemServiceClient) GetMerchantMoreInfo(ctx context.Context, Req *system.GetMerchantMoreInfoReq, callOptions ...callopt.Option) (r *system.GetMerchantMoreInfoResp, err error) {
+	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
+	return p.kClient.GetMerchantMoreInfo(ctx, Req)
+}
+
+func (p *kSystemServiceClient) UpdateMerchantMoreInfo(ctx context.Context, Req *system.UpdateMerchantMoreInfoReq, callOptions ...callopt.Option) (r *system.Response, err error) {
+	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
+	return p.kClient.UpdateMerchantMoreInfo(ctx, Req)
 }
 
 func (p *kSystemServiceClient) GetMerchantTotalData(ctx context.Context, Req *system.GetMerchantTotalDataReq, callOptions ...callopt.Option) (r *system.GetMerchantTotalDataResp, err error) {

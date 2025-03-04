@@ -4497,6 +4497,16 @@ func (x *GetMerchantMoreInfoResp) FastRead(buf []byte, _type int8, number int32)
 		if err != nil {
 			goto ReadFieldError
 		}
+	case 4:
+		offset, err = x.fastReadField4(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	case 5:
+		offset, err = x.fastReadField5(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
 		if err != nil {
@@ -4511,16 +4521,26 @@ ReadFieldError:
 }
 
 func (x *GetMerchantMoreInfoResp) fastReadField1(buf []byte, _type int8) (offset int, err error) {
-	x.Questions, offset, err = fastpb.ReadString(buf, _type)
+	x.Code, offset, err = fastpb.ReadInt64(buf, _type)
 	return offset, err
 }
 
 func (x *GetMerchantMoreInfoResp) fastReadField2(buf []byte, _type int8) (offset int, err error) {
-	x.PrivacyAgreement, offset, err = fastpb.ReadString(buf, _type)
+	x.Msg, offset, err = fastpb.ReadString(buf, _type)
 	return offset, err
 }
 
 func (x *GetMerchantMoreInfoResp) fastReadField3(buf []byte, _type int8) (offset int, err error) {
+	x.Questions, offset, err = fastpb.ReadString(buf, _type)
+	return offset, err
+}
+
+func (x *GetMerchantMoreInfoResp) fastReadField4(buf []byte, _type int8) (offset int, err error) {
+	x.PrivacyAgreement, offset, err = fastpb.ReadString(buf, _type)
+	return offset, err
+}
+
+func (x *GetMerchantMoreInfoResp) fastReadField5(buf []byte, _type int8) (offset int, err error) {
 	x.UserAgreement, offset, err = fastpb.ReadString(buf, _type)
 	return offset, err
 }
@@ -10528,30 +10548,48 @@ func (x *GetMerchantMoreInfoResp) FastWrite(buf []byte) (offset int) {
 	offset += x.fastWriteField1(buf[offset:])
 	offset += x.fastWriteField2(buf[offset:])
 	offset += x.fastWriteField3(buf[offset:])
+	offset += x.fastWriteField4(buf[offset:])
+	offset += x.fastWriteField5(buf[offset:])
 	return offset
 }
 
 func (x *GetMerchantMoreInfoResp) fastWriteField1(buf []byte) (offset int) {
-	if x.Questions == "" {
+	if x.Code == 0 {
 		return offset
 	}
-	offset += fastpb.WriteString(buf[offset:], 1, x.GetQuestions())
+	offset += fastpb.WriteInt64(buf[offset:], 1, x.GetCode())
 	return offset
 }
 
 func (x *GetMerchantMoreInfoResp) fastWriteField2(buf []byte) (offset int) {
-	if x.PrivacyAgreement == "" {
+	if x.Msg == "" {
 		return offset
 	}
-	offset += fastpb.WriteString(buf[offset:], 2, x.GetPrivacyAgreement())
+	offset += fastpb.WriteString(buf[offset:], 2, x.GetMsg())
 	return offset
 }
 
 func (x *GetMerchantMoreInfoResp) fastWriteField3(buf []byte) (offset int) {
+	if x.Questions == "" {
+		return offset
+	}
+	offset += fastpb.WriteString(buf[offset:], 3, x.GetQuestions())
+	return offset
+}
+
+func (x *GetMerchantMoreInfoResp) fastWriteField4(buf []byte) (offset int) {
+	if x.PrivacyAgreement == "" {
+		return offset
+	}
+	offset += fastpb.WriteString(buf[offset:], 4, x.GetPrivacyAgreement())
+	return offset
+}
+
+func (x *GetMerchantMoreInfoResp) fastWriteField5(buf []byte) (offset int) {
 	if x.UserAgreement == "" {
 		return offset
 	}
-	offset += fastpb.WriteString(buf[offset:], 3, x.GetUserAgreement())
+	offset += fastpb.WriteString(buf[offset:], 5, x.GetUserAgreement())
 	return offset
 }
 
@@ -15933,30 +15971,48 @@ func (x *GetMerchantMoreInfoResp) Size() (n int) {
 	n += x.sizeField1()
 	n += x.sizeField2()
 	n += x.sizeField3()
+	n += x.sizeField4()
+	n += x.sizeField5()
 	return n
 }
 
 func (x *GetMerchantMoreInfoResp) sizeField1() (n int) {
-	if x.Questions == "" {
+	if x.Code == 0 {
 		return n
 	}
-	n += fastpb.SizeString(1, x.GetQuestions())
+	n += fastpb.SizeInt64(1, x.GetCode())
 	return n
 }
 
 func (x *GetMerchantMoreInfoResp) sizeField2() (n int) {
-	if x.PrivacyAgreement == "" {
+	if x.Msg == "" {
 		return n
 	}
-	n += fastpb.SizeString(2, x.GetPrivacyAgreement())
+	n += fastpb.SizeString(2, x.GetMsg())
 	return n
 }
 
 func (x *GetMerchantMoreInfoResp) sizeField3() (n int) {
+	if x.Questions == "" {
+		return n
+	}
+	n += fastpb.SizeString(3, x.GetQuestions())
+	return n
+}
+
+func (x *GetMerchantMoreInfoResp) sizeField4() (n int) {
+	if x.PrivacyAgreement == "" {
+		return n
+	}
+	n += fastpb.SizeString(4, x.GetPrivacyAgreement())
+	return n
+}
+
+func (x *GetMerchantMoreInfoResp) sizeField5() (n int) {
 	if x.UserAgreement == "" {
 		return n
 	}
-	n += fastpb.SizeString(3, x.GetUserAgreement())
+	n += fastpb.SizeString(5, x.GetUserAgreement())
 	return n
 }
 
@@ -18568,9 +18624,11 @@ var fieldIDToName_GetMerchantMoreInfoReq = map[int32]string{
 }
 
 var fieldIDToName_GetMerchantMoreInfoResp = map[int32]string{
-	1: "Questions",
-	2: "PrivacyAgreement",
-	3: "UserAgreement",
+	1: "Code",
+	2: "Msg",
+	3: "Questions",
+	4: "PrivacyAgreement",
+	5: "UserAgreement",
 }
 
 var fieldIDToName_UpdateMerchantMoreInfoReq = map[int32]string{

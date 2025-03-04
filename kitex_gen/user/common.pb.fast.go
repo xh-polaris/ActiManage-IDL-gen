@@ -1282,6 +1282,11 @@ func (x *MerchantListUsersResp) FastRead(buf []byte, _type int8, number int32) (
 		if err != nil {
 			goto ReadFieldError
 		}
+	case 3:
+		offset, err = x.fastReadField3(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
 		if err != nil {
@@ -1308,6 +1313,16 @@ func (x *MerchantListUsersResp) fastReadField1(buf []byte, _type int8) (offset i
 func (x *MerchantListUsersResp) fastReadField2(buf []byte, _type int8) (offset int, err error) {
 	x.Total, offset, err = fastpb.ReadInt64(buf, _type)
 	return offset, err
+}
+
+func (x *MerchantListUsersResp) fastReadField3(buf []byte, _type int8) (offset int, err error) {
+	var v MerchantListUsersResp_Item
+	offset, err = fastpb.ReadMessage(buf, _type, &v)
+	if err != nil {
+		return offset, err
+	}
+	x.Infos = append(x.Infos, &v)
+	return offset, nil
 }
 
 func (x *MerchantListReserversReq) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
@@ -3316,6 +3331,51 @@ func (x *Response) fastReadField2(buf []byte, _type int8) (offset int, err error
 	return offset, err
 }
 
+func (x *MerchantListUsersResp_Item) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
+	switch number {
+	case 1:
+		offset, err = x.fastReadField1(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	case 2:
+		offset, err = x.fastReadField2(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	case 3:
+		offset, err = x.fastReadField3(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	default:
+		offset, err = fastpb.Skip(buf, _type, number)
+		if err != nil {
+			goto SkipFieldError
+		}
+	}
+	return offset, nil
+SkipFieldError:
+	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
+ReadFieldError:
+	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_MerchantListUsersResp_Item[number], err)
+}
+
+func (x *MerchantListUsersResp_Item) fastReadField1(buf []byte, _type int8) (offset int, err error) {
+	x.Book, offset, err = fastpb.ReadInt64(buf, _type)
+	return offset, err
+}
+
+func (x *MerchantListUsersResp_Item) fastReadField2(buf []byte, _type int8) (offset int, err error) {
+	x.View, offset, err = fastpb.ReadInt64(buf, _type)
+	return offset, err
+}
+
+func (x *MerchantListUsersResp_Item) fastReadField3(buf []byte, _type int8) (offset int, err error) {
+	x.Favorite, offset, err = fastpb.ReadInt64(buf, _type)
+	return offset, err
+}
+
 func (x *MerchantListReserversResp_Item) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
 	switch number {
 	case 1:
@@ -5111,6 +5171,7 @@ func (x *MerchantListUsersResp) FastWrite(buf []byte) (offset int) {
 	}
 	offset += x.fastWriteField1(buf[offset:])
 	offset += x.fastWriteField2(buf[offset:])
+	offset += x.fastWriteField3(buf[offset:])
 	return offset
 }
 
@@ -5129,6 +5190,16 @@ func (x *MerchantListUsersResp) fastWriteField2(buf []byte) (offset int) {
 		return offset
 	}
 	offset += fastpb.WriteInt64(buf[offset:], 2, x.GetTotal())
+	return offset
+}
+
+func (x *MerchantListUsersResp) fastWriteField3(buf []byte) (offset int) {
+	if x.Infos == nil {
+		return offset
+	}
+	for i := range x.GetInfos() {
+		offset += fastpb.WriteMessage(buf[offset:], 3, x.GetInfos()[i])
+	}
 	return offset
 }
 
@@ -6515,6 +6586,40 @@ func (x *Response) fastWriteField2(buf []byte) (offset int) {
 		return offset
 	}
 	offset += fastpb.WriteString(buf[offset:], 2, x.GetMsg())
+	return offset
+}
+
+func (x *MerchantListUsersResp_Item) FastWrite(buf []byte) (offset int) {
+	if x == nil {
+		return offset
+	}
+	offset += x.fastWriteField1(buf[offset:])
+	offset += x.fastWriteField2(buf[offset:])
+	offset += x.fastWriteField3(buf[offset:])
+	return offset
+}
+
+func (x *MerchantListUsersResp_Item) fastWriteField1(buf []byte) (offset int) {
+	if x.Book == 0 {
+		return offset
+	}
+	offset += fastpb.WriteInt64(buf[offset:], 1, x.GetBook())
+	return offset
+}
+
+func (x *MerchantListUsersResp_Item) fastWriteField2(buf []byte) (offset int) {
+	if x.View == 0 {
+		return offset
+	}
+	offset += fastpb.WriteInt64(buf[offset:], 2, x.GetView())
+	return offset
+}
+
+func (x *MerchantListUsersResp_Item) fastWriteField3(buf []byte) (offset int) {
+	if x.Favorite == 0 {
+		return offset
+	}
+	offset += fastpb.WriteInt64(buf[offset:], 3, x.GetFavorite())
 	return offset
 }
 
@@ -8148,6 +8253,7 @@ func (x *MerchantListUsersResp) Size() (n int) {
 	}
 	n += x.sizeField1()
 	n += x.sizeField2()
+	n += x.sizeField3()
 	return n
 }
 
@@ -8166,6 +8272,16 @@ func (x *MerchantListUsersResp) sizeField2() (n int) {
 		return n
 	}
 	n += fastpb.SizeInt64(2, x.GetTotal())
+	return n
+}
+
+func (x *MerchantListUsersResp) sizeField3() (n int) {
+	if x.Infos == nil {
+		return n
+	}
+	for i := range x.GetInfos() {
+		n += fastpb.SizeMessage(3, x.GetInfos()[i])
+	}
 	return n
 }
 
@@ -9555,6 +9671,40 @@ func (x *Response) sizeField2() (n int) {
 	return n
 }
 
+func (x *MerchantListUsersResp_Item) Size() (n int) {
+	if x == nil {
+		return n
+	}
+	n += x.sizeField1()
+	n += x.sizeField2()
+	n += x.sizeField3()
+	return n
+}
+
+func (x *MerchantListUsersResp_Item) sizeField1() (n int) {
+	if x.Book == 0 {
+		return n
+	}
+	n += fastpb.SizeInt64(1, x.GetBook())
+	return n
+}
+
+func (x *MerchantListUsersResp_Item) sizeField2() (n int) {
+	if x.View == 0 {
+		return n
+	}
+	n += fastpb.SizeInt64(2, x.GetView())
+	return n
+}
+
+func (x *MerchantListUsersResp_Item) sizeField3() (n int) {
+	if x.Favorite == 0 {
+		return n
+	}
+	n += fastpb.SizeInt64(3, x.GetFavorite())
+	return n
+}
+
 func (x *MerchantListReserversResp_Item) Size() (n int) {
 	if x == nil {
 		return n
@@ -10316,6 +10466,7 @@ var fieldIDToName_MerchantListUsersReq = map[int32]string{
 var fieldIDToName_MerchantListUsersResp = map[int32]string{
 	1: "Users",
 	2: "Total",
+	3: "Infos",
 }
 
 var fieldIDToName_MerchantListReserversReq = map[int32]string{
@@ -10579,6 +10730,12 @@ var fieldIDToName_MerchantGetNewUserNumberResp = map[int32]string{
 var fieldIDToName_Response = map[int32]string{
 	1: "Code",
 	2: "Msg",
+}
+
+var fieldIDToName_MerchantListUsersResp_Item = map[int32]string{
+	1: "Book",
+	2: "View",
+	3: "Favorite",
 }
 
 var fieldIDToName_MerchantListReserversResp_Item = map[int32]string{

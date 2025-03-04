@@ -6322,6 +6322,21 @@ func (x *MerchantListUsersResp_Item) FastRead(buf []byte, _type int8, number int
 		if err != nil {
 			goto ReadFieldError
 		}
+	case 6:
+		offset, err = x.fastReadField6(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	case 7:
+		offset, err = x.fastReadField7(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	case 8:
+		offset, err = x.fastReadField8(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
 		if err != nil {
@@ -6357,6 +6372,21 @@ func (x *MerchantListUsersResp_Item) fastReadField4(buf []byte, _type int8) (off
 
 func (x *MerchantListUsersResp_Item) fastReadField5(buf []byte, _type int8) (offset int, err error) {
 	x.CreateTime, offset, err = fastpb.ReadInt64(buf, _type)
+	return offset, err
+}
+
+func (x *MerchantListUsersResp_Item) fastReadField6(buf []byte, _type int8) (offset int, err error) {
+	x.Book, offset, err = fastpb.ReadInt64(buf, _type)
+	return offset, err
+}
+
+func (x *MerchantListUsersResp_Item) fastReadField7(buf []byte, _type int8) (offset int, err error) {
+	x.View, offset, err = fastpb.ReadInt64(buf, _type)
+	return offset, err
+}
+
+func (x *MerchantListUsersResp_Item) fastReadField8(buf []byte, _type int8) (offset int, err error) {
+	x.Favorite, offset, err = fastpb.ReadInt64(buf, _type)
 	return offset, err
 }
 
@@ -11740,6 +11770,9 @@ func (x *MerchantListUsersResp_Item) FastWrite(buf []byte) (offset int) {
 	offset += x.fastWriteField3(buf[offset:])
 	offset += x.fastWriteField4(buf[offset:])
 	offset += x.fastWriteField5(buf[offset:])
+	offset += x.fastWriteField6(buf[offset:])
+	offset += x.fastWriteField7(buf[offset:])
+	offset += x.fastWriteField8(buf[offset:])
 	return offset
 }
 
@@ -11780,6 +11813,30 @@ func (x *MerchantListUsersResp_Item) fastWriteField5(buf []byte) (offset int) {
 		return offset
 	}
 	offset += fastpb.WriteInt64(buf[offset:], 5, x.GetCreateTime())
+	return offset
+}
+
+func (x *MerchantListUsersResp_Item) fastWriteField6(buf []byte) (offset int) {
+	if x.Book == 0 {
+		return offset
+	}
+	offset += fastpb.WriteInt64(buf[offset:], 6, x.GetBook())
+	return offset
+}
+
+func (x *MerchantListUsersResp_Item) fastWriteField7(buf []byte) (offset int) {
+	if x.View == 0 {
+		return offset
+	}
+	offset += fastpb.WriteInt64(buf[offset:], 7, x.GetView())
+	return offset
+}
+
+func (x *MerchantListUsersResp_Item) fastWriteField8(buf []byte) (offset int) {
+	if x.Favorite == 0 {
+		return offset
+	}
+	offset += fastpb.WriteInt64(buf[offset:], 8, x.GetFavorite())
 	return offset
 }
 
@@ -17009,6 +17066,9 @@ func (x *MerchantListUsersResp_Item) Size() (n int) {
 	n += x.sizeField3()
 	n += x.sizeField4()
 	n += x.sizeField5()
+	n += x.sizeField6()
+	n += x.sizeField7()
+	n += x.sizeField8()
 	return n
 }
 
@@ -17049,6 +17109,30 @@ func (x *MerchantListUsersResp_Item) sizeField5() (n int) {
 		return n
 	}
 	n += fastpb.SizeInt64(5, x.GetCreateTime())
+	return n
+}
+
+func (x *MerchantListUsersResp_Item) sizeField6() (n int) {
+	if x.Book == 0 {
+		return n
+	}
+	n += fastpb.SizeInt64(6, x.GetBook())
+	return n
+}
+
+func (x *MerchantListUsersResp_Item) sizeField7() (n int) {
+	if x.View == 0 {
+		return n
+	}
+	n += fastpb.SizeInt64(7, x.GetView())
+	return n
+}
+
+func (x *MerchantListUsersResp_Item) sizeField8() (n int) {
+	if x.Favorite == 0 {
+		return n
+	}
+	n += fastpb.SizeInt64(8, x.GetFavorite())
 	return n
 }
 
@@ -18325,6 +18409,9 @@ var fieldIDToName_MerchantListUsersResp_Item = map[int32]string{
 	3: "Avatar",
 	4: "LoginTime",
 	5: "CreateTime",
+	6: "Book",
+	7: "View",
+	8: "Favorite",
 }
 
 var fieldIDToName_MerchantListReserversResp_Item = map[int32]string{

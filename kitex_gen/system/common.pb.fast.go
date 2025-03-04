@@ -1989,6 +1989,11 @@ func (x *ResetMerchantPasswordReq) FastRead(buf []byte, _type int8, number int32
 		if err != nil {
 			goto ReadFieldError
 		}
+	case 3:
+		offset, err = x.fastReadField3(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
 		if err != nil {
@@ -2009,6 +2014,11 @@ func (x *ResetMerchantPasswordReq) fastReadField1(buf []byte, _type int8) (offse
 
 func (x *ResetMerchantPasswordReq) fastReadField2(buf []byte, _type int8) (offset int, err error) {
 	x.NewPassword, offset, err = fastpb.ReadString(buf, _type)
+	return offset, err
+}
+
+func (x *ResetMerchantPasswordReq) fastReadField3(buf []byte, _type int8) (offset int, err error) {
+	x.AdminId, offset, err = fastpb.ReadString(buf, _type)
 	return offset, err
 }
 
@@ -4738,6 +4748,7 @@ func (x *ResetMerchantPasswordReq) FastWrite(buf []byte) (offset int) {
 	}
 	offset += x.fastWriteField1(buf[offset:])
 	offset += x.fastWriteField2(buf[offset:])
+	offset += x.fastWriteField3(buf[offset:])
 	return offset
 }
 
@@ -4754,6 +4765,14 @@ func (x *ResetMerchantPasswordReq) fastWriteField2(buf []byte) (offset int) {
 		return offset
 	}
 	offset += fastpb.WriteString(buf[offset:], 2, x.GetNewPassword())
+	return offset
+}
+
+func (x *ResetMerchantPasswordReq) fastWriteField3(buf []byte) (offset int) {
+	if x.AdminId == "" {
+		return offset
+	}
+	offset += fastpb.WriteString(buf[offset:], 3, x.GetAdminId())
 	return offset
 }
 
@@ -7118,6 +7137,7 @@ func (x *ResetMerchantPasswordReq) Size() (n int) {
 	}
 	n += x.sizeField1()
 	n += x.sizeField2()
+	n += x.sizeField3()
 	return n
 }
 
@@ -7134,6 +7154,14 @@ func (x *ResetMerchantPasswordReq) sizeField2() (n int) {
 		return n
 	}
 	n += fastpb.SizeString(2, x.GetNewPassword())
+	return n
+}
+
+func (x *ResetMerchantPasswordReq) sizeField3() (n int) {
+	if x.AdminId == "" {
+		return n
+	}
+	n += fastpb.SizeString(3, x.GetAdminId())
 	return n
 }
 
@@ -8292,6 +8320,7 @@ var fieldIDToName_AdminSetPasswordReq = map[int32]string{
 var fieldIDToName_ResetMerchantPasswordReq = map[int32]string{
 	1: "MerchantId",
 	2: "NewPassword",
+	3: "AdminId",
 }
 
 var fieldIDToName_CreateMerchantReq = map[int32]string{

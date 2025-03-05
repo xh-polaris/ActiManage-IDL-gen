@@ -3359,6 +3359,11 @@ func (x *MerchantUpdateInfoReq) FastRead(buf []byte, _type int8, number int32) (
 		if err != nil {
 			goto ReadFieldError
 		}
+	case 7:
+		offset, err = x.fastReadField7(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
 		if err != nil {
@@ -3414,6 +3419,11 @@ func (x *MerchantUpdateInfoReq) fastReadField6(buf []byte, _type int8) (offset i
 		return offset, err
 	}
 	x.Licences = append(x.Licences, v)
+	return offset, err
+}
+
+func (x *MerchantUpdateInfoReq) fastReadField7(buf []byte, _type int8) (offset int, err error) {
+	x.Logo, offset, err = fastpb.ReadString(buf, _type)
 	return offset, err
 }
 
@@ -4882,6 +4892,16 @@ func (x *SystemGetMerchantResp) FastRead(buf []byte, _type int8, number int32) (
 		if err != nil {
 			goto ReadFieldError
 		}
+	case 9:
+		offset, err = x.fastReadField9(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	case 10:
+		offset, err = x.fastReadField10(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
 		if err != nil {
@@ -4947,6 +4967,16 @@ func (x *SystemGetMerchantResp) fastReadField8(buf []byte, _type int8) (offset i
 		return offset, err
 	}
 	x.Licences = append(x.Licences, v)
+	return offset, err
+}
+
+func (x *SystemGetMerchantResp) fastReadField9(buf []byte, _type int8) (offset int, err error) {
+	x.Uri, offset, err = fastpb.ReadString(buf, _type)
+	return offset, err
+}
+
+func (x *SystemGetMerchantResp) fastReadField10(buf []byte, _type int8) (offset int, err error) {
+	x.Logo, offset, err = fastpb.ReadString(buf, _type)
 	return offset, err
 }
 
@@ -9740,6 +9770,7 @@ func (x *MerchantUpdateInfoReq) FastWrite(buf []byte) (offset int) {
 	offset += x.fastWriteField4(buf[offset:])
 	offset += x.fastWriteField5(buf[offset:])
 	offset += x.fastWriteField6(buf[offset:])
+	offset += x.fastWriteField7(buf[offset:])
 	return offset
 }
 
@@ -9792,6 +9823,14 @@ func (x *MerchantUpdateInfoReq) fastWriteField6(buf []byte) (offset int) {
 	for i := range x.GetLicences() {
 		offset += fastpb.WriteString(buf[offset:], 6, x.GetLicences()[i])
 	}
+	return offset
+}
+
+func (x *MerchantUpdateInfoReq) fastWriteField7(buf []byte) (offset int) {
+	if x.Logo == "" {
+		return offset
+	}
+	offset += fastpb.WriteString(buf[offset:], 7, x.GetLogo())
 	return offset
 }
 
@@ -10818,6 +10857,8 @@ func (x *SystemGetMerchantResp) FastWrite(buf []byte) (offset int) {
 	offset += x.fastWriteField6(buf[offset:])
 	offset += x.fastWriteField7(buf[offset:])
 	offset += x.fastWriteField8(buf[offset:])
+	offset += x.fastWriteField9(buf[offset:])
+	offset += x.fastWriteField10(buf[offset:])
 	return offset
 }
 
@@ -10886,6 +10927,22 @@ func (x *SystemGetMerchantResp) fastWriteField8(buf []byte) (offset int) {
 	for i := range x.GetLicences() {
 		offset += fastpb.WriteString(buf[offset:], 8, x.GetLicences()[i])
 	}
+	return offset
+}
+
+func (x *SystemGetMerchantResp) fastWriteField9(buf []byte) (offset int) {
+	if x.Uri == "" {
+		return offset
+	}
+	offset += fastpb.WriteString(buf[offset:], 9, x.GetUri())
+	return offset
+}
+
+func (x *SystemGetMerchantResp) fastWriteField10(buf []byte) (offset int) {
+	if x.Logo == "" {
+		return offset
+	}
+	offset += fastpb.WriteString(buf[offset:], 10, x.GetLogo())
 	return offset
 }
 
@@ -15163,6 +15220,7 @@ func (x *MerchantUpdateInfoReq) Size() (n int) {
 	n += x.sizeField4()
 	n += x.sizeField5()
 	n += x.sizeField6()
+	n += x.sizeField7()
 	return n
 }
 
@@ -15215,6 +15273,14 @@ func (x *MerchantUpdateInfoReq) sizeField6() (n int) {
 	for i := range x.GetLicences() {
 		n += fastpb.SizeString(6, x.GetLicences()[i])
 	}
+	return n
+}
+
+func (x *MerchantUpdateInfoReq) sizeField7() (n int) {
+	if x.Logo == "" {
+		return n
+	}
+	n += fastpb.SizeString(7, x.GetLogo())
 	return n
 }
 
@@ -16241,6 +16307,8 @@ func (x *SystemGetMerchantResp) Size() (n int) {
 	n += x.sizeField6()
 	n += x.sizeField7()
 	n += x.sizeField8()
+	n += x.sizeField9()
+	n += x.sizeField10()
 	return n
 }
 
@@ -16309,6 +16377,22 @@ func (x *SystemGetMerchantResp) sizeField8() (n int) {
 	for i := range x.GetLicences() {
 		n += fastpb.SizeString(8, x.GetLicences()[i])
 	}
+	return n
+}
+
+func (x *SystemGetMerchantResp) sizeField9() (n int) {
+	if x.Uri == "" {
+		return n
+	}
+	n += fastpb.SizeString(9, x.GetUri())
+	return n
+}
+
+func (x *SystemGetMerchantResp) sizeField10() (n int) {
+	if x.Logo == "" {
+		return n
+	}
+	n += fastpb.SizeString(10, x.GetLogo())
 	return n
 }
 
@@ -18490,6 +18574,7 @@ var fieldIDToName_MerchantUpdateInfoReq = map[int32]string{
 	4: "Location",
 	5: "Openings",
 	6: "Licences",
+	7: "Logo",
 }
 
 var fieldIDToName_MerchantGetInfoReq = map[int32]string{}
@@ -18671,14 +18756,16 @@ var fieldIDToName_SystemGetMerchantReq = map[int32]string{
 }
 
 var fieldIDToName_SystemGetMerchantResp = map[int32]string{
-	1: "Code",
-	2: "Msg",
-	3: "Name",
-	4: "Description",
-	5: "Phone",
-	6: "Location",
-	7: "Openings",
-	8: "Licences",
+	1:  "Code",
+	2:  "Msg",
+	3:  "Name",
+	4:  "Description",
+	5:  "Phone",
+	6:  "Location",
+	7:  "Openings",
+	8:  "Licences",
+	9:  "Uri",
+	10: "Logo",
 }
 
 var fieldIDToName_SystemCreateMerchantReq = map[int32]string{

@@ -3692,6 +3692,16 @@ func (x *GetMerchantInfoByUriResp) FastRead(buf []byte, _type int8, number int32
 		if err != nil {
 			goto ReadFieldError
 		}
+	case 5:
+		offset, err = x.fastReadField5(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	case 6:
+		offset, err = x.fastReadField6(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
 		if err != nil {
@@ -3728,6 +3738,16 @@ func (x *GetMerchantInfoByUriResp) fastReadField4(buf []byte, _type int8) (offse
 	}
 	x.Ad = &v
 	return offset, nil
+}
+
+func (x *GetMerchantInfoByUriResp) fastReadField5(buf []byte, _type int8) (offset int, err error) {
+	x.Logo, offset, err = fastpb.ReadString(buf, _type)
+	return offset, err
+}
+
+func (x *GetMerchantInfoByUriResp) fastReadField6(buf []byte, _type int8) (offset int, err error) {
+	x.Name, offset, err = fastpb.ReadString(buf, _type)
+	return offset, err
 }
 
 func (x *GetAdReq) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
@@ -10027,6 +10047,8 @@ func (x *GetMerchantInfoByUriResp) FastWrite(buf []byte) (offset int) {
 	offset += x.fastWriteField2(buf[offset:])
 	offset += x.fastWriteField3(buf[offset:])
 	offset += x.fastWriteField4(buf[offset:])
+	offset += x.fastWriteField5(buf[offset:])
+	offset += x.fastWriteField6(buf[offset:])
 	return offset
 }
 
@@ -10059,6 +10081,22 @@ func (x *GetMerchantInfoByUriResp) fastWriteField4(buf []byte) (offset int) {
 		return offset
 	}
 	offset += fastpb.WriteMessage(buf[offset:], 4, x.GetAd())
+	return offset
+}
+
+func (x *GetMerchantInfoByUriResp) fastWriteField5(buf []byte) (offset int) {
+	if x.Logo == "" {
+		return offset
+	}
+	offset += fastpb.WriteString(buf[offset:], 5, x.GetLogo())
+	return offset
+}
+
+func (x *GetMerchantInfoByUriResp) fastWriteField6(buf []byte) (offset int) {
+	if x.Name == "" {
+		return offset
+	}
+	offset += fastpb.WriteString(buf[offset:], 6, x.GetName())
 	return offset
 }
 
@@ -15477,6 +15515,8 @@ func (x *GetMerchantInfoByUriResp) Size() (n int) {
 	n += x.sizeField2()
 	n += x.sizeField3()
 	n += x.sizeField4()
+	n += x.sizeField5()
+	n += x.sizeField6()
 	return n
 }
 
@@ -15509,6 +15549,22 @@ func (x *GetMerchantInfoByUriResp) sizeField4() (n int) {
 		return n
 	}
 	n += fastpb.SizeMessage(4, x.GetAd())
+	return n
+}
+
+func (x *GetMerchantInfoByUriResp) sizeField5() (n int) {
+	if x.Logo == "" {
+		return n
+	}
+	n += fastpb.SizeString(5, x.GetLogo())
+	return n
+}
+
+func (x *GetMerchantInfoByUriResp) sizeField6() (n int) {
+	if x.Name == "" {
+		return n
+	}
+	n += fastpb.SizeString(6, x.GetName())
 	return n
 }
 
@@ -18610,6 +18666,8 @@ var fieldIDToName_GetMerchantInfoByUriResp = map[int32]string{
 	2: "Msg",
 	3: "MerchantId",
 	4: "Ad",
+	5: "Logo",
+	6: "Name",
 }
 
 var fieldIDToName_GetAdReq = map[int32]string{

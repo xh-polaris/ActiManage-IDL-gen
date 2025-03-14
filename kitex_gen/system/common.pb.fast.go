@@ -649,6 +649,11 @@ func (x *Activity) FastRead(buf []byte, _type int8, number int32) (offset int, e
 		if err != nil {
 			goto ReadFieldError
 		}
+	case 18:
+		offset, err = x.fastReadField18(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
 		if err != nil {
@@ -759,6 +764,11 @@ func (x *Activity) fastReadField16(buf []byte, _type int8) (offset int, err erro
 
 func (x *Activity) fastReadField17(buf []byte, _type int8) (offset int, err error) {
 	x.Status, offset, err = fastpb.ReadInt64(buf, _type)
+	return offset, err
+}
+
+func (x *Activity) fastReadField18(buf []byte, _type int8) (offset int, err error) {
+	x.View, offset, err = fastpb.ReadInt64(buf, _type)
 	return offset, err
 }
 
@@ -3839,6 +3849,7 @@ func (x *Activity) FastWrite(buf []byte) (offset int) {
 	offset += x.fastWriteField15(buf[offset:])
 	offset += x.fastWriteField16(buf[offset:])
 	offset += x.fastWriteField17(buf[offset:])
+	offset += x.fastWriteField18(buf[offset:])
 	return offset
 }
 
@@ -3977,6 +3988,14 @@ func (x *Activity) fastWriteField17(buf []byte) (offset int) {
 		return offset
 	}
 	offset += fastpb.WriteInt64(buf[offset:], 17, x.GetStatus())
+	return offset
+}
+
+func (x *Activity) fastWriteField18(buf []byte) (offset int) {
+	if x.View == 0 {
+		return offset
+	}
+	offset += fastpb.WriteInt64(buf[offset:], 18, x.GetView())
 	return offset
 }
 
@@ -6318,6 +6337,7 @@ func (x *Activity) Size() (n int) {
 	n += x.sizeField15()
 	n += x.sizeField16()
 	n += x.sizeField17()
+	n += x.sizeField18()
 	return n
 }
 
@@ -6456,6 +6476,14 @@ func (x *Activity) sizeField17() (n int) {
 		return n
 	}
 	n += fastpb.SizeInt64(17, x.GetStatus())
+	return n
+}
+
+func (x *Activity) sizeField18() (n int) {
+	if x.View == 0 {
+		return n
+	}
+	n += fastpb.SizeInt64(18, x.GetView())
 	return n
 }
 
@@ -8445,6 +8473,7 @@ var fieldIDToName_Activity = map[int32]string{
 	15: "UpdateTime",
 	16: "DeleteTime",
 	17: "Status",
+	18: "View",
 }
 
 var fieldIDToName_Admin = map[int32]string{

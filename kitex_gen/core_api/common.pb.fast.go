@@ -5350,6 +5350,31 @@ func (x *SystemUpdateMerchantReq) fastReadField12(buf []byte, _type int8) (offse
 	return offset, err
 }
 
+func (x *DeleteMerchantReq) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
+	switch number {
+	case 1:
+		offset, err = x.fastReadField1(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	default:
+		offset, err = fastpb.Skip(buf, _type, number)
+		if err != nil {
+			goto SkipFieldError
+		}
+	}
+	return offset, nil
+SkipFieldError:
+	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
+ReadFieldError:
+	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_DeleteMerchantReq[number], err)
+}
+
+func (x *DeleteMerchantReq) fastReadField1(buf []byte, _type int8) (offset int, err error) {
+	x.Id, offset, err = fastpb.ReadString(buf, _type)
+	return offset, err
+}
+
 func (x *SystemGetDashboardReq) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
 	switch number {
 	case 1:
@@ -11387,6 +11412,22 @@ func (x *SystemUpdateMerchantReq) fastWriteField12(buf []byte) (offset int) {
 	return offset
 }
 
+func (x *DeleteMerchantReq) FastWrite(buf []byte) (offset int) {
+	if x == nil {
+		return offset
+	}
+	offset += x.fastWriteField1(buf[offset:])
+	return offset
+}
+
+func (x *DeleteMerchantReq) fastWriteField1(buf []byte) (offset int) {
+	if x.Id == "" {
+		return offset
+	}
+	offset += fastpb.WriteString(buf[offset:], 1, x.GetId())
+	return offset
+}
+
 func (x *SystemGetDashboardReq) FastWrite(buf []byte) (offset int) {
 	if x == nil {
 		return offset
@@ -16963,6 +17004,22 @@ func (x *SystemUpdateMerchantReq) sizeField12() (n int) {
 	return n
 }
 
+func (x *DeleteMerchantReq) Size() (n int) {
+	if x == nil {
+		return n
+	}
+	n += x.sizeField1()
+	return n
+}
+
+func (x *DeleteMerchantReq) sizeField1() (n int) {
+	if x.Id == "" {
+		return n
+	}
+	n += fastpb.SizeString(1, x.GetId())
+	return n
+}
+
 func (x *SystemGetDashboardReq) Size() (n int) {
 	if x == nil {
 		return n
@@ -19195,6 +19252,10 @@ var fieldIDToName_SystemUpdateMerchantReq = map[int32]string{
 	10: "Status",
 	11: "Establish",
 	12: "Capital",
+}
+
+var fieldIDToName_DeleteMerchantReq = map[int32]string{
+	1: "Id",
 }
 
 var fieldIDToName_SystemGetDashboardReq = map[int32]string{

@@ -71,6 +71,13 @@ var serviceMethods = map[string]kitex.MethodInfo{
 		false,
 		kitex.WithStreamingMode(kitex.StreamingUnary),
 	),
+	"DeleteMerchant": kitex.NewMethodInfo(
+		deleteMerchantHandler,
+		newDeleteMerchantArgs,
+		newDeleteMerchantResult,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingUnary),
+	),
 }
 
 var (
@@ -1361,6 +1368,159 @@ func (p *ResetMerchantPasswordResult) GetResult() interface{} {
 	return p.Success
 }
 
+func deleteMerchantHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
+	switch s := arg.(type) {
+	case *streaming.Args:
+		st := s.Stream
+		req := new(core_api.DeleteMerchantReq)
+		if err := st.RecvMsg(req); err != nil {
+			return err
+		}
+		resp, err := handler.(core_api.System).DeleteMerchant(ctx, req)
+		if err != nil {
+			return err
+		}
+		return st.SendMsg(resp)
+	case *DeleteMerchantArgs:
+		success, err := handler.(core_api.System).DeleteMerchant(ctx, s.Req)
+		if err != nil {
+			return err
+		}
+		realResult := result.(*DeleteMerchantResult)
+		realResult.Success = success
+		return nil
+	default:
+		return errInvalidMessageType
+	}
+}
+func newDeleteMerchantArgs() interface{} {
+	return &DeleteMerchantArgs{}
+}
+
+func newDeleteMerchantResult() interface{} {
+	return &DeleteMerchantResult{}
+}
+
+type DeleteMerchantArgs struct {
+	Req *core_api.DeleteMerchantReq
+}
+
+func (p *DeleteMerchantArgs) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetReq() {
+		p.Req = new(core_api.DeleteMerchantReq)
+	}
+	return p.Req.FastRead(buf, _type, number)
+}
+
+func (p *DeleteMerchantArgs) FastWrite(buf []byte) (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.FastWrite(buf)
+}
+
+func (p *DeleteMerchantArgs) Size() (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.Size()
+}
+
+func (p *DeleteMerchantArgs) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetReq() {
+		return out, nil
+	}
+	return proto.Marshal(p.Req)
+}
+
+func (p *DeleteMerchantArgs) Unmarshal(in []byte) error {
+	msg := new(core_api.DeleteMerchantReq)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Req = msg
+	return nil
+}
+
+var DeleteMerchantArgs_Req_DEFAULT *core_api.DeleteMerchantReq
+
+func (p *DeleteMerchantArgs) GetReq() *core_api.DeleteMerchantReq {
+	if !p.IsSetReq() {
+		return DeleteMerchantArgs_Req_DEFAULT
+	}
+	return p.Req
+}
+
+func (p *DeleteMerchantArgs) IsSetReq() bool {
+	return p.Req != nil
+}
+
+func (p *DeleteMerchantArgs) GetFirstArgument() interface{} {
+	return p.Req
+}
+
+type DeleteMerchantResult struct {
+	Success *core_api.Response
+}
+
+var DeleteMerchantResult_Success_DEFAULT *core_api.Response
+
+func (p *DeleteMerchantResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetSuccess() {
+		p.Success = new(core_api.Response)
+	}
+	return p.Success.FastRead(buf, _type, number)
+}
+
+func (p *DeleteMerchantResult) FastWrite(buf []byte) (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.FastWrite(buf)
+}
+
+func (p *DeleteMerchantResult) Size() (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.Size()
+}
+
+func (p *DeleteMerchantResult) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetSuccess() {
+		return out, nil
+	}
+	return proto.Marshal(p.Success)
+}
+
+func (p *DeleteMerchantResult) Unmarshal(in []byte) error {
+	msg := new(core_api.Response)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Success = msg
+	return nil
+}
+
+func (p *DeleteMerchantResult) GetSuccess() *core_api.Response {
+	if !p.IsSetSuccess() {
+		return DeleteMerchantResult_Success_DEFAULT
+	}
+	return p.Success
+}
+
+func (p *DeleteMerchantResult) SetSuccess(x interface{}) {
+	p.Success = x.(*core_api.Response)
+}
+
+func (p *DeleteMerchantResult) IsSetSuccess() bool {
+	return p.Success != nil
+}
+
+func (p *DeleteMerchantResult) GetResult() interface{} {
+	return p.Success
+}
+
 type kClient struct {
 	c client.Client
 }
@@ -1446,6 +1606,16 @@ func (p *kClient) ResetMerchantPassword(ctx context.Context, Req *core_api.Reset
 	_args.Req = Req
 	var _result ResetMerchantPasswordResult
 	if err = p.c.Call(ctx, "ResetMerchantPassword", &_args, &_result); err != nil {
+		return
+	}
+	return _result.GetSuccess(), nil
+}
+
+func (p *kClient) DeleteMerchant(ctx context.Context, Req *core_api.DeleteMerchantReq) (r *core_api.Response, err error) {
+	var _args DeleteMerchantArgs
+	_args.Req = Req
+	var _result DeleteMerchantResult
+	if err = p.c.Call(ctx, "DeleteMerchant", &_args, &_result); err != nil {
 		return
 	}
 	return _result.GetSuccess(), nil

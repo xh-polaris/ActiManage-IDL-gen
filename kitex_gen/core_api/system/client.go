@@ -19,6 +19,7 @@ type Client interface {
 	SystemGetDashboard(ctx context.Context, Req *core_api.SystemGetDashboardReq, callOptions ...callopt.Option) (r *core_api.SystemGetDashboardResp, err error)
 	SystemGetOverallDashboard(ctx context.Context, Req *core_api.SystemGetOverallDashboardReq, callOptions ...callopt.Option) (r *core_api.SystemGetOverallDashboardResp, err error)
 	ResetMerchantPassword(ctx context.Context, Req *core_api.ResetMerchantPasswordReq, callOptions ...callopt.Option) (r *core_api.Response, err error)
+	DeleteMerchant(ctx context.Context, Req *core_api.DeleteMerchantReq, callOptions ...callopt.Option) (r *core_api.Response, err error)
 }
 
 // NewClient creates a client for the service defined in IDL.
@@ -88,4 +89,9 @@ func (p *kSystemClient) SystemGetOverallDashboard(ctx context.Context, Req *core
 func (p *kSystemClient) ResetMerchantPassword(ctx context.Context, Req *core_api.ResetMerchantPasswordReq, callOptions ...callopt.Option) (r *core_api.Response, err error) {
 	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
 	return p.kClient.ResetMerchantPassword(ctx, Req)
+}
+
+func (p *kSystemClient) DeleteMerchant(ctx context.Context, Req *core_api.DeleteMerchantReq, callOptions ...callopt.Option) (r *core_api.Response, err error) {
+	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
+	return p.kClient.DeleteMerchant(ctx, Req)
 }
